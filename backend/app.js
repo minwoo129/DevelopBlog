@@ -6,6 +6,10 @@ const morgan = require("morgan");
 const session = require("express-session");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
+const connect = require("./schemas");
+
+const indexRouter = require("./routes");
+const userRouter = require("./routes/user");
 
 dotenv.config();
 const app = express();
@@ -16,6 +20,7 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
+connect();
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
@@ -33,6 +38,9 @@ app.use(
     },
   })
 );
+
+app.use("/", indexRouter);
+app.use("/users", userRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
