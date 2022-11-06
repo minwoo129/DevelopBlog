@@ -4,7 +4,7 @@ const connect = () => {
   if (process.env.NODE_ENV != "production") mongoose.set("debug", true);
 
   mongoose.connect(
-    `mongodb://rmw:rmwkey0129@localhost:27017/admin`,
+    `mongodb://${process.env.MONGODB_NICKNAME}:${process.env.MONGODB_PASSWORD}@localhost:${process.env.MONGODB_ACCESS_PORT}/admin`,
     {
       dbName: "blog",
       useNewUrlParser: true,
