@@ -6,7 +6,6 @@ const morgan = require("morgan");
 const session = require("express-session");
 const nunjucks = require("nunjucks");
 const dotenv = require("dotenv");
-const connect = require("./schemas");
 
 const indexRouter = require("./routes");
 const userRouter = require("./routes/user");
@@ -20,7 +19,6 @@ nunjucks.configure("views", {
   express: app,
   watch: true,
 });
-connect();
 
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "public")));
