@@ -60,8 +60,8 @@ const textMap = {
 
 type AuthFormProps = {
   type: "login" | "register";
-  form?: {
-    username: string;
+  form: {
+    email: string;
     password: string;
     passwordConfirm?: string;
     name?: string;
@@ -83,7 +83,7 @@ const AuthForm: FC<AuthFormProps> = ({ type, form, onChange, onSubmit }) => {
             name="name"
             placeholder="사용자 이름"
             onChange={onChange}
-            value={form?.name}
+            value={form.name}
           />
         )}
         <StyledInput
@@ -91,7 +91,7 @@ const AuthForm: FC<AuthFormProps> = ({ type, form, onChange, onSubmit }) => {
           name="email"
           placeholder="이메일"
           onChange={onChange}
-          value={form?.username}
+          value={form.email}
           type={"email"}
         />
         <StyledInput
@@ -100,7 +100,7 @@ const AuthForm: FC<AuthFormProps> = ({ type, form, onChange, onSubmit }) => {
           placeholder="비밀번호"
           type={"password"}
           onChange={onChange}
-          value={form?.password}
+          value={form.password}
         />
         {type == "register" && (
           <StyledInput
@@ -109,7 +109,7 @@ const AuthForm: FC<AuthFormProps> = ({ type, form, onChange, onSubmit }) => {
             placeholder="비밀번호 확인"
             type={"password"}
             onChange={onChange}
-            value={form?.passwordConfirm}
+            value={form.passwordConfirm}
           />
         )}
 
