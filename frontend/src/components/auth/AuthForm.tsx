@@ -64,6 +64,7 @@ type AuthFormProps = {
     username: string;
     password: string;
     passwordConfirm?: string;
+    name?: string;
   };
   onChange(e: ChangeEvent<HTMLInputElement>): void;
   onSubmit(e: FormEvent<HTMLFormElement>): void;
@@ -76,12 +77,22 @@ const AuthForm: FC<AuthFormProps> = ({ type, form, onChange, onSubmit }) => {
     <AuthFormBlock>
       <h3>{text}</h3>
       <form onSubmit={(e) => {}}>
+        {type == "register" && (
+          <StyledInput
+            autoComplete="name"
+            name="name"
+            placeholder="사용자 이름"
+            onChange={onChange}
+            value={form?.name}
+          />
+        )}
         <StyledInput
-          autoComplete="username"
-          name="username"
-          placeholder="아이디"
+          autoComplete="email"
+          name="email"
+          placeholder="이메일"
           onChange={onChange}
           value={form?.username}
+          type={"email"}
         />
         <StyledInput
           autoComplete="new-password"
