@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeField } from "../../modules/actions/auth";
+import { changeField, join } from "../../modules/actions/auth";
 import { RootState } from "../../modules/reducer";
 import AuthForm from "./AuthForm";
 
@@ -13,7 +13,7 @@ const RegisterForm = () => {
     dispatch(changeField({ form: "register", key: name, value }));
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     const { email, password, passwordConfirm, isAdmin, name, adminPwd } = form;
     if (email == "") {
       alert("이메일을 입력해주세요.");
@@ -42,7 +42,8 @@ const RegisterForm = () => {
       return;
     }
 
-    e.preventDefault();
+    try {
+    } catch (e) {}
   };
   const onCheckAdmin = (value: boolean) => {
     dispatch(changeField({ form: "register", key: "isAdmin", value }));
