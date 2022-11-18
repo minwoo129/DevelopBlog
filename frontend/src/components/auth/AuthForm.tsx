@@ -4,6 +4,7 @@ import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 import Button from "../common/Button";
 import CheckAdminSection from "../common/CheckAdminSection";
+import Footer from "./Footer";
 import StyledInput from "./StyledInput";
 
 /* 
@@ -21,17 +22,6 @@ const AuthFormBlock = styled.div`
 /**
  * 폼 하단에 로그인 혹은 회원가입 링크를 보여줌
  */
-const Footer = styled.div`
-  margin-top: 2rem;
-  text-align: right;
-  a {
-    color: ${palette.gray[6]};
-    text-decoration: underline;
-    &:hover {
-      color: ${palette.gray[9]};
-    }
-  }
-`;
 
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;

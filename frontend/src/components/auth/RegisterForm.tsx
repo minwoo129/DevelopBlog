@@ -14,6 +14,7 @@ const RegisterForm = () => {
   };
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const { email, password, passwordConfirm, isAdmin, name, adminPwd } = form;
     e.preventDefault();
   };
   const onCheckAdmin = (value: boolean) => {
