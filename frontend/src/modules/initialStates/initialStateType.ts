@@ -5,7 +5,7 @@ export type AuthStateType = {
     password: string;
     passwordConfirm: string;
     isAdmin: boolean;
-    admiinPwd: string;
+    adminPwd: string;
   };
   login: {
     email: string;
