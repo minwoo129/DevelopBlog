@@ -6,6 +6,8 @@ export const AuthInitialState: AuthStateType = {
     name: "",
     password: "",
     passwordConfirm: "",
+    isAdmin: false,
+    admiinPwd: "",
   },
   login: {
     email: "",
