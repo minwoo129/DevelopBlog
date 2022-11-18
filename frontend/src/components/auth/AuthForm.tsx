@@ -4,6 +4,7 @@ import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 import Button from "../common/Button";
 import CheckAdminSection from "../common/CheckAdminSection";
+import StyledInput from "./StyledInput";
 
 /* 
     회원가입, 로그인 폼
@@ -14,24 +15,6 @@ const AuthFormBlock = styled.div`
     margin: 0;
     color: ${palette.gray[8]};
     margin-bottom: 1rem;
-  }
-`;
-/**
- * 스타일링된 input
- */
-const StyledInput = styled.input`
-  font-size: 1rem;
-  border: none;
-  border-bottom: 1px solid ${palette.gray[5]};
-  padding-bottom: 0.5rem;
-  outline: none;
-  width: 100%;
-  &:focus {
-    color: $oc-teal-7;
-    border-bottom: 1px solid ${palette.gray[7]};
-  }
-  & + & {
-    margin-top: 1rem;
   }
 `;
 
