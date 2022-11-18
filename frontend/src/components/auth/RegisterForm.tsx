@@ -16,6 +16,9 @@ const RegisterForm = () => {
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
+  const onCheckAdmin = (value: boolean) => {
+    dispatch(changeField({ form: "register", key: "isAdmin", value }));
+  };
 
   return (
     <AuthForm
@@ -23,6 +26,7 @@ const RegisterForm = () => {
       form={form}
       onChange={onChange}
       onSubmit={onSubmit}
+      onCheckAdmin={onCheckAdmin}
     />
   );
 };

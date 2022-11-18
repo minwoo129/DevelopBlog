@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { ChangeEvent, FC } from "react";
 import styled from "styled-components";
 import { MdCheckBoxOutlineBlank, MdCheckBox } from "react-icons/md";
 import "./CheckAdminSection.scss";
@@ -6,8 +6,10 @@ import classNames from "classnames";
 import palette from "../../lib/styles/palette";
 
 type CheckAdminSectionProps = {
-  checked: boolean;
-  onClick(value: boolean): void;
+  checked?: boolean;
+  onClick?(value: boolean): void;
+  adminPwd?: string;
+  onChange(e: ChangeEvent<HTMLInputElement>): void;
 };
 
 const StyledInput = styled.input`
@@ -28,17 +30,30 @@ const StyledInput = styled.input`
 const CheckAdminSection: FC<CheckAdminSectionProps> = ({
   checked,
   onClick,
+  adminPwd,
+  onChange,
 }) => {
   return (
     <div className="checkAdminSection">
       <div
         className={classNames("checkbox", { checked })}
-        onClick={(e) => onClick(!checked)}
+        onClick={(e) => {
+          onClick && onClick(!checked);
+        }}
       >
         <div className="text">관리자인가요?</div>
         {checked ? <MdCheckBox /> : <MdCheckBoxOutlineBlank />}
       </div>
-      {checked && <StyledInput placeholder="관리자 인증 비밀번호" />}
+      {checked && (
+        <StyledInput
+          placeholder="관리자 인증 비밀번호"
+          autoComplete="adminPwd"
+          name="adminPwd"
+          type={"password"}
+          onChange={onChange}
+          value={adminPwd}
+        />
+      )}
     </div>
   );
 };

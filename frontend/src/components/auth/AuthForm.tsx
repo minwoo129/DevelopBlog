@@ -66,19 +66,27 @@ type AuthFormProps = {
     password: string;
     passwordConfirm?: string;
     name?: string;
+    isAdmin?: boolean;
+    adminPwd?: string;
   };
   onChange(e: ChangeEvent<HTMLInputElement>): void;
+  onCheckAdmin?(value: boolean): void;
   onSubmit(e: FormEvent<HTMLFormElement>): void;
 };
 
-const AuthForm: FC<AuthFormProps> = ({ type, form, onChange, onSubmit }) => {
+const AuthForm: FC<AuthFormProps> = ({
+  type,
+  form,
+  onChange,
+  onSubmit,
+  onCheckAdmin,
+}) => {
   const text = useMemo(() => textMap[type], [type]);
-  const [check, setCheck] = useState(false);
 
   return (
     <AuthFormBlock>
       <h3>{text}</h3>
-      <form onSubmit={(e) => {}}>
+      <form onSubmit={onSubmit}>
         {type == "register" && (
           <StyledInput
             autoComplete="name"
@@ -115,7 +123,12 @@ const AuthForm: FC<AuthFormProps> = ({ type, form, onChange, onSubmit }) => {
           />
         )}
         {type == "register" && (
-          <CheckAdminSection checked={check} onClick={setCheck} />
+          <CheckAdminSection
+            checked={form?.isAdmin}
+            onClick={onCheckAdmin}
+            onChange={onChange}
+            adminPwd={form.adminPwd}
+          />
         )}
 
         <ButtonWithMarginTop cyan fullWidth style={{ marginTop: "1rem" }}>
