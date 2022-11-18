@@ -1,8 +1,9 @@
-import React, { ChangeEvent, FC, FormEvent, useMemo } from "react";
+import React, { ChangeEvent, FC, FormEvent, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import palette from "../../lib/styles/palette";
 import Button from "../common/Button";
+import CheckAdminSection from "../common/CheckAdminSection";
 
 /* 
     회원가입, 로그인 폼
@@ -72,6 +73,7 @@ type AuthFormProps = {
 
 const AuthForm: FC<AuthFormProps> = ({ type, form, onChange, onSubmit }) => {
   const text = useMemo(() => textMap[type], [type]);
+  const [check, setCheck] = useState(false);
 
   return (
     <AuthFormBlock>
@@ -111,6 +113,9 @@ const AuthForm: FC<AuthFormProps> = ({ type, form, onChange, onSubmit }) => {
             onChange={onChange}
             value={form.passwordConfirm}
           />
+        )}
+        {type == "register" && (
+          <CheckAdminSection checked={check} onClick={setCheck} />
         )}
 
         <ButtonWithMarginTop cyan fullWidth style={{ marginTop: "1rem" }}>
