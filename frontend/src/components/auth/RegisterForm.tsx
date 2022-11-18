@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeField, join } from "../../modules/actions/auth";
+import { changeField } from "../../modules/actions/auth";
 import { RootState } from "../../modules/reducer";
 import AuthForm from "./AuthForm";
 

@@ -1,3 +1,7 @@
+import { AxiosError } from "axios";
+import { createAsyncAction } from "typesafe-actions";
+import { AuthStateType } from "../initialStates/initialStateType";
+
 export const CHANGE_FIELD = "auth/CHANGE_FIELD";
 
 export const LOGIN = "auth/LOGIN";

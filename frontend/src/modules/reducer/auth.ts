@@ -20,28 +20,4 @@ export default createReducer<AuthStateType, AuthActionTypes>(initialState, {
       draft[form][key] = value;
     });
   },
-  // LOGIN ================================================
-  [LOGIN]: (state, action) => {
-    return state;
-  },
-  [LOGIN_SUCCESS]: (state, { payload }) => {
-    console.log("result(LOGIN_SUCCESS): ", payload);
-    return state;
-  },
-  [LOGIN_ERROR]: (state, action) => {
-    console.log("result(LOGIN_ERROR): ", action);
-    return state;
-  },
-  // JOIN ================================================
-  [JOIN]: (state, action) => {
-    return state;
-  },
-  [JOIN_SUCCESS]: (state, { payload }) => {
-    console.log("result(JOIN_SUCCESS): ", payload);
-    return state;
-  },
-  [JOIN_ERROR]: (state, action) => {
-    console.log("result(JOIN_ERROR): ", action);
-    return state;
-  },
 });
