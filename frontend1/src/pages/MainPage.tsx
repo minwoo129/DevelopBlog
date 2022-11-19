@@ -1,11 +1,8 @@
 import React from "react";
+import MenuTemplate from "../components/menu/MenuTemplate";
 
 const MainPage = ({}) => {
-  return (
-    <div>
-      <h3>테스트</h3>
-    </div>
-  );
+  return <MenuTemplate></MenuTemplate>;
 };
 
 export default MainPage;
