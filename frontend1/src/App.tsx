@@ -9,7 +9,8 @@ function App() {
   return (
     <Routes>
       <Route element={<MainPage />} path={"/*"} />
-      <Route element={<AuthPage />} path={"/auth*"} />
+      <Route element={<AuthPage />} path={"/auth/login*"} />
+      <Route element={<AuthPage />} path={"/auth/join*"} />
       <Route element={<ListPage />} path={"/list*"} />
       <Route element={<SearchPage />} path={"/search*"} />
     </Routes>

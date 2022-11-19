@@ -31,14 +31,9 @@ type pageEnableType = "login" | "join";
 
 const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const location = useLocation();
-  const query = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  console.log("location: ", location);
-  console.log("query: ", query);
   const type = useMemo((): pageEnableType => {
     let type: pageEnableType = "login";
-    if (location.search.indexOf("login")) type = "login";
+    if (location.pathname.indexOf("login") != -1) type = "login";
     else type = "join";
     return type;
   }, [location]);
