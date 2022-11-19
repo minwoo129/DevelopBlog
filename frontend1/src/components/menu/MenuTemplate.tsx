@@ -9,7 +9,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     navigate("/");
   };
   const onClickLogin = (e: MouseEvent<HTMLDivElement>) => {
-    navigate("/login");
+    navigate("/auth");
   };
   const onClickMyArticle = (e: MouseEvent<HTMLDivElement>) => {
     navigate("/list");
