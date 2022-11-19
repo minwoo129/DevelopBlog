@@ -33,7 +33,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
           <h3>검색</h3>
         </div>
       </div>
-      <div className="children">{props.children}</div>
+      {props.children}
     </div>
   );
 };

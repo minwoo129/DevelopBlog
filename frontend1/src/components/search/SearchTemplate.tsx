@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const SearchTemplateBlock = styled.div`
   flex: 1;
-  border: 1px solid red;
+  border: 1px solid blue;
   color: blue;
 `;
 

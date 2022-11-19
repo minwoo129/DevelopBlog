@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const LoginTemplateBlock = styled.div`
   flex: 1;
-  border: 1px solid red;
+  border: 1px solid green;
   color: green;
 `;
 
