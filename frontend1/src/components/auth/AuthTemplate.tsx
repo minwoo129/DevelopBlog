@@ -10,6 +10,7 @@ import qs from "qs";
 import { useLocation } from "react-router-dom";
 import AuthForm from "./AuthForm";
 import { useDispatch, useSelector } from "react-redux";
+import { changeField } from "../../modules/auth";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -32,7 +33,8 @@ type pageEnableType = "login" | "join";
 
 const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const dispatch = useDispatch();
-
+  const joinForm = useSelector((state: any) => state.auth.join);
+  const loginForm = useSelector((state: any) => state.auth.login);
   const location = useLocation();
   const type = useMemo((): pageEnableType => {
     let type: pageEnableType = "login";
@@ -41,14 +43,20 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     return type;
   }, [location]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {};
-  const onCheckAdmin = (value: boolean) => {};
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    dispatch(changeField({ form: type, key: name, value }));
+  };
+  const onCheckAdmin = (value: boolean) => {
+    dispatch(changeField({ form: "join", key: "isAdmin", value }));
+  };
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {};
   return (
     <AuthTemplateBlock>
       <WhiteBox>
         <AuthForm
           formType={type}
+          form={type == "join" ? joinForm : loginForm}
           onChange={onChange}
           onCheckAdmin={onCheckAdmin}
           onSubmit={onSubmit}

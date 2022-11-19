@@ -35,9 +35,15 @@ export default handleActions(
     [CHANGE_FIELD]: (state, { payload: result }) => {
       const { form, key, value } = result;
 
-      return produce(state, (draft) => {
-        draft[form][key] = value;
-      });
+      const newState = {
+        ...state,
+        [form]: {
+          ...state[form],
+          [key]: value,
+        },
+      };
+
+      return newState;
     },
   },
   initialState
