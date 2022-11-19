@@ -9,6 +9,7 @@ import styled from "styled-components";
 import qs from "qs";
 import { useLocation } from "react-router-dom";
 import AuthForm from "./AuthForm";
+import { useDispatch, useSelector } from "react-redux";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -30,6 +31,8 @@ interface AuthTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 type pageEnableType = "login" | "join";
 
 const AuthTemplate: FC<AuthTemplateProps> = (props) => {
+  const dispatch = useDispatch();
+
   const location = useLocation();
   const type = useMemo((): pageEnableType => {
     let type: pageEnableType = "login";
