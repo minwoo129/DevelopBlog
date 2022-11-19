@@ -1,0 +1,18 @@
+.checkAdminSection {
+  margin-top: 1rem;
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+  .checkbox {
+    display: flex;
+    width: fit-content;
+    .text {
+      margin-right: 10px;
+    }
+    &.checked {
+      svg {
+        color: #22b8cf;
+      }
+    }
+  }
+}
