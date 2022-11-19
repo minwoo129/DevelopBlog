@@ -54,7 +54,7 @@ const AuthForm: FC<AuthFormProps> = ({
   return (
     <AuthFormBlock>
       <h3>{title}</h3>
-      <form>
+      <form onSubmit={onSubmit}>
         {formType == "join" && (
           <StyledInput
             autoComplete="name"

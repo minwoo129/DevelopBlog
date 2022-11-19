@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 import AuthForm from "./AuthForm";
 import { useDispatch, useSelector } from "react-redux";
 import { changeField } from "../../modules/auth";
+import invokeAPI from "../../modules/restAPI";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -50,7 +51,17 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const onCheckAdmin = (value: boolean) => {
     dispatch(changeField({ form: "join", key: "isAdmin", value }));
   };
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {};
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const result = await invokeAPI({ method: "post", path: "/users/login" })(
+        {}
+      );
+      console.log("result: ", result);
+    } catch (e: any) {
+      console.log("error: ", e.response);
+    }
+  };
   return (
     <AuthTemplateBlock>
       <WhiteBox>
