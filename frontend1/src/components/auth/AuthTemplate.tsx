@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import styled from "styled-components";
 import qs from "qs";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AuthForm from "./AuthForm";
 import { useDispatch, useSelector } from "react-redux";
 import { changeField } from "../../modules/auth";
@@ -43,6 +43,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     else type = "join";
     return type;
   }, [location]);
+  const navigate = useNavigate();
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -88,7 +89,33 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
             adminPwd,
           },
         });
-        console.log("result: ", result);
+        console.log("join result: ", result);
+        navigate("/auth/login");
+      } catch (e: any) {
+        console.log("error: ", e.response);
+      }
+    } else {
+      const { email, pwd } = loginForm;
+      if (email == "") {
+        alert("이메일을 입력해주세요.");
+        return;
+      }
+      if (pwd == "") {
+        alert("비밀번호를 입력해주세요.");
+        return;
+      }
+      try {
+        const result = await invokeAPI({
+          method: "post",
+          path: "/users/login",
+        })({
+          data: {
+            email,
+            password: pwd,
+          },
+        });
+        console.log("login result: ", result);
+        navigate("/");
       } catch (e: any) {
         console.log("error: ", e.response);
       }
