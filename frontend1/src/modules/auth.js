@@ -110,7 +110,15 @@ export default handleActions(
       return newState;
     },
     [LOGIN_TOKEN_ERROR]: (state, action) => {
-      return state;
+      const newState = {
+        ...state,
+        login: false,
+        loginInfo: {
+          name: null,
+          email: null,
+        },
+      };
+      return newState;
     },
   },
   initialState

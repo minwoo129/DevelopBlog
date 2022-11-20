@@ -9,7 +9,7 @@ import ListPage from "./pages/ListPage";
 import MainPage from "./pages/MainPage";
 import SearchPage from "./pages/SearchPage";
 
-function App() {
+const App = () => {
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
@@ -34,6 +34,6 @@ function App() {
       <Route element={<SearchPage />} path={"/search*"} />
     </Routes>
   );
-}
+};
 
 export default App;
