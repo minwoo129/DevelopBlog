@@ -9,10 +9,11 @@ const dotenv = require("dotenv");
 
 const indexRouter = require("./routes");
 const userRouter = require("./routes/user");
+const passportConfig = require("./passport");
 
 dotenv.config();
 const app = express();
-
+passportConfig();
 app.set("port", process.env.PORT || 3001);
 app.set("view engine", "html");
 nunjucks.configure("views", {
@@ -36,6 +37,8 @@ app.use(
     },
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", userRouter);
