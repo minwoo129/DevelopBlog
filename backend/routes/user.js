@@ -3,7 +3,7 @@ const AWS = require("aws-sdk");
 const dynamodbAccessKey = require("../AWS/dynamodbAccessKey");
 const { v4 } = require("uuid");
 const bcrypt = require("bcrypt");
-const { isNotLoggedIn } = require("./middlewares");
+const { isNotLoggedIn, verifyToken } = require("./middlewares");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
@@ -40,6 +40,41 @@ router.post("/login", async (req, res, next) => {
       res.status(200).json({ ...user, token });
     });
   })(req, res, next);
+});
+
+router.post("/token", verifyToken, async (req, res, next) => {
+  const exixtQuery = {
+    TableName: "DevelopBlog_user",
+    KeyConditionExpression: "email=:email",
+    ExpressionAttributeValues: {
+      ":email": req.decoded.id,
+    },
+  };
+  try {
+    const user = await dynamoDB.query(exixtQuery).promise();
+    if (user.Count > 0) {
+      const token = jwt.sign(
+        {
+          id: user.Items[0].email,
+          name: user.Items[0].name,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "60m",
+          issuer: "rmwDevelopBlog",
+        }
+      );
+      res.status(200).json({ ...user.Items[0], token });
+      return;
+    }
+
+    res
+      .status(410)
+      .json({ error: true, code: 410, data: "가입되지 않은 계정입니다." });
+  } catch (e) {
+    console.error(err);
+    res.status(500).json({ error: true, code: 500, data: err });
+  }
 });
 
 router.post("/join", isNotLoggedIn, async (req, res, next) => {
