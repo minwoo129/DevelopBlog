@@ -1,5 +1,5 @@
 import { apiType1, apiType2 } from "./type";
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
@@ -9,26 +9,40 @@ export const setToken = (loginData: any) => {
 };
 
 export const setCookies = (loginData: any) => {
+  cookies.remove("cookie");
   const date = new Date();
   date.setHours(date.getHours() + 1);
-  return cookies.set("loginToken", loginData.token, {
-    expires: date,
-  });
+  return cookies.set(
+    "cookie",
+    { ...loginData },
+    {
+      expires: date,
+    }
+  );
 };
 
-export const getCookies = () => {
-  return cookies.get("loginToken");
+export const getCookies = (key: string) => {
+  return cookies.get(key);
 };
 
 const invokeAPI =
   ({ method, path }: apiType1) =>
   ({ subPath = null, params = null, data = null }: apiType2) => {
-    return axios({
+    let axiosReq: AxiosRequestConfig = {
       method,
       url: subPath ? `${path}${subPath}` : path,
       params,
       data,
-    });
+    };
+    if (getCookies("cookie")) {
+      axiosReq = {
+        ...axiosReq,
+        headers: {
+          Authorization: getCookies("cookie").token,
+        },
+      };
+    }
+    return axios(axiosReq);
   };
 
 export default invokeAPI;
