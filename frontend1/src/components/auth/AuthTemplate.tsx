@@ -53,13 +53,45 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   };
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      const result = await invokeAPI({ method: "post", path: "/users/login" })(
-        {}
-      );
-      console.log("result: ", result);
-    } catch (e: any) {
-      console.log("error: ", e.response);
+    if (type == "join") {
+      const { email, pwd, pwdCheck, name, isAdmin, adminPwd } = joinForm;
+      if (email == "") {
+        alert("이메일을 입력해주세요.");
+        return;
+      }
+      if (pwd == "") {
+        alert("비밀번호를 입력해주세요.");
+        return;
+      }
+      if (pwdCheck == "") {
+        alert("확인용 비밀번호를 입력해주세요.");
+        return;
+      }
+      if (name == "") {
+        alert("이름을 입력해주세요.");
+        return;
+      }
+      if (pwd != pwdCheck) {
+        alert("비밀번호가 일치하지 않습니다.");
+        return;
+      }
+      try {
+        const result = await invokeAPI({
+          method: "post",
+          path: "http://43.201.78.192:3001/users/join",
+        })({
+          data: {
+            email,
+            password: pwd,
+            name,
+            isAdmin,
+            adminPwd,
+          },
+        });
+        console.log("result: ", result);
+      } catch (e: any) {
+        console.log("error: ", e.response);
+      }
     }
   };
   return (

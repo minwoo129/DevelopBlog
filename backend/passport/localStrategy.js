@@ -1,6 +1,5 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const bcrypt = require("bcrypt");
 const AWS = require("aws-sdk");
 const dynamodbAccessKey = require("../AWS/dynamodbAccessKey");
 const bcrypt = require("bcrypt");
