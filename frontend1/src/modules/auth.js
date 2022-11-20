@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
 import produce from "immer";
-import { createPromiseThunk } from "../lib/styles/api/asyncUtils";
+import { createPromiseThunk } from "../lib/api/asyncUtils";
 import invokeAPI, { setToken } from "./restAPI";
 // ********************************* state초기화 ********************************
 const initialState = {
