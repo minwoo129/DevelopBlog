@@ -28,7 +28,16 @@ const WritePost: FC<WritePostProps> = (props) => {
         hooks={{
           addImageBlobHook: async (blob, callback) => {
             console.log("blob: ", blob);
-            AWSFileUpload(blob);
+            //AWSFileUpload(blob);
+            try {
+              const result = await invokeFileUpload({
+                data: blob,
+                path: "/files/upload",
+              });
+              console.log("result: ", result);
+            } catch (err) {
+              console.log("upload error: ", err);
+            }
           },
         }}
       />

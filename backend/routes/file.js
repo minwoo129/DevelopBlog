@@ -35,18 +35,23 @@ const s3 = new AWS.S3({
 
 const upload = multer({
   storage: multerS3({
-    s3,
+    s3: new AWS.S3(),
     bucket: "developblog",
-    key(req, file, cb) {
-      cb(null, `original/${Date.now()}_${path.basename(file.originalname)}`);
+    acl: "public-read",
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    key: async (req, file, cb) => {
+      cb(
+        null,
+        `original/image_${Date.now()}${path.parse(file.originalname).ext}`
+      );
     },
   }),
   limits: { fieldSize: 5 * 1024 * 1024 },
 });
 
-router.post("/upload", verifyToken, upload.single("img"), (req, res) => {
+router.post("/upload", verifyToken, upload.single("file"), (req, res) => {
   console.log("file: ", req.file);
-  res.status(200).json({ test: "ok" });
+  res.status(200).json({ ...req.file });
 });
 
 module.exports = router;
