@@ -5,6 +5,7 @@ const { v4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const { isNotLoggedIn } = require("./middlewares");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 const router = express.Router();
 AWS.config.update(dynamodbAccessKey);
@@ -24,7 +25,19 @@ router.post("/login", isNotLoggedIn, async (req, res, next) => {
         res.status(500).json({ error: true, code: 500, data: loginError });
         return;
       }
-      res.status(200).json(user);
+      const token = jwt.sign(
+        {
+          id: user.email,
+          name: user.name,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "60m",
+          issuer: "rmwDevelopBlog",
+        }
+      );
+
+      res.status(200).json({ ...user, token });
     });
   })(req, res, next);
 });
