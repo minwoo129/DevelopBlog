@@ -1,0 +1,4 @@
+export const AWSINFO = {
+  ACCESS_KEY_ID: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+  SECRET_ACCESS_KEY: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+};
