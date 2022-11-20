@@ -9,9 +9,11 @@ import styled from "styled-components";
 import qs from "qs";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthForm from "./AuthForm";
-import { useDispatch, useSelector } from "react-redux";
-import { changeField } from "../../modules/auth";
+import { useSelector } from "react-redux";
+import { changeField, login } from "../../modules/auth";
 import invokeAPI from "../../modules/restAPI";
+import { AnyAction } from "redux";
+import { useDispatch } from "react-redux";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -33,7 +35,7 @@ interface AuthTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 type pageEnableType = "login" | "join";
 
 const AuthTemplate: FC<AuthTemplateProps> = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const joinForm = useSelector((state: any) => state.auth.join);
   const loginForm = useSelector((state: any) => state.auth.login);
   const location = useLocation();
@@ -105,15 +107,14 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
         return;
       }
       try {
-        const result = await invokeAPI({
-          method: "post",
-          path: "/users/login",
-        })({
-          data: {
-            email,
-            password: pwd,
-          },
-        });
+        const result = await dispatch(
+          login({
+            data: {
+              email,
+              password: pwd,
+            },
+          })
+        );
         console.log("login result: ", result);
         navigate("/");
       } catch (e: any) {
