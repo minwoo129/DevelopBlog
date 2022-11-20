@@ -11,7 +11,7 @@ const router = express.Router();
 AWS.config.update(dynamodbAccessKey);
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
-router.post("/login", isNotLoggedIn, async (req, res, next) => {
+router.post("/login", async (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
     if (authError) {
       res.status(500).json({ error: true, code: 500, data: authError });
