@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, MouseEvent } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import invokeAPI from "../../modules/restAPI";
+import invokeAPI, { getCookies } from "../../modules/restAPI";
 
 const ListTemplateBlock = styled.div`
   flex: 1;
@@ -24,9 +24,14 @@ const ListTemplate: FC<ListTemplateProps> = (props) => {
       console.log("tokenTest error: ", e);
     }
   };
+
+  const cookieTest = (e: MouseEvent<HTMLDivElement>) => {
+    console.log("cookie: ", getCookies());
+  };
+
   return (
     <ListTemplateBlock>
-      <div onClick={tokenTest}>토큰 테스트</div>
+      <div onClick={cookieTest}>토큰 테스트</div>
     </ListTemplateBlock>
   );
 };
