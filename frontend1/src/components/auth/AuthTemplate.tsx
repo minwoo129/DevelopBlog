@@ -78,7 +78,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       try {
         const result = await invokeAPI({
           method: "post",
-          path: "http://43.201.78.192:3001/users/join",
+          path: "/users/join",
         })({
           data: {
             email,
