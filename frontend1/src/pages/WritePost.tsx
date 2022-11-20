@@ -1,0 +1,39 @@
+import React, { FC, HTMLAttributes, useRef } from "react";
+import { Editor } from "@toast-ui/react-editor";
+import "@toast-ui/editor/dist/toastui-editor.css";
+import "prismjs/themes/prism.css";
+import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css";
+import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
+import Prism from "prismjs";
+import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+import { invokeFileUpload } from "../modules/restAPI";
+import { AWSFileUpload } from "../lib/api/AWSUpload";
+
+interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
+
+const WritePost: FC<WritePostProps> = (props) => {
+  const ref = useRef<Editor>(null);
+
+  console.log("ref: ", ref.current);
+  return (
+    <div>
+      <Editor
+        ref={ref}
+        initialValue="hello react editor world!"
+        previewStyle="vertical"
+        height="600px"
+        initialEditType="markdown"
+        useCommandShortcut={true}
+        plugins={[[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax]}
+        hooks={{
+          addImageBlobHook: async (blob, callback) => {
+            console.log("blob: ", blob);
+            AWSFileUpload(blob);
+          },
+        }}
+      />
+    </div>
+  );
+};
+
+export default WritePost;

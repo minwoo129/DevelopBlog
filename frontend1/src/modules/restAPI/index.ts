@@ -1,4 +1,4 @@
-import { apiType1, apiType2 } from "./type";
+import { apiType1, apiType2, fileUpload } from "./type";
 import axios, { AxiosRequestConfig } from "axios";
 import { Cookies } from "react-cookie";
 
@@ -23,6 +23,17 @@ export const setCookies = (loginData: any) => {
 
 export const getCookies = (key: string) => {
   return cookies.get(key);
+};
+
+export const invokeFileUpload = ({ path, data }: fileUpload) => {
+  const form = new FormData();
+  form.append("img", data);
+
+  return axios.post(path, form, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 const invokeAPI =

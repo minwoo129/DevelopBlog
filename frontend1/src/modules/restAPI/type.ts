@@ -8,3 +8,8 @@ export type apiType2 = {
   params?: any;
   data?: any;
 };
+
+export type fileUpload = {
+  path: string;
+  data: Blob;
+};
