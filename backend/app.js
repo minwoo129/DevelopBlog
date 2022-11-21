@@ -10,7 +10,7 @@ const dotenv = require("dotenv");
 const indexRouter = require("./routes");
 const userRouter = require("./routes/user");
 const passportConfig = require("./passport");
-const fileConfig = require("./routes/file");
+const fileRouter = require("./routes/file");
 
 dotenv.config();
 const app = express();
@@ -43,7 +43,7 @@ app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/users", userRouter);
-app.use("/files", fileConfig);
+app.use("/files", fileRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
