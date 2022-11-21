@@ -1,7 +1,6 @@
 const express = require("express");
 const AWS = require("aws-sdk");
 const dynamodbAccessKey = require("../AWS/dynamodbAccessKey");
-const { v4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const { isNotLoggedIn, verifyToken } = require("./middlewares");
 const passport = require("passport");
