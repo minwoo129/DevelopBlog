@@ -7,7 +7,6 @@ import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import Prism from "prismjs";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import { invokeFileUpload } from "../modules/restAPI";
-import { AWSFileUpload } from "../lib/api/AWSUpload";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -27,7 +26,6 @@ const WritePost: FC<WritePostProps> = (props) => {
         plugins={[[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax]}
         hooks={{
           addImageBlobHook: async (blob, callback) => {
-            console.log("blob: ", blob);
             //AWSFileUpload(blob);
             try {
               const result = await invokeFileUpload({
