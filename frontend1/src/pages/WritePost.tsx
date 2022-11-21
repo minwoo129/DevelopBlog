@@ -33,6 +33,7 @@ const WritePost: FC<WritePostProps> = (props) => {
                 path: "/files/upload",
               });
               console.log("result: ", result);
+              callback(result.data.location);
             } catch (err) {
               console.log("upload error: ", err);
             }
