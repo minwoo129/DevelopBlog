@@ -1,18 +1,25 @@
 import React, { FC, HTMLAttributes, MouseEvent } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../modules/auth";
 import "./MenuTemplate.scss";
 
 interface MenuTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const loginInfo = useSelector((state: any) => state.auth.loginInfo);
   const login = useSelector((state: any) => state.auth.login);
+
   const onClickTitle = (e: MouseEvent<HTMLDivElement>) => {
     navigate("/");
   };
   const onClickLogin = (e: MouseEvent<HTMLDivElement>) => {
-    navigate("/auth/login");
+    if (login) {
+      dispatch(logout());
+      navigate("/");
+    } else navigate("/auth/login");
   };
   const onClickWrite = (e: MouseEvent<HTMLDivElement>) => {
     navigate("/write");
@@ -23,6 +30,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   const onClickSearch = (e: MouseEvent<HTMLDivElement>) => {
     navigate("/search");
   };
+
   return (
     <div className="menuTemplate">
       <div className="menuBar">

@@ -21,6 +21,10 @@ export const getCookies = (key: string) => {
   return cookies.get(key);
 };
 
+export const removeCookies = (key: string) => {
+  return cookies.remove(key);
+};
+
 export const invokeFileUpload = ({ path, data }: fileUpload) => {
   const form = new FormData();
   form.append("file", data);

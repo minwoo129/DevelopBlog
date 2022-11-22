@@ -1,6 +1,6 @@
 import { handleActions } from "redux-actions";
 import { createPromiseThunk } from "../lib/api/asyncUtils";
-import invokeAPI, { setCookies } from "./restAPI";
+import invokeAPI, { removeCookies, setCookies } from "./restAPI";
 // ********************************* state초기화 ********************************
 const initialState = {
   loginForm: {
@@ -37,6 +37,8 @@ const LOGIN_TOKEN_ERROR = "auth/LOGIN_TOKEN_ERROR";
 
 const INITIALIZE_BY_TOKEN = "auth/INITIALIZE_BY_TOKEN";
 
+const LOGOUT = "auth/LOGOUT";
+
 // *********************************** thunk ************************************
 //  비동기 액션일 때는 createPromiseThunk 호출, 아니면 그냥 action(object) 리턴
 // ******************************************************************************
@@ -56,6 +58,10 @@ export const loginToken = createPromiseThunk(
 
 export const initializeByToken = (value) => {
   return { type: INITIALIZE_BY_TOKEN, payload: value };
+};
+
+export const logout = () => {
+  return { type: LOGOUT };
 };
 
 // *********************************** reducer ***********************************
@@ -137,6 +143,15 @@ export default handleActions(
         login: true,
       };
 
+      return newState;
+    },
+
+    // LOGOUT ////////////////////////////////////////////////////
+    [LOGOUT]: (state) => {
+      const newState = {
+        ...initialState,
+      };
+      removeCookies("cookie");
       return newState;
     },
   },
