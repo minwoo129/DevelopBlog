@@ -22,7 +22,8 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     } else navigate("/auth/login");
   };
   const onClickWrite = (e: MouseEvent<HTMLDivElement>) => {
-    navigate("/write");
+    if (login) navigate("/write");
+    else navigate("/auth/login");
   };
   const onClickMyArticle = (e: MouseEvent<HTMLDivElement>) => {
     navigate("/list");
