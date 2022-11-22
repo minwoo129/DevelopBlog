@@ -32,17 +32,17 @@ const WhiteBox = styled.div`
 `;
 
 interface AuthTemplateProps extends HTMLAttributes<HTMLDivElement> {}
-type pageEnableType = "login" | "join";
+type pageEnableType = "loginForm" | "joinForm";
 
 const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
-  const joinForm = useSelector((state: any) => state.auth.join);
-  const loginForm = useSelector((state: any) => state.auth.login);
+  const joinForm = useSelector((state: any) => state.auth.joinForm);
+  const loginForm = useSelector((state: any) => state.auth.loginForm);
   const location = useLocation();
   const type = useMemo((): pageEnableType => {
-    let type: pageEnableType = "login";
-    if (location.pathname.indexOf("login") != -1) type = "login";
-    else type = "join";
+    let type: pageEnableType = "loginForm";
+    if (location.pathname.indexOf("login") != -1) type = "loginForm";
+    else type = "joinForm";
     return type;
   }, [location]);
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   };
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (type == "join") {
+    if (type == "joinForm") {
       const { email, pwd, pwdCheck, name, isAdmin, adminPwd } = joinForm;
       if (email == "") {
         alert("이메일을 입력해주세요.");
@@ -127,7 +127,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       <WhiteBox>
         <AuthForm
           formType={type}
-          form={type == "join" ? joinForm : loginForm}
+          form={type == "joinForm" ? joinForm : loginForm}
           onChange={onChange}
           onCheckAdmin={onCheckAdmin}
           onSubmit={onSubmit}

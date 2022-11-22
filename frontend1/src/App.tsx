@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { loginToken } from "./modules/auth";
+import { initializeByToken, loginToken } from "./modules/auth";
 import { getCookies } from "./modules/restAPI";
 import AuthPage from "./pages/AuthPage";
 import ListPage from "./pages/ListPage";
@@ -11,21 +11,15 @@ import SearchPage from "./pages/SearchPage";
 import WritePost from "./pages/WritePost";
 
 const App = () => {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
+  const login = useSelector((state: any) => state.auth.login);
 
   useEffect(() => {
-    firstLogin();
-  }, []);
-
-  const firstLogin = async () => {
-    console.log("firstLogin");
-    try {
-      const result = await dispatch(loginToken({}));
-    } catch (e) {
-      console.log("firstLogin error: ", e);
+    if (!login) {
+      const cookie = getCookies("cookie");
+      if (cookie) dispatch(initializeByToken(cookie));
     }
-  };
-
+  }, [login]);
   return (
     <Routes>
       <Route element={<MainPage />} path={"/*"} />

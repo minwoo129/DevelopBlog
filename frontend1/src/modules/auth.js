@@ -1,14 +1,13 @@
 import { handleActions } from "redux-actions";
-import produce from "immer";
 import { createPromiseThunk } from "../lib/api/asyncUtils";
-import invokeAPI, { setCookies, setToken } from "./restAPI";
+import invokeAPI, { setCookies } from "./restAPI";
 // ********************************* state초기화 ********************************
 const initialState = {
-  login: {
+  loginForm: {
     email: "",
     pwd: "",
   },
-  join: {
+  joinForm: {
     email: "",
     pwd: "",
     pwdCheck: "",
@@ -36,6 +35,8 @@ const LOGIN_TOKEN = "auth/LOGIN_TOKEN";
 const LOGIN_TOKEN_SUCCESS = "auth/LOGIN_TOKEN_SUCCESS";
 const LOGIN_TOKEN_ERROR = "auth/LOGIN_TOKEN_ERROR";
 
+const INITIALIZE_BY_TOKEN = "auth/INITIALIZE_BY_TOKEN";
+
 // *********************************** thunk ************************************
 //  비동기 액션일 때는 createPromiseThunk 호출, 아니면 그냥 action(object) 리턴
 // ******************************************************************************
@@ -52,6 +53,10 @@ export const loginToken = createPromiseThunk(
   LOGIN_TOKEN,
   invokeAPI({ method: "post", path: "/users/token" })
 );
+
+export const initializeByToken = (value) => {
+  return { type: INITIALIZE_BY_TOKEN, payload: value };
+};
 
 // *********************************** reducer ***********************************
 export default handleActions(
@@ -76,7 +81,6 @@ export default handleActions(
       return state;
     },
     [LOGIN_SUCCESS]: (state, { payload: { param, result } }) => {
-      setToken(result);
       setCookies(result);
       const newState = {
         ...state,
@@ -84,6 +88,10 @@ export default handleActions(
         loginInfo: {
           name: result.name,
           email: result.email,
+        },
+        loginForm: {
+          email: "",
+          pwd: "",
         },
       };
       return newState;
@@ -97,7 +105,6 @@ export default handleActions(
       return state;
     },
     [LOGIN_TOKEN_SUCCESS]: (state, { payload: { param, result } }) => {
-      setToken(result);
       setCookies(result);
       const newState = {
         ...state,
@@ -118,6 +125,18 @@ export default handleActions(
           email: null,
         },
       };
+      return newState;
+    },
+
+    // INITIALIZE_BY_TOKEN ////////////////////////////////////////////////////
+    [INITIALIZE_BY_TOKEN]: (state, { payload: result }) => {
+      const { name, email, token } = result;
+      const newState = {
+        ...state,
+        loginInfo: { name, email },
+        login: true,
+      };
+
       return newState;
     },
   },

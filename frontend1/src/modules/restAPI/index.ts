@@ -4,10 +4,6 @@ import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
 
-export const setToken = (loginData: any) => {
-  axios.defaults.headers.common["authorization"] = loginData.token;
-};
-
 export const setCookies = (loginData: any) => {
   cookies.remove("cookie");
   const date = new Date();
@@ -32,6 +28,7 @@ export const invokeFileUpload = ({ path, data }: fileUpload) => {
   return axios.post(path, form, {
     headers: {
       "Content-Type": "multipart/form-data",
+      Authorization: getCookies("cookie").token,
     },
   });
 };

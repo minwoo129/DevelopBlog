@@ -24,12 +24,12 @@ const ButtonWithMarginTop = styled(Button)`
 `;
 
 const textMap = {
-  login: "로그인",
-  join: "회원가입",
+  loginForm: "로그인",
+  joinForm: "회원가입",
 };
 
 interface AuthFormProps {
-  formType: "login" | "join";
+  formType: "loginForm" | "joinForm";
   form?: {
     email: string;
     pwd: string;
@@ -55,7 +55,7 @@ const AuthForm: FC<AuthFormProps> = ({
     <AuthFormBlock>
       <h3>{title}</h3>
       <form onSubmit={onSubmit}>
-        {formType == "join" && (
+        {formType == "joinForm" && (
           <StyledInput
             autoComplete="name"
             name="name"
@@ -80,7 +80,7 @@ const AuthForm: FC<AuthFormProps> = ({
           onChange={onChange}
           type={"password"}
         />
-        {formType == "join" && (
+        {formType == "joinForm" && (
           <StyledInput
             autoComplete="pwdCheck"
             name="pwdCheck"
@@ -90,7 +90,7 @@ const AuthForm: FC<AuthFormProps> = ({
             type={"password"}
           />
         )}
-        {formType == "join" && (
+        {formType == "joinForm" && (
           <CheckAdminSection
             checked={form?.isAdmin}
             onClick={onCheckAdmin}
@@ -103,7 +103,7 @@ const AuthForm: FC<AuthFormProps> = ({
         </ButtonWithMarginTop>
       </form>
       <Footer>
-        {formType == "login" ? (
+        {formType == "loginForm" ? (
           <Link to="/auth/join">회원가입</Link>
         ) : (
           <Link to="/auth/login">로그인</Link>
