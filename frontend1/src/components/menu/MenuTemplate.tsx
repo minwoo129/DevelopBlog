@@ -28,9 +28,6 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   const onClickMyArticle = (e: MouseEvent<HTMLDivElement>) => {
     navigate("/list");
   };
-  const onClickSearch = (e: MouseEvent<HTMLDivElement>) => {
-    navigate("/search");
-  };
 
   return (
     <div className="menuTemplate">
@@ -49,9 +46,6 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
         </div>
         <div className="menuItem" onClick={onClickMyArticle}>
           <h3>내 작성 글</h3>
-        </div>
-        <div className="menuItem" onClick={onClickSearch}>
-          <h3>검색</h3>
         </div>
       </div>
       {props.children}
