@@ -1,15 +1,20 @@
 import React, { FC, HTMLAttributes } from "react";
-import styled from "styled-components";
+import styled, {
+  css,
+  DefaultTheme,
+  ThemedCssFunction,
+} from "styled-components";
+
+interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
+  isLastRow?: boolean;
+}
 
 const ListItemBlock = styled.div`
-  width: 15%;
+  width: 284.6px;
   height: 150px;
-  border: 1px solid red;
+  border: 1px solid green;
   display: inline-block;
-  margin-bottom: 20px;
 `;
-
-interface ListItemProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ListItem: FC<ListItemProps> = (props) => {
   return <ListItemBlock></ListItemBlock>;
