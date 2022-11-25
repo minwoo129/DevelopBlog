@@ -7,7 +7,7 @@ const cookies = new Cookies();
 export const setCookies = (loginData: any) => {
   cookies.remove("cookie");
   const date = new Date();
-  date.setHours(date.getHours() + 1);
+  date.setDate(date.getDate() + 1);
   return cookies.set(
     "cookie",
     { ...loginData },

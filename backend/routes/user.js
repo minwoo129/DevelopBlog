@@ -31,7 +31,7 @@ router.post("/login", async (req, res, next) => {
         },
         process.env.JWT_SECRET,
         {
-          expiresIn: "60m",
+          expiresIn: "24h",
           issuer: "rmwDevelopBlog",
         }
       );
