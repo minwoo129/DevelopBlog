@@ -25,9 +25,6 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     if (login) navigate("/write");
     else navigate("/auth/login");
   };
-  const onClickMyArticle = (e: MouseEvent<HTMLDivElement>) => {
-    navigate("/list");
-  };
 
   return (
     <div className="menuTemplate">
@@ -43,9 +40,6 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
         </div>
         <div className="menuItem" onClick={onClickWrite}>
           <h3>글쓰기</h3>
-        </div>
-        <div className="menuItem" onClick={onClickMyArticle}>
-          <h3>내 작성 글</h3>
         </div>
       </div>
       {props.children}
