@@ -21,24 +21,16 @@ const BodyRowSectionBlock = styled.div`
 
 const BodyRowSection: FC<BodyRowSectionProps> = (props) => {
   const { items } = props;
-  return (
-    <BodyRowSectionBlock>
-      {items.map((item, index) => {
-        return <ListItem isLastRow={items.length % 4 != 0} key={index} />;
-      })}
-    </BodyRowSectionBlock>
-  );
+  return <BodyRowSectionBlock></BodyRowSectionBlock>;
 };
 
 const BodyBlock = styled.div`
   flex: 1;
-  height: 919px;
   border: 1px solid red;
   overflow: scroll;
   padding: 0 70px;
-  flex-direction: row;
-  flex-wrap: wrap;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-start;
   overflow: scroll;
@@ -47,15 +39,20 @@ const BodyBlock = styled.div`
 interface BodyProps extends HTMLAttributes<HTMLDivElement> {}
 
 const Body: FC<BodyProps> = (props) => {
-  const arr = Array(46).fill(1);
+  /* const arr = Array(46).fill(1);
   const section = lodash.chunk(arr, 4);
-  console.log("section: ", section);
+  console.log("section: ", section); */
+  let arr = [];
+  for (let i = 0; i < 50; i++) arr.push(i);
 
   return (
     <BodyBlock>
-      {section.map((item, index) => {
-        return <BodyRowSection items={item} key={index} />;
+      {arr.map((item: number, index: number) => {
+        return <ListItem value={item} key={index} />;
       })}
+      {/* {section.map((item, index) => {
+        return <BodyRowSection items={item} key={index} />;
+      })} */}
     </BodyBlock>
   );
 };
