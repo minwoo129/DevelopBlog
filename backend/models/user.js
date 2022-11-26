@@ -28,6 +28,7 @@ module.exports = class User extends Sequelize.Model {
         timestamps: true,
         underscored: false,
         modelName: "User",
+        initialAutoIncrement: 1,
         tableName: "users",
         paranoid: false,
         charset: "utf8",

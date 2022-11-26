@@ -17,6 +17,7 @@ const initialState = {
   },
   login: false,
   loginInfo: {
+    id: null,
     name: null,
     email: null,
   },
@@ -87,13 +88,15 @@ export default handleActions(
       return state;
     },
     [LOGIN_SUCCESS]: (state, { payload: { param, result } }) => {
-      setCookies(result);
+      setCookies(result.data);
+      console.log("result(LOGIN_SUCCESS): ", result);
       const newState = {
         ...state,
         login: true,
         loginInfo: {
-          name: result.name,
-          email: result.email,
+          id: result.data.id,
+          name: result.data.name,
+          email: result.data.email,
         },
         loginForm: {
           email: "",
@@ -136,10 +139,10 @@ export default handleActions(
 
     // INITIALIZE_BY_TOKEN ////////////////////////////////////////////////////
     [INITIALIZE_BY_TOKEN]: (state, { payload: result }) => {
-      const { name, email, token } = result;
+      const { name, email, token, id } = result;
       const newState = {
         ...state,
-        loginInfo: { name, email },
+        loginInfo: { name, email, id },
         login: true,
       };
 

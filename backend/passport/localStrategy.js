@@ -1,11 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const AWS = require("aws-sdk");
-const dynamodbAccessKey = require("../AWS/dynamodbAccessKey");
 const bcrypt = require("bcrypt");
-
-AWS.config.update(dynamodbAccessKey);
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const User = require("../models/user");
 
 module.exports = () => {
   passport.use(
@@ -15,22 +11,14 @@ module.exports = () => {
         passwordField: "password",
       },
       async (email, password, done) => {
-        const exixtQuery = {
-          TableName: "DevelopBlog_user",
-          KeyConditionExpression: "email=:email",
-          ExpressionAttributeValues: {
-            ":email": email,
-          },
-        };
         try {
-          const exUser = await dynamoDB.query(exixtQuery).promise();
-          if (exUser.Count > 0) {
-            const result = await bcrypt.compare(
-              password,
-              exUser.Items[0].password
-            );
+          const exUser = await User.findOne({
+            where: { email },
+          });
+          if (exUser) {
+            const result = await bcrypt.compare(password, exUser.password);
             if (result) {
-              done(null, exUser.Items[0]);
+              done(null, exUser);
             } else {
               done(null, false, {
                 message: "아이디 또는 비밀번호가 일치하지 않습니다.",
@@ -41,7 +29,7 @@ module.exports = () => {
               message: "아이디 또는 비밀번호가 일치하지 않습니다.",
             });
           }
-        } catch (e) {
+        } catch (err) {
           console.error(e);
           done(e);
         }

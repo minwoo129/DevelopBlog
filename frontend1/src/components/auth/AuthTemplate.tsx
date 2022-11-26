@@ -52,7 +52,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     dispatch(changeField({ form: type, key: name, value }));
   };
   const onCheckAdmin = (value: boolean) => {
-    dispatch(changeField({ form: "join", key: "isAdmin", value }));
+    dispatch(changeField({ form: "joinForm", key: "isAdmin", value }));
   };
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

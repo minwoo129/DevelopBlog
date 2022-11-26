@@ -51,6 +51,7 @@ const AuthForm: FC<AuthFormProps> = ({
   onCheckAdmin,
 }) => {
   const title = useMemo(() => textMap[formType], [formType]);
+  console.log("form: ", form);
   return (
     <AuthFormBlock>
       <h3>{title}</h3>

@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const { verifyToken, AWSSingleFileUpload } = require("./middlewares");
+const File = require("../models/file");
 
 const router = express.Router();
 
@@ -11,8 +12,46 @@ try {
   fs.mkdirSync("uploads");
 }
 
-router.post("/upload", verifyToken, AWSSingleFileUpload, (req, res) => {
-  res.status(200).json({ ...req.file });
+router.post("/upload", verifyToken, AWSSingleFileUpload, async (req, res) => {
+  try {
+    const {
+      acl,
+      bucket,
+      location,
+      size,
+      originalname,
+      mimetype,
+      contentType,
+      encoding,
+      fieldname,
+      key,
+      storageClass,
+    } = req.file;
+    const { uploadType } = req.query;
+    const { id } = req.decoded;
+
+    const result = await File.create({
+      acl,
+      bucket,
+      publishedUrl: location,
+      size,
+      originalname,
+      mimeType: mimetype,
+      contentType,
+      encoding,
+      fieldname,
+      key,
+      storageClass,
+      uploadType,
+      userId: id,
+    });
+    res
+      .status(200)
+      .json({ result: true, data: { ...result.dataValues }, error: false });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: true, result: false, data: err, code: 500 });
+  }
 });
 
 module.exports = router;

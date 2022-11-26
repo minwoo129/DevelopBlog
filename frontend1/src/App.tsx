@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import { initializeByToken, loginToken } from "./modules/auth";
+import { initializeByToken } from "./modules/auth";
 import { getCookies } from "./modules/restAPI";
 import AuthPage from "./pages/AuthPage";
 import ListPage from "./pages/ListPage";

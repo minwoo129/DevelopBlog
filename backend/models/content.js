@@ -18,6 +18,7 @@ module.exports = class Content extends Sequelize.Model {
         sequelize,
         timestamps: true,
         underscored: false,
+        initialAutoIncrement: 1,
         modelName: "Content",
         tableName: "contents",
         paranoid: true,

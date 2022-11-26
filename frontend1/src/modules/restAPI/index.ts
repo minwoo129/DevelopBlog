@@ -34,6 +34,9 @@ export const invokeFileUpload = ({ path, data }: fileUpload) => {
       "Content-Type": "multipart/form-data",
       Authorization: getCookies("cookie").token,
     },
+    params: {
+      uploadType: "content",
+    },
   });
 };
 

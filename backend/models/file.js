@@ -60,6 +60,7 @@ module.exports = class File extends Sequelize.Model {
         sequelize,
         timestamps: true,
         underscored: false,
+        initialAutoIncrement: 1,
         modelName: "File",
         tableName: "files",
         paranoid: true,
