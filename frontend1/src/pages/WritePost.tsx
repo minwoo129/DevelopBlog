@@ -30,7 +30,7 @@ const WritePost: FC<WritePostProps> = (props) => {
             try {
               const result = await invokeFileUpload({
                 data: blob,
-                path: "/files/upload",
+                path: "/api/files/upload",
               });
               console.log("result: ", result);
               callback(result.data.data.publishedUrl);
