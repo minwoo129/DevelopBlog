@@ -8,6 +8,8 @@ import Header from "./Header";
 const ListTemplateBlock = styled.div`
   flex: 1;
   background: #e9ecef;
+  display: flex;
+  flex-direction: column;
 `;
 
 interface ListTemplateProps extends HTMLAttributes<HTMLDivElement> {}
