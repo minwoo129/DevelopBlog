@@ -13,17 +13,8 @@ const ListTemplateBlock = styled.div`
 interface ListTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ListTemplate: FC<ListTemplateProps> = (props) => {
-  const test = async (e: MouseEvent<HTMLDivElement>) => {
-    try {
-      const result = await invokeAPI({ method: "get", path: "/api/test" })({});
-      console.log("test result: ", result);
-    } catch (error) {
-      console.log("test error: ", error);
-    }
-  };
   return (
     <ListTemplateBlock>
-      <div onClick={test}>api 실행 테스트</div>
       <Header />
       <Body />
       {/* <div
