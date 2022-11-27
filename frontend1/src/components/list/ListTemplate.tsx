@@ -17,15 +17,6 @@ const ListTemplate: FC<ListTemplateProps> = (props) => {
     <ListTemplateBlock>
       <Header />
       <Body />
-      {/* <div
-        style={{
-          width: "100%",
-          height: "95%",
-          border: "1px solid red",
-          display: "flex",
-          flex: 1,
-        }}
-      ></div> */}
     </ListTemplateBlock>
   );
 };
