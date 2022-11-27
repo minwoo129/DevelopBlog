@@ -13,6 +13,12 @@ module.exports = class Content extends Sequelize.Model {
           allowNull: false,
           defaultValue: "",
         },
+        thumbnailUrl: {
+          type: Sequelize.STRING,
+          allowNull: false,
+          defaultValue:
+            "https://developblog.s3.ap-northeast-2.amazonaws.com/image/2022/1127/f93a392c-bcae-4010-8243-998d90ce7d56",
+        },
       },
       {
         sequelize,
