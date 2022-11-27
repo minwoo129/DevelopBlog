@@ -49,12 +49,12 @@ export const changeField = (value) => {
 
 export const login = createPromiseThunk(
   LOGIN,
-  invokeAPI({ method: "post", path: "/users/login" })
+  invokeAPI({ method: "post", path: "/api/users/login" })
 );
 
 export const loginToken = createPromiseThunk(
   LOGIN_TOKEN,
-  invokeAPI({ method: "post", path: "/users/token" })
+  invokeAPI({ method: "post", path: "/api/users/token" })
 );
 
 export const initializeByToken = (value) => {

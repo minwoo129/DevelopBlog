@@ -81,7 +81,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       try {
         const result = await invokeAPI({
           method: "post",
-          path: "/users/join",
+          path: "/api/users/join",
         })({
           data: {
             email,

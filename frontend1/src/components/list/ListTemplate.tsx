@@ -15,7 +15,7 @@ interface ListTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const ListTemplate: FC<ListTemplateProps> = (props) => {
   const test = async (e: MouseEvent<HTMLDivElement>) => {
     try {
-      const result = await invokeAPI({ method: "get", path: "/test" })({});
+      const result = await invokeAPI({ method: "get", path: "/api/test" })({});
       console.log("test result: ", result);
     } catch (error) {
       console.log("test error: ", error);
