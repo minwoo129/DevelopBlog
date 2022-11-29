@@ -15,17 +15,18 @@ const ListItemBlock = styled.div`
   display: inline-block;
   margin-top: 25px;
   margin-bottom: 20px;
+  border-radius: 6px;
   @media (max-width: 1000px) {
-    width: 100%;
-    background: green;
+    width: 500px;
   }
   @media (min-width: 1000px) {
-    width: 45%;
-    background: red;
+    width: 500px;
+  }
+  @media (min-width: 1200px) {
+    width: 400px;
   }
   @media (min-width: 1500px) {
-    width: 450px;
-    background: blue;
+    width: 500px;
   }
 `;
 

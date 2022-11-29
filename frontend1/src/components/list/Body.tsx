@@ -27,11 +27,26 @@ const BodyRowSection: FC<BodyRowSectionProps> = (props) => {
 const BodyBlock = styled.div`
   flex: 1;
   border: 1px solid red;
-  padding: 0 100px;
   display: flex;
   flex-wrap: wrap;
   overflow: scroll;
-  justify-content: space-between;
+
+  @media (min-width: 1000px) {
+    padding: 0 50px;
+    justify-content: center;
+  }
+  @media (max-width: 1000px) {
+    padding: 0 50px;
+    justify-content: center;
+  }
+  @media (min-width: 1200px) {
+    padding: 0 100px;
+    justify-content: space-between;
+  }
+  @media (min-width: 1500px) {
+    padding: 0 150px;
+    justify-content: space-between;
+  }
 `;
 
 interface BodyProps extends HTMLAttributes<HTMLDivElement> {}
