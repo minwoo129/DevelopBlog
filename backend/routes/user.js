@@ -34,13 +34,11 @@ router.post("/login", async (req, res, next) => {
         }
       );
 
-      res
-        .status(200)
-        .json({
-          result: true,
-          error: false,
-          data: { ...user.dataValues, token },
-        });
+      res.status(200).json({
+        result: true,
+        error: false,
+        data: { ...user.dataValues, token },
+      });
     });
   })(req, res, next);
 });
@@ -88,6 +86,23 @@ router.get("/getOne", async (req, res, next) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: true, code: 500, data: err, result: false });
+  }
+});
+
+router.get("/get", verifyToken, async (req, res, next) => {
+  const { id } = req.decoded;
+  try {
+    const user = await User.findOne({
+      where: { id },
+    });
+    res
+      .status(200)
+      .json({ error: false, result: true, data: { ...user.dataValues } });
+  } catch (e) {
+    console.error(err);
+    res
+      .status(500)
+      .json({ error: true, code: 500, data: err.message, result: false });
   }
 });
 
