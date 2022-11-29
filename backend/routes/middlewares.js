@@ -45,6 +45,7 @@ exports.verifyToken = (req, res, next) => {
         code: 419,
         message: "토큰이 만료되었습니다.",
         data: null,
+        result: false,
       });
     }
 
@@ -53,6 +54,7 @@ exports.verifyToken = (req, res, next) => {
       code: 401,
       message: "유효하지 않은 토큰입니다.",
       data: null,
+      result: false,
     });
   }
 };
