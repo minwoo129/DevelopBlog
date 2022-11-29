@@ -50,7 +50,15 @@ router.post("/upload", verifyToken, AWSSingleFileUpload, async (req, res) => {
       .json({ result: true, data: { ...result.dataValues }, error: false });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: true, result: false, data: err, code: 500 });
+    res
+      .status(500)
+      .json({
+        error: true,
+        result: false,
+        data: null,
+        message: err.message,
+        code: 500,
+      });
   }
 });
 

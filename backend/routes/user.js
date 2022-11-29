@@ -74,7 +74,15 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
     res.status(200).json({ result: true });
   } catch (error) {
     console.error(err);
-    res.status(500).json({ error: true, code: 500, data: err, result: false });
+    res
+      .status(500)
+      .json({
+        error: true,
+        code: 500,
+        data: null,
+        message: err.message,
+        result: false,
+      });
   }
 });
 
@@ -85,7 +93,15 @@ router.get("/getOne", async (req, res, next) => {
     res.status(200).json({ result: true, error: false, data: { ...result } });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: true, code: 500, data: err, result: false });
+    res
+      .status(500)
+      .json({
+        error: true,
+        code: 500,
+        data: null,
+        message: err.message,
+        result: false,
+      });
   }
 });
 
