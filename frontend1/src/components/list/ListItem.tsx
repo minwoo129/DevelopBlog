@@ -10,10 +10,21 @@ interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const ListItemBlock = styled.div`
-  width: 290px;
-  height: 150px;
+  height: 300px;
   border: 1px solid green;
   display: inline-block;
+  @media (max-width: 1000px) {
+    width: 100%;
+    background: green;
+  }
+  @media (min-width: 1000px) {
+    width: 40%;
+    background: red;
+  }
+  @media (min-width: 1500px) {
+    width: 40%;
+    background: blue;
+  }
 `;
 
 const ListItem: FC<ListItemProps> = (props) => {
