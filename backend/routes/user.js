@@ -10,15 +10,39 @@ const router = express.Router();
 router.post("/login", async (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
     if (authError) {
-      res.status(500).json({ error: true, code: 500, data: authError });
+      res
+        .status(500)
+        .json({
+          error: true,
+          code: 500,
+          result: false,
+          data: null,
+          message: authError.message,
+        });
       return;
     }
     if (!user) {
-      res.status(401).status({ error: true, code: 401, data: info });
+      res
+        .status(401)
+        .status({
+          error: true,
+          code: 401,
+          result: false,
+          data: null,
+          message: info.message,
+        });
     }
     return req.login(user, (loginError) => {
       if (loginError) {
-        res.status(500).json({ error: true, code: 500, data: loginError });
+        res
+          .status(500)
+          .json({
+            error: true,
+            code: 500,
+            result: false,
+            data: null,
+            message: loginError.message,
+          });
         return;
       }
       const token = jwt.sign(
@@ -51,7 +75,7 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
       res.status(400).json({
         error: true,
         code: 400,
-        errMessage: "이미 존재하는 이메일입니다.",
+        message: "이미 존재하는 이메일입니다.",
         data: null,
         result: false,
       });
@@ -74,15 +98,13 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
     res.status(200).json({ result: true });
   } catch (error) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        error: true,
-        code: 500,
-        data: null,
-        message: err.message,
-        result: false,
-      });
+    res.status(500).json({
+      error: true,
+      code: 500,
+      data: null,
+      message: err.message,
+      result: false,
+    });
   }
 });
 
@@ -93,15 +115,13 @@ router.get("/getOne", async (req, res, next) => {
     res.status(200).json({ result: true, error: false, data: { ...result } });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        error: true,
-        code: 500,
-        data: null,
-        message: err.message,
-        result: false,
-      });
+    res.status(500).json({
+      error: true,
+      code: 500,
+      data: null,
+      message: err.message,
+      result: false,
+    });
   }
 });
 
