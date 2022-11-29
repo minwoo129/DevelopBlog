@@ -10,39 +10,33 @@ const router = express.Router();
 router.post("/login", async (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
     if (authError) {
-      res
-        .status(500)
-        .json({
+      res.status(500).json({
+        error: true,
+        code: 500,
+        result: false,
+        data: null,
+        message: authError.message,
+      });
+      return;
+    }
+    if (!user) {
+      res.status(401).status({
+        error: true,
+        code: 401,
+        result: false,
+        data: null,
+        message: info.message,
+      });
+    }
+    return req.login(user, (loginError) => {
+      if (loginError) {
+        res.status(500).json({
           error: true,
           code: 500,
           result: false,
           data: null,
-          message: authError.message,
+          message: loginError.message,
         });
-      return;
-    }
-    if (!user) {
-      res
-        .status(401)
-        .status({
-          error: true,
-          code: 401,
-          result: false,
-          data: null,
-          message: info.message,
-        });
-    }
-    return req.login(user, (loginError) => {
-      if (loginError) {
-        res
-          .status(500)
-          .json({
-            error: true,
-            code: 500,
-            result: false,
-            data: null,
-            message: loginError.message,
-          });
         return;
       }
       const token = jwt.sign(
@@ -95,7 +89,7 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
       };
     }
     await User.create(query);
-    res.status(200).json({ result: true });
+    res.status(200).json({ result: true, error: false, data: null });
   } catch (error) {
     console.error(err);
     res.status(500).json({
