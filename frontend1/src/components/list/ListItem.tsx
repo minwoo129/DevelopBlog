@@ -13,16 +13,18 @@ const ListItemBlock = styled.div`
   height: 300px;
   border: 1px solid green;
   display: inline-block;
+  margin-top: 25px;
+  margin-bottom: 20px;
   @media (max-width: 1000px) {
     width: 100%;
     background: green;
   }
   @media (min-width: 1000px) {
-    width: 40%;
+    width: 45%;
     background: red;
   }
   @media (min-width: 1500px) {
-    width: 40%;
+    width: 450px;
     background: blue;
   }
 `;
