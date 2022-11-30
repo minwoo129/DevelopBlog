@@ -3,3 +3,10 @@ export type ChangeFieldParam = {
   key: string;
   value: string | boolean;
 };
+
+export type InitializeByTokenParam = {
+  name: string;
+  email: string;
+  token: string;
+  id: string;
+};

@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../modules/actions/auth";
 import { RootState } from "../../modules/reducer";
 import "./MenuTemplate.scss";
 
@@ -17,7 +18,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   };
   const onClickLogin = (e: MouseEvent<HTMLDivElement>) => {
     if (login) {
-      //dispatch(logout());
+      dispatch(logout());
       navigate("/");
     } else navigate("/auth/login");
   };

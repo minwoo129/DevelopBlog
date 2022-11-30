@@ -1,7 +1,7 @@
 import { AxiosError } from "axios";
 import { createAsyncAction } from "typesafe-actions";
 import { asyncCommonReturnType } from "./actionType";
-import { ChangeFieldParam } from "./actionType/auth";
+import { ChangeFieldParam, InitializeByTokenParam } from "./actionType/auth";
 
 export const CHANGE_FIELD = "auth/CHANGE_FIELD";
 
@@ -23,3 +23,16 @@ export const login = createAsyncAction(LOGIN, LOGIN_SUCCESS, LOGIN_ERROR)<
   asyncCommonReturnType,
   AxiosError
 >();
+
+export const initializeByToken = ({
+  name,
+  email,
+  token,
+  id,
+}: InitializeByTokenParam) => {
+  return { type: INITIALIZE_BY_TOKEN, payload: { name, email, token, id } };
+};
+
+export const logout = () => {
+  return { type: LOGOUT, payload: null };
+};

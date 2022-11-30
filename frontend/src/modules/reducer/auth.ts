@@ -4,11 +4,13 @@ import { authInitialStateType as initialStateType } from "../initialStates/initi
 import { authInitialState as initialState } from "../initialStates/initialState";
 import {
   CHANGE_FIELD,
+  INITIALIZE_BY_TOKEN,
   LOGIN,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
+  LOGOUT,
 } from "../actions/auth";
-import { setCookies } from "../../lib/restAPI";
+import { removeCookies, setCookies } from "../../lib/restAPI";
 
 export default createReducer<initialStateType, authActionType>(initialState, {
   // CHANGE_FIELD ////////////////////////////////////////////////////
@@ -29,6 +31,7 @@ export default createReducer<initialStateType, authActionType>(initialState, {
     return state;
   },
   [LOGIN_SUCCESS]: (state, { payload: { param, result } }) => {
+    console.log("result(LOGIN_SUCCESS): ", result);
     setCookies("cookie", result.data);
     const newState: initialStateType = {
       ...state,
@@ -47,5 +50,25 @@ export default createReducer<initialStateType, authActionType>(initialState, {
   },
   [LOGIN_ERROR]: (state, action) => {
     return state;
+  },
+
+  // INITIALIZE_BY_TOKEN ////////////////////////////////////////////////////
+  [INITIALIZE_BY_TOKEN]: (state, { payload: result }) => {
+    const { name, email, token, id } = result;
+    const newState = {
+      ...state,
+      loginInfo: { name, email, id },
+      login: true,
+    };
+    return newState;
+  },
+
+  // LOGOUT ////////////////////////////////////////////////////
+  [LOGOUT]: (state, action) => {
+    const newState = {
+      ...initialState,
+    };
+    removeCookies("cookie");
+    return newState;
   },
 });

@@ -118,7 +118,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
           })
         );
         console.log("login result: ", result);
-        //navigate("/");
+        navigate("/");
       } catch (e: any) {
         console.log("error: ", e.response);
       }
