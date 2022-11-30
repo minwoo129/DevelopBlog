@@ -4,12 +4,12 @@ import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
 
-export const setCookies = (loginData: any) => {
-  cookies.remove("cookie");
+export const setCookies = (key: string, loginData: any) => {
+  cookies.remove(key);
   const date = new Date();
   date.setDate(date.getDate() + 1);
   return cookies.set(
-    "cookie",
+    key,
     { ...loginData },
     {
       expires: date,
