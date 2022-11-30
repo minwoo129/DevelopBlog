@@ -6,18 +6,21 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
+import { CookiesProvider } from "react-cookie";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store}>
-    <BrowserRouter>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </BrowserRouter>
-  </Provider>
+  <CookiesProvider>
+    <Provider store={store}>
+      <BrowserRouter>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </BrowserRouter>
+    </Provider>
+  </CookiesProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
