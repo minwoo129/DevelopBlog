@@ -10,10 +10,11 @@ import qs from "qs";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthForm from "./AuthForm";
 import { useSelector } from "react-redux";
-import { changeField, login } from "../../modules/auth";
-import invokeAPI from "../../modules/restAPI";
 import { AnyAction } from "redux";
 import { useDispatch } from "react-redux";
+import { changeField, login } from "../../modules/actions/auth";
+import invokeAPI from "../../lib/restAPI";
+import { loginThunk } from "../../modules/thunk/auth";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -108,7 +109,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       }
       try {
         const result = await dispatch(
-          login({
+          loginThunk({
             data: {
               email,
               password: pwd,
@@ -116,7 +117,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
           })
         );
         console.log("login result: ", result);
-        navigate("/");
+        //navigate("/");
       } catch (e: any) {
         console.log("error: ", e.response);
       }

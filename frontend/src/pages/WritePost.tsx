@@ -6,7 +6,6 @@ import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import Prism from "prismjs";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
-import { invokeFileUpload } from "../modules/restAPI";
 import Header from "../components/write/Header";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
@@ -33,7 +32,7 @@ const WritePost: FC<WritePostProps> = (props) => {
         hooks={{
           addImageBlobHook: async (blob, callback) => {
             //AWSFileUpload(blob);
-            try {
+            /* try {
               const result = await invokeFileUpload({
                 data: blob,
                 path: "/api/files/upload",
@@ -45,7 +44,7 @@ const WritePost: FC<WritePostProps> = (props) => {
               callback(result.data.data.publishedUrl);
             } catch (err) {
               console.log("upload error: ", err);
-            }
+            } */
           },
         }}
       />

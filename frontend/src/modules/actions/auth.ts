@@ -14,8 +14,8 @@ export const INITIALIZE_BY_TOKEN = "auth/INITIALIZE_BY_TOKEN";
 export const LOGOUT = "auth/LOGOUT";
 
 // ********************************** Action *******************************************
-export const changeField = (param: ChangeFieldParam) => {
-  return { type: CHANGE_FIELD, payload: param };
+export const changeField = ({ form, key, value }: ChangeFieldParam) => {
+  return { type: CHANGE_FIELD, payload: { form, key, value } };
 };
 
 export const login = createAsyncAction(LOGIN, LOGIN_SUCCESS, LOGIN_ERROR)<
