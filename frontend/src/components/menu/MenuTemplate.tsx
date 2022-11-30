@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, MouseEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../../modules/reducer";
 import "./MenuTemplate.scss";
 
 interface MenuTemplateProps extends HTMLAttributes<HTMLDivElement> {}
@@ -8,8 +9,8 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const loginInfo = useSelector((state: any) => state.auth.loginInfo);
-  const login = useSelector((state: any) => state.auth.login);
+  const loginInfo = useSelector((state: RootState) => state.auth.loginInfo);
+  const login = useSelector((state: RootState) => state.auth.login);
 
   const onClickTitle = (e: MouseEvent<HTMLDivElement>) => {
     navigate("/");

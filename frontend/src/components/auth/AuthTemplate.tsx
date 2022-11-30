@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { changeField, login } from "../../modules/actions/auth";
 import invokeAPI from "../../lib/restAPI";
 import { loginThunk } from "../../modules/thunk/auth";
+import { RootState } from "../../modules/reducer";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -37,8 +38,8 @@ type pageEnableType = "loginForm" | "joinForm";
 
 const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
-  const joinForm = useSelector((state: any) => state.auth.joinForm);
-  const loginForm = useSelector((state: any) => state.auth.loginForm);
+  const joinForm = useSelector((state: RootState) => state.auth.joinForm);
+  const loginForm = useSelector((state: RootState) => state.auth.loginForm);
   const location = useLocation();
   const type = useMemo((): pageEnableType => {
     let type: pageEnableType = "loginForm";
