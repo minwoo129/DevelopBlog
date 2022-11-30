@@ -16,7 +16,7 @@ export default createReducer<initialStateType, authActionType>(initialState, {
     let newForm: "loginForm" | "joinForm" = form;
     const newState = {
       ...state,
-      [form]: {
+      [newForm]: {
         ...state[newForm],
         [key]: value,
       },
