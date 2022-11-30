@@ -1,7 +1,13 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, useEffect, useState } from "react";
 import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineSearch } from "react-icons/hi";
+import { useDispatch } from "react-redux";
+import { setMenuOpen } from "../../modules/actions/menu";
+import MenuIcon from "@mui/icons-material/Menu";
+import { IconButton } from "@mui/material";
+import { useSelector } from "react-redux";
+import { RootState } from "../../modules/reducer";
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -15,10 +21,25 @@ const HeaderBlock = styled.div`
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {}
 
 const Header: FC<HeaderProps> = (props) => {
+  const dispatch = useDispatch();
+  const [visible, setVisible] = useState<boolean>(false);
+  const isMenuVisible = useSelector(
+    (state: RootState) => state.menu.isMenuVisible
+  );
+
   return (
     <HeaderBlock>
       <div style={{ marginLeft: "2rem" }}>
-        <GiHamburgerMenu style={{ width: "1.5rem", height: "1.5rem" }} />
+        {!isMenuVisible && (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge={false}
+            onClick={() => dispatch(setMenuOpen(true))}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
       </div>
       <div style={{ marginRight: "2rem" }}>
         <HiOutlineSearch style={{ width: "1.5rem", height: "1.5rem" }} />

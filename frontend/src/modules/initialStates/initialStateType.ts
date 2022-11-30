@@ -18,3 +18,8 @@ export type authInitialStateType = {
     email: string | null;
   };
 };
+
+export type menuInitialStateType = {
+  isMenuVisible: boolean;
+  isMenuOpen: boolean;
+};

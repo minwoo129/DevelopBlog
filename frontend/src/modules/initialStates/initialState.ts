@@ -1,4 +1,4 @@
-import { authInitialStateType } from "./initialStateType";
+import { authInitialStateType, menuInitialStateType } from "./initialStateType";
 
 export const authInitialState: authInitialStateType = {
   loginForm: {
@@ -19,4 +19,9 @@ export const authInitialState: authInitialStateType = {
     name: null,
     email: null,
   },
+};
+
+export const menuInitialState: menuInitialStateType = {
+  isMenuVisible: true,
+  isMenuOpen: false,
 };
