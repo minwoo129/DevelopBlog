@@ -16,6 +16,9 @@ import { changeField, login } from "../../modules/actions/auth";
 import invokeAPI from "../../lib/restAPI";
 import { loginThunk } from "../../modules/thunk/auth";
 import { RootState } from "../../modules/reducer";
+import { IconButton } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { setMenuOpen } from "../../modules/actions/menu";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -40,6 +43,9 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
   const joinForm = useSelector((state: RootState) => state.auth.joinForm);
   const loginForm = useSelector((state: RootState) => state.auth.loginForm);
+  const isMenuVisible = useSelector(
+    (state: RootState) => state.menu.isMenuVisible
+  );
   const location = useLocation();
   const type = useMemo((): pageEnableType => {
     let type: pageEnableType = "loginForm";
@@ -126,6 +132,21 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   };
   return (
     <AuthTemplateBlock>
+      {!isMenuVisible && (
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge={false}
+          onClick={() => dispatch(setMenuOpen(true))}
+          style={{
+            position: "absolute",
+            top: "1rem",
+            left: "1rem",
+          }}
+        >
+          <MenuIcon />
+        </IconButton>
+      )}
       <WhiteBox>
         <AuthForm
           formType={type}
