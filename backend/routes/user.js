@@ -128,7 +128,7 @@ router.get("/get", verifyToken, async (req, res, next) => {
     res
       .status(200)
       .json({ error: false, result: true, data: { ...user.dataValues } });
-  } catch (e) {
+  } catch (err) {
     console.error(err);
     res
       .status(500)
