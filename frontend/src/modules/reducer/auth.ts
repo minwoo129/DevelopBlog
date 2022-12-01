@@ -9,6 +9,9 @@ import {
   LOGIN_ERROR,
   LOGIN_SUCCESS,
   LOGOUT,
+  TOKEN_CHECK,
+  TOKEN_CHECK_ERROR,
+  TOKEN_CHECK_SUCCESS,
 } from "../actions/auth";
 import { removeCookies, setCookies } from "../../lib/restAPI";
 
@@ -31,7 +34,7 @@ export default createReducer<initialStateType, authActionType>(initialState, {
     return state;
   },
   [LOGIN_SUCCESS]: (state, { payload: { param, result } }) => {
-    setCookies("cookie", result.data);
+    setCookies("access_token", result.data.token);
     const newState: initialStateType = {
       ...state,
       login: true,
@@ -62,12 +65,37 @@ export default createReducer<initialStateType, authActionType>(initialState, {
     return newState;
   },
 
+  // TOKEN_CHECK ////////////////////////////////////////////////////
+  [TOKEN_CHECK]: (state, action) => {
+    return state;
+  },
+  [TOKEN_CHECK_SUCCESS]: (state, { payload: { param, result } }) => {
+    setCookies("access_token", result.data.token);
+    const newState: initialStateType = {
+      ...state,
+      login: true,
+      loginInfo: {
+        id: result.data.id,
+        name: result.data.name,
+        email: result.data.email,
+      },
+      loginForm: {
+        email: "",
+        pwd: "",
+      },
+    };
+    return newState;
+  },
+  [TOKEN_CHECK_ERROR]: (state, action) => {
+    return state;
+  },
+
   // LOGOUT ////////////////////////////////////////////////////
   [LOGOUT]: (state, action) => {
     const newState = {
       ...initialState,
     };
-    removeCookies("cookie");
+    removeCookies("access_token");
     return newState;
   },
 });
