@@ -28,7 +28,6 @@ export const removeCookies = (key: string) => {
 export const invokeFileUpload = ({ path, data }: fileUpload) => {
   const form = new FormData();
   form.append("file", data);
-  console.log("form: ", form);
   return axios.post(path, form, {
     headers: {
       "Content-Type": "multipart/form-data",

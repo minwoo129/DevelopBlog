@@ -99,7 +99,6 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
             adminPwd,
           },
         });
-        console.log("join result: ", result);
         navigate("/auth/login");
       } catch (e: any) {
         console.log("error: ", e.response);
@@ -123,7 +122,6 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
             },
           })
         );
-        console.log("login result: ", result);
         navigate("/");
       } catch (e: any) {
         console.log("error: ", e.response);

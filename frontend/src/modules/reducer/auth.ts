@@ -31,7 +31,6 @@ export default createReducer<initialStateType, authActionType>(initialState, {
     return state;
   },
   [LOGIN_SUCCESS]: (state, { payload: { param, result } }) => {
-    console.log("result(LOGIN_SUCCESS): ", result);
     setCookies("cookie", result.data);
     const newState: initialStateType = {
       ...state,
