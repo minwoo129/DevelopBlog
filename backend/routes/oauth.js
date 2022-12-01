@@ -60,7 +60,7 @@ router.post("/token", async (req, res, next) => {
   })(req, res, next);
 });
 
-router.post("/token/confirm", verifyToken, async (req, res, next) => {
+router.post("/token/validate", verifyToken, async (req, res, next) => {
   const { id } = req.decoded;
   try {
     const user = await User.findOne({
@@ -78,13 +78,11 @@ router.post("/token/confirm", verifyToken, async (req, res, next) => {
         issuer: process.env.JWT_SIGN,
       }
     );
-    res
-      .status(200)
-      .json({
-        result: true,
-        error: false,
-        data: { ...user.dataValues, token },
-      });
+    res.status(200).json({
+      result: true,
+      error: false,
+      data: { ...user.dataValues, token },
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({
