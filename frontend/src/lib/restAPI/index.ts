@@ -21,7 +21,7 @@ export const removeCookies = (key: string) => {
   return cookies.remove(key);
 };
 
-export const invokeFileUpload = ({ path, data }: fileUpload) => {
+export const invokeFileUpload = ({ path, data, uploadType }: fileUpload) => {
   const form = new FormData();
   form.append("file", data);
   return axios.post(path, form, {
@@ -30,7 +30,7 @@ export const invokeFileUpload = ({ path, data }: fileUpload) => {
       Authorization: getCookies("access_token"),
     },
     params: {
-      uploadType: "content",
+      uploadType,
     },
   });
 };

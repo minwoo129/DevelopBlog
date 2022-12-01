@@ -17,7 +17,7 @@ const WritePost: FC<WritePostProps> = (props) => {
   const ref = useRef<Editor>(null);
 
   const onClick = () => {
-    console.log("ref: ", ref.current?.getInstance()?.getHTML());
+    console.log("ref: ", ref.current?.getInstance()?.getMarkdown());
   };
   return (
     <div>
@@ -32,11 +32,11 @@ const WritePost: FC<WritePostProps> = (props) => {
         plugins={[[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax]}
         hooks={{
           addImageBlobHook: async (blob, callback) => {
-            //AWSFileUpload(blob);
             try {
               const result = await invokeFileUpload({
                 data: blob,
                 path: "/api/files/upload",
+                uploadType: "content",
               });
               console.log("result: ", result);
               if (!thumbnailUrl) {
