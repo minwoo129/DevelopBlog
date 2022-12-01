@@ -4,17 +4,13 @@ import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
 
-export const setCookies = (key: string, loginData: any) => {
+export const setCookies = (key: string, data: any) => {
   cookies.remove(key);
   const date = new Date();
   date.setDate(date.getDate() + 1);
-  return cookies.set(
-    key,
-    { ...loginData },
-    {
-      expires: date,
-    }
-  );
+  return cookies.set(key, data, {
+    expires: date,
+  });
 };
 
 export const getCookies = (key: string) => {
@@ -28,11 +24,10 @@ export const removeCookies = (key: string) => {
 export const invokeFileUpload = ({ path, data }: fileUpload) => {
   const form = new FormData();
   form.append("file", data);
-  console.log("form: ", form);
   return axios.post(path, form, {
     headers: {
       "Content-Type": "multipart/form-data",
-      Authorization: getCookies("cookie").token,
+      Authorization: getCookies("access_token"),
     },
     params: {
       uploadType: "content",
@@ -49,11 +44,12 @@ const invokeAPI =
       params,
       data,
     };
-    if (getCookies("cookie")) {
+    const token = getCookies("access_token");
+    if (token) {
       axiosReq = {
         ...axiosReq,
         headers: {
-          Authorization: getCookies("cookie").token,
+          Authorization: token,
         },
       };
     }

@@ -11,6 +11,10 @@ export const LOGIN_ERROR = "auth/LOGIN_ERROR";
 
 export const INITIALIZE_BY_TOKEN = "auth/INITIALIZE_BY_TOKEN";
 
+export const TOKEN_CHECK = "auth/TOKEN_CHECK";
+export const TOKEN_CHECK_SUCCESS = "auth/TOKEN_CHECK_SUCCESS";
+export const TOKEN_CHECK_ERROR = "auth/TOKEN_CHECK_ERROR";
+
 export const LOGOUT = "auth/LOGOUT";
 
 // ********************************** Action *******************************************
@@ -32,6 +36,12 @@ export const initializeByToken = ({
 }: InitializeByTokenParam) => {
   return { type: INITIALIZE_BY_TOKEN, payload: { name, email, token, id } };
 };
+
+export const tokenCheck = createAsyncAction(
+  TOKEN_CHECK,
+  TOKEN_CHECK_SUCCESS,
+  TOKEN_CHECK_ERROR
+)<any, asyncCommonReturnType, AxiosError>();
 
 export const logout = () => {
   return { type: LOGOUT, payload: null };
