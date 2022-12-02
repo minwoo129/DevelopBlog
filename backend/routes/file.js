@@ -50,16 +50,34 @@ router.post("/upload", verifyToken, AWSSingleFileUpload, async (req, res) => {
       .json({ result: true, data: { ...result.dataValues }, error: false });
   } catch (err) {
     console.log(err);
-    res
-      .status(500)
-      .json({
-        error: true,
-        result: false,
-        data: null,
-        message: err.message,
-        code: 500,
-      });
+    res.status(500).json({
+      error: true,
+      result: false,
+      data: null,
+      message: err.message,
+      code: 500,
+    });
   }
 });
 
+router.use("/get").get(":id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const file = await File.findOne({
+      where: { id },
+    });
+    res
+      .status(200)
+      .json({ result: true, error: false, data: { ...file.dataValues } });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      data: null,
+      message: err.message,
+      code: 500,
+    });
+  }
+});
 module.exports = router;
