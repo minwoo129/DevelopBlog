@@ -16,6 +16,9 @@ const ListItemBlock = styled.div`
   margin-top: 25px;
   margin-bottom: 20px;
   border-radius: 6px;
+  &:last-child {
+    margin-left: auto;
+  }
   @media (max-width: 1000px) {
     width: 500px;
   }
