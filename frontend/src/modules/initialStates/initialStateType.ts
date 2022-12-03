@@ -23,3 +23,7 @@ export type menuInitialStateType = {
   isMenuVisible: boolean;
   isMenuOpen: boolean;
 };
+
+export type blogInitialStateType = {
+  addedImageIds: number[];
+};
