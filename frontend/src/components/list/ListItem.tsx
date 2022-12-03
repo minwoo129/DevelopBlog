@@ -58,18 +58,22 @@ const StyledContent = styled.p`
 `;
 
 interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
-  value: number;
   blog: blogType;
+  onPress(id: number): void;
 }
 
-const ListItem: FC<ListItemProps> = (props) => {
-  let newContent = props.blog.htmlContent.replace(/(<([^>]+)>)/gi, "");
+const ListItem: FC<ListItemProps> = ({ blog, onPress }) => {
+  let newContent = blog.htmlContent.replace(/(<([^>]+)>)/gi, "");
   return (
-    <ListItemBlock>
+    <ListItemBlock
+      onClick={(e) => {
+        onPress(blog.id);
+      }}
+    >
       <InsideContentGrid>
-        <StyledImg src={props.blog.thumbnailUrl} />
+        <StyledImg src={blog.thumbnailUrl} />
         <ContentDetailGrid>
-          <StyledTitle>{props.blog.title}</StyledTitle>
+          <StyledTitle>{blog.title}</StyledTitle>
           <StyledContent>{newContent}</StyledContent>
         </ContentDetailGrid>
       </InsideContentGrid>

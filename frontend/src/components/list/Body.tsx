@@ -5,6 +5,7 @@ import lodash from "lodash";
 import { useSelector } from "react-redux";
 import { RootState } from "../../modules/reducer";
 import { blogType } from "../../modules/initialStates/initialStateType";
+import { useNavigate } from "react-router-dom";
 
 interface BodyRowSectionProps extends HTMLAttributes<HTMLDivElement> {
   items: number[];
@@ -34,13 +35,16 @@ interface BodyProps extends HTMLAttributes<HTMLDivElement> {}
 
 const Body: FC<BodyProps> = (props) => {
   const blogs = useSelector((state: RootState) => state.blog.blogs);
-  let arr = [];
-  for (let i = 0; i < 50; i++) arr.push(i);
+  const navigate = useNavigate();
+
+  const onPress = (id: number) => {
+    navigate(`/detail?id=${id}`);
+  };
 
   return (
     <BodyBlock>
       {blogs.map((item: blogType, index: number) => {
-        return <ListItem value={item.id} blog={item} key={index} />;
+        return <ListItem blog={item} onPress={onPress} key={index} />;
       })}
     </BodyBlock>
   );
