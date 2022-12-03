@@ -32,4 +32,6 @@ export const menuInitialState: menuInitialStateType = {
 
 export const blogInitialState: blogInitialStateType = {
   addedImageIds: [],
+  blogs: [],
+  blog: null,
 };
