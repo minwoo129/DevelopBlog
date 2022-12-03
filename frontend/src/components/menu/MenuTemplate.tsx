@@ -22,7 +22,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
 
   useEffect(() => {
     const resizeEvent = () => {
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 906) {
         if (!isMenuVisible) {
           dispatch(setMenuVisible(true));
           dispatch(setMenuOpen(false));
