@@ -7,17 +7,46 @@ import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import Prism from "prismjs";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import Header from "../components/write/Header";
-import { invokeFileUpload } from "../lib/restAPI";
+import invokeAPI, { invokeFileUpload } from "../lib/restAPI";
+import { useNavigate } from "react-router-dom";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
 const WritePost: FC<WritePostProps> = (props) => {
   const [title, setTitle] = useState<string>("");
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
+  const [imageIds, setImageIds] = useState<number[]>([]);
   const ref = useRef<Editor>(null);
+  const navigate = useNavigate();
 
-  const onClick = () => {
+  const onClick = async () => {
+    console.log("title: ", title);
+    console.log("thumbnailUrl: ", thumbnailUrl);
+    console.log("html: ", ref?.current?.getInstance()?.getHTML());
     console.log("ref: ", ref.current?.getInstance()?.getMarkdown());
+    console.log("imageIDs: ", imageIds);
+    if (title == "") {
+      alert("제목을 입력하세요.");
+      return;
+    }
+    try {
+      const result = await invokeAPI({
+        method: "post",
+        path: "/api/content/save",
+      })({
+        data: {
+          title,
+          content: ref?.current?.getInstance()?.getMarkdown(),
+          thumbnailUrl,
+          htmlContent: ref.current?.getInstance()?.getHTML(),
+          imageIds,
+        },
+      });
+      navigate("/");
+      console.log("WritePost onClick result: ", result);
+    } catch (e) {
+      console.log("WritePost onClick error: ", e);
+    }
   };
   return (
     <div>
@@ -42,6 +71,7 @@ const WritePost: FC<WritePostProps> = (props) => {
               if (!thumbnailUrl) {
                 setThumbnailUrl(result.data.data.publishedUrl);
               }
+              setImageIds([...imageIds, result.data.data.id]);
               callback(result.data.data.publishedUrl);
             } catch (err) {
               console.log("upload error: ", err);

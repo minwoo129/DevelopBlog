@@ -30,10 +30,15 @@ const BodyBlock = styled.div`
   display: flex;
   flex-flow: row wrap;
   overflow: scroll;
-  justify-content: space-between;
-  &:after {
-    content: "";
-    flex: content;
+  padding: 0 50px;
+  @media (max-width: 1270px) {
+    justify-content: center;
+  }
+  @media (min-width: 1270px) {
+    justify-content: space-around;
+  }
+  @media (min-width: 1550px) {
+    justify-content: space-around;
   }
 `;
 

@@ -6,11 +6,12 @@ import { RootState } from "../../modules/reducer";
 import "./MenuTemplate.scss";
 import { setMenuOpen, setMenuVisible } from "../../modules/actions/menu";
 import { Drawer } from "@mui/material";
+import { tokenCheckThunk } from "../../modules/thunk/auth";
 
 interface MenuTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
 
   const loginInfo = useSelector((state: RootState) => state.auth.loginInfo);
   const login = useSelector((state: RootState) => state.auth.login);
@@ -50,8 +51,21 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   };
   const onClickWrite = (e: MouseEvent<HTMLDivElement>) => {
     dispatch(setMenuOpen(false));
-    if (login) navigate("/write");
+    if (login) _updateToken();
     else navigate("/auth/login");
+  };
+
+  const _updateToken = async () => {
+    try {
+      await dispatch(tokenCheckThunk({}));
+      navigate("/write");
+    } catch (err) {
+      console.log("MainPage _tokenCheck error: ", err);
+      const isMoveToLogin = window.confirm(
+        "사용자 정보를 확인할 수 없습니다.\n로그인 페이지로 이동하시겠습니까?"
+      );
+      if (isMoveToLogin) navigate("/auth/login");
+    }
   };
 
   return (
