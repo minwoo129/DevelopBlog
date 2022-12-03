@@ -1,4 +1,8 @@
-import { authInitialStateType, menuInitialStateType } from "./initialStateType";
+import {
+  authInitialStateType,
+  blogInitialStateType,
+  menuInitialStateType,
+} from "./initialStateType";
 
 export const authInitialState: authInitialStateType = {
   loginForm: {
@@ -24,4 +28,8 @@ export const authInitialState: authInitialStateType = {
 export const menuInitialState: menuInitialStateType = {
   isMenuVisible: true,
   isMenuOpen: false,
+};
+
+export const blogInitialState: blogInitialStateType = {
+  addedImageIds: [],
 };

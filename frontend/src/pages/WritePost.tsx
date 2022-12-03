@@ -9,10 +9,14 @@ import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import Header from "../components/write/Header";
 import invokeAPI, { invokeFileUpload } from "../lib/restAPI";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setAddedImageIds } from "../modules/actions/blog";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
 const WritePost: FC<WritePostProps> = (props) => {
+  const dispatch = useDispatch();
+
   const [title, setTitle] = useState<string>("");
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
   const [imageIds, setImageIds] = useState<number[]>([]);
@@ -71,7 +75,8 @@ const WritePost: FC<WritePostProps> = (props) => {
               if (!thumbnailUrl) {
                 setThumbnailUrl(result.data.data.publishedUrl);
               }
-              setImageIds([...imageIds, result.data.data.id]);
+              //setImageIds([...imageIds, result.data.data.id]);
+              dispatch(setAddedImageIds(result.data.data.id));
               callback(result.data.data.publishedUrl);
             } catch (err) {
               console.log("upload error: ", err);
