@@ -2,14 +2,11 @@ const express = require("express");
 const { verifyToken } = require("./middlewares");
 const Content = require("../models/content");
 const File = require("../models/file");
+const User = require("../models/user");
 
 const router = express.Router();
 
 router.post("/save", verifyToken, async (req, res, next) => {
-  console.log("query: ", req.query);
-  console.log("userId: ", req.decoded.id);
-  console.log("body: ", req.body);
-
   try {
     const { title, content, thumbnailUrl, htmlContent, imageIds } = req.body;
     if ("contentId" in req.body) {
@@ -19,7 +16,7 @@ router.post("/save", verifyToken, async (req, res, next) => {
       content,
       thumbnailUrl,
       htmlContent,
-      userId: req.decoded.userId,
+      userId: req.decoded.id,
     });
     const file = await File.update(
       {
@@ -34,15 +31,39 @@ router.post("/save", verifyToken, async (req, res, next) => {
     res.status(200).json({ error: false, result: true, data: true });
   } catch (err) {
     console.error(err);
-    res
-      .status(500)
-      .json({
-        error: true,
-        result: false,
-        code: 500,
-        message: err.message,
-        data: null,
-      });
+    res.status(500).json({
+      error: true,
+      result: false,
+      code: 500,
+      message: err.message,
+      data: null,
+    });
+  }
+});
+
+router.get("/get/list", async (req, res, next) => {
+  try {
+    let pageNum = req.query.page; // 요청 페이지 넘버
+    const { size } = req.query;
+    let offset = 0;
+
+    if (pageNum > 1) {
+      offset = 1;
+    }
+    const contents = await Content.findAll({
+      include: { model: User },
+    });
+    console.log("contents: ", contents);
+    res.status(200).json({ error: false, result: true, data: contents });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      code: 500,
+      message: err.message,
+      data: null,
+    });
   }
 });
 
