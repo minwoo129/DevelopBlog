@@ -11,24 +11,24 @@ import invokeAPI, { invokeFileUpload } from "../lib/restAPI";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setAddedImageIds } from "../modules/actions/blog";
+import { useSelector } from "react-redux";
+import { RootState } from "../modules/reducer";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
 const WritePost: FC<WritePostProps> = (props) => {
   const dispatch = useDispatch();
 
+  const addedImageIds = useSelector(
+    (state: RootState) => state.blog.addedImageIds
+  );
+
   const [title, setTitle] = useState<string>("");
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
-  const [imageIds, setImageIds] = useState<number[]>([]);
   const ref = useRef<Editor>(null);
   const navigate = useNavigate();
 
   const onClick = async () => {
-    console.log("title: ", title);
-    console.log("thumbnailUrl: ", thumbnailUrl);
-    console.log("html: ", ref?.current?.getInstance()?.getHTML());
-    console.log("ref: ", ref.current?.getInstance()?.getMarkdown());
-    console.log("imageIDs: ", imageIds);
     if (title == "") {
       alert("제목을 입력하세요.");
       return;
@@ -43,11 +43,10 @@ const WritePost: FC<WritePostProps> = (props) => {
           content: ref?.current?.getInstance()?.getMarkdown(),
           thumbnailUrl,
           htmlContent: ref.current?.getInstance()?.getHTML(),
-          imageIds,
+          imageIds: addedImageIds,
         },
       });
       navigate("/");
-      console.log("WritePost onClick result: ", result);
     } catch (e) {
       console.log("WritePost onClick error: ", e);
     }
@@ -71,7 +70,6 @@ const WritePost: FC<WritePostProps> = (props) => {
                 path: "/api/files/upload",
                 uploadType: "content",
               });
-              console.log("result: ", result);
               if (!thumbnailUrl) {
                 setThumbnailUrl(result.data.data.publishedUrl);
               }
