@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import AuthPage from "./pages/AuthPage";
+import DetailPage from "./pages/DetailPage";
 import ListPage from "./pages/ListPage";
 import MainPage from "./pages/MainPage";
 import SearchPage from "./pages/SearchPage";
@@ -16,6 +17,7 @@ const App = () => {
       <Route element={<ListPage />} path={"/list*"} />
       <Route element={<SearchPage />} path={"/search*"} />
       <Route element={<WritePost />} path={"/write"} />
+      <Route element={<DetailPage />} path={"/detail/*"} />
     </Routes>
   );
 };

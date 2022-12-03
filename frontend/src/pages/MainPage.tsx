@@ -47,7 +47,7 @@ const MainPage = ({}) => {
 
   return (
     <MenuTemplate>
-      <ListTemplate></ListTemplate>
+      <ListTemplate />
     </MenuTemplate>
   );
 };
