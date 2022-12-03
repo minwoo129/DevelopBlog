@@ -17,7 +17,7 @@ module.exports = class Content extends Sequelize.Model {
           type: Sequelize.STRING,
           allowNull: false,
           defaultValue:
-            "https://developblog.s3.ap-northeast-2.amazonaws.com/image/2022/1127/f93a392c-bcae-4010-8243-998d90ce7d56",
+            "https://developblog.s3.ap-northeast-2.amazonaws.com/image/default/2022/1203/93eb6dd6-8a7a-41ad-93fd-616795fa4bae",
         },
       },
       {
