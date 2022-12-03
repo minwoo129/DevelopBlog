@@ -55,6 +55,10 @@ module.exports = class File extends Sequelize.Model {
           type: Sequelize.STRING(30),
           allowNull: false,
         },
+        contentId: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+        },
       },
       {
         sequelize,
