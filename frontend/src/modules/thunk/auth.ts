@@ -9,5 +9,5 @@ export const loginThunk = createAsyncThunk(
 
 export const tokenCheckThunk = createAsyncThunk(
   tokenCheck,
-  invokeAPI({ method: "post", path: "/api/token/validate" })
+  invokeAPI({ method: "post", path: "/api/oauth/token/validate" })
 );
