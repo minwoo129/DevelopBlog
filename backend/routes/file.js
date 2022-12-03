@@ -1,6 +1,10 @@
 const express = require("express");
 const fs = require("fs");
-const { verifyToken, AWSSingleFileUpload } = require("./middlewares");
+const {
+  verifyToken,
+  AWSSingleFileUpload,
+  checkIsAdmin,
+} = require("./middlewares");
 const File = require("../models/file");
 
 const router = express.Router();
@@ -29,7 +33,6 @@ router.post("/upload", verifyToken, AWSSingleFileUpload, async (req, res) => {
     } = req.file;
     const { uploadType } = req.query;
     const { id } = req.decoded;
-
     const result = await File.create({
       acl,
       bucket,
@@ -60,24 +63,57 @@ router.post("/upload", verifyToken, AWSSingleFileUpload, async (req, res) => {
   }
 });
 
-router.use("/get").get(":id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const file = await File.findOne({
-      where: { id },
-    });
-    res
-      .status(200)
-      .json({ result: true, error: false, data: { ...file.dataValues } });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({
-      error: true,
-      result: false,
-      data: null,
-      message: err.message,
-      code: 500,
-    });
+router.post(
+  "/admin/upload",
+  verifyToken,
+  checkIsAdmin,
+  AWSSingleFileUpload,
+  async (req, res, next) => {
+    try {
+      const {
+        acl,
+        bucket,
+        location,
+        size,
+        originalname,
+        mimetype,
+        contentType,
+        encoding,
+        fieldname,
+        key,
+        storageClass,
+      } = req.file;
+      const { uploadType } = req.query;
+      const { id } = req.decoded;
+      const result = await File.create({
+        acl,
+        bucket,
+        publishedUrl: location,
+        size,
+        originalname,
+        mimeType: mimetype,
+        contentType,
+        encoding,
+        fieldname,
+        key,
+        storageClass,
+        uploadType,
+        userId: id,
+      });
+      res
+        .status(200)
+        .json({ result: true, data: { ...result.dataValues }, error: false });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: true,
+        result: false,
+        data: null,
+        message: err.message,
+        code: 500,
+      });
+    }
   }
-});
+);
+
 module.exports = router;
