@@ -9,15 +9,6 @@ const router = express.Router();
 router.post("/save", verifyToken, async (req, res, next) => {
   try {
     const { title, content, thumbnailUrl, htmlContent, imageIds } = req.body;
-    if ("contentId" in req.body) {
-    }
-    const result = await Content.create({
-      title,
-      content,
-      thumbnailUrl,
-      htmlContent,
-      userId: req.decoded.id,
-    });
     const file = await File.update(
       {
         contentId: result.dataValues.id,
@@ -28,6 +19,32 @@ router.post("/save", verifyToken, async (req, res, next) => {
         },
       }
     );
+    if ("contentId" in req.body) {
+      const { contentId } = req.body;
+      const result = await Content.update(
+        {
+          title,
+          content,
+          thumbnailUrl,
+          htmlContent,
+        },
+        {
+          where: {
+            id: contentId,
+          },
+        }
+      );
+      res.status(200).json({ error: false, result: true, data: result });
+      return;
+    }
+    const result = await Content.create({
+      title,
+      content,
+      thumbnailUrl,
+      htmlContent,
+      userId: req.decoded.id,
+    });
+
     res.status(200).json({ error: false, result: true, data: true });
   } catch (err) {
     console.error(err);
