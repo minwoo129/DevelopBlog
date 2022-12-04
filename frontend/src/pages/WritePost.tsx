@@ -47,6 +47,7 @@ const WritePost: FC<WritePostProps> = (props) => {
       thumbnailUrl,
       htmlContent: ref.current?.getInstance()?.getHTML(),
       imageIds: addedImageIds,
+      public: true,
     };
     if (location.pathname.indexOf("revise") != -1) {
       data = {
