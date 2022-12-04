@@ -28,7 +28,7 @@ const DetailTemplate: FC<DetailTemplateProps> = ({
   ...props
 }) => {
   return (
-    <DetailTemplateBlock>
+    <DetailTemplateBlock {...props}>
       <Header isMenuVisible={isMenuVisible} setMenuOpen={setMenuOpen} />
       <Body
         blog={blog}

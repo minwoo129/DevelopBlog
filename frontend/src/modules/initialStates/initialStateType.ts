@@ -49,6 +49,7 @@ export interface blogItemType {
     name: string;
     password: string;
     updatedAt: string;
+    nickname: string;
   };
 }
 

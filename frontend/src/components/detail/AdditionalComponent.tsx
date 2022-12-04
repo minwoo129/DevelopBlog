@@ -83,7 +83,7 @@ const InformationView: FC<InformationViewProps> = ({ blog, ...props }) => {
   const { name, createdAt } = useMemo(() => {
     let name = "",
       createdAt = "";
-    name = blog?.User?.name ?? "";
+    name = blog?.User?.nickname ?? "";
     if (blog?.createdAt) {
       const [year, month, day] = blog.createdAt.split("T")[0].split("-");
       createdAt = `${year}년 ${month}월 ${day}일`;
@@ -91,7 +91,7 @@ const InformationView: FC<InformationViewProps> = ({ blog, ...props }) => {
     return { name, createdAt };
   }, [blog]);
   return (
-    <InformationViewBlock>
+    <InformationViewBlock {...props}>
       <h4 style={{ marginRight: "0.5rem" }}>{name}</h4> ·{" "}
       <p style={{ marginLeft: "0.5rem", color: "#6E6E6E" }}>{createdAt}</p>
     </InformationViewBlock>

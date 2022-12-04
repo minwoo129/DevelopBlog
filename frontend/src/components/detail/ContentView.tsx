@@ -32,7 +32,7 @@ const ContentView: FC<ContentViewProps> = ({
   ...props
 }) => {
   return (
-    <ContentViewBlock>
+    <ContentViewBlock {...props}>
       <StyledTitle>{blog?.title ?? ""}</StyledTitle>
       <SecondHeader
         blog={blog}

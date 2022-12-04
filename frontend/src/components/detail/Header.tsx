@@ -19,7 +19,7 @@ interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
 
 const Header: FC<HeaderProps> = ({ isMenuVisible, setMenuOpen, ...props }) => {
   return (
-    <HeaderBlock>
+    <HeaderBlock {...props}>
       {!isMenuVisible && (
         <IconButton
           color="inherit"
