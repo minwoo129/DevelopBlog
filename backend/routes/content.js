@@ -75,7 +75,6 @@ router.get("/get/list", async (req, res, next) => {
     const contents = await Content.findAll({
       include: { model: User },
     });
-    console.log("contents: ", contents);
     res.status(200).json({ error: false, result: true, data: contents });
   } catch (err) {
     console.error(err);
@@ -90,7 +89,6 @@ router.get("/get/list", async (req, res, next) => {
 });
 
 router.get("/get/:id", verifyTokenWithoutErr, async (req, res, next) => {
-  console.log("api");
   const { id } = req.params;
   try {
     const blog = await Content.findOne({
