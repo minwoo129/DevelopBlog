@@ -1,5 +1,5 @@
 const express = require("express");
-const { verifyToken } = require("./middlewares");
+const { verifyToken, verifyTokenWithoutErr } = require("./middlewares");
 const Content = require("../models/content");
 const File = require("../models/file");
 const User = require("../models/user");
@@ -75,6 +75,56 @@ router.get("/get/list", async (req, res, next) => {
     });
     console.log("contents: ", contents);
     res.status(200).json({ error: false, result: true, data: contents });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      code: 500,
+      message: err.message,
+      data: null,
+    });
+  }
+});
+
+router.get("/get/:id", verifyTokenWithoutErr, async (req, res, next) => {
+  console.log("api");
+  const { id } = req.params;
+  try {
+    const blog = await Content.findOne({
+      where: { id },
+      include: { model: User },
+    });
+    let data = {
+      ...blog.dataValues,
+      authorization: {
+        writeComment: false,
+        reviseContent: false,
+        deleteContent: false,
+      },
+    };
+    if (req.decodeRes) {
+      data = {
+        ...data,
+        authorization: {
+          ...data.authorization,
+          writeComment: true,
+        },
+      };
+
+      const AccessUserId = req.decoded.id;
+      if (blog.userId == AccessUserId) {
+        data = {
+          ...data,
+          authorization: {
+            ...data.authorization,
+            reviseContent: true,
+            deleteContent: true,
+          },
+        };
+      }
+    }
+    res.status(200).json({ result: true, error: false, data });
   } catch (err) {
     console.error(err);
     res.status(500).json({
