@@ -22,6 +22,10 @@ module.exports = class Content extends Sequelize.Model {
           type: Sequelize.TEXT("long"),
           allowNull: false,
         },
+        public: {
+          type: Sequelize.BOOLEAN,
+          defaultValue: true,
+        },
       },
       {
         sequelize,
