@@ -12,12 +12,23 @@ const BodyBlock = styled.div`
 
 interface BodyProps extends HTMLAttributes<HTMLDivElement> {
   blog: blogDetailType | null;
+  onPressDelete(): void;
+  onPressRevise(): void;
 }
 
-const Body: FC<BodyProps> = ({ blog, ...props }) => {
+const Body: FC<BodyProps> = ({
+  blog,
+  onPressDelete,
+  onPressRevise,
+  ...props
+}) => {
   return (
-    <BodyBlock>
-      <ContentView blog={blog} />
+    <BodyBlock {...props}>
+      <ContentView
+        blog={blog}
+        onPressDelete={onPressDelete}
+        onPressRevise={onPressRevise}
+      />
     </BodyBlock>
   );
 };

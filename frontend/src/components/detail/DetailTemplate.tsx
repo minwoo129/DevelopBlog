@@ -15,18 +15,26 @@ interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
   blog: blogDetailType | null;
   isMenuVisible: boolean;
   setMenuOpen(): void;
+  onPressDelete(): void;
+  onPressRevise(): void;
 }
 
 const DetailTemplate: FC<DetailTemplateProps> = ({
   blog,
   isMenuVisible,
   setMenuOpen,
+  onPressDelete,
+  onPressRevise,
   ...props
 }) => {
   return (
     <DetailTemplateBlock>
       <Header isMenuVisible={isMenuVisible} setMenuOpen={setMenuOpen} />
-      <Body blog={blog} />
+      <Body
+        blog={blog}
+        onPressRevise={onPressRevise}
+        onPressDelete={onPressDelete}
+      />
     </DetailTemplateBlock>
   );
 };

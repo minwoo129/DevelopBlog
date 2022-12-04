@@ -1,5 +1,5 @@
 import React, { FC, HTMLAttributes, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DetailTemplate from "../components/detail/DetailTemplate";
 import MenuTemplate from "../components/menu/MenuTemplate";
 import qs from "qs";
@@ -14,6 +14,7 @@ interface DetailPageProps extends HTMLAttributes<HTMLDivElement> {}
 const DetailPage: FC<DetailPageProps> = (props) => {
   const dispatch = useDispatch<any>();
   const location = useLocation();
+  const navigate = useNavigate();
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
@@ -41,12 +42,23 @@ const DetailPage: FC<DetailPageProps> = (props) => {
     }
   };
 
+  const onPressDelete = () => {
+    console.log("onPressDelete");
+  };
+
+  const onPressRevise = () => {
+    console.log("onPressRevise");
+    navigate("/write/revise");
+  };
+
   return (
     <MenuTemplate>
       <DetailTemplate
         blog={blog}
         isMenuVisible={isMenuVisible}
         setMenuOpen={() => dispatch(setMenuOpen(true))}
+        onPressDelete={onPressDelete}
+        onPressRevise={onPressRevise}
       />
     </MenuTemplate>
   );

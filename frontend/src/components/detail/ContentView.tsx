@@ -21,17 +21,23 @@ const ContentViewBlock = styled.div`
 
 interface ContentViewProps extends HTMLAttributes<HTMLDivElement> {
   blog: blogDetailType | null;
+  onPressDelete(): void;
+  onPressRevise(): void;
 }
 
-const ContentView: FC<ContentViewProps> = ({ blog, ...props }) => {
-  console.log("blog: ", blog);
+const ContentView: FC<ContentViewProps> = ({
+  blog,
+  onPressDelete,
+  onPressRevise,
+  ...props
+}) => {
   return (
     <ContentViewBlock>
       <StyledTitle>{blog?.title ?? ""}</StyledTitle>
       <SecondHeader
         blog={blog}
-        onPressDelete={() => {}}
-        onPressRevise={() => {}}
+        onPressDelete={onPressDelete}
+        onPressRevise={onPressRevise}
       />
       {blog && <Viewer initialValue={blog?.content ?? ""} />}
     </ContentViewBlock>
