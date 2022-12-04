@@ -53,6 +53,8 @@ const invokeAPI =
         },
       };
     }
+
+    console.log("request req: ", axiosReq);
     return axios(axiosReq);
   };
 

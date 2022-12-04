@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { blogType } from "../../modules/initialStates/initialStateType";
+import { blogItemType } from "../../modules/initialStates/initialStateType";
 
 const ListItemBlock = styled.div`
   border-radius: 6px;
@@ -58,7 +58,7 @@ const StyledContent = styled.p`
 `;
 
 interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogType;
+  blog: blogItemType;
   onPress(id: number): void;
 }
 

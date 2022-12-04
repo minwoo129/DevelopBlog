@@ -26,11 +26,11 @@ export type menuInitialStateType = {
 
 export type blogInitialStateType = {
   addedImageIds: number[];
-  blogs: blogType[];
-  blog: blogType | null;
+  blogs: blogItemType[];
+  blog: blogDetailType | null;
 };
 
-export type blogType = {
+export interface blogItemType {
   id: number;
   thumbnailUrl: string;
   content: string;
@@ -49,4 +49,12 @@ export type blogType = {
     password: string;
     updatedAt: string;
   };
-};
+}
+
+export interface blogDetailType extends blogItemType {
+  authorization: {
+    writeComment: boolean;
+    reviseContent: boolean;
+    deleteContent: boolean;
+  };
+}

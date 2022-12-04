@@ -4,7 +4,7 @@ import ListItem from "./ListItem";
 import lodash from "lodash";
 import { useSelector } from "react-redux";
 import { RootState } from "../../modules/reducer";
-import { blogType } from "../../modules/initialStates/initialStateType";
+import { blogItemType } from "../../modules/initialStates/initialStateType";
 import { useNavigate } from "react-router-dom";
 
 interface BodyRowSectionProps extends HTMLAttributes<HTMLDivElement> {
@@ -43,7 +43,7 @@ const Body: FC<BodyProps> = (props) => {
 
   return (
     <BodyBlock>
-      {blogs.map((item: blogType, index: number) => {
+      {blogs.map((item: blogItemType, index: number) => {
         return <ListItem blog={item} onPress={onPress} key={index} />;
       })}
     </BodyBlock>

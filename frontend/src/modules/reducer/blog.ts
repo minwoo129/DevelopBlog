@@ -2,9 +2,12 @@ import { createReducer } from "typesafe-actions";
 import { blogActionType } from "../actions";
 import {
   CLEAR_ADDED_IMAGE_IDS,
+  GET_BLOG,
   GET_BLOGS,
   GET_BLOGS_ERROR,
   GET_BLOGS_SUCCESS,
+  GET_BLOG_ERROR,
+  GET_BLOG_SUCCESS,
   SET_ADDED_IMAGE_IDS,
 } from "../actions/blog";
 import { blogInitialState as initialState } from "../initialStates/initialState";
@@ -29,6 +32,7 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
     };
     return newState;
   },
+
   // GET_BLOGS ////////////////////////////////////////////////////
   [GET_BLOGS]: (state, action) => {
     return state;
@@ -41,6 +45,21 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
     return newState;
   },
   [GET_BLOGS_ERROR]: (state, action) => {
+    return state;
+  },
+
+  // GET_BLOG ////////////////////////////////////////////////////
+  [GET_BLOG]: (state, action) => {
+    return state;
+  },
+  [GET_BLOG_SUCCESS]: (state, { payload: { param, result } }) => {
+    const newState: initialStateType = {
+      ...state,
+      blog: result.data,
+    };
+    return newState;
+  },
+  [GET_BLOG_ERROR]: (state, action) => {
     return state;
   },
 });
