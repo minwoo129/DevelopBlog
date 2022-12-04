@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import { blogDetailType } from "../../modules/initialStates/initialStateType";
 import ContentView from "./ContentView";
 
 const BodyBlock = styled.div`
@@ -10,12 +11,14 @@ const BodyBlock = styled.div`
   overflow: scroll;
 `;
 
-interface BodyProps extends HTMLAttributes<HTMLDivElement> {}
+interface BodyProps extends HTMLAttributes<HTMLDivElement> {
+  blog: blogDetailType | null;
+}
 
-const Body: FC<BodyProps> = (props) => {
+const Body: FC<BodyProps> = ({ blog, ...props }) => {
   return (
     <BodyBlock>
-      <ContentView />
+      <ContentView blog={blog} />
     </BodyBlock>
   );
 };

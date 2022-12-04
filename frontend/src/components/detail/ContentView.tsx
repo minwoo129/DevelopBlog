@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import { blogDetailType } from "../../modules/initialStates/initialStateType";
 
 const ContentViewBlock = styled.div`
   flex: 1;
@@ -9,7 +10,9 @@ const ContentViewBlock = styled.div`
   min-width: 568px;
 `;
 
-interface ContentViewProps extends HTMLAttributes<HTMLDivElement> {}
+interface ContentViewProps extends HTMLAttributes<HTMLDivElement> {
+  blog: blogDetailType | null;
+}
 
 const ContentView: FC<ContentViewProps> = (props) => {
   return <ContentViewBlock></ContentViewBlock>;

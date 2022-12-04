@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import { blogDetailType } from "../../modules/initialStates/initialStateType";
 import Body from "./Body";
 import Header from "./Header";
 
@@ -10,13 +11,22 @@ const DetailTemplateBlock = styled.div`
   flex-direction: column;
 `;
 
-interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {}
+interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
+  blog: blogDetailType | null;
+  isMenuVisible: boolean;
+  setMenuOpen(): void;
+}
 
-const DetailTemplate: FC<DetailTemplateProps> = (props) => {
+const DetailTemplate: FC<DetailTemplateProps> = ({
+  blog,
+  isMenuVisible,
+  setMenuOpen,
+  ...props
+}) => {
   return (
     <DetailTemplateBlock>
-      <Header />
-      <Body />
+      <Header isMenuVisible={isMenuVisible} setMenuOpen={setMenuOpen} />
+      <Body blog={blog} />
     </DetailTemplateBlock>
   );
 };

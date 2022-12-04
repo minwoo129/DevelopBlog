@@ -5,6 +5,9 @@ import MenuTemplate from "../components/menu/MenuTemplate";
 import qs from "qs";
 import { useDispatch } from "react-redux";
 import { getBlogThunk } from "../modules/thunk/blog";
+import { useSelector } from "react-redux";
+import { RootState } from "../modules/reducer";
+import { setMenuOpen } from "../modules/actions/menu";
 
 interface DetailPageProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -14,6 +17,11 @@ const DetailPage: FC<DetailPageProps> = (props) => {
   const query = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });
+
+  const blog = useSelector((state: RootState) => state.blog.blog);
+  const isMenuVisible = useSelector(
+    (state: RootState) => state.menu.isMenuVisible
+  );
   console.log("query: ", query);
 
   useEffect(() => {
@@ -35,7 +43,11 @@ const DetailPage: FC<DetailPageProps> = (props) => {
 
   return (
     <MenuTemplate>
-      <DetailTemplate />
+      <DetailTemplate
+        blog={blog}
+        isMenuVisible={isMenuVisible}
+        setMenuOpen={() => dispatch(setMenuOpen(true))}
+      />
     </MenuTemplate>
   );
 };
