@@ -1,16 +1,24 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import Body from "./Body";
+import Header from "./Header";
 
 const DetailTemplateBlock = styled.div`
-  display: flex;
   flex: 1;
-  border: 1px solid red;
+  background: #e9ecef;
+  display: flex;
+  flex-direction: column;
 `;
 
 interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 
 const DetailTemplate: FC<DetailTemplateProps> = (props) => {
-  return <DetailTemplateBlock></DetailTemplateBlock>;
+  return (
+    <DetailTemplateBlock>
+      <Header />
+      <Body />
+    </DetailTemplateBlock>
+  );
 };
 
 export default DetailTemplate;
