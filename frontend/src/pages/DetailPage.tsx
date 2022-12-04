@@ -8,6 +8,7 @@ import { getBlogThunk } from "../modules/thunk/blog";
 import { useSelector } from "react-redux";
 import { RootState } from "../modules/reducer";
 import { setMenuOpen } from "../modules/actions/menu";
+import invokeAPI from "../lib/restAPI";
 
 interface DetailPageProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -44,11 +45,27 @@ const DetailPage: FC<DetailPageProps> = (props) => {
 
   const onPressDelete = () => {
     console.log("onPressDelete");
+    const confirmDelete = window.confirm("게시글을 삭제하시겠습니까?.");
+    if (confirmDelete) __delContent(blog?.id ?? 0);
   };
 
   const onPressRevise = () => {
     console.log("onPressRevise");
     navigate("/write/revise");
+  };
+
+  const __delContent = async (id: number) => {
+    try {
+      const result = await invokeAPI({
+        method: "delete",
+        path: "/api/content/del",
+      })({
+        subPath: `/${id}`,
+      });
+      navigate("/");
+    } catch (err) {
+      console.log("DetailPage __delContent error: ", err);
+    }
   };
 
   return (
