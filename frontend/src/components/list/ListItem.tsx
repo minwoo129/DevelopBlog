@@ -48,12 +48,11 @@ const StyledContent = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp: 3; /* 라인수 */
+  -webkit-line-clamp: 2; /* 라인수 */
   -webkit-box-orient: vertical;
   word-wrap: break-word;
   line-height: 1.2em;
-  height: 3.6em;
-  height: "4rem";
+  height: 2.4em;
   margin-top: -0.5rem;
 `;
 
@@ -75,6 +74,7 @@ const ListItem: FC<ListItemProps> = ({ blog, onPress }) => {
         <ContentDetailGrid>
           <StyledTitle>{blog.title}</StyledTitle>
           <StyledContent>{newContent}</StyledContent>
+          <h6 style={{ color: "#6E6E6E" }}>{blog.User.nickname}</h6>
         </ContentDetailGrid>
       </InsideContentGrid>
     </ListItemBlock>
