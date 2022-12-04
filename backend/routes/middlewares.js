@@ -63,6 +63,19 @@ exports.verifyToken = (req, res, next) => {
   }
 };
 
+exports.verifyTokenWithoutErr = (req, res, next) => {
+  console.log("verifyTokenWithoutErr");
+  try {
+    req.decoded = jwt.verify(req.headers.authorization, process.env.JWT_SECRET);
+    req.decodeRes = true;
+    return next();
+  } catch (error) {
+    req.decoded = null;
+    req.decodeRes = false;
+    return next();
+  }
+};
+
 // 관리자 계정 여부 검증(토큰 검증 후 실행)
 exports.checkIsAdmin = (req, res, next) => {
   User.findOne({
