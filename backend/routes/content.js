@@ -29,6 +29,7 @@ router.post("/save", verifyToken, async (req, res, next) => {
       );
       res.status(200).json({ error: false, result: true, data: result });
       newContentId = contentId;
+      return;
     } else {
       const result = await Content.create({
         title,

@@ -26,6 +26,7 @@ router.post("/token", async (req, res, next) => {
         data: null,
         message: info.message,
       });
+      return;
     }
     return req.login(user, (loginError) => {
       if (loginError) {
@@ -63,9 +64,11 @@ router.post("/token", async (req, res, next) => {
 router.post("/token/validate", verifyToken, async (req, res, next) => {
   const { id } = req.decoded;
   try {
+    console.log("==============================");
     const user = await User.findOne({
       where: { id },
     });
+    console.log("user: ", user);
     const token = jwt.sign(
       {
         id: user.dataValues.id,
@@ -78,6 +81,7 @@ router.post("/token/validate", verifyToken, async (req, res, next) => {
         issuer: process.env.JWT_SIGN,
       }
     );
+    console.log("token: ", token);
     res.status(200).json({
       result: true,
       error: false,
