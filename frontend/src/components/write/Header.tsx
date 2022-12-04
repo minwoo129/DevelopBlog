@@ -24,12 +24,12 @@ const HeaderInput = styled.input`
 const HeaderSubmitBtn = styled.button`
   width: 100px;
   height: 100%;
-  background: #084b8a;
+  background: #0080ff;
   border-radius: 6px;
   border: 1px solid white;
   color: white;
   &:hover {
-    background: #0080ff;
+    background: #084b8a;
   }
 `;
 
