@@ -8,7 +8,8 @@ const router = express.Router();
 
 router.post("/save", verifyToken, async (req, res, next) => {
   try {
-    const { title, content, thumbnailUrl, htmlContent, imageIds } = req.body;
+    const { title, content, thumbnailUrl, htmlContent, imageIds, public } =
+      req.body;
     let newContentId = -1;
 
     if ("contentId" in req.body) {
@@ -20,6 +21,7 @@ router.post("/save", verifyToken, async (req, res, next) => {
           content,
           thumbnailUrl,
           htmlContent,
+          public,
         },
         {
           where: {
@@ -37,6 +39,7 @@ router.post("/save", verifyToken, async (req, res, next) => {
         thumbnailUrl,
         htmlContent,
         userId: req.decoded.id,
+        public,
       });
       newContentId = result.dataValues.id;
     }
