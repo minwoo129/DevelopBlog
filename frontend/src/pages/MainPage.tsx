@@ -15,19 +15,9 @@ const MainPage = ({}) => {
 
   useEffect(() => {
     if (!login) {
-      const cookie = getCookies("access_token");
-      if (cookie) _tokenCheck();
       _getBlogs();
     }
   }, []);
-
-  const _tokenCheck = async () => {
-    try {
-      await dispatch(tokenCheckThunk({}));
-    } catch (e) {
-      console.log("MainPage _tokenCheck error: ", e);
-    }
-  };
 
   const _getBlogs = async () => {
     try {

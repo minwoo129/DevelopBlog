@@ -7,6 +7,7 @@ import "./MenuTemplate.scss";
 import { setMenuOpen, setMenuVisible } from "../../modules/actions/menu";
 import { Drawer } from "@mui/material";
 import { tokenCheckThunk } from "../../modules/thunk/auth";
+import { getCookies } from "../../lib/restAPI";
 
 interface MenuTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const MenuTemplate: FC<MenuTemplateProps> = (props) => {
@@ -20,6 +21,12 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   );
   const isMenuOpen = useSelector((state: RootState) => state.menu.isMenuOpen);
 
+  useEffect(() => {
+    if (!login) {
+      const cookie = getCookies("access_token");
+      if (cookie) _tokenCheck();
+    }
+  }, []);
   useEffect(() => {
     const resizeEvent = () => {
       if (window.innerWidth >= 906) {
@@ -65,6 +72,13 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
         "사용자 정보를 확인할 수 없습니다.\n로그인 페이지로 이동하시겠습니까?"
       );
       if (isMoveToLogin) navigate("/auth/login");
+    }
+  };
+  const _tokenCheck = async () => {
+    try {
+      await dispatch(tokenCheckThunk({}));
+    } catch (e) {
+      console.log("MainPage _tokenCheck error: ", e);
     }
   };
 

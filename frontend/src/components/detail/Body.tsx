@@ -5,7 +5,6 @@ import ContentView from "./ContentView";
 
 const BodyBlock = styled.div`
   flex: 1;
-  border: 1px solid red;
   display: flex;
   flex-flow: row wrap;
   overflow: scroll;
