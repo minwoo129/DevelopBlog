@@ -59,13 +59,7 @@ const WritePost: FC<WritePostProps> = (props) => {
         method: "post",
         path: "/api/content/save",
       })({
-        data: {
-          title,
-          content: ref?.current?.getInstance()?.getMarkdown(),
-          thumbnailUrl,
-          htmlContent: ref.current?.getInstance()?.getHTML(),
-          imageIds: addedImageIds,
-        },
+        data,
       });
       navigate("/");
     } catch (e) {
