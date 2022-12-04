@@ -37,6 +37,7 @@ interface AuthFormProps {
     name?: string;
     isAdmin?: boolean;
     adminPwd?: string;
+    nickname?: string;
   };
   onChange(e: ChangeEvent<HTMLInputElement>): void;
   onCheckAdmin?(value: boolean): void;
@@ -61,6 +62,15 @@ const AuthForm: FC<AuthFormProps> = ({
             name="name"
             placeholder="사용자 이름"
             value={form?.name}
+            onChange={onChange}
+          />
+        )}
+        {formType == "joinForm" && (
+          <StyledInput
+            autoComplete="nickname"
+            name="nickname"
+            placeholder="닉네임"
+            value={form?.nickname}
             onChange={onChange}
           />
         )}

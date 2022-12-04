@@ -16,6 +16,7 @@ export const authInitialState: authInitialStateType = {
     name: "",
     isAdmin: false,
     adminPwd: "",
+    nickname: "",
   },
   login: false,
   loginInfo: {
