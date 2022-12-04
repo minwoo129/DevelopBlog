@@ -41,9 +41,7 @@ const Body: FC<BodyProps> = (props) => {
   const login = useSelector((state: RootState) => state.auth.login);
 
   useEffect(() => {
-    if (!login) {
-      _getBlogs();
-    }
+    _getBlogs();
   }, []);
 
   const _getBlogs = async () => {
