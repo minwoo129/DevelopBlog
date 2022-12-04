@@ -10,31 +10,6 @@ import { tokenCheckThunk } from "../modules/thunk/auth";
 import { getBlogsThunk } from "../modules/thunk/blog";
 
 const MainPage = ({}) => {
-  const dispatch = useDispatch<any>();
-  const login = useSelector((state: RootState) => state.auth.login);
-
-  useEffect(() => {
-    if (!login) {
-      _getBlogs();
-    }
-  }, []);
-
-  const _getBlogs = async () => {
-    try {
-      const result = await dispatch(
-        getBlogsThunk({
-          params: {
-            page: 1,
-            size: 20,
-          },
-        })
-      );
-      console.log("MainPage _getBlogs result: ", result);
-    } catch (err) {
-      console.log("MainPage _getBlogs error: ", err);
-    }
-  };
-
   return (
     <MenuTemplate>
       <ListTemplate />
