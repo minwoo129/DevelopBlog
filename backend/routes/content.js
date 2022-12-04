@@ -12,6 +12,7 @@ router.post("/save", verifyToken, async (req, res, next) => {
     let newContentId = -1;
 
     if ("contentId" in req.body) {
+      console.log("revise");
       const { contentId } = req.body;
       const result = await Content.update(
         {
@@ -126,6 +127,25 @@ router.get("/get/:id", verifyTokenWithoutErr, async (req, res, next) => {
     }
     res.status(200).json({ result: true, error: false, data });
   } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      code: 500,
+      message: err.message,
+      data: null,
+    });
+  }
+});
+
+router.delete("/del/:id", verifyToken, async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const result = await Content.destroy({
+      where: { id },
+    });
+    res.status(200).json({ result: true, error: false, data: true });
+  } catch (error) {
     console.error(err);
     res.status(500).json({
       error: true,
