@@ -62,7 +62,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/join", isNotLoggedIn, async (req, res, next) => {
-  const { email, password, name, isAdmin, adminPwd } = req.body;
+  const { email, password, name, isAdmin, adminPwd, nickname } = req.body;
   try {
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
@@ -82,6 +82,19 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
       name,
       isAdmin: false,
     };
+    if (nickname != "") {
+      query = {
+        ...query,
+        nickname,
+      };
+    } else {
+      const defaultNickname = email.split("@")[0];
+      query = {
+        ...query,
+        nickname: defaultNickname,
+      };
+    }
+
     if (isAdmin && adminPwd == process.env.ADMIN_CONFIRM_KEY) {
       query = {
         ...query,
