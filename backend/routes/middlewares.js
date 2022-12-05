@@ -64,7 +64,6 @@ exports.verifyToken = (req, res, next) => {
 };
 
 exports.verifyTokenWithoutErr = (req, res, next) => {
-  console.log("verifyTokenWithoutErr");
   try {
     req.decoded = jwt.verify(req.headers.authorization, process.env.JWT_SECRET);
     req.decodeRes = true;
@@ -120,7 +119,6 @@ exports.AWSSingleFileUpload = (req, res, next) => {
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
         const day = date.getDate();
-        console.log("uploadQuery: ", req.query);
         let fileRoute = `image/${req.query.uploadType}/${year}/${
           month < 10 ? `0${month}` : `${month}`
         }${day < 10 ? `0${day}` : `${day}`}/${v4()}`;

@@ -12,7 +12,6 @@ export default function createAsyncThunk<
       const { request, success, failure } = asyncActionCreator;
       dispatch(request(undefined)); // 파라미터를 비우면 타입 에러가 나기 때문에 undefined 전달
       try {
-        console.log("params: ", params);
         const result = await promiseCreator(...params);
         dispatch(
           success({

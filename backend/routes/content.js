@@ -13,7 +13,6 @@ router.post("/save", verifyToken, async (req, res, next) => {
     let newContentId = -1;
 
     if ("contentId" in req.body) {
-      console.log("revise");
       const { contentId } = req.body;
       const result = await Content.update(
         {

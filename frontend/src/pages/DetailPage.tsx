@@ -24,7 +24,6 @@ const DetailPage: FC<DetailPageProps> = (props) => {
   const isMenuVisible = useSelector(
     (state: RootState) => state.menu.isMenuVisible
   );
-  console.log("query: ", query);
 
   useEffect(() => {
     _getBlog(Number(query.id));
@@ -37,20 +36,17 @@ const DetailPage: FC<DetailPageProps> = (props) => {
           subPath: `/${id}`,
         })
       );
-      console.log("DetailPage _getBlog result: ", result);
     } catch (err) {
       console.log("DetailPage _getBlog error: ", err);
     }
   };
 
   const onPressDelete = () => {
-    console.log("onPressDelete");
     const confirmDelete = window.confirm("게시글을 삭제하시겠습니까?.");
     if (confirmDelete) __delContent(blog?.id ?? 0);
   };
 
   const onPressRevise = () => {
-    console.log("onPressRevise");
     navigate("/write/revise");
   };
 

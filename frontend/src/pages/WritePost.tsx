@@ -93,7 +93,6 @@ const WritePost: FC<WritePostProps> = (props) => {
               if (!thumbnailUrl) {
                 setThumbnailUrl(result.data.data.publishedUrl);
               }
-              //setImageIds([...imageIds, result.data.data.id]);
               dispatch(setAddedImageIds(result.data.data.id));
               callback(result.data.data.publishedUrl);
             } catch (err) {
