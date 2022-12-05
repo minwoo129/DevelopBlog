@@ -1,9 +1,10 @@
 import {
+  appInfoInitialStateType,
   authInitialStateType,
   blogInitialStateType,
   menuInitialStateType,
 } from "./initialStateType";
-
+// ================================ Auth =======================================
 export const authInitialState: authInitialStateType = {
   loginForm: {
     email: "",
@@ -25,14 +26,19 @@ export const authInitialState: authInitialStateType = {
     email: null,
   },
 };
-
+// ================================ menu =======================================
 export const menuInitialState: menuInitialStateType = {
   isMenuVisible: true,
   isMenuOpen: false,
 };
-
+// ================================ blog =======================================
 export const blogInitialState: blogInitialStateType = {
   addedImageIds: [],
   blogs: [],
   blog: null,
+};
+// ================================ appInfo =======================================
+export const appInfoInitialState: appInfoInitialStateType = {
+  searchBarVisible: false,
+  searchTxt: "",
 };

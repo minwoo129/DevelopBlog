@@ -1,3 +1,4 @@
+// ================================ Auth =======================================
 export type authInitialStateType = {
   loginForm: {
     email: string;
@@ -19,17 +20,25 @@ export type authInitialStateType = {
     email: string | null;
   };
 };
-
+// ================================ menu =======================================
 export type menuInitialStateType = {
   isMenuVisible: boolean;
   isMenuOpen: boolean;
 };
+// ================================ blog =======================================
 
 export type blogInitialStateType = {
   addedImageIds: number[];
   blogs: blogItemType[];
   blog: blogDetailType | null;
 };
+// ================================ appInfo =======================================
+export type appInfoInitialStateType = {
+  searchBarVisible: boolean;
+  searchTxt: string;
+};
+
+// =============================================================================
 
 export interface blogItemType {
   id: number;
