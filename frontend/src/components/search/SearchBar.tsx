@@ -23,13 +23,13 @@ const StyledInput = styled.input`
   padding: 0 1rem;
   border: 1px solid #6e6e6e;
   @media (max-width: 768px) {
-    width: 400px;
+    width: 70%;
   }
   @media (min-width: 768px) {
     width: 80%;
   }
   @media (min-width: 1400px) {
-    width: 80%;
+    width: 90%;
   }
 `;
 const SearchBtn = styled.button`

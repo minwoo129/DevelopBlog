@@ -7,7 +7,7 @@ interface SearchPageProps extends HTMLAttributes<HTMLDivElement> {}
 const SearchPage: FC<SearchPageProps> = (props) => {
   return (
     <MenuTemplate>
-      <SearchTemplate></SearchTemplate>
+      <SearchTemplate />
     </MenuTemplate>
   );
 };
