@@ -14,11 +14,11 @@ const SearchBarBlock = styled.div`
   max-width: 99%;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 1rem 1rem;
 `;
 
 const StyledInput = styled.input`
-  height: 2rem;
+  height: 2.5rem;
   border-radius: 6px;
   padding: 0 1rem;
   border: 1px solid #6e6e6e;
@@ -49,28 +49,7 @@ interface SearchBarProps extends HTMLAttributes<HTMLDivElement> {}
 const SearchBar: FC<SearchBarProps> = (props) => {
   const dispatch = useDispatch<any>();
 
-  const searchBarVisible = useSelector(
-    (state: RootState) => state.appInfo.searchBarVisible
-  );
   const searchTxt = useSelector((state: RootState) => state.appInfo.searchTxt);
-
-  const _getBlogs = async () => {
-    return;
-    try {
-      const result = await dispatch(
-        getBlogsThunk({
-          params: {
-            page: 1,
-            size: 20,
-          },
-        })
-      );
-    } catch (err) {
-      console.log("MainPage _getBlogs error: ", err);
-    }
-  };
-
-  if (!searchBarVisible) return null;
 
   return (
     <SearchBarBlock>
@@ -82,7 +61,7 @@ const SearchBar: FC<SearchBarProps> = (props) => {
         placeholder="검색어를 입력해주세요."
       />
 
-      <SearchBtn onClick={_getBlogs}>검색하기</SearchBtn>
+      <SearchBtn>검색하기</SearchBtn>
     </SearchBarBlock>
   );
 };
