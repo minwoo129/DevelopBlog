@@ -8,6 +8,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../../modules/reducer";
+import { setSearchbarVisible } from "../../modules/actions/appInfo";
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -26,6 +27,13 @@ const Header: FC<HeaderProps> = (props) => {
   const isMenuVisible = useSelector(
     (state: RootState) => state.menu.isMenuVisible
   );
+  const searchBarVisible = useSelector(
+    (state: RootState) => state.appInfo.searchBarVisible
+  );
+
+  const onClickSearch = () => {
+    dispatch(setSearchbarVisible(!searchBarVisible));
+  };
 
   return (
     <HeaderBlock>
@@ -41,7 +49,7 @@ const Header: FC<HeaderProps> = (props) => {
           </IconButton>
         )}
       </div>
-      <div style={{ marginRight: "2rem" }}>
+      <div style={{ marginRight: "2rem" }} onClick={onClickSearch}>
         <HiOutlineSearch style={{ width: "1.5rem", height: "1.5rem" }} />
       </div>
     </HeaderBlock>

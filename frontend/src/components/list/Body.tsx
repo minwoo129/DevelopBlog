@@ -9,10 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getBlogsThunk } from "../../modules/thunk/blog";
 
-interface BodyRowSectionProps extends HTMLAttributes<HTMLDivElement> {
-  items: number[];
-}
-
 const BodyBlock = styled.div`
   flex: 1;
   display: flex;
@@ -38,7 +34,6 @@ const Body: FC<BodyProps> = (props) => {
   const blogs = useSelector((state: RootState) => state.blog.blogs);
   const navigate = useNavigate();
   const dispatch = useDispatch<any>();
-  const login = useSelector((state: RootState) => state.auth.login);
 
   useEffect(() => {
     _getBlogs();
