@@ -65,7 +65,8 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (type == "joinForm") {
-      const { email, pwd, pwdCheck, name, isAdmin, adminPwd } = joinForm;
+      const { email, pwd, pwdCheck, name, isAdmin, adminPwd, nickname } =
+        joinForm;
       if (email == "") {
         alert("이메일을 입력해주세요.");
         return;
@@ -97,6 +98,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
             name,
             isAdmin,
             adminPwd,
+            nickname,
           },
         });
         navigate("/auth/login");
