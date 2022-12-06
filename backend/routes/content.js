@@ -144,8 +144,13 @@ router.get("/get/:id", verifyTokenWithoutErr, async (req, res, next) => {
 router.delete("/del/:id", verifyToken, async (req, res, next) => {
   const { id } = req.params;
   try {
-    const result = await Content.destroy({
+    await Content.destroy({
       where: { id },
+    });
+    await File.destroy({
+      where: {
+        contentId: id,
+      },
     });
     res.status(200).json({ result: true, error: false, data: true });
   } catch (err) {
