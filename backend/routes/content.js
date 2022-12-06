@@ -3,6 +3,8 @@ const { verifyToken, verifyTokenWithoutErr } = require("./middlewares");
 const Content = require("../models/content");
 const File = require("../models/file");
 const User = require("../models/user");
+const sequelize = require("sequelize");
+const Op = sequelize.Op;
 
 const router = express.Router();
 
@@ -146,7 +148,40 @@ router.delete("/del/:id", verifyToken, async (req, res, next) => {
       where: { id },
     });
     res.status(200).json({ result: true, error: false, data: true });
-  } catch (error) {
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      code: 500,
+      message: err.message,
+      data: null,
+    });
+  }
+});
+
+router.get("/search", async (req, res, next) => {
+  const { searchText } = req.query;
+  try {
+    const result = await Content.findAll({
+      where: {
+        [Op.or]: [
+          {
+            title: {
+              [Op.like]: "%" + searchText + "%",
+            },
+          },
+          {
+            content: {
+              [Op.like]: "%" + searchText + "%",
+            },
+          },
+        ],
+      },
+      order: [["createdAt", "DESC"]],
+    });
+    res.status(200).json({ result: true, error: false, data: result });
+  } catch (err) {
     console.error(err);
     res.status(500).json({
       error: true,
