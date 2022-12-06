@@ -63,6 +63,7 @@ exports.verifyToken = (req, res, next) => {
   }
 };
 
+// 토큰 검증(권한이 없으면 없는 정보대로 반환, content 상세 조회시 필요)
 exports.verifyTokenWithoutErr = (req, res, next) => {
   try {
     req.decoded = jwt.verify(req.headers.authorization, process.env.JWT_SECRET);
