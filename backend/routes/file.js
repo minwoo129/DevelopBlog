@@ -116,4 +116,23 @@ router.post(
   }
 );
 
+router.delete("/del/:fileId", verifyToken, async (req, res, next) => {
+  const { fileId } = req.params;
+  try {
+    const result = await File.destroy({
+      where: { id: fileId },
+    });
+    res.status(200).json({ result: true, error: false, data: true });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      data: null,
+      message: err.message,
+      code: 500,
+    });
+  }
+});
+
 module.exports = router;
