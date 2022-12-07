@@ -75,6 +75,7 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
     const newState: initialStateType = {
       ...state,
       searchBlogs: result.data,
+      isExecuteSearch: true,
     };
     return newState;
   },
@@ -87,6 +88,7 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
     const newState: initialStateType = {
       ...state,
       searchBlogs: [],
+      isExecuteSearch: false,
     };
     return newState;
   },

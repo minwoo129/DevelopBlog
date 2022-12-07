@@ -37,6 +37,7 @@ export const blogInitialState: blogInitialStateType = {
   blogs: [],
   blog: null,
   searchBlogs: [],
+  isExecuteSearch: false,
 };
 // ================================ appInfo =======================================
 export const appInfoInitialState: appInfoInitialStateType = {

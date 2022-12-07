@@ -7,6 +7,7 @@ import { blogItemType } from "../../modules/initialStates/initialStateType";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getBlogsThunk } from "../../modules/thunk/blog";
+import EmptyLayer from "../../common/EmptyLayer";
 
 const BodyBlock = styled.div`
   flex: 1;
@@ -60,6 +61,9 @@ const Body: FC<BodyProps> = (props) => {
     navigate(`/detail?id=${id}`);
   };
 
+  if (blogs.length == 0) {
+    return <EmptyLayer isSearch={false} />;
+  }
   return (
     <BodyBlock>
       {blogs.map((item: blogItemType, index: number) => {

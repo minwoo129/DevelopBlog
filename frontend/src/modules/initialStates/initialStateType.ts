@@ -32,6 +32,7 @@ export type blogInitialStateType = {
   blogs: blogItemType[];
   blog: blogDetailType | null;
   searchBlogs: blogItemType[];
+  isExecuteSearch: boolean;
 };
 // ================================ appInfo =======================================
 export type appInfoInitialStateType = {

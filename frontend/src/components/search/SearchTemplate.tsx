@@ -22,6 +22,9 @@ const SearchTemplate: FC<SearchTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
   const searchTxt = useSelector((state: RootState) => state.appInfo.searchTxt);
   const searchBlogs = useSelector((state: RootState) => state.blog.searchBlogs);
+  const isExecuteSearch = useSelector(
+    (state: RootState) => state.blog.isExecuteSearch
+  );
 
   const onPressSearch = async () => {
     if (searchTxt == "") {
@@ -49,7 +52,11 @@ const SearchTemplate: FC<SearchTemplateProps> = (props) => {
         onChangeValue={(e) => dispatch(setSearchTxt(e.target.value))}
         onPressSearch={onPressSearch}
       />
-      <Body searchBlogs={searchBlogs} />
+      <Body
+        searchBlogs={searchBlogs}
+        isExecuteSearch={isExecuteSearch}
+        searchTxt={searchTxt}
+      />
     </SearchTemplateBlock>
   );
 };
