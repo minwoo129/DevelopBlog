@@ -8,6 +8,9 @@ import {
   GET_BLOGS_SUCCESS,
   GET_BLOG_ERROR,
   GET_BLOG_SUCCESS,
+  GET_SEARCH_BLOGS,
+  GET_SEARCH_BLOGS_ERROR,
+  GET_SEARCH_BLOGS_SUCCESS,
   SET_ADDED_IMAGE_IDS,
 } from "../actions/blog";
 import { blogInitialState as initialState } from "../initialStates/initialState";
@@ -60,6 +63,21 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
     return newState;
   },
   [GET_BLOG_ERROR]: (state, action) => {
+    return state;
+  },
+
+  // GET_SEARCH_BLOGS ////////////////////////////////////////////////////
+  [GET_SEARCH_BLOGS]: (state, action) => {
+    return state;
+  },
+  [GET_SEARCH_BLOGS_SUCCESS]: (state, { payload: { param, result } }) => {
+    const newState: initialStateType = {
+      ...state,
+      searchBlogs: result.data,
+    };
+    return newState;
+  },
+  [GET_SEARCH_BLOGS_ERROR]: (state, action) => {
     return state;
   },
 });

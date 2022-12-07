@@ -31,6 +31,7 @@ export type blogInitialStateType = {
   addedImageIds: number[];
   blogs: blogItemType[];
   blog: blogDetailType | null;
+  searchBlogs: blogItemType[];
 };
 // ================================ appInfo =======================================
 export type appInfoInitialStateType = {

@@ -36,6 +36,7 @@ export const blogInitialState: blogInitialStateType = {
   addedImageIds: [],
   blogs: [],
   blog: null,
+  searchBlogs: [],
 };
 // ================================ appInfo =======================================
 export const appInfoInitialState: appInfoInitialStateType = {
