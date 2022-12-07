@@ -1,7 +1,6 @@
 import React, { FC, HTMLAttributes, useEffect, useMemo } from "react";
 import styled, { css } from "styled-components";
-import ListItem from "./ListItem";
-import lodash from "lodash";
+import ListItem from "./listItem/ListItem";
 import { useSelector } from "react-redux";
 import { RootState } from "../../modules/reducer";
 import { blogItemType } from "../../modules/initialStates/initialStateType";
