@@ -45,11 +45,12 @@ const SearchItemBlock = styled.div`
 
 interface SearchItemProps extends HTMLAttributes<HTMLDivElement> {
   blog: blogItemType;
+  onPress(id: number): void;
 }
 
-const SearchItem: FC<SearchItemProps> = ({ blog, ...props }) => {
+const SearchItem: FC<SearchItemProps> = ({ blog, onPress, ...props }) => {
   return (
-    <SearchItemBlock {...props}>
+    <SearchItemBlock {...props} onClick={() => onPress(blog.id)}>
       <StyledImgGrid>
         <StyledImg src={blog.thumbnailUrl} />
       </StyledImgGrid>

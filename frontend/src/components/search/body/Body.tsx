@@ -1,4 +1,5 @@
 import React, { FC, HTMLAttributes } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { blogItemType } from "../../../modules/initialStates/initialStateType";
 import SearchItem from "./searchItem/SearchItem";
@@ -17,10 +18,16 @@ interface BodyProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Body: FC<BodyProps> = ({ searchBlogs, ...props }) => {
+  const navigate = useNavigate();
+
+  const moveToDetail = (id: number) => {
+    navigate(`/detail?id=${id}`);
+  };
+
   return (
     <BodyBlock {...props}>
       {searchBlogs.map((item, index) => {
-        return <SearchItem blog={item} key={index} />;
+        return <SearchItem blog={item} key={index} onPress={moveToDetail} />;
       })}
     </BodyBlock>
   );
