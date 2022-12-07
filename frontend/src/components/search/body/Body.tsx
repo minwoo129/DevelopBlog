@@ -9,7 +9,6 @@ const BodyBlock = styled.div`
   height: 90%;
   flex-direction: column;
   overflow: scroll;
-  border: 1px solid red;
   align-items: center;
 `;
 

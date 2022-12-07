@@ -39,7 +39,7 @@ const SearchItemBlock = styled.div`
     margin-bottom: 30px;
   }
   &:hover {
-    background: #e6e6e6;
+    background: #d8d8d8;
   }
 `;
 
