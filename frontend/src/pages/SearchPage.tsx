@@ -4,9 +4,9 @@ import SearchTemplate from "../components/search/SearchTemplate";
 
 interface SearchPageProps extends HTMLAttributes<HTMLDivElement> {}
 
-const SearchPage: FC<SearchPageProps> = (props) => {
+const SearchPage: FC<SearchPageProps> = ({ ...props }) => {
   return (
-    <MenuTemplate>
+    <MenuTemplate {...props}>
       <SearchTemplate />
     </MenuTemplate>
   );

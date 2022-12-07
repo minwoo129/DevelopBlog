@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useRef, useState } from "react";
+import React, { FC, HTMLAttributes, useEffect, useRef, useState } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "prismjs/themes/prism.css";
@@ -10,15 +10,24 @@ import Header from "../components/write/Header";
 import invokeAPI, { invokeFileUpload } from "../lib/restAPI";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setAddedImageIds } from "../modules/actions/blog";
+import { clearSearchBlogs, setAddedImageIds } from "../modules/actions/blog";
 import { useSelector } from "react-redux";
 import { RootState } from "../modules/reducer";
+import { batch } from "react-redux";
+import { setSearchTxt } from "../modules/actions/appInfo";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
 const WritePost: FC<WritePostProps> = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
+
+  useEffect(() => {
+    batch(() => {
+      dispatch(clearSearchBlogs());
+      dispatch(setSearchTxt(""));
+    });
+  }, []);
 
   const addedImageIds = useSelector(
     (state: RootState) => state.blog.addedImageIds

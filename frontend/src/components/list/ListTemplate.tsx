@@ -13,9 +13,9 @@ const ListTemplateBlock = styled.div`
 
 interface ListTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 
-const ListTemplate: FC<ListTemplateProps> = (props) => {
+const ListTemplate: FC<ListTemplateProps> = ({ ...props }) => {
   return (
-    <ListTemplateBlock>
+    <ListTemplateBlock {...props}>
       <Header />
       <Body />
     </ListTemplateBlock>

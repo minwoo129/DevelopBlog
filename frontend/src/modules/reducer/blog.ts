@@ -2,6 +2,7 @@ import { createReducer } from "typesafe-actions";
 import { blogActionType } from "../actions";
 import {
   CLEAR_ADDED_IMAGE_IDS,
+  CLEAR_SEARCH_BLOGS,
   GET_BLOG,
   GET_BLOGS,
   GET_BLOGS_ERROR,
@@ -79,5 +80,14 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
   },
   [GET_SEARCH_BLOGS_ERROR]: (state, action) => {
     return state;
+  },
+
+  // CLEAR_SEARCH_BLOGS ////////////////////////////////////////////////////
+  [CLEAR_SEARCH_BLOGS]: (state, { payload: result }) => {
+    const newState: initialStateType = {
+      ...state,
+      searchBlogs: [],
+    };
+    return newState;
   },
 });

@@ -1,13 +1,25 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, useEffect } from "react";
+import { batch } from "react-redux";
+import { useDispatch } from "react-redux";
 import ListTemplate from "../components/list/ListTemplate";
 import MenuTemplate from "../components/menu/MenuTemplate";
+import { setSearchTxt } from "../modules/actions/appInfo";
+import { clearSearchBlogs } from "../modules/actions/blog";
 
 interface ListPageProps extends HTMLAttributes<HTMLDivElement> {}
 
-const ListPage: FC<ListPageProps> = (props) => {
+const ListPage: FC<ListPageProps> = ({ ...props }) => {
+  const dispatch = useDispatch<any>();
+
+  useEffect(() => {
+    batch(() => {
+      dispatch(clearSearchBlogs());
+      dispatch(setSearchTxt(""));
+    });
+  }, []);
   return (
-    <MenuTemplate>
-      <ListTemplate></ListTemplate>
+    <MenuTemplate {...props}>
+      <ListTemplate />
     </MenuTemplate>
   );
 };

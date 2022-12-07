@@ -9,10 +9,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "../modules/reducer";
 import { setMenuOpen } from "../modules/actions/menu";
 import invokeAPI from "../lib/restAPI";
+import { batch } from "react-redux";
+import { clearSearchBlogs } from "../modules/actions/blog";
+import { setSearchTxt } from "../modules/actions/appInfo";
 
 interface DetailPageProps extends HTMLAttributes<HTMLDivElement> {}
 
-const DetailPage: FC<DetailPageProps> = (props) => {
+const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   const dispatch = useDispatch<any>();
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,7 +29,9 @@ const DetailPage: FC<DetailPageProps> = (props) => {
   );
 
   useEffect(() => {
-    _getBlog(Number(query.id));
+    batch(() => {
+      _getBlog(Number(query.id));
+    });
   }, []);
 
   const _getBlog = async (id: number) => {
@@ -65,7 +70,7 @@ const DetailPage: FC<DetailPageProps> = (props) => {
   };
 
   return (
-    <MenuTemplate>
+    <MenuTemplate {...props}>
       <DetailTemplate
         blog={blog}
         isMenuVisible={isMenuVisible}
