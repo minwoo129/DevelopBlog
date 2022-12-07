@@ -12,18 +12,21 @@ import { getBlogsThunk } from "../../modules/thunk/blog";
 const BodyBlock = styled.div`
   flex: 1;
   display: flex;
-  flex-flow: row wrap;
   overflow: scroll;
   @media (max-width: 768px) {
-    justify-content: center;
     padding: 0 50px;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: 768px) {
-    justify-content: center;
     padding: 0 120px;
+    flex-direction: column;
+    align-items: center;
   }
   @media (min-width: 1400px) {
+    flex-flow: row wrap;
     justify-content: space-between;
+    align-items: flex-start;
     padding: 0 100px;
   }
 `;
