@@ -148,5 +148,6 @@ interface StyledButtonProps extends HTMLAttributes<HTMLButtonElement> {
 }
 
 const StyledButton: FC<StyledButtonProps> = ({ visible, ...props }) => {
+  if (!visible) return null;
   return <StyledButtonBlock {...props}>{props.children}</StyledButtonBlock>;
 };
