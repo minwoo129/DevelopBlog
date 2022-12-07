@@ -166,24 +166,25 @@ router.delete("/del/:id", verifyToken, async (req, res, next) => {
 });
 
 router.get("/search", async (req, res, next) => {
-  const { searchText } = req.query;
+  const { searchTxt } = req.query;
   try {
     const result = await Content.findAll({
       where: {
         [Op.or]: [
           {
             title: {
-              [Op.like]: "%" + searchText + "%",
+              [Op.like]: "%" + searchTxt + "%",
             },
           },
           {
             content: {
-              [Op.like]: "%" + searchText + "%",
+              [Op.like]: "%" + searchTxt + "%",
             },
           },
         ],
       },
       order: [["createdAt", "DESC"]],
+      include: { model: User },
     });
     res.status(200).json({ result: true, error: false, data: result });
   } catch (err) {
