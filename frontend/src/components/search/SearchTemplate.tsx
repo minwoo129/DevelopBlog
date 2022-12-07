@@ -1,5 +1,10 @@
 import React, { FC, HTMLAttributes } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { setSearchTxt } from "../../modules/actions/appInfo";
+import { RootState } from "../../modules/reducer";
+import { getSearchBlogsThunk } from "../../modules/thunk/blog";
 import Body from "./body/Body";
 import SearchBar from "./SearchBar";
 
@@ -14,9 +19,31 @@ const SearchTemplateBlock = styled.div`
 interface SearchTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 
 const SearchTemplate: FC<SearchTemplateProps> = (props) => {
+  const dispatch = useDispatch<any>();
+  const searchTxt = useSelector((state: RootState) => state.appInfo.searchTxt);
+
+  const onPressSearch = async () => {
+    try {
+      const result = await dispatch(
+        getSearchBlogsThunk({
+          params: {
+            searchTxt,
+          },
+        })
+      );
+      console.log("SearchTemplate onPressSearch result: ", result);
+    } catch (err) {
+      console.log("SearchTemplate onPressSearch error: ", err);
+    }
+  };
+
   return (
     <SearchTemplateBlock>
-      <SearchBar />
+      <SearchBar
+        searchTxt={searchTxt}
+        onChangeValue={(e) => dispatch(setSearchTxt(e.target.value))}
+        onPressSearch={onPressSearch}
+      />
       <Body />
     </SearchTemplateBlock>
   );

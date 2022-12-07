@@ -13,7 +13,7 @@ const SearchItemBlock = styled.div`
     border: 1px solid blue;
   }
   @media (min-width: 906px) {
-    width: 600px;
+    width: 700px;
     border: 1px solid green;
   }
   @media (min-width: 1400px) {
