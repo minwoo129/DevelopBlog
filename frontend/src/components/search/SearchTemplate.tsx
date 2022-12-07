@@ -21,8 +21,13 @@ interface SearchTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const SearchTemplate: FC<SearchTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
   const searchTxt = useSelector((state: RootState) => state.appInfo.searchTxt);
+  const searchBlogs = useSelector((state: RootState) => state.blog.searchBlogs);
 
   const onPressSearch = async () => {
+    if (searchTxt == "") {
+      alert("검색어를 입력해주세요.");
+      return;
+    }
     try {
       const result = await dispatch(
         getSearchBlogsThunk({
@@ -44,7 +49,7 @@ const SearchTemplate: FC<SearchTemplateProps> = (props) => {
         onChangeValue={(e) => dispatch(setSearchTxt(e.target.value))}
         onPressSearch={onPressSearch}
       />
-      <Body />
+      <Body searchBlogs={searchBlogs} />
     </SearchTemplateBlock>
   );
 };
