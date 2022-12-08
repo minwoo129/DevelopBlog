@@ -16,7 +16,7 @@ const AuthPage: FC<AuthPageProps> = ({ ...props }) => {
       dispatch(clearSearchBlogs());
       dispatch(setSearchTxt(""));
     });
-  });
+  }, []);
 
   return (
     <MenuTemplate {...props}>

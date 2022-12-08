@@ -12,6 +12,7 @@ const ListPage: FC<ListPageProps> = ({ ...props }) => {
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
+    document.title = "DEVELOPBLOG";
     batch(() => {
       dispatch(clearSearchBlogs());
       dispatch(setSearchTxt(""));

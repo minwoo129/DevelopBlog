@@ -1,10 +1,13 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, useEffect } from "react";
 import MenuTemplate from "../components/menu/MenuTemplate";
 import SearchTemplate from "../components/search/SearchTemplate";
 
 interface SearchPageProps extends HTMLAttributes<HTMLDivElement> {}
 
 const SearchPage: FC<SearchPageProps> = ({ ...props }) => {
+  useEffect(() => {
+    document.title = "DEVELOPBLOG-검색하기";
+  }, []);
   return (
     <MenuTemplate {...props}>
       <SearchTemplate />

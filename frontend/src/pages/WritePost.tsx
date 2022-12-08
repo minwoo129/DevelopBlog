@@ -46,6 +46,10 @@ const WritePost: FC<WritePostProps> = (props) => {
   const ref = useRef<Editor>(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = "DEVELOPBLOG-작성하기";
+  }, []);
+
   const onClick = async () => {
     if (title == "") {
       alert("제목을 입력하세요.");
