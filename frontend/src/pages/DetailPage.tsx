@@ -29,6 +29,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   );
 
   useEffect(() => {
+    document.title = "DEVELOPBLOG-상세";
     batch(() => {
       _getBlog(Number(query.id));
     });

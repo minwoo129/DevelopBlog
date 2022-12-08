@@ -4,7 +4,6 @@ import styled from "styled-components";
 const HeaderBlock = styled.div`
   flex: 1;
   height: 48px;
-  border: 1px solid red;
   padding: 4px 20px;
   display: flex;
   flex-direction: row;

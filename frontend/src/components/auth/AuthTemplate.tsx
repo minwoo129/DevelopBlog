@@ -3,6 +3,7 @@ import React, {
   FC,
   FormEvent,
   HTMLAttributes,
+  useEffect,
   useMemo,
 } from "react";
 import styled from "styled-components";
@@ -54,6 +55,14 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     return type;
   }, [location]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (type == "joinForm") {
+      document.title = "DEVELOPBLOG-로그인";
+    } else {
+      document.title = "DEVELOPBLOG-회원가입";
+    }
+  }, [type]);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

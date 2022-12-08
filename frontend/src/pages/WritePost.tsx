@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../modules/reducer";
 import { batch } from "react-redux";
 import { setSearchTxt } from "../modules/actions/appInfo";
+import { clearAddedImageIds } from "../modules/actions/blog";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -45,6 +46,10 @@ const WritePost: FC<WritePostProps> = (props) => {
   const ref = useRef<Editor>(null);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = "DEVELOPBLOG-작성하기";
+  }, []);
+
   const onClick = async () => {
     if (title == "") {
       alert("제목을 입력하세요.");
@@ -71,6 +76,7 @@ const WritePost: FC<WritePostProps> = (props) => {
       })({
         data,
       });
+      dispatch(clearAddedImageIds());
       navigate("/");
     } catch (e) {
       console.log("WritePost onClick error: ", e);
