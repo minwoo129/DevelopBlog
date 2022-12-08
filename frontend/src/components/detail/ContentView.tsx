@@ -8,14 +8,13 @@ import { SecondHeader, StyledTitle } from "./AdditionalComponent";
 const ContentViewBlock = styled.div`
   flex: 1;
   display: flex;
-  min-width: 568px;
   flex-direction: column;
-  padding: 0 2rem;
+  padding: 0 5rem;
   @media (min-width: 906px) {
     margin: 0 50px;
   }
   @media (min-width: 1000px) {
-    margin: 0 100px;
+    margin: 0 50px;
   }
 `;
 
