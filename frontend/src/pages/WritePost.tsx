@@ -15,6 +15,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../modules/reducer";
 import { batch } from "react-redux";
 import { setSearchTxt } from "../modules/actions/appInfo";
+import { clearAddedImageIds } from "../modules/actions/blog";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -71,6 +72,7 @@ const WritePost: FC<WritePostProps> = (props) => {
       })({
         data,
       });
+      dispatch(clearAddedImageIds());
       navigate("/");
     } catch (e) {
       console.log("WritePost onClick error: ", e);
