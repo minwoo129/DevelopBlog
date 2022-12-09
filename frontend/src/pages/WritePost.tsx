@@ -16,6 +16,7 @@ import { RootState } from "../modules/reducer";
 import { batch } from "react-redux";
 import { setSearchTxt } from "../modules/actions/appInfo";
 import { clearAddedImageIds } from "../modules/actions/blog";
+import Modal from "../components/write/Modal";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -43,6 +44,7 @@ const WritePost: FC<WritePostProps> = (props) => {
       ? blog?.thumbnailUrl ?? null
       : null
   );
+  const [modal, setModal] = useState<boolean>(false);
   const ref = useRef<Editor>(null);
   const navigate = useNavigate();
 
@@ -51,7 +53,8 @@ const WritePost: FC<WritePostProps> = (props) => {
   }, []);
 
   const onClick = async () => {
-    if (title == "") {
+    setModal(true);
+    /* if (title == "") {
       alert("제목을 입력하세요.");
       return;
     }
@@ -80,7 +83,7 @@ const WritePost: FC<WritePostProps> = (props) => {
       navigate("/");
     } catch (e) {
       console.log("WritePost onClick error: ", e);
-    }
+    } */
   };
   return (
     <div>
@@ -116,6 +119,7 @@ const WritePost: FC<WritePostProps> = (props) => {
           },
         }}
       />
+      <Modal visible={modal} setVisible={setModal} />
     </div>
   );
 };
