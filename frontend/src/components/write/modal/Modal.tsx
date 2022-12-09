@@ -1,6 +1,14 @@
 import React, { FC, HTMLAttributes } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
+const moveAnimation = keyframes`
+    from {
+        top: 100%;
+    }
+    to {
+        top: 0px
+    }
+`;
 const ModalBlock = styled.div`
   position: absolute;
   background: orange;
@@ -10,6 +18,7 @@ const ModalBlock = styled.div`
   z-index: 100;
   top: 0;
   border: 1px solid red;
+  animation: ${moveAnimation} 0.25s linear 1;
 `;
 
 interface ModalProps extends HTMLAttributes<HTMLDivElement> {

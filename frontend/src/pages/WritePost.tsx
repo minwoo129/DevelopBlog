@@ -16,7 +16,7 @@ import { RootState } from "../modules/reducer";
 import { batch } from "react-redux";
 import { setSearchTxt } from "../modules/actions/appInfo";
 import { clearAddedImageIds } from "../modules/actions/blog";
-import Modal from "../components/write/Modal";
+import Modal from "../components/write/modal/Modal";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
