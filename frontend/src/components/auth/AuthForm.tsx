@@ -44,6 +44,9 @@ interface AuthFormProps {
   onChange(e: ChangeEvent<HTMLInputElement>): void;
   onCheckAdmin?(value: boolean): void;
   onSubmit(e: FormEvent<HTMLFormElement>): void;
+  imgSrc: any;
+  setImgSrc(value: any): void;
+  onChangeImg(value: File | Blob): void;
 }
 
 const AuthForm: FC<AuthFormProps> = ({
@@ -52,13 +55,22 @@ const AuthForm: FC<AuthFormProps> = ({
   onChange,
   onSubmit,
   onCheckAdmin,
+  imgSrc,
+  setImgSrc,
+  onChangeImg,
 }) => {
   const title = useMemo(() => textMap[formType], [formType]);
   return (
     <AuthFormBlock>
       <h3>{title}</h3>
       <form onSubmit={onSubmit}>
-        {formType == "joinForm" && <StyledImageInput />}
+        {formType == "joinForm" && (
+          <StyledImageInput
+            imgSrc={imgSrc}
+            setImgSrc={setImgSrc}
+            onChangeImg={onChangeImg}
+          />
+        )}
         {formType == "joinForm" && (
           <StyledInput
             autoComplete="name"

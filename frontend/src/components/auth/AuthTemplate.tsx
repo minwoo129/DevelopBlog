@@ -5,6 +5,7 @@ import React, {
   HTMLAttributes,
   useEffect,
   useMemo,
+  useState,
 } from "react";
 import styled from "styled-components";
 import qs from "qs";
@@ -54,6 +55,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     else type = "joinForm";
     return type;
   }, [location]);
+  const [imgSrc, setImgSrc] = useState<any>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,6 +69,9 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     dispatch(changeField({ form: type, key: name, value }));
+  };
+  const onChangeImg = (data: File | Blob) => {
+    dispatch(changeField({ form: type, key: "imageFile", value: data }));
   };
   const onCheckAdmin = (value: boolean) => {
     dispatch(changeField({ form: "joinForm", key: "isAdmin", value }));
@@ -175,6 +180,9 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
           onChange={onChange}
           onCheckAdmin={onCheckAdmin}
           onSubmit={onSubmit}
+          imgSrc={imgSrc}
+          setImgSrc={setImgSrc}
+          onChangeImg={onChangeImg}
         />
       </WhiteBox>
     </AuthTemplateBlock>

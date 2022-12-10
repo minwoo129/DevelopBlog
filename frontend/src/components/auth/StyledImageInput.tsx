@@ -1,4 +1,10 @@
-import React, { FC, HTMLAttributes, useRef } from "react";
+import React, {
+  FC,
+  HTMLAttributes,
+  MouseEvent,
+  MouseEventHandler,
+  useRef,
+} from "react";
 import styled from "styled-components";
 import { IoMdAdd } from "react-icons/io";
 import DefaultUserImage from "../../common/DefaultUserImage";
@@ -13,7 +19,7 @@ const StyledImageInputBlock = styled.div`
   margin-bottom: 1rem;
 `;
 
-const AddImageButton = styled.div`
+const AddImageButton = styled.button`
   width: 25px;
   height: 25px;
   border-radius: 12.5px;
@@ -28,9 +34,29 @@ const AddImageButton = styled.div`
   right: 30px;
 `;
 
-interface StyledImageInputProps extends HTMLAttributes<HTMLDivElement> {}
+const UserImage = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: #bdbdbd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+`;
 
-const StyledImageInput: FC<StyledImageInputProps> = (props) => {
+interface StyledImageInputProps extends HTMLAttributes<HTMLDivElement> {
+  imgSrc: any;
+  setImgSrc(value: any): void;
+  onChangeImg(value: File | Blob): void;
+}
+
+const StyledImageInput: FC<StyledImageInputProps> = ({
+  imgSrc,
+  setImgSrc,
+  onChangeImg,
+  ...props
+}) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const encodeFileToBase64 = async (fileBlob: Blob) => {
@@ -40,23 +66,32 @@ const StyledImageInput: FC<StyledImageInputProps> = (props) => {
 
     return new Promise((resolve) => {
       reader.onload = () => {
-        console.log("result: ", reader.result);
+        onChangeImg(fileBlob);
+        setImgSrc(reader.result);
+        resolve(null);
       };
     });
   };
 
-  /*   const addImage = () => {
+  const addImage = (e: MouseEvent<HTMLButtonElement>) => {
+    console.log("test");
+    e.preventDefault();
     if (!inputRef.current) {
       return;
     }
     inputRef.current.click();
-  }; */
+  };
+
   return (
-    <StyledImageInputBlock>
-      <DefaultUserImage
-        style={{ width: "100px", height: "100px", borderRadius: "50px" }}
-        iconDetailStyle={{ width: "50px", height: "50px" }}
-      />
+    <StyledImageInputBlock {...props}>
+      {imgSrc ? (
+        <UserImage src={imgSrc} />
+      ) : (
+        <DefaultUserImage
+          style={{ width: "100px", height: "100px", borderRadius: "50px" }}
+          iconDetailStyle={{ width: "50px", height: "50px" }}
+        />
+      )}
       <input
         type="file"
         ref={inputRef}
@@ -68,19 +103,8 @@ const StyledImageInput: FC<StyledImageInputProps> = (props) => {
           encodeFileToBase64(e.target.files[0]);
         }}
       />
-      <AddImageButton>
+      <AddImageButton onClick={addImage}>
         <IoMdAdd style={{ width: "1rem", height: "1rem" }} />
-        <input
-          type="file"
-          ref={inputRef}
-          style={{ display: "none" }}
-          onChange={(e) => {
-            if (!e.target.files) {
-              return;
-            }
-            encodeFileToBase64(e.target.files[0]);
-          }}
-        />
       </AddImageButton>
     </StyledImageInputBlock>
   );
