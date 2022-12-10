@@ -47,6 +47,7 @@ interface InputInfoProps extends HTMLAttributes<HTMLDivElement> {
   isPublic: boolean;
   setPublic(value: boolean): void;
   close(): void;
+  addBlog(): void;
 }
 
 const InputInfo: FC<InputInfoProps> = ({
@@ -55,6 +56,7 @@ const InputInfo: FC<InputInfoProps> = ({
   isPublic,
   setPublic,
   close,
+  addBlog,
   ...props
 }) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -140,10 +142,16 @@ const InputInfo: FC<InputInfoProps> = ({
       </PublicAskBtnGrid>
 
       <SaveBtnsGrid>
-        <FooterBtn style={{ borderColor: closeBtnColor, color: closeBtnColor }}>
+        <FooterBtn
+          style={{ borderColor: closeBtnColor, color: closeBtnColor }}
+          onClick={close}
+        >
           닫기
         </FooterBtn>
-        <FooterBtn style={{ borderColor: saveBtnColor, color: saveBtnColor }}>
+        <FooterBtn
+          style={{ borderColor: saveBtnColor, color: saveBtnColor }}
+          onClick={addBlog}
+        >
           등록하기
         </FooterBtn>
       </SaveBtnsGrid>

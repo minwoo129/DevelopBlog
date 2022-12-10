@@ -31,6 +31,7 @@ interface ModalProps extends HTMLAttributes<HTMLDivElement> {
   setThumbnailUrl(value: string): void;
   isPublic: boolean;
   setPublic(value: boolean): void;
+  addBlog(): void;
 }
 
 const Modal: FC<ModalProps> = ({
@@ -40,6 +41,7 @@ const Modal: FC<ModalProps> = ({
   setThumbnailUrl,
   isPublic,
   setPublic,
+  addBlog,
   ...props
 }) => {
   if (!visible) return null;
@@ -51,6 +53,7 @@ const Modal: FC<ModalProps> = ({
         isPublic={isPublic}
         setPublic={setPublic}
         close={() => setVisible(false)}
+        addBlog={addBlog}
       />
     </ModalBlock>
   );

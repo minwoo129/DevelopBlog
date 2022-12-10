@@ -1,4 +1,11 @@
-import React, { FC, HTMLAttributes, useEffect, useRef, useState } from "react";
+import React, {
+  FC,
+  HTMLAttributes,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "prismjs/themes/prism.css";
@@ -24,34 +31,19 @@ const WritePost: FC<WritePostProps> = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  useEffect(() => {
-    batch(() => {
-      dispatch(clearSearchBlogs());
-      dispatch(setSearchTxt(""));
-    });
-  }, []);
-
   const addedImageIds = useSelector(
     (state: RootState) => state.blog.addedImageIds
   );
   const blog = useSelector((state: RootState) => state.blog.blog);
+  const isReviseMode = useMemo(() => {
+    return location.pathname.indexOf("revise") != -1;
+  }, []);
 
-  const [title, setTitle] = useState<string>(
-    location.pathname.indexOf("revise") != -1 ? blog?.title ?? "" : ""
-  );
+  const [title, setTitle] = useState<string>("");
   const [thumbnailUrl, setThumbnailUrl] = useState<string>(
-    location.pathname.indexOf("revise") != -1
-      ? blog?.thumbnailUrl ??
-          "https://developblog.s3.ap-northeast-2.amazonaws.com/image/default/2022/1203/93eb6dd6-8a7a-41ad-93fd-616795fa4bae"
-      : "https://developblog.s3.ap-northeast-2.amazonaws.com/image/default/2022/1203/93eb6dd6-8a7a-41ad-93fd-616795fa4bae"
+    "https://developblog.s3.ap-northeast-2.amazonaws.com/image/default/2022/1203/93eb6dd6-8a7a-41ad-93fd-616795fa4bae"
   );
-  const [isthumbnailChange, setThumbnailChange] = useState(
-    location.pathname.indexOf("revise") != -1
-      ? blog?.thumbnailUrl
-        ? true
-        : false
-      : false
-  );
+  const [isthumbnailChange, setThumbnailChange] = useState(false);
   const [modal, setModal] = useState<boolean>(false);
   const [isPublic, setPublic] = useState<boolean>(false);
   const ref = useRef<Editor>(null);
@@ -59,6 +51,17 @@ const WritePost: FC<WritePostProps> = (props) => {
 
   useEffect(() => {
     document.title = "DEVELOPBLOG-작성하기";
+    batch(() => {
+      dispatch(clearSearchBlogs());
+      dispatch(setSearchTxt(""));
+    });
+    if (isReviseMode) {
+      if (blog?.thumbnailUrl) {
+        if (blog.thumbnailUrl != thumbnailUrl) setThumbnailChange(true);
+        setThumbnailUrl(blog.thumbnailUrl);
+      }
+      if (blog?.title) setTitle(blog.title);
+    }
   }, []);
 
   const onClick = async () => {
@@ -67,10 +70,9 @@ const WritePost: FC<WritePostProps> = (props) => {
       return;
     }
     setModal(true);
-    /* if (title == "") {
-      alert("제목을 입력하세요.");
-      return;
-    }
+  };
+
+  const __addBlog = async () => {
     let data: any = {
       title,
       content: ref?.current?.getInstance()?.getMarkdown(),
@@ -96,7 +98,7 @@ const WritePost: FC<WritePostProps> = (props) => {
       navigate("/");
     } catch (e) {
       console.log("WritePost onClick error: ", e);
-    } */
+    }
   };
   return (
     <div>
@@ -140,6 +142,7 @@ const WritePost: FC<WritePostProps> = (props) => {
         setThumbnailUrl={setThumbnailUrl}
         isPublic={isPublic}
         setPublic={setPublic}
+        addBlog={__addBlog}
       />
     </div>
   );
