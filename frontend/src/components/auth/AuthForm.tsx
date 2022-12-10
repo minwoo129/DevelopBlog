@@ -10,6 +10,7 @@ import styled from "styled-components";
 import Button from "../../common/Button";
 import CheckAdminSection from "./CheckAdminSection";
 import Footer from "./Footer";
+import StyledImageInput from "./StyledImageInput";
 import StyledInput from "./StyledInput";
 
 const AuthFormBlock = styled.div`
@@ -38,6 +39,7 @@ interface AuthFormProps {
     isAdmin?: boolean;
     adminPwd?: string;
     nickname?: string;
+    imageFile?: File | null;
   };
   onChange(e: ChangeEvent<HTMLInputElement>): void;
   onCheckAdmin?(value: boolean): void;
@@ -56,6 +58,7 @@ const AuthForm: FC<AuthFormProps> = ({
     <AuthFormBlock>
       <h3>{title}</h3>
       <form onSubmit={onSubmit}>
+        {formType == "joinForm" && <StyledImageInput />}
         {formType == "joinForm" && (
           <StyledInput
             autoComplete="name"
