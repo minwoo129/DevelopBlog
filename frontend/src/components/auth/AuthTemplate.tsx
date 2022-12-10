@@ -145,17 +145,6 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     }
   };
 
-  const encodeFileToBase64 = async (fileBlob: Blob) => {
-    console.log("file: ", fileBlob);
-    const reader = new FileReader();
-    reader.readAsDataURL(fileBlob);
-
-    return new Promise((resolve) => {
-      reader.onload = () => {
-        console.log("result: ", reader.result);
-      };
-    });
-  };
   return (
     <AuthTemplateBlock>
       {!isMenuVisible && (
