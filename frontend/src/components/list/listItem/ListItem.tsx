@@ -4,6 +4,7 @@ import { blogItemType } from "../../../modules/initialStates/initialStateType";
 import {
   ContentDetailGrid,
   InsideContentGrid,
+  LockedIcon,
   StyledContent,
   StyledImg,
   StyledTitle,
@@ -36,6 +37,7 @@ const ListItem: FC<ListItemProps> = ({ blog, onPress }) => {
         onPress(blog.id);
       }}
     >
+      <LockedIcon isPublic={blog.public} />
       <InsideContentGrid>
         <StyledImg src={blog.thumbnailUrl} />
         <ContentDetailGrid>
