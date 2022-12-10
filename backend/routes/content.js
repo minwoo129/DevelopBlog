@@ -67,7 +67,7 @@ router.post("/save", verifyToken, async (req, res, next) => {
   }
 });
 
-router.get("/get/list", async (req, res, next) => {
+router.get("/get/list", verifyTokenWithoutErr, async (req, res, next) => {
   try {
     let pageNum = req.query.page; // 요청 페이지 넘버
     const { size } = req.query;
@@ -76,8 +76,29 @@ router.get("/get/list", async (req, res, next) => {
     if (pageNum > 1) {
       offset = 1;
     }
+
+    let where = {};
+
+    if (req.decodeRes) {
+      where = {
+        [Op.or]: [
+          {
+            public: true,
+          },
+          {
+            userId: req.decoded.id,
+          },
+        ],
+      };
+    } else {
+      where = {
+        public: true,
+      };
+    }
+
     const contents = await Content.findAll({
       include: { model: User },
+      where,
     });
     res.status(200).json({ error: false, result: true, data: contents });
   } catch (err) {
