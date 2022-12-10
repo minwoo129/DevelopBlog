@@ -52,6 +52,7 @@ export interface blogItemType {
   title: string;
   updatedAt: string;
   userId: number;
+  public: boolean;
   User: {
     createdAt: string;
     email: string;
