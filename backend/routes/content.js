@@ -99,6 +99,7 @@ router.get("/get/list", verifyTokenWithoutErr, async (req, res, next) => {
     const contents = await Content.findAll({
       include: { model: User },
       where,
+      order: [["createdAt", "DESC"]],
     });
     res.status(200).json({ error: false, result: true, data: contents });
   } catch (err) {
