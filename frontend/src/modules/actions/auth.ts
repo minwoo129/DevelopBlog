@@ -9,6 +9,10 @@ export const LOGIN = "auth/LOGIN";
 export const LOGIN_SUCCESS = "auth/LOGIN_SUCCESS";
 export const LOGIN_ERROR = "auth/LOGIN_ERROR";
 
+export const JOIN = "auth/JOIN";
+export const JOIN_SUCCESS = "auth/JOIN_SUCCESS";
+export const JOIN_ERROR = "auth/JOIN_ERROR";
+
 export const INITIALIZE_BY_TOKEN = "auth/INITIALIZE_BY_TOKEN";
 
 export const TOKEN_CHECK = "auth/TOKEN_CHECK";
@@ -23,6 +27,12 @@ export const changeField = ({ form, key, value }: ChangeFieldParam) => {
 };
 
 export const login = createAsyncAction(LOGIN, LOGIN_SUCCESS, LOGIN_ERROR)<
+  any,
+  asyncCommonReturnType,
+  AxiosError
+>();
+
+export const join = createAsyncAction(JOIN, JOIN_SUCCESS, JOIN_ERROR)<
   any,
   asyncCommonReturnType,
   AxiosError

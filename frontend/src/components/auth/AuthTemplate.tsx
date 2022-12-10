@@ -15,8 +15,8 @@ import { useSelector } from "react-redux";
 import { AnyAction } from "redux";
 import { useDispatch } from "react-redux";
 import { changeField, login } from "../../modules/actions/auth";
-import invokeAPI from "../../lib/restAPI";
-import { loginThunk } from "../../modules/thunk/auth";
+import invokeAPI, { invokeFileUpload } from "../../lib/restAPI";
+import { joinThunk, loginThunk } from "../../modules/thunk/auth";
 import { RootState } from "../../modules/reducer";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -40,6 +40,26 @@ const WhiteBox = styled.div`
 
 interface AuthTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 type pageEnableType = "loginForm" | "joinForm";
+
+type joinMethodParams = {
+  email: string;
+  password: string;
+  name: string;
+  isAdmin: boolean;
+  adminPwd: string;
+  nickname: string;
+  profileImgIdx: number | null;
+};
+
+type uploadFileMethodParams = {
+  email: string;
+  password: string;
+  name: string;
+  isAdmin: boolean;
+  adminPwd: string;
+  nickname: string;
+  imageFile: File | Blob | null;
+};
 
 const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
@@ -79,8 +99,16 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (type == "joinForm") {
-      const { email, pwd, pwdCheck, name, isAdmin, adminPwd, nickname } =
-        joinForm;
+      const {
+        email,
+        pwd,
+        pwdCheck,
+        name,
+        isAdmin,
+        adminPwd,
+        nickname,
+        imageFile,
+      } = joinForm;
       if (email == "") {
         alert("이메일을 입력해주세요.");
         return;
@@ -101,24 +129,15 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
         alert("비밀번호가 일치하지 않습니다.");
         return;
       }
-      try {
-        const result = await invokeAPI({
-          method: "post",
-          path: "/api/users/join",
-        })({
-          data: {
-            email,
-            password: pwd,
-            name,
-            isAdmin,
-            adminPwd,
-            nickname,
-          },
-        });
-        navigate("/auth/login");
-      } catch (e: any) {
-        console.log("error: ", e.response);
-      }
+      __uploadImageFile({
+        email,
+        password: pwd,
+        adminPwd,
+        imageFile,
+        isAdmin,
+        name,
+        nickname,
+      });
     } else {
       const { email, pwd } = loginForm;
       if (email == "") {
@@ -129,19 +148,93 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
         alert("비밀번호를 입력해주세요.");
         return;
       }
-      try {
-        const result = await dispatch(
-          loginThunk({
-            data: {
-              email,
-              password: pwd,
-            },
-          })
-        );
-        navigate("/");
-      } catch (e: any) {
-        console.log("error: ", e.response);
-      }
+      _login(email, pwd);
+    }
+  };
+
+  const __uploadImageFile = async (props: uploadFileMethodParams) => {
+    const { imageFile, adminPwd, email, isAdmin, name, nickname, password } =
+      props;
+    if (!imageFile) {
+      _join({
+        adminPwd,
+        email,
+        isAdmin,
+        name,
+        nickname,
+        password,
+        profileImgIdx: null,
+      });
+      return;
+    }
+
+    let profileImgIdx: null | number = null;
+    try {
+      const result = await invokeFileUpload({
+        path: "/api/files/upload/join",
+        data: imageFile,
+        uploadType: "image/user",
+      });
+      profileImgIdx = result.data.data.id;
+    } catch (err) {
+      console.log("AuthTemplate __uploadImageFile error: ", err);
+    } finally {
+      _join({
+        adminPwd,
+        email,
+        isAdmin,
+        name,
+        nickname,
+        password,
+        profileImgIdx,
+      });
+    }
+  };
+
+  const _join = async (props: joinMethodParams) => {
+    const {
+      adminPwd,
+      email,
+      profileImgIdx,
+      isAdmin,
+      name,
+      nickname,
+      password,
+    } = props;
+    try {
+      const result = await dispatch(
+        joinThunk({
+          data: {
+            email,
+            password,
+            name,
+            isAdmin,
+            adminPwd,
+            nickname,
+            profileImgIdx,
+          },
+        })
+      );
+      setImgSrc(null);
+      navigate("/auth/login");
+    } catch (err) {
+      console.log("AuthTemplate _join error: ", err);
+    }
+  };
+
+  const _login = async (email: string, password: string) => {
+    try {
+      const result = await dispatch(
+        loginThunk({
+          data: {
+            email,
+            password,
+          },
+        })
+      );
+      navigate("/");
+    } catch (e: any) {
+      console.log("AuthTemplate _login error: ", e.response);
     }
   };
 
