@@ -39,12 +39,21 @@ const WritePost: FC<WritePostProps> = (props) => {
   const [title, setTitle] = useState<string>(
     location.pathname.indexOf("revise") != -1 ? blog?.title ?? "" : ""
   );
-  const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(
+  const [thumbnailUrl, setThumbnailUrl] = useState<string>(
     location.pathname.indexOf("revise") != -1
-      ? blog?.thumbnailUrl ?? null
-      : null
+      ? blog?.thumbnailUrl ??
+          "https://developblog.s3.ap-northeast-2.amazonaws.com/image/default/2022/1203/93eb6dd6-8a7a-41ad-93fd-616795fa4bae"
+      : "https://developblog.s3.ap-northeast-2.amazonaws.com/image/default/2022/1203/93eb6dd6-8a7a-41ad-93fd-616795fa4bae"
+  );
+  const [isthumbnailChange, setThumbnailChange] = useState(
+    location.pathname.indexOf("revise") != -1
+      ? blog?.thumbnailUrl
+        ? true
+        : false
+      : false
   );
   const [modal, setModal] = useState<boolean>(false);
+  const [isPublic, setPublic] = useState<boolean>(false);
   const ref = useRef<Editor>(null);
   const navigate = useNavigate();
 
@@ -53,6 +62,10 @@ const WritePost: FC<WritePostProps> = (props) => {
   }, []);
 
   const onClick = async () => {
+    if (title == "") {
+      alert("제목을 입력하세요.");
+      return;
+    }
     setModal(true);
     /* if (title == "") {
       alert("제목을 입력하세요.");
@@ -108,8 +121,9 @@ const WritePost: FC<WritePostProps> = (props) => {
                 path: "/api/files/upload",
                 uploadType: "content",
               });
-              if (!thumbnailUrl) {
+              if (!isthumbnailChange) {
                 setThumbnailUrl(result.data.data.publishedUrl);
+                setThumbnailChange(true);
               }
               dispatch(setAddedImageIds(result.data.data.id));
               callback(result.data.data.publishedUrl);
@@ -119,7 +133,14 @@ const WritePost: FC<WritePostProps> = (props) => {
           },
         }}
       />
-      <Modal visible={modal} setVisible={setModal} />
+      <Modal
+        visible={modal}
+        setVisible={setModal}
+        thumbnailUrl={thumbnailUrl}
+        setThumbnailUrl={setThumbnailUrl}
+        isPublic={isPublic}
+        setPublic={setPublic}
+      />
     </div>
   );
 };
