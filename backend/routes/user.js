@@ -4,6 +4,7 @@ const { isNotLoggedIn, verifyToken } = require("./middlewares");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const File = require("../models/file");
 
 const router = express.Router();
 
@@ -62,7 +63,8 @@ router.post("/login", async (req, res, next) => {
 });
 
 router.post("/join", isNotLoggedIn, async (req, res, next) => {
-  const { email, password, name, isAdmin, adminPwd, nickname } = req.body;
+  const { email, password, name, isAdmin, adminPwd, nickname, profileImgIdx } =
+    req.body;
   try {
     const exUser = await User.findOne({ where: { email } });
     if (exUser) {
@@ -81,6 +83,7 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
       password: hash,
       name,
       isAdmin: false,
+      profileImgIdx,
     };
     if (nickname != "") {
       query = {
@@ -101,7 +104,19 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
         isAdmin: true,
       };
     }
-    await User.create(query);
+    const result = await User.create(query);
+    if (profileImgIdx) {
+      await File.update(
+        {
+          userId: result.dataValues.id,
+        },
+        {
+          where: {
+            id: profileImgIdx,
+          },
+        }
+      );
+    }
     res.status(200).json({ result: true, error: false, data: null });
   } catch (error) {
     console.error(err);
