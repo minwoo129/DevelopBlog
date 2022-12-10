@@ -18,6 +18,7 @@ export const authInitialState: authInitialStateType = {
     isAdmin: false,
     adminPwd: "",
     nickname: "",
+    imageFile: null,
   },
   login: false,
   loginInfo: {

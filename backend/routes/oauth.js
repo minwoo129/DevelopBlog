@@ -47,7 +47,7 @@ router.post("/token", async (req, res, next) => {
         },
         process.env.JWT_SECRET,
         {
-          expiresIn: "24h",
+          expiresIn: "6h",
           issuer: process.env.JWT_SIGN,
         }
       );
@@ -75,7 +75,7 @@ router.post("/token/validate", verifyToken, async (req, res, next) => {
       },
       process.env.JWT_SECRET,
       {
-        expiresIn: "24h",
+        expiresIn: "6h",
         issuer: process.env.JWT_SIGN,
       }
     );

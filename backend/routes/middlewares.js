@@ -120,7 +120,7 @@ exports.AWSSingleFileUpload = (req, res, next) => {
         const year = date.getFullYear();
         const month = date.getMonth() + 1;
         const day = date.getDate();
-        let fileRoute = `image/${req.query.uploadType}/${year}/${
+        let fileRoute = `${req.query.uploadType}/${year}/${
           month < 10 ? `0${month}` : `${month}`
         }${day < 10 ? `0${day}` : `${day}`}/${v4()}`;
         cb(null, fileRoute);

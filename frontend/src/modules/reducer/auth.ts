@@ -5,6 +5,9 @@ import { authInitialState as initialState } from "../initialStates/initialState"
 import {
   CHANGE_FIELD,
   INITIALIZE_BY_TOKEN,
+  JOIN,
+  JOIN_ERROR,
+  JOIN_SUCCESS,
   LOGIN,
   LOGIN_ERROR,
   LOGIN_SUCCESS,
@@ -51,6 +54,30 @@ export default createReducer<initialStateType, authActionType>(initialState, {
     return newState;
   },
   [LOGIN_ERROR]: (state, action) => {
+    return state;
+  },
+
+  // JOIN ////////////////////////////////////////////////////
+  [JOIN]: (state, action) => {
+    return state;
+  },
+  [JOIN_SUCCESS]: (state, { payload: { param, result } }) => {
+    const newState: initialStateType = {
+      ...state,
+      joinForm: {
+        adminPwd: "",
+        email: "",
+        imageFile: null,
+        isAdmin: false,
+        name: "",
+        nickname: "",
+        pwd: "",
+        pwdCheck: "",
+      },
+    };
+    return newState;
+  },
+  [JOIN_ERROR]: (state, action) => {
     return state;
   },
 

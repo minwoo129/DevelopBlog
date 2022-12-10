@@ -12,6 +12,7 @@ export type authInitialStateType = {
     isAdmin: boolean;
     adminPwd: string;
     nickname: string;
+    imageFile: File | Blob | null;
   };
   login: boolean;
   loginInfo: {
@@ -52,6 +53,7 @@ export interface blogItemType {
   title: string;
   updatedAt: string;
   userId: number;
+  public: boolean;
   User: {
     createdAt: string;
     email: string;

@@ -63,6 +63,52 @@ router.post("/upload", verifyToken, AWSSingleFileUpload, async (req, res) => {
   }
 });
 
+router.post("/upload/join", AWSSingleFileUpload, async (req, res) => {
+  try {
+    const {
+      acl,
+      bucket,
+      location,
+      size,
+      originalname,
+      mimetype,
+      contentType,
+      encoding,
+      fieldname,
+      key,
+      storageClass,
+    } = req.file;
+    const { uploadType } = req.query;
+    const result = await File.create({
+      acl,
+      bucket,
+      publishedUrl: location,
+      size,
+      originalname,
+      mimeType: mimetype,
+      contentType,
+      encoding,
+      fieldname,
+      key,
+      storageClass,
+      uploadType,
+      userId: null,
+    });
+    res
+      .status(200)
+      .json({ result: true, data: { ...result.dataValues }, error: false });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      data: null,
+      message: err.message,
+      code: 500,
+    });
+  }
+});
+
 router.post(
   "/admin/upload",
   verifyToken,

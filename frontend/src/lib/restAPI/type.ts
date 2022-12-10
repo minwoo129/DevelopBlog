@@ -11,6 +11,6 @@ export type apiType2 = {
 
 export type fileUpload = {
   path: string;
-  data: Blob;
+  data: Blob | File;
   uploadType: string;
 };
