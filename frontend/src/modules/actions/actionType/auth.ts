@@ -1,7 +1,7 @@
 export type ChangeFieldParam = {
   form: "loginForm" | "joinForm";
   key: string;
-  value: string | boolean | File;
+  value: string | boolean | File | Blob;
 };
 
 export type InitializeByTokenParam = {
