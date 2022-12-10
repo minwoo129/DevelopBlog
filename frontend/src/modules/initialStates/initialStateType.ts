@@ -12,6 +12,7 @@ export type authInitialStateType = {
     isAdmin: boolean;
     adminPwd: string;
     nickname: string;
+    imageFile: File | null;
   };
   login: boolean;
   loginInfo: {
