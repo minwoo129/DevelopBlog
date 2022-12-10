@@ -122,7 +122,7 @@ const WritePost: FC<WritePostProps> = (props) => {
               const result = await invokeFileUpload({
                 data: blob,
                 path: "/api/files/upload",
-                uploadType: "content",
+                uploadType: "image/content",
               });
               if (!isthumbnailChange) {
                 setThumbnailUrl(result.data.data.publishedUrl);

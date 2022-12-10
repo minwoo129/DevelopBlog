@@ -90,7 +90,7 @@ const InputInfo: FC<InputInfoProps> = ({
       const result = await invokeFileUpload({
         path: "/api/files/upload",
         data: file,
-        uploadType: "content",
+        uploadType: "image/content",
       });
       console.log("InputInfo __uploadFile result: ", result);
       setThumbnailUrl(result.data.data.publishedUrl);
