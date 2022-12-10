@@ -61,6 +61,7 @@ const WritePost: FC<WritePostProps> = (props) => {
         setThumbnailUrl(blog.thumbnailUrl);
       }
       if (blog?.title) setTitle(blog.title);
+      if (blog?.public) setPublic(blog.public);
     }
   }, []);
 
@@ -79,7 +80,7 @@ const WritePost: FC<WritePostProps> = (props) => {
       thumbnailUrl,
       htmlContent: ref.current?.getInstance()?.getHTML(),
       imageIds: addedImageIds,
-      public: true,
+      public: isPublic,
     };
     if (location.pathname.indexOf("revise") != -1) {
       data = {
