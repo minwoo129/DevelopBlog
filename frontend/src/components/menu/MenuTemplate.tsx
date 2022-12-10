@@ -49,6 +49,10 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     dispatch(setMenuOpen(false));
     navigate("/");
   };
+  const onClickUser = (e: MouseEvent<HTMLDivElement>) => {
+    dispatch(setMenuOpen(false));
+    navigate("/myPage");
+  };
   const onClickLogin = (e: MouseEvent<HTMLDivElement>) => {
     dispatch(setMenuOpen(false));
     if (login) {
@@ -90,7 +94,10 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
             <h3>DEVBLOG</h3>
           </div>
           {login && (
-            <div className="loginInfo">{`${loginInfo.name}님, 반갑습니다.`}</div>
+            <div
+              className="loginInfo"
+              onClick={onClickUser}
+            >{`${loginInfo.name}님, 반갑습니다.`}</div>
           )}
           <div className="menuItem" onClick={onClickLogin}>
             <h3>{login ? "로그아웃" : "로그인"}</h3>
