@@ -4,6 +4,9 @@ import {
   GET_USER_INFO,
   GET_USER_INFO_ERROR,
   GET_USER_INFO_SUCCESS,
+  GET_USER_WRITE_BLOGS,
+  GET_USER_WRITE_BLOGS_ERROR,
+  GET_USER_WRITE_BLOGS_SUCCESS,
   SET_SEARCHBAR_VISIBLE,
   SET_SEARCH_TXT,
 } from "../actions/appInfo";
@@ -45,6 +48,17 @@ export default createReducer<initialStateType, appInfoActionType>(
       return newState;
     },
     [GET_USER_INFO_ERROR]: (state, action) => {
+      return state;
+    },
+    // GET_USER_WRITE_BLOGS ////////////////////////////////////////////////////
+    [GET_USER_WRITE_BLOGS]: (state, action) => {
+      return state;
+    },
+    [GET_USER_WRITE_BLOGS_SUCCESS]: (state, { payload: { param, result } }) => {
+      console.log("result(GET_USER_WRITE_BLOGS_SUCCESS): ", result);
+      return state;
+    },
+    [GET_USER_WRITE_BLOGS_ERROR]: (state, action) => {
       return state;
     },
   }

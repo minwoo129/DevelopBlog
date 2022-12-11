@@ -10,6 +10,10 @@ export const GET_USER_INFO = "appInfo/GET_USER_INFO";
 export const GET_USER_INFO_SUCCESS = "appInfo/GET_USER_INFO_SUCCESS";
 export const GET_USER_INFO_ERROR = "appInfo/GET_USER_INFO_ERROR";
 
+export const GET_USER_WRITE_BLOGS = "appInfo/GET_USER_WRITE_BLOGS";
+export const GET_USER_WRITE_BLOGS_SUCCESS =
+  "appInfo/GET_USER_WRITE_BLOGS_SUCCESS";
+export const GET_USER_WRITE_BLOGS_ERROR = "appInfo/GET_USER_WRITE_BLOGS_ERROR";
 // ********************************** Action *******************************************
 export const setSearchbarVisible = (value: boolean) => {
   return { type: SET_SEARCHBAR_VISIBLE, payload: value };
@@ -23,4 +27,10 @@ export const getUserInfo = createAsyncAction(
   GET_USER_INFO,
   GET_USER_INFO_SUCCESS,
   GET_USER_INFO_ERROR
+)<any, asyncCommonReturnType, AxiosError>();
+
+export const getUserWriteBlogs = createAsyncAction(
+  GET_USER_WRITE_BLOGS,
+  GET_USER_WRITE_BLOGS_SUCCESS,
+  GET_USER_WRITE_BLOGS_ERROR
 )<any, asyncCommonReturnType, AxiosError>();

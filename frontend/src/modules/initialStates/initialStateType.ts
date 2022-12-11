@@ -40,6 +40,7 @@ export type appInfoInitialStateType = {
   searchBarVisible: boolean;
   searchTxt: string;
   userInfo: userDetailInfoType | null;
+  userWriteBlogs: blogItemType[];
 };
 
 // =============================================================================
