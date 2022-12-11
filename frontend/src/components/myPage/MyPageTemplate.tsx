@@ -6,7 +6,6 @@ import Header from "./Header";
 const MyPageTemplateBlock = styled.div`
   display: flex;
   flex: 1;
-  border: 1px solid red;
   background: #e9ecef;
   flex-direction: column;
 `;

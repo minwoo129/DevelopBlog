@@ -6,7 +6,6 @@ const UserInfoBlock = styled.div`
   width: 100%;
   height: 400px;
   display: flex;
-  border: 1px solid green;
 `;
 
 const UserInfoGrid = styled.div`
@@ -15,7 +14,6 @@ const UserInfoGrid = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid red;
   @media (max-width: 906px) {
     margin: 50px auto 0 auto;
   }
@@ -27,7 +25,6 @@ const UserInfoGrid = styled.div`
 const UserDetailInfoGrid = styled.div`
   display: flex;
   flex: 1;
-  border: 1px solid blue;
   padding-left: 10px;
   width: 100%;
   height: 100%;

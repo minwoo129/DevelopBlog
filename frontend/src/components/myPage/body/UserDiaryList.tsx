@@ -3,9 +3,8 @@ import styled from "styled-components";
 
 const UserDiaryListBlock = styled.div`
   width: 100%;
-  min-height: 915px;
+  min-height: 920px;
   display: flex;
-  border: 1px solid blue;
   background: #fff;
 `;
 

@@ -6,7 +6,6 @@ import UserInfo from "./UserInfo";
 const BodyBlock = styled.div`
   display: block;
   flex: 1;
-  border: 1px solid orange;
   flex-direction: column;
   @media (min-width: 906px) {
     margin: 0 100px;
