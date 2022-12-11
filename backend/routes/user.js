@@ -153,9 +153,26 @@ router.get("/get", verifyToken, async (req, res, next) => {
     const user = await User.findOne({
       where: { id },
     });
-    res
-      .status(200)
-      .json({ error: false, result: true, data: { ...user.dataValues } });
+    const imageFile = await File.findOne({
+      where: {
+        id: user.dataValues.profileImgIdx,
+      },
+      attributes: ["id", "publishedUrl"],
+    });
+    let newUserData = { ...user.dataValues };
+    let newImageData = null;
+
+    delete newUserData["password"];
+    if (imageFile) {
+      newImageData = {
+        ...imageFile.dataValues,
+      };
+    }
+    const data = {
+      ...newUserData,
+      profileImg: newImageData,
+    };
+    res.status(200).json({ error: false, result: true, data });
   } catch (err) {
     console.error(err);
     res
