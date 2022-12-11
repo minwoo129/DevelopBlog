@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import UserDiaryItem from "./UserDiaryItem";
 
 const UserDiaryListBlock = styled.div`
   width: 100%;
@@ -11,7 +12,11 @@ const UserDiaryListBlock = styled.div`
 interface UserDiaryListProps extends HTMLAttributes<HTMLDivElement> {}
 
 const UserDiaryList: FC<UserDiaryListProps> = ({ ...props }) => {
-  return <UserDiaryListBlock></UserDiaryListBlock>;
+  return (
+    <UserDiaryListBlock {...props}>
+      <UserDiaryItem />
+    </UserDiaryListBlock>
+  );
 };
 
 export default UserDiaryList;
