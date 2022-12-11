@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import { userWriteBlogsType } from "../../../modules/initialStates/initialStateType";
 import UserDiaryList from "./UserDiaryList";
 import UserInfo from "./UserInfo";
 
@@ -10,19 +11,22 @@ const BodyBlock = styled.div`
   @media (min-width: 906px) {
     margin: 0 100px;
   }
-  overflow: scroll;
+  overflow-y: scroll;
+  border: 1px solid orange;
   &::-webkit-scrollbar {
     display: none;
   }
 `;
 
-interface BodyProps extends HTMLAttributes<HTMLDivElement> {}
+interface BodyProps extends HTMLAttributes<HTMLDivElement> {
+  userBlogs: userWriteBlogsType | null;
+}
 
-const Body: FC<BodyProps> = ({ ...props }) => {
+const Body: FC<BodyProps> = ({ userBlogs, ...props }) => {
   return (
     <BodyBlock {...props}>
       <UserInfo />
-      <UserDiaryList />
+      <UserDiaryList userBlogs={userBlogs} />
     </BodyBlock>
   );
 };

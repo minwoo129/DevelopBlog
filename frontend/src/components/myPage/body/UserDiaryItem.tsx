@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import { blogItemType } from "../../../modules/initialStates/initialStateType";
 
 const UserDiaryItemBlock = styled.div`
   margin: 20px 10px;
@@ -10,7 +11,9 @@ const UserDiaryItemBlock = styled.div`
   height: 300px;
 `;
 
-interface UserDiaryItemProps extends HTMLAttributes<HTMLDivElement> {}
+interface UserDiaryItemProps extends HTMLAttributes<HTMLDivElement> {
+  item: blogItemType;
+}
 
 const UserDiaryItem: FC<UserDiaryItemProps> = ({ ...props }) => {
   return <UserDiaryItemBlock {...props}></UserDiaryItemBlock>;

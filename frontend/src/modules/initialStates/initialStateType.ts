@@ -86,7 +86,7 @@ interface userProfileImgType {
   publishedUrl: string;
 }
 
-interface userWriteBlogsType {
+export interface userWriteBlogsType {
   contents: blogItemType[];
   totalElements: number;
   totalPages: number;
