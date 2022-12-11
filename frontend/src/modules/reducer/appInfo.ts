@@ -1,6 +1,12 @@
 import { createReducer } from "typesafe-actions";
 import { appInfoActionType } from "../actions";
-import { SET_SEARCHBAR_VISIBLE, SET_SEARCH_TXT } from "../actions/appInfo";
+import {
+  GET_USER_INFO,
+  GET_USER_INFO_ERROR,
+  GET_USER_INFO_SUCCESS,
+  SET_SEARCHBAR_VISIBLE,
+  SET_SEARCH_TXT,
+} from "../actions/appInfo";
 import { appInfoInitialState as initialState } from "../initialStates/initialState";
 import { appInfoInitialStateType as initialStateType } from "../initialStates/initialStateType";
 
@@ -26,6 +32,17 @@ export default createReducer<initialStateType, appInfoActionType>(
         searchTxt,
       };
       return newState;
+    },
+    // GET_USER_INFO ////////////////////////////////////////////////////
+    [GET_USER_INFO]: (state, action) => {
+      return state;
+    },
+    [GET_USER_INFO_SUCCESS]: (state, { payload: { param, result } }) => {
+      console.log("result(GET_USER_INFO_SUCCESS): ", result);
+      return state;
+    },
+    [GET_USER_INFO_ERROR]: (state, action) => {
+      return state;
     },
   }
 );

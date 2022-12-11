@@ -44,4 +44,5 @@ export const blogInitialState: blogInitialStateType = {
 export const appInfoInitialState: appInfoInitialStateType = {
   searchBarVisible: false,
   searchTxt: "",
+  userInfo: null,
 };

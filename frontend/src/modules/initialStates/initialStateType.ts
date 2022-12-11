@@ -39,6 +39,7 @@ export type blogInitialStateType = {
 export type appInfoInitialStateType = {
   searchBarVisible: boolean;
   searchTxt: string;
+  userInfo: userDetailInfoType | null;
 };
 
 // =============================================================================
@@ -72,4 +73,16 @@ export interface blogDetailType extends blogItemType {
     reviseContent: boolean;
     deleteContent: boolean;
   };
+}
+
+interface userDetailInfoType {
+  createdAt: string;
+  email: string;
+  id: number;
+  isAdmin: boolean;
+  name: string;
+  updatedAt: string;
+  nickname: string;
+  profileImgIdx: number | null;
+  profileImg: any;
 }
