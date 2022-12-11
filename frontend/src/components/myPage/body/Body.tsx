@@ -12,7 +12,6 @@ const BodyBlock = styled.div`
     margin: 0 100px;
   }
   overflow-y: scroll;
-  border: 1px solid orange;
   &::-webkit-scrollbar {
     display: none;
   }
