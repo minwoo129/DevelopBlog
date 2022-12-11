@@ -45,5 +45,5 @@ export const appInfoInitialState: appInfoInitialStateType = {
   searchBarVisible: false,
   searchTxt: "",
   userInfo: null,
-  userWriteBlogs: [],
+  userWriteBlogs: null,
 };

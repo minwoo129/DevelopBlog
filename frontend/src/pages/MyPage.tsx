@@ -25,7 +25,6 @@ const MyPage = ({}) => {
   const _getUserInfo = async () => {
     try {
       const result = await dispatch(getUserInfoThunk({}));
-      console.log("MyPage _getUserInfo result: ", result);
     } catch (err) {
       console.log("MyPage _getUserInfo error: ", err);
     }
@@ -41,7 +40,6 @@ const MyPage = ({}) => {
           },
         })
       );
-      console.log("MyPage _getUserWriteBlogs result: ", result);
     } catch (err) {
       console.log("MyPage _getUserWriteBlogs error: ", err);
     }

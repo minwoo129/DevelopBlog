@@ -40,7 +40,7 @@ export type appInfoInitialStateType = {
   searchBarVisible: boolean;
   searchTxt: string;
   userInfo: userDetailInfoType | null;
-  userWriteBlogs: blogItemType[];
+  userWriteBlogs: userWriteBlogsType | null;
 };
 
 // =============================================================================
@@ -84,4 +84,10 @@ interface userDetailInfoType {
 interface userProfileImgType {
   id: number;
   publishedUrl: string;
+}
+
+interface userWriteBlogsType {
+  contents: blogItemType[];
+  totalElements: number;
+  totalPages: number;
 }
