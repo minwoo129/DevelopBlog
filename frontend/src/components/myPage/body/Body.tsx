@@ -19,12 +19,14 @@ const BodyBlock = styled.div`
 
 interface BodyProps extends HTMLAttributes<HTMLDivElement> {
   userBlogs: userWriteBlogsType | null;
+  isRevise: boolean;
+  setRevise(value: boolean): void;
 }
 
-const Body: FC<BodyProps> = ({ userBlogs, ...props }) => {
+const Body: FC<BodyProps> = ({ userBlogs, isRevise, setRevise, ...props }) => {
   return (
     <BodyBlock {...props}>
-      <UserInfo />
+      <UserInfo isRevise={isRevise} setRevise={setRevise} />
       <UserDiaryList userBlogs={userBlogs} />
     </BodyBlock>
   );

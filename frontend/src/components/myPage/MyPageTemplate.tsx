@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../modules/reducer";
@@ -18,10 +18,12 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
   const userBlogs = useSelector(
     (state: RootState) => state.appInfo.userWriteBlogs
   );
+
+  const [isRevise, setRevise] = useState(false);
   return (
     <MyPageTemplateBlock {...props}>
       <Header />
-      <Body userBlogs={userBlogs} />
+      <Body userBlogs={userBlogs} isRevise={isRevise} setRevise={setRevise} />
     </MyPageTemplateBlock>
   );
 };

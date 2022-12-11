@@ -6,6 +6,8 @@ const UserInfoBlock = styled.div`
   width: 100%;
   height: 400px;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const UserInfoGrid = styled.div`
@@ -15,7 +17,8 @@ const UserInfoGrid = styled.div`
   justify-content: space-between;
   align-items: center;
   @media (max-width: 906px) {
-    margin: 50px auto 0 auto;
+    margin-top: 50px;
+    margin-left: 50px;
   }
   @media (min-width: 906px) {
     margin-left: 50px;
@@ -34,9 +37,26 @@ const NickName = styled.h2`
   color: #151515;
 `;
 
-interface UserInfoProps extends HTMLAttributes<HTMLDivElement> {}
+const ReviseBtn = styled.button`
+  width: 100px;
+  height: 50px;
+  border-radius: 6px;
+  background: #01df3a;
+  margin-left: 50px;
+  margin-bottom: 25px;
+  border: 1px solid #e9ecef;
+  color: #fff;
+  &:hover {
+    background: #2efe64;
+  }
+`;
 
-const UserInfo: FC<UserInfoProps> = ({ ...props }) => {
+interface UserInfoProps extends HTMLAttributes<HTMLDivElement> {
+  isRevise: boolean;
+  setRevise(value: boolean): void;
+}
+
+const UserInfo: FC<UserInfoProps> = ({ isRevise, setRevise, ...props }) => {
   return (
     <UserInfoBlock {...props}>
       <UserInfoGrid>
@@ -48,6 +68,7 @@ const UserInfo: FC<UserInfoProps> = ({ ...props }) => {
           <NickName>test</NickName>
         </UserDetailInfoGrid>
       </UserInfoGrid>
+      <ReviseBtn>수정하기</ReviseBtn>
     </UserInfoBlock>
   );
 };
