@@ -38,8 +38,11 @@ export default createReducer<initialStateType, appInfoActionType>(
       return state;
     },
     [GET_USER_INFO_SUCCESS]: (state, { payload: { param, result } }) => {
-      console.log("result(GET_USER_INFO_SUCCESS): ", result);
-      return state;
+      const newState: initialStateType = {
+        ...state,
+        userInfo: result.data,
+      };
+      return newState;
     },
     [GET_USER_INFO_ERROR]: (state, action) => {
       return state;
