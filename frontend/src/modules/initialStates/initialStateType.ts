@@ -56,13 +56,6 @@ export interface blogItemType {
   userId: number;
   public: boolean;
   User: {
-    createdAt: string;
-    email: string;
-    id: number;
-    isAdmin: boolean;
-    name: string;
-    password: string;
-    updatedAt: string;
     nickname: string;
   };
 }
@@ -84,5 +77,10 @@ interface userDetailInfoType {
   updatedAt: string;
   nickname: string;
   profileImgIdx: number | null;
-  profileImg: any;
+  profileImg: userProfileImgType | null;
+}
+
+interface userProfileImgType {
+  id: number;
+  publishedUrl: string;
 }

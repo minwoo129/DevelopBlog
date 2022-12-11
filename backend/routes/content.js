@@ -97,7 +97,10 @@ router.get("/get/list", verifyTokenWithoutErr, async (req, res, next) => {
     }
 
     const contents = await Content.findAll({
-      include: { model: User },
+      include: {
+        model: User,
+        attributes: ["nickname"],
+      },
       where,
       order: [["createdAt", "DESC"]],
     });
@@ -119,7 +122,10 @@ router.get("/get/:id", verifyTokenWithoutErr, async (req, res, next) => {
   try {
     const blog = await Content.findOne({
       where: { id },
-      include: { model: User },
+      include: {
+        model: User,
+        attributes: ["nickname"],
+      },
     });
     let data = {
       ...blog.dataValues,
