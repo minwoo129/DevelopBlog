@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { userWriteBlogsType } from "../../../modules/initialStates/initialStateType";
-import UserDiaryItem from "./UserDiaryItem";
+import UserDiaryItem from "./listItem/UserDiaryItem";
 
 const UserDiaryListBlock = styled.div`
   width: 100%;

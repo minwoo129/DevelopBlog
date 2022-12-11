@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { blogItemType } from "../../../modules/initialStates/initialStateType";
+import { blogItemType } from "../../../../modules/initialStates/initialStateType";
 
 const UserDiaryItemBlock = styled.div`
   margin: 20px 10px;
