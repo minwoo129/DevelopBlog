@@ -13,9 +13,9 @@ const MyPageTemplateBlock = styled.div`
 
 interface MyPageTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 
-const MyPageTemplate: FC<MyPageTemplateProps> = (props) => {
+const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
   return (
-    <MyPageTemplateBlock>
+    <MyPageTemplateBlock {...props}>
       <Header />
       <Body />
     </MyPageTemplateBlock>

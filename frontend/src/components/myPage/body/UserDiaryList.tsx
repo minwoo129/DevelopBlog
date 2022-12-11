@@ -11,7 +11,7 @@ const UserDiaryListBlock = styled.div`
 
 interface UserDiaryListProps extends HTMLAttributes<HTMLDivElement> {}
 
-const UserDiaryList: FC<UserDiaryListProps> = (props) => {
+const UserDiaryList: FC<UserDiaryListProps> = ({ ...props }) => {
   return <UserDiaryListBlock></UserDiaryListBlock>;
 };
 

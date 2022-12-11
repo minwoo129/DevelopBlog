@@ -19,9 +19,9 @@ const BodyBlock = styled.div`
 
 interface BodyProps extends HTMLAttributes<HTMLDivElement> {}
 
-const Body: FC<BodyProps> = (props) => {
+const Body: FC<BodyProps> = ({ ...props }) => {
   return (
-    <BodyBlock>
+    <BodyBlock {...props}>
       <UserInfo />
       <UserDiaryList />
     </BodyBlock>

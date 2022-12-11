@@ -22,7 +22,7 @@ const HeaderBlock = styled.div`
 
 interface HeaderProps extends HTMLAttributes<HTMLDivElement> {}
 
-const Header: FC<HeaderProps> = (props) => {
+const Header: FC<HeaderProps> = ({ ...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isMenuVisible = useSelector(
@@ -37,7 +37,7 @@ const Header: FC<HeaderProps> = (props) => {
   };
 
   return (
-    <HeaderBlock>
+    <HeaderBlock {...props}>
       <div style={{ marginLeft: "2rem" }}>
         {!isMenuVisible && (
           <IconButton
