@@ -47,4 +47,6 @@ export const appInfoInitialState: appInfoInitialStateType = {
   userInfo: null,
   userWriteBlogs: null,
   isReviseUserInfo: false,
+  userImgTempData: null,
+  backgroundImgTempData: null,
 };
