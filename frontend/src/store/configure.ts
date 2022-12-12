@@ -4,7 +4,7 @@ import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { isActiveInServer } from "../config";
 const configure = () => {
-  if (isActiveInServer) {
+  if (!isActiveInServer) {
     return createStore(rootReducer, applyMiddleware(thunk));
   }
   return createStore(rootReducer, applyMiddleware(logger, thunk));
