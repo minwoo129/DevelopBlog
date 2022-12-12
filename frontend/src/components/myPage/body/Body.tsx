@@ -1,6 +1,9 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { userWriteBlogsType } from "../../../modules/initialStates/initialStateType";
+import {
+  userDetailInfoType,
+  userWriteBlogsType,
+} from "../../../modules/initialStates/initialStateType";
 import UserDiaryList from "./UserDiaryList";
 import UserInfo from "./UserInfo";
 
@@ -21,12 +24,19 @@ interface BodyProps extends HTMLAttributes<HTMLDivElement> {
   userBlogs: userWriteBlogsType | null;
   isRevise: boolean;
   setRevise(value: boolean): void;
+  userInfo: userDetailInfoType | null;
 }
 
-const Body: FC<BodyProps> = ({ userBlogs, isRevise, setRevise, ...props }) => {
+const Body: FC<BodyProps> = ({
+  userBlogs,
+  isRevise,
+  setRevise,
+  userInfo,
+  ...props
+}) => {
   return (
     <BodyBlock {...props}>
-      <UserInfo isRevise={isRevise} setRevise={setRevise} />
+      <UserInfo isRevise={isRevise} setRevise={setRevise} userInfo={userInfo} />
       <UserDiaryList userBlogs={userBlogs} />
     </BodyBlock>
   );

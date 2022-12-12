@@ -18,12 +18,18 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
   const userBlogs = useSelector(
     (state: RootState) => state.appInfo.userWriteBlogs
   );
+  const userInfo = useSelector((state: RootState) => state.appInfo.userInfo);
 
   const [isRevise, setRevise] = useState(false);
   return (
     <MyPageTemplateBlock {...props}>
       <Header />
-      <Body userBlogs={userBlogs} isRevise={isRevise} setRevise={setRevise} />
+      <Body
+        userBlogs={userBlogs}
+        isRevise={isRevise}
+        setRevise={setRevise}
+        userInfo={userInfo}
+      />
     </MyPageTemplateBlock>
   );
 };
