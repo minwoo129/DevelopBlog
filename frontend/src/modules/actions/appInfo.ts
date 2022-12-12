@@ -19,6 +19,8 @@ export const GET_USER_WRITE_BLOGS_ERROR = "appInfo/GET_USER_WRITE_BLOGS_ERROR";
 export const SET_APP_STATE = "appInfo/SET_APP_STATE";
 
 export const CLEAR_REVISE_DATA = "appInfo/CLEAR_REVISE_DATA";
+
+export const CLEAR_DATA_WHEN_LOGOUT = "appInfo/CLEAR_DATA_WHEN_LOGOUT";
 // ********************************** Action *******************************************
 export const setSearchbarVisible = (value: boolean) => {
   return { type: SET_SEARCHBAR_VISIBLE, payload: value };
@@ -46,4 +48,8 @@ export const setAppState = (value: setAppStateParams) => {
 
 export const clearReviseData = () => {
   return { type: CLEAR_REVISE_DATA, payload: null };
+};
+
+export const clearDataWhenLogout = () => {
+  return { type: CLEAR_DATA_WHEN_LOGOUT, payload: null };
 };

@@ -1,6 +1,7 @@
 import { createReducer } from "typesafe-actions";
 import { appInfoActionType } from "../actions";
 import {
+  CLEAR_DATA_WHEN_LOGOUT,
   CLEAR_REVISE_DATA,
   GET_USER_INFO,
   GET_USER_INFO_ERROR,
@@ -116,6 +117,13 @@ export default createReducer<initialStateType, appInfoActionType>(
         };
       }
       return newState;
+    },
+
+    // CLEAR_DATA_WHEN_LOGOUT ////////////////////////////////////////////////////
+    [CLEAR_DATA_WHEN_LOGOUT]: (state, { payload: result }) => {
+      return {
+        ...initialState,
+      };
     },
   }
 );

@@ -15,7 +15,11 @@ import { Drawer } from "@mui/material";
 import { tokenCheckThunk } from "../../modules/thunk/auth";
 import { getCookies } from "../../lib/restAPI";
 import { batch } from "react-redux";
-import { clearReviseData, setAppState } from "../../modules/actions/appInfo";
+import {
+  clearDataWhenLogout,
+  clearReviseData,
+  setAppState,
+} from "../../modules/actions/appInfo";
 
 interface MenuTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const MenuTemplate: FC<MenuTemplateProps> = (props) => {
@@ -98,6 +102,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     dispatch(setMenuOpen(false));
     if (login) {
       dispatch(logout());
+      dispatch(clearDataWhenLogout());
       navigate("/");
     } else navigate("/auth/login");
   };
