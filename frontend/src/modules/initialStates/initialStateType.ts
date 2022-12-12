@@ -46,6 +46,7 @@ export type appInfoInitialStateType = {
   backgroundImgTempData: File | Blob | null;
   userImgSrc: any;
   backgroundImgSrc: any;
+  tempNickname: string;
 };
 
 // =============================================================================

@@ -51,4 +51,5 @@ export const appInfoInitialState: appInfoInitialStateType = {
   backgroundImgTempData: null,
   userImgSrc: null,
   backgroundImgSrc: null,
+  tempNickname: "",
 };
