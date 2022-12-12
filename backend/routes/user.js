@@ -153,24 +153,29 @@ router.get("/get", verifyToken, async (req, res, next) => {
     const user = await User.findOne({
       where: { id },
     });
-    const imageFile = await File.findOne({
+    const { profileImgIdx, backgroundImgIdx } = user.dataValues;
+    const imageFiles = await File.findAll({
       where: {
-        id: user.dataValues.profileImgIdx,
+        id: [profileImgIdx, backgroundImgIdx],
       },
       attributes: ["id", "publishedUrl"],
     });
     let newUserData = { ...user.dataValues };
-    let newImageData = null;
+    let profileImg = null,
+      backgroundImg = null;
 
     delete newUserData["password"];
-    if (imageFile) {
-      newImageData = {
-        ...imageFile.dataValues,
-      };
+
+    if (profileImgIdx) {
+      profileImg = imageFiles.find((item) => item.id == profileImgIdx);
+    }
+    if (backgroundImgIdx) {
+      backgroundImg = imageFiles.find((item) => item.id == backgroundImgIdx);
     }
     const data = {
       ...newUserData,
-      profileImg: newImageData,
+      profileImg,
+      backgroundImg,
     };
     res.status(200).json({ error: false, result: true, data });
   } catch (err) {
@@ -178,6 +183,33 @@ router.get("/get", verifyToken, async (req, res, next) => {
     res
       .status(500)
       .json({ error: true, code: 500, data: err.message, result: false });
+  }
+});
+
+router.put("/update", verifyToken, async (req, res, next) => {
+  const { profileImgIdx, backgroundImgIdx, nickname } = req.body;
+  const { id } = req.decoded;
+  try {
+    const result = await User.update(
+      {
+        profileImgIdx,
+        backgroundImgIdx,
+        nickname,
+      },
+      {
+        where: { id },
+      }
+    );
+    res.status(200).json({ error: false, result: true, data: true });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: true,
+      code: 500,
+      data: null,
+      message: err.message,
+      result: false,
+    });
   }
 });
 
