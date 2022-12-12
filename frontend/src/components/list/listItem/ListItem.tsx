@@ -19,6 +19,7 @@ const ListItemBlock = styled.div`
   display: block;
   box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.7);
   border: 1px solid grey;
+  background: #e9ecef;
   &:hover {
     background: #d8d8d8;
   }

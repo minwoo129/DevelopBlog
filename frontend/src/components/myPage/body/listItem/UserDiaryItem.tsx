@@ -15,7 +15,10 @@ const UserDiaryItemBlock = styled.div`
   border: 1px solid #848484;
   display: flex;
   width: 100%;
-
+  background: #e9ecef;
+  &:hover {
+    background: #d8d8d8;
+  }
   padding: 0 25px;
   @media (max-width: 1180px) {
     flex-direction: column;

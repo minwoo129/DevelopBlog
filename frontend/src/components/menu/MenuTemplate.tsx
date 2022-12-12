@@ -117,8 +117,16 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
 
   const _updateToken = async () => {
     try {
-      await dispatch(tokenCheckThunk({}));
+      const result = await dispatch(tokenCheckThunk({}));
       navigate("/write");
+      if (result.data?.backgroundImg) {
+        dispatch(
+          setAppState({
+            key: "backgroundImgSrc",
+            value: result.data?.backgroundImg.publishedUrl,
+          })
+        );
+      }
     } catch (err) {
       console.log("MainPage _tokenCheck error: ", err);
       const isMoveToLogin = window.confirm(
@@ -129,7 +137,15 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   };
   const _tokenCheck = async () => {
     try {
-      await dispatch(tokenCheckThunk({}));
+      const result = await dispatch(tokenCheckThunk({}));
+      if (result.data?.backgroundImg) {
+        dispatch(
+          setAppState({
+            key: "backgroundImgSrc",
+            value: result.data?.backgroundImg.publishedUrl,
+          })
+        );
+      }
     } catch (e) {
       console.log("MainPage _tokenCheck error: ", e);
     }
@@ -194,6 +210,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
                   color: "orange",
                   fontWeight: "bold",
                 }}
+                onClick={onClickUser}
               >{`${loginInfo.name}님\n반갑습니다.`}</div>
             )}
             <div
