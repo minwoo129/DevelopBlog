@@ -11,6 +11,7 @@ const SearchItemBlock = styled.div`
   border-radius: 6px;
   margin-top: 20px;
   border: 1px solid #848484;
+  background: #e9ecef;
   @media (max-width: 768px) {
     width: 500px;
     height: 700px;

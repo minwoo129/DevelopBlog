@@ -4,6 +4,7 @@ import "./App.css";
 import AuthPage from "./pages/AuthPage";
 import DetailPage from "./pages/DetailPage";
 import MainPage from "./pages/MainPage";
+import MyPage from "./pages/MyPage";
 import SearchPage from "./pages/SearchPage";
 import WritePost from "./pages/WritePost";
 
@@ -16,6 +17,7 @@ const App = () => {
       <Route element={<SearchPage />} path={"/search*"} />
       <Route element={<WritePost />} path={"/write/*"} />
       <Route element={<DetailPage />} path={"/detail/*"} />
+      <Route element={<MyPage />} path={"/myPage/*"} />
     </Routes>
   );
 };

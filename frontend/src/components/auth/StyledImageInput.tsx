@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import styled from "styled-components";
 import { IoMdAdd } from "react-icons/io";
-import DefaultUserImage from "../../common/DefaultUserImage";
+import { DefaultUserImage } from "../../common/UserImage";
 
 const StyledImageInputBlock = styled.div`
   width: 100%;
@@ -59,7 +59,6 @@ const StyledImageInput: FC<StyledImageInputProps> = ({
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const encodeFileToBase64 = async (fileBlob: Blob) => {
-    console.log("file: ", fileBlob);
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
 
@@ -73,7 +72,6 @@ const StyledImageInput: FC<StyledImageInputProps> = ({
   };
 
   const addImage = (e: MouseEvent<HTMLButtonElement>) => {
-    console.log("test");
     e.preventDefault();
     if (!inputRef.current) {
       return;

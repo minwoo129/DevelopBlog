@@ -21,6 +21,7 @@ import { RootState } from "../../modules/reducer";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { setMenuOpen } from "../../modules/actions/menu";
+import { setAppState } from "../../modules/actions/appInfo";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -232,6 +233,14 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
           },
         })
       );
+      if (result.data?.backgroundImg) {
+        await dispatch(
+          setAppState({
+            key: "backgroundImgSrc",
+            value: result.data.backgroundImg.publishedUrl,
+          })
+        );
+      }
       navigate("/");
     } catch (e: any) {
       console.log("AuthTemplate _login error: ", e.response);

@@ -39,6 +39,16 @@ export type blogInitialStateType = {
 export type appInfoInitialStateType = {
   searchBarVisible: boolean;
   searchTxt: string;
+  userInfo: userDetailInfoType | null;
+  userWriteBlogs: userWriteBlogsType | null;
+  isReviseUserInfo: boolean;
+  userImgTempData: File | Blob | null;
+  backgroundImgTempData: File | Blob | null;
+  userImgSrc: any;
+  backgroundImgSrc: any;
+  isUserImgChanged: boolean;
+  isBackgroundImgChanged: boolean;
+  tempNickname: string;
 };
 
 // =============================================================================
@@ -55,13 +65,6 @@ export interface blogItemType {
   userId: number;
   public: boolean;
   User: {
-    createdAt: string;
-    email: string;
-    id: number;
-    isAdmin: boolean;
-    name: string;
-    password: string;
-    updatedAt: string;
     nickname: string;
   };
 }
@@ -72,4 +75,28 @@ export interface blogDetailType extends blogItemType {
     reviseContent: boolean;
     deleteContent: boolean;
   };
+}
+
+export interface userDetailInfoType {
+  createdAt: string;
+  email: string;
+  id: number;
+  isAdmin: boolean;
+  name: string;
+  updatedAt: string;
+  nickname: string;
+  profileImgIdx: number | null;
+  profileImg: userProfileImgType | null;
+  backgroundImg: userProfileImgType | null;
+}
+
+interface userProfileImgType {
+  id: number;
+  publishedUrl: string;
+}
+
+export interface userWriteBlogsType {
+  contents: blogItemType[];
+  totalElements: number;
+  totalPages: number;
 }

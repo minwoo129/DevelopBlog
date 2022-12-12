@@ -2,6 +2,7 @@ const express = require("express");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const File = require("../models/file");
 const { verifyToken } = require("./middlewares");
 
 const router = express.Router();
@@ -55,7 +56,7 @@ router.post("/token", async (req, res, next) => {
       res.status(200).json({
         result: true,
         error: false,
-        data: { ...user.dataValues, token },
+        data: { ...user, token },
       });
     });
   })(req, res, next);
@@ -66,7 +67,30 @@ router.post("/token/validate", verifyToken, async (req, res, next) => {
   try {
     const user = await User.findOne({
       where: { id },
+      attributes: [
+        "id",
+        "name",
+        "email",
+        "nickname",
+        "profileImgIdx",
+        "backgroundImgIdx",
+      ],
     });
+    const { profileImgIdx, backgroundImgIdx } = user.dataValues;
+    const userFiles = await File.findAll({
+      where: {
+        id: [profileImgIdx, backgroundImgIdx],
+      },
+      attributes: ["id", "publishedUrl"],
+    });
+    let profileImg = null,
+      backgroundImg = null;
+    if (profileImgIdx) {
+      profileImg = userFiles.find((item) => item.id == profileImgIdx);
+    }
+    if (backgroundImgIdx) {
+      backgroundImg = userFiles.find((item) => item.id == backgroundImgIdx);
+    }
     const token = jwt.sign(
       {
         id: user.dataValues.id,
@@ -82,7 +106,12 @@ router.post("/token/validate", verifyToken, async (req, res, next) => {
     res.status(200).json({
       result: true,
       error: false,
-      data: { ...user.dataValues, token },
+      data: {
+        ...user.dataValues,
+        profileImg,
+        backgroundImg,
+        token,
+      },
     });
   } catch (err) {
     console.error(err);

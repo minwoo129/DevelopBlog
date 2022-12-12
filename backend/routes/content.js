@@ -97,11 +97,58 @@ router.get("/get/list", verifyTokenWithoutErr, async (req, res, next) => {
     }
 
     const contents = await Content.findAll({
-      include: { model: User },
+      include: {
+        model: User,
+        attributes: ["nickname"],
+      },
       where,
       order: [["createdAt", "DESC"]],
     });
     res.status(200).json({ error: false, result: true, data: contents });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      code: 500,
+      message: err.message,
+      data: null,
+    });
+  }
+});
+
+router.get("/get/list/userWrite", verifyToken, async (req, res, next) => {
+  const { page, size } = req.query;
+  const { id } = req.decoded;
+  let offset = 0,
+    limit = 0;
+  limit = Number(size);
+  if (page > 0) {
+    offset = limit * (page - 1);
+  } else offset = 0;
+
+  try {
+    const result = await Content.findAndCountAll({
+      where: {
+        userId: id,
+      },
+      include: {
+        model: User,
+        attributes: ["nickname"],
+      },
+      order: [["createdAt", "DESC"]],
+      offset,
+      limit,
+    });
+    res.status(200).json({
+      error: false,
+      result: true,
+      data: {
+        contents: result.rows,
+        totalPages: Math.ceil(result.count / limit),
+        totalElements: result.count,
+      },
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({
@@ -119,7 +166,10 @@ router.get("/get/:id", verifyTokenWithoutErr, async (req, res, next) => {
   try {
     const blog = await Content.findOne({
       where: { id },
-      include: { model: User },
+      include: {
+        model: User,
+        attributes: ["nickname"],
+      },
     });
     let data = {
       ...blog.dataValues,

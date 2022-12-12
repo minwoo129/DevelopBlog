@@ -32,6 +32,9 @@
       align-items: center;
       color: orange;
       font-weight: bold;
+      &:hover {
+        background-color: #585858;
+      }
     }
     .menuItem {
       width: 100%;

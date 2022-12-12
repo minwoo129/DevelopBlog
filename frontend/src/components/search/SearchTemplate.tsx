@@ -25,6 +25,9 @@ const SearchTemplate: FC<SearchTemplateProps> = (props) => {
   const isExecuteSearch = useSelector(
     (state: RootState) => state.blog.isExecuteSearch
   );
+  const backgroundImgSrc = useSelector(
+    (state: RootState) => state.appInfo.backgroundImgSrc
+  );
 
   const onPressSearch = async () => {
     if (searchTxt == "") {
@@ -39,14 +42,17 @@ const SearchTemplate: FC<SearchTemplateProps> = (props) => {
           },
         })
       );
-      console.log("SearchTemplate onPressSearch result: ", result);
     } catch (err) {
       console.log("SearchTemplate onPressSearch error: ", err);
     }
   };
 
   return (
-    <SearchTemplateBlock>
+    <SearchTemplateBlock
+      style={{
+        backgroundImage: `url(${backgroundImgSrc})`,
+      }}
+    >
       <SearchBar
         searchTxt={searchTxt}
         onChangeValue={(e) => dispatch(setSearchTxt(e.target.value))}
