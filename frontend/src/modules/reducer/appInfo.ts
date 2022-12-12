@@ -1,6 +1,7 @@
 import { createReducer } from "typesafe-actions";
 import { appInfoActionType } from "../actions";
 import {
+  CLEAR_REVISE_DATA,
   GET_USER_INFO,
   GET_USER_INFO_ERROR,
   GET_USER_INFO_SUCCESS,
@@ -75,6 +76,20 @@ export default createReducer<initialStateType, appInfoActionType>(
       const newState: initialStateType = {
         ...state,
         [key]: value,
+      };
+      return newState;
+    },
+
+    // CLEAR_REVISE_DATA ////////////////////////////////////////////////////
+    [CLEAR_REVISE_DATA]: (state, { payload: result }) => {
+      const newState: initialStateType = {
+        ...state,
+        userImgTempData: null,
+        backgroundImgTempData: null,
+        isReviseUserInfo: false,
+        userImgSrc: null,
+        backgroundImgSrc: null,
+        tempNickname: "",
       };
       return newState;
     },

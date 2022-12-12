@@ -17,6 +17,8 @@ export const GET_USER_WRITE_BLOGS_SUCCESS =
 export const GET_USER_WRITE_BLOGS_ERROR = "appInfo/GET_USER_WRITE_BLOGS_ERROR";
 
 export const SET_APP_STATE = "appInfo/SET_APP_STATE";
+
+export const CLEAR_REVISE_DATA = "appInfo/CLEAR_REVISE_DATA";
 // ********************************** Action *******************************************
 export const setSearchbarVisible = (value: boolean) => {
   return { type: SET_SEARCHBAR_VISIBLE, payload: value };
@@ -40,4 +42,8 @@ export const getUserWriteBlogs = createAsyncAction(
 
 export const setAppState = (value: setAppStateParams) => {
   return { type: SET_APP_STATE, payload: value };
+};
+
+export const clearReviseData = () => {
+  return { type: CLEAR_REVISE_DATA, payload: null };
 };
