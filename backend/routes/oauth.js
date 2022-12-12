@@ -56,7 +56,7 @@ router.post("/token", async (req, res, next) => {
       res.status(200).json({
         result: true,
         error: false,
-        data: { ...user.dataValues, token },
+        data: { ...user, token },
       });
     });
   })(req, res, next);
@@ -81,6 +81,7 @@ router.post("/token/validate", verifyToken, async (req, res, next) => {
       where: {
         id: [profileImgIdx, backgroundImgIdx],
       },
+      attributes: ["id", "publishedUrl"],
     });
     let profileImg = null,
       backgroundImg = null;
