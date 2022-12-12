@@ -1,4 +1,5 @@
 const express = require("express");
+const { isActiveInServer } = require("../config");
 const Comment = require("../models/comment");
 const { verifyToken } = require("./middlewares");
 
@@ -30,16 +31,14 @@ router.post("/save", verifyToken, async (req, res, next) => {
     });
     res.status(200).json({ result: true, error: false, data: true });
   } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .json({
-        error: true,
-        result: false,
-        data: null,
-        code: 500,
-        message: err.message,
-      });
+    !isActiveInServer && console.error(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      data: null,
+      code: 500,
+      message: err.message,
+    });
   }
 });
 
@@ -50,16 +49,14 @@ router.delete("/del/:commentId", verifyToken, async (req, res, next) => {
     });
     res.status(200).json({ result: true, error: false, data: true });
   } catch (err) {
-    console.error(err);
-    res
-      .status(500)
-      .json({
-        error: true,
-        result: false,
-        data: null,
-        code: 500,
-        message: err.message,
-      });
+    !isActiveInServer && console.error(err);
+    res.status(500).json({
+      error: true,
+      result: false,
+      data: null,
+      code: 500,
+      message: err.message,
+    });
   }
 });
 

@@ -1,4 +1,5 @@
 const express = require("express");
+const { isActiveInServer } = require("../config");
 const { verifyToken } = require("./middlewares");
 
 const router = express.Router();
@@ -7,7 +8,7 @@ router.get("/test", async (req, res, next) => {
   try {
     res.status(201).json({ test: "success" });
   } catch (e) {
-    console.error(e);
+    !isActiveInServer && console.error(e);
     next(e);
   }
 });

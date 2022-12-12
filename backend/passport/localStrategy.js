@@ -3,6 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const File = require("../models/file");
+const { isActiveInServer } = require("../config");
 
 module.exports = () => {
   passport.use(
@@ -57,7 +58,7 @@ module.exports = () => {
             });
           }
         } catch (err) {
-          console.error(err);
+          !isActiveInServer && console.error(err);
           done(err);
         }
       }

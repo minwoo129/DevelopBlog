@@ -6,13 +6,15 @@ const {
   checkIsAdmin,
 } = require("./middlewares");
 const File = require("../models/file");
+const { isActiveInServer } = require("../config");
 
 const router = express.Router();
 
 try {
   fs.readdirSync("uploads");
 } catch (error) {
-  console.error("uploads폴더가 없어 uploads 폴더를 생성합니다.");
+  !isActiveInServer &&
+    console.error("uploads폴더가 없어 uploads 폴더를 생성합니다.");
   fs.mkdirSync("uploads");
 }
 
@@ -52,7 +54,7 @@ router.post("/upload", verifyToken, AWSSingleFileUpload, async (req, res) => {
       .status(200)
       .json({ result: true, data: { ...result.dataValues }, error: false });
   } catch (err) {
-    console.log(err);
+    !isActiveInServer && console.log(err);
     res.status(500).json({
       error: true,
       result: false,
@@ -98,7 +100,7 @@ router.post("/upload/join", AWSSingleFileUpload, async (req, res) => {
       .status(200)
       .json({ result: true, data: { ...result.dataValues }, error: false });
   } catch (err) {
-    console.log(err);
+    !isActiveInServer && console.log(err);
     res.status(500).json({
       error: true,
       result: false,
@@ -150,7 +152,7 @@ router.post(
         .status(200)
         .json({ result: true, data: { ...result.dataValues }, error: false });
     } catch (err) {
-      console.log(err);
+      !isActiveInServer && console.log(err);
       res.status(500).json({
         error: true,
         result: false,
@@ -170,7 +172,7 @@ router.delete("/del/:fileId", verifyToken, async (req, res, next) => {
     });
     res.status(200).json({ result: true, error: false, data: true });
   } catch (err) {
-    console.log(err);
+    !isActiveInServer && console.log(err);
     res.status(500).json({
       error: true,
       result: false,

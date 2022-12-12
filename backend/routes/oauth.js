@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const File = require("../models/file");
 const { verifyToken } = require("./middlewares");
+const { isActiveInServer } = require("../config");
 
 const router = express.Router();
 
@@ -114,7 +115,7 @@ router.post("/token/validate", verifyToken, async (req, res, next) => {
       },
     });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       code: 500,

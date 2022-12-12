@@ -1,6 +1,7 @@
 import { apiType1, apiType2, fileUpload } from "./type";
 import axios, { AxiosRequestConfig } from "axios";
 import { Cookies } from "react-cookie";
+import { isActiveInServer } from "../../config";
 
 const cookies = new Cookies();
 
@@ -54,7 +55,7 @@ const invokeAPI =
       };
     }
 
-    console.log("request req: ", axiosReq);
+    !isActiveInServer && console.log("request req: ", axiosReq);
     return axios(axiosReq);
   };
 

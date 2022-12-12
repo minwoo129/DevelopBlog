@@ -5,6 +5,7 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const File = require("../models/file");
+const { isActiveInServer } = require("../config");
 
 const router = express.Router();
 
@@ -119,7 +120,7 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
     }
     res.status(200).json({ result: true, error: false, data: null });
   } catch (error) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       code: 500,
@@ -136,7 +137,7 @@ router.get("/getOne", async (req, res, next) => {
     const result = await User.findOne({ where: { email } });
     res.status(200).json({ result: true, error: false, data: { ...result } });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       code: 500,
@@ -179,7 +180,7 @@ router.get("/get", verifyToken, async (req, res, next) => {
     };
     res.status(200).json({ error: false, result: true, data });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res
       .status(500)
       .json({ error: true, code: 500, data: err.message, result: false });
@@ -202,7 +203,7 @@ router.put("/update", verifyToken, async (req, res, next) => {
     );
     res.status(200).json({ error: false, result: true, data: true });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       code: 500,

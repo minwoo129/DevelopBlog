@@ -22,6 +22,7 @@ import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { setMenuOpen } from "../../modules/actions/menu";
 import { setAppState } from "../../modules/actions/appInfo";
+import { isActiveInServer } from "../../config";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -178,7 +179,8 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       });
       profileImgIdx = result.data.data.id;
     } catch (err) {
-      console.log("AuthTemplate __uploadImageFile error: ", err);
+      !isActiveInServer &&
+        console.log("AuthTemplate __uploadImageFile error: ", err);
     } finally {
       _join({
         adminPwd,
@@ -219,7 +221,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       setImgSrc(null);
       navigate("/auth/login");
     } catch (err) {
-      console.log("AuthTemplate _join error: ", err);
+      !isActiveInServer && console.log("AuthTemplate _join error: ", err);
     }
   };
 
@@ -243,7 +245,8 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       }
       navigate("/");
     } catch (e: any) {
-      console.log("AuthTemplate _login error: ", e.response);
+      !isActiveInServer &&
+        console.log("AuthTemplate _login error: ", e.response);
     }
   };
 
