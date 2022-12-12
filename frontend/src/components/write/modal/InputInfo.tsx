@@ -92,7 +92,6 @@ const InputInfo: FC<InputInfoProps> = ({
         data: file,
         uploadType: "image/content",
       });
-      console.log("InputInfo __uploadFile result: ", result);
       setThumbnailUrl(result.data.data.publishedUrl);
     } catch (err) {
       console.log("InputInfo __uploadFile error: ", err);

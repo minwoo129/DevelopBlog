@@ -59,7 +59,6 @@ const StyledImageInput: FC<StyledImageInputProps> = ({
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const encodeFileToBase64 = async (fileBlob: Blob) => {
-    console.log("file: ", fileBlob);
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
 
@@ -73,7 +72,6 @@ const StyledImageInput: FC<StyledImageInputProps> = ({
   };
 
   const addImage = (e: MouseEvent<HTMLButtonElement>) => {
-    console.log("test");
     e.preventDefault();
     if (!inputRef.current) {
       return;

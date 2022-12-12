@@ -39,7 +39,6 @@ const SearchTemplate: FC<SearchTemplateProps> = (props) => {
           },
         })
       );
-      console.log("SearchTemplate onPressSearch result: ", result);
     } catch (err) {
       console.log("SearchTemplate onPressSearch error: ", err);
     }

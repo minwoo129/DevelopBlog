@@ -71,7 +71,6 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
     fileBlob: Blob,
     type: "userImg" | "background"
   ) => {
-    console.log("file: ", fileBlob);
     const reader = new FileReader();
     reader.readAsDataURL(fileBlob);
 
