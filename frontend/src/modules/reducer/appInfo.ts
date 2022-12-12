@@ -45,10 +45,22 @@ export default createReducer<initialStateType, appInfoActionType>(
       return state;
     },
     [GET_USER_INFO_SUCCESS]: (state, { payload: { param, result } }) => {
-      const newState: initialStateType = {
+      let newState: initialStateType = {
         ...state,
         userInfo: result.data,
       };
+      if (result.data.profileImg) {
+        newState = {
+          ...newState,
+          userImgSrc: result.data.profileImg.publishedUrl,
+        };
+      }
+      if (result.data.backgroundImg) {
+        newState = {
+          ...newState,
+          backgroundImgSrc: result.data.backgroundImg.publishedUrl,
+        };
+      }
       return newState;
     },
     [GET_USER_INFO_ERROR]: (state, action) => {
@@ -82,7 +94,7 @@ export default createReducer<initialStateType, appInfoActionType>(
 
     // CLEAR_REVISE_DATA ////////////////////////////////////////////////////
     [CLEAR_REVISE_DATA]: (state, { payload: result }) => {
-      const newState: initialStateType = {
+      let newState: initialStateType = {
         ...state,
         userImgTempData: null,
         backgroundImgTempData: null,
@@ -91,6 +103,18 @@ export default createReducer<initialStateType, appInfoActionType>(
         backgroundImgSrc: null,
         tempNickname: "",
       };
+      if (state.userInfo?.profileImg) {
+        newState = {
+          ...newState,
+          userImgSrc: state.userInfo.profileImg.publishedUrl,
+        };
+      }
+      if (state.userInfo?.backgroundImg) {
+        newState = {
+          ...newState,
+          backgroundImgSrc: state.userInfo.backgroundImg.publishedUrl,
+        };
+      }
       return newState;
     },
   }

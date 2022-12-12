@@ -87,6 +87,7 @@ export interface userDetailInfoType {
   nickname: string;
   profileImgIdx: number | null;
   profileImg: userProfileImgType | null;
+  backgroundImg: userProfileImgType | null;
 }
 
 interface userProfileImgType {
