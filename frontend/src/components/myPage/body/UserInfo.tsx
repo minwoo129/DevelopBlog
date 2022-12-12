@@ -1,8 +1,8 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, MouseEvent, useRef } from "react";
 import styled from "styled-components";
-import DefaultUserImage from "../../../common/DefaultUserImage";
 import { IoMdAdd } from "react-icons/io";
 import { userDetailInfoType } from "../../../modules/initialStates/initialStateType";
+import { DefaultUserImage, UserImg } from "../../../common/UserImage";
 
 const UserInfoBlock = styled.div`
   width: 100%;
@@ -36,21 +36,48 @@ const UserDetailInfoGrid = styled.div`
   align-items: center;
 `;
 const NickName = styled.h2`
-  color: #151515;
+  color: invert(100%);
+`;
+const NickNameInput = styled.input`
+  width: 200px;
+  height: 50px;
+  color: invert(100%);
+  font-size: 1.5rem;
+  border-radius: 6px;
+  background: #00000000;
+  border: 1px solid #e9ecef;
+`;
+
+const ReviseBtnView = styled.div`
+  display: flex;
+  margin-left: 50px;
+  margin-bottom: 25px;
 `;
 
 const ReviseBtn = styled.button`
   width: 100px;
   height: 50px;
   border-radius: 6px;
-  background: #01df3a;
-  margin-left: 50px;
-  margin-bottom: 25px;
+  background: #fff;
   border: 1px solid #01df3a;
-  color: #fff;
+  color: #000;
   &:hover {
-    background: #2efe64;
-    border: 1px solid #2efe64;
+    background: #01df3a;
+    color: #fff;
+  }
+`;
+const CancelBtn = styled.button`
+  width: 100px;
+  height: 50px;
+  border-radius: 6px;
+  background: #fff;
+  border: 1px solid #df0101;
+  color: #000;
+  margin-left: 1rem;
+  &:hover {
+    background: #df0101;
+    border: 1px solid #df0101;
+    color: #fff;
   }
 `;
 const AddImageButton = styled.button`
@@ -90,34 +117,108 @@ const ChangeBackgroundBtn = styled.button`
 
 interface UserInfoProps extends HTMLAttributes<HTMLDivElement> {
   isRevise: boolean;
-  setRevise(value: boolean): void;
   userInfo: userDetailInfoType | null;
+  encodeFileToBase64(fileBlob: Blob, type: "userImg" | "background"): void;
+  onClickRevise(): void;
+  onClickReviseCancel(): void;
+  userImgTempSrc: any;
+  backgroundImgTempSrc: any;
+  tempNickname: string;
+  setTempNickname(value: string): void;
 }
 
 const UserInfo: FC<UserInfoProps> = ({
   isRevise,
-  setRevise,
   userInfo,
+  encodeFileToBase64,
+  userImgTempSrc,
+  onClickRevise,
+  onClickReviseCancel,
+  backgroundImgTempSrc,
+  tempNickname,
+  setTempNickname,
   ...props
 }) => {
+  const userImgRef = useRef<HTMLInputElement | null>(null);
+  const backgroundImgRef = useRef<HTMLInputElement | null>(null);
+  const addUserImg = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!userImgRef.current) {
+      return;
+    }
+    userImgRef.current.click();
+  };
+  const addBackgroundImg = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    if (!backgroundImgRef.current) {
+      return;
+    }
+    backgroundImgRef.current.click();
+  };
   return (
     <UserInfoBlock {...props}>
       <UserInfoGrid>
-        <DefaultUserImage
-          style={{ width: "120px", height: "120px", borderRadius: "60px" }}
-          iconDetailStyle={{ width: "60px", height: "60px" }}
-        />
+        {userImgTempSrc ? (
+          <UserImg
+            style={{ width: "120px", height: "120px", borderRadius: "60px" }}
+            src={userImgTempSrc}
+          />
+        ) : (
+          <DefaultUserImage
+            style={{ width: "120px", height: "120px", borderRadius: "60px" }}
+            iconDetailStyle={{ width: "60px", height: "60px" }}
+          />
+        )}
         {isRevise && (
-          <AddImageButton>
+          <AddImageButton onClick={addUserImg}>
             <IoMdAdd style={{ width: "1rem", height: "1rem" }} />
           </AddImageButton>
         )}
         <UserDetailInfoGrid>
-          <NickName>{userInfo?.nickname ?? ""}</NickName>
+          {isRevise ? (
+            <NickNameInput
+              value={tempNickname}
+              onChange={(e) => setTempNickname(e.target.value)}
+            />
+          ) : (
+            <NickName>{userInfo?.nickname ?? ""}</NickName>
+          )}
         </UserDetailInfoGrid>
       </UserInfoGrid>
-      <ReviseBtn onClick={() => setRevise(!isRevise)}>수정하기</ReviseBtn>
-      {isRevise && <ChangeBackgroundBtn>배경화면 바꾸기</ChangeBackgroundBtn>}
+      <ReviseBtnView>
+        <ReviseBtn onClick={onClickRevise}>수정하기</ReviseBtn>
+        {isRevise && (
+          <CancelBtn onClick={onClickReviseCancel}>취소하기</CancelBtn>
+        )}
+      </ReviseBtnView>
+      {isRevise && (
+        <ChangeBackgroundBtn onClick={addBackgroundImg}>
+          배경화면 바꾸기
+        </ChangeBackgroundBtn>
+      )}
+
+      <input
+        type="file"
+        ref={userImgRef}
+        style={{ display: "none" }}
+        onChange={(e) => {
+          if (!e.target.files) {
+            return;
+          }
+          encodeFileToBase64(e.target.files[0], "userImg");
+        }}
+      />
+      <input
+        type="file"
+        ref={backgroundImgRef}
+        style={{ display: "none" }}
+        onChange={(e) => {
+          if (!e.target.files) {
+            return;
+          }
+          encodeFileToBase64(e.target.files[0], "background");
+        }}
+      />
     </UserInfoBlock>
   );
 };

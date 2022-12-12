@@ -23,20 +23,42 @@ const BodyBlock = styled.div`
 interface BodyProps extends HTMLAttributes<HTMLDivElement> {
   userBlogs: userWriteBlogsType | null;
   isRevise: boolean;
-  setRevise(value: boolean): void;
   userInfo: userDetailInfoType | null;
+  encodeFileToBase64(fileBlob: Blob, type: "userImg" | "background"): void;
+  userImgTempSrc: any;
+  backgroundImgTempSrc: any;
+  onClickRevise(): void;
+  onClickReviseCancel(): void;
+  tempNickname: string;
+  setTempNickname(value: string): void;
 }
 
 const Body: FC<BodyProps> = ({
   userBlogs,
   isRevise,
-  setRevise,
   userInfo,
+  encodeFileToBase64,
+  userImgTempSrc,
+  backgroundImgTempSrc,
+  onClickRevise,
+  onClickReviseCancel,
+  tempNickname,
+  setTempNickname,
   ...props
 }) => {
   return (
     <BodyBlock {...props}>
-      <UserInfo isRevise={isRevise} setRevise={setRevise} userInfo={userInfo} />
+      <UserInfo
+        isRevise={isRevise}
+        userInfo={userInfo}
+        encodeFileToBase64={encodeFileToBase64}
+        userImgTempSrc={userImgTempSrc}
+        onClickRevise={onClickRevise}
+        onClickReviseCancel={onClickReviseCancel}
+        backgroundImgTempSrc={backgroundImgTempSrc}
+        tempNickname={tempNickname}
+        setTempNickname={setTempNickname}
+      />
       <UserDiaryList userBlogs={userBlogs} />
     </BodyBlock>
   );

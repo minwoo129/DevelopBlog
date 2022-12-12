@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import styled from "styled-components";
 import { IoMdAdd } from "react-icons/io";
-import DefaultUserImage from "../../common/DefaultUserImage";
+import { DefaultUserImage } from "../../common/UserImage";
 
 const StyledImageInputBlock = styled.div`
   width: 100%;
