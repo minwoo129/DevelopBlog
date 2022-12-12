@@ -30,6 +30,10 @@ module.exports = class User extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
+        backgroundImgIdx: {
+          type: Sequelize.INTEGER,
+          allowNull: true,
+        },
       },
       {
         sequelize,
