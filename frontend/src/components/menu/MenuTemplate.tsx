@@ -20,6 +20,7 @@ import {
   clearReviseData,
   setAppState,
 } from "../../modules/actions/appInfo";
+import { getBlogsThunk } from "../../modules/thunk/blog";
 
 interface MenuTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const MenuTemplate: FC<MenuTemplateProps> = (props) => {
@@ -103,6 +104,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     if (login) {
       dispatch(logout());
       dispatch(clearDataWhenLogout());
+      _getBlogs();
       navigate("/");
     } else navigate("/auth/login");
   };
@@ -153,6 +155,21 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
       }
     } catch (e) {
       console.log("MainPage _tokenCheck error: ", e);
+    }
+  };
+
+  const _getBlogs = async () => {
+    try {
+      const result = await dispatch(
+        getBlogsThunk({
+          params: {
+            page: 1,
+            size: 20,
+          },
+        })
+      );
+    } catch (err) {
+      console.log("MainPage _getBlogs error: ", err);
     }
   };
 

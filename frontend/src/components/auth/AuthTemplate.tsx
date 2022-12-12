@@ -235,9 +235,9 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       );
       console.log("AuthTemplate _login result: ", result);
       if (result.data?.backgroundImg) {
-        dispatch(
+        await dispatch(
           setAppState({
-            key: "backgroundImg",
+            key: "backgroundImgSrc",
             value: result.data.backgroundImg.publishedUrl,
           })
         );
