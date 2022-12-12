@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 .env
-/src/config.index.ts
+/src/config/index.ts
 
 # testing
 /coverage
