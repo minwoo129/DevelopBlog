@@ -44,6 +44,8 @@ export type appInfoInitialStateType = {
   isReviseUserInfo: boolean;
   userImgTempData: File | Blob | null;
   backgroundImgTempData: File | Blob | null;
+  userImgSrc: any;
+  backgroundImgSrc: any;
 };
 
 // =============================================================================
