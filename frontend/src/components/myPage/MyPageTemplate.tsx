@@ -66,6 +66,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
         if (type == "userImg") {
           dispatch(setAppState({ key: "userImgTempData", value: fileBlob }));
           dispatch(setAppState({ key: "userImgSrc", value: reader.result }));
+          dispatch(setAppState({ key: "isUserImgChanged", value: true }));
         } else {
           dispatch(
             setAppState({ key: "backgroundImgTempData", value: fileBlob })
@@ -73,6 +74,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
           dispatch(
             setAppState({ key: "backgroundImgSrc", value: reader.result })
           );
+          dispatch(setAppState({ key: "isBackgroundImgChanged", value: true }));
         }
         resolve(null);
       };
