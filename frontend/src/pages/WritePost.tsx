@@ -24,6 +24,7 @@ import { batch } from "react-redux";
 import { setSearchTxt } from "../modules/actions/appInfo";
 import { clearAddedImageIds } from "../modules/actions/blog";
 import Modal from "../components/write/modal/Modal";
+import { isActiveInServer } from "../config";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -98,7 +99,7 @@ const WritePost: FC<WritePostProps> = (props) => {
       dispatch(clearAddedImageIds());
       navigate("/");
     } catch (e) {
-      console.log("WritePost onClick error: ", e);
+      !isActiveInServer && console.log("WritePost onClick error: ", e);
     }
   };
   return (
@@ -131,7 +132,7 @@ const WritePost: FC<WritePostProps> = (props) => {
               dispatch(setAddedImageIds(result.data.data.id));
               callback(result.data.data.publishedUrl);
             } catch (err) {
-              console.log("upload error: ", err);
+              !isActiveInServer && console.log("upload error: ", err);
             }
           },
         }}

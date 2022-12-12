@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { isActiveInServer } from "../../config";
 import { setSearchTxt } from "../../modules/actions/appInfo";
 import { RootState } from "../../modules/reducer";
 import { getSearchBlogsThunk } from "../../modules/thunk/blog";
@@ -43,7 +44,8 @@ const SearchTemplate: FC<SearchTemplateProps> = (props) => {
         })
       );
     } catch (err) {
-      console.log("SearchTemplate onPressSearch error: ", err);
+      !isActiveInServer &&
+        console.log("SearchTemplate onPressSearch error: ", err);
     }
   };
 

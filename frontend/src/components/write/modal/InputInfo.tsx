@@ -25,6 +25,7 @@ import {
   StyledImg,
   StyledTempCloseBtn,
 } from "./AdditionalComponent";
+import { isActiveInServer } from "../../../config";
 
 const InputInfoBlock = styled.div`
   background: #fff;
@@ -94,7 +95,7 @@ const InputInfo: FC<InputInfoProps> = ({
       });
       setThumbnailUrl(result.data.data.publishedUrl);
     } catch (err) {
-      console.log("InputInfo __uploadFile error: ", err);
+      !isActiveInServer && console.log("InputInfo __uploadFile error: ", err);
     } finally {
       setLoading(false);
     }

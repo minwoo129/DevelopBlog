@@ -21,6 +21,7 @@ import {
   setAppState,
 } from "../../modules/actions/appInfo";
 import { getBlogsThunk } from "../../modules/thunk/blog";
+import { isActiveInServer } from "../../config";
 
 interface MenuTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const MenuTemplate: FC<MenuTemplateProps> = (props) => {
@@ -135,7 +136,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
         );
       }
     } catch (err) {
-      console.log("MainPage _tokenCheck error: ", err);
+      !isActiveInServer && console.log("MainPage _tokenCheck error: ", err);
       const isMoveToLogin = window.confirm(
         "사용자 정보를 확인할 수 없습니다.\n로그인 페이지로 이동하시겠습니까?"
       );
@@ -154,7 +155,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
         );
       }
     } catch (e) {
-      console.log("MainPage _tokenCheck error: ", e);
+      !isActiveInServer && console.log("MainPage _tokenCheck error: ", e);
     }
   };
 
@@ -169,7 +170,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
         })
       );
     } catch (err) {
-      console.log("MainPage _getBlogs error: ", err);
+      !isActiveInServer && console.log("MainPage _getBlogs error: ", err);
     }
   };
 

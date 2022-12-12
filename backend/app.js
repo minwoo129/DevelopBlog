@@ -15,6 +15,7 @@ const oauthRouter = require("./routes/oauth");
 const contentRouter = require("./routes/content");
 const commentRouter = require("./routes/comment");
 const { sequelize } = require("./models");
+const { isActiveInServer } = require("./config");
 
 dotenv.config();
 const app = express();
@@ -32,7 +33,7 @@ sequelize
     console.log("데이터베이스 연결 성공");
   })
   .catch((err) => {
-    console.error(err);
+    !isActiveInServer && console.error(err);
   });
 
 app.use(morgan("dev"));
@@ -75,5 +76,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(app.get("port"), () => {
-  console.log(app.get("port"), "번 포트에서 대기 중");
+  !isActiveInServer && console.log(app.get("port"), "번 포트에서 대기 중");
 });

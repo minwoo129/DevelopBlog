@@ -12,6 +12,7 @@ import invokeAPI from "../lib/restAPI";
 import { batch } from "react-redux";
 import { clearSearchBlogs } from "../modules/actions/blog";
 import { setSearchTxt } from "../modules/actions/appInfo";
+import { isActiveInServer } from "../config";
 
 interface DetailPageProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -43,7 +44,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
         })
       );
     } catch (err) {
-      console.log("DetailPage _getBlog error: ", err);
+      !isActiveInServer && console.log("DetailPage _getBlog error: ", err);
     }
   };
 
@@ -66,7 +67,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
       });
       navigate("/");
     } catch (err) {
-      console.log("DetailPage __delContent error: ", err);
+      !isActiveInServer && console.log("DetailPage __delContent error: ", err);
     }
   };
 

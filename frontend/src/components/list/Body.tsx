@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getBlogsThunk } from "../../modules/thunk/blog";
 import EmptyLayer from "../../common/EmptyLayer";
+import { isActiveInServer } from "../../config";
 
 const BodyBlock = styled.div`
   flex: 1;
@@ -53,7 +54,7 @@ const Body: FC<BodyProps> = (props) => {
         })
       );
     } catch (err) {
-      console.log("MainPage _getBlogs error: ", err);
+      !isActiveInServer && console.log("MainPage _getBlogs error: ", err);
     }
   };
 

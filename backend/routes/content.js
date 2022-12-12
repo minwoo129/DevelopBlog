@@ -4,6 +4,7 @@ const Content = require("../models/content");
 const File = require("../models/file");
 const User = require("../models/user");
 const sequelize = require("sequelize");
+const { isActiveInServer } = require("../config");
 const Op = sequelize.Op;
 
 const router = express.Router();
@@ -56,7 +57,7 @@ router.post("/save", verifyToken, async (req, res, next) => {
     );
     res.status(200).json({ error: false, result: true, data: true });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       result: false,
@@ -106,7 +107,7 @@ router.get("/get/list", verifyTokenWithoutErr, async (req, res, next) => {
     });
     res.status(200).json({ error: false, result: true, data: contents });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       result: false,
@@ -150,7 +151,7 @@ router.get("/get/list/userWrite", verifyToken, async (req, res, next) => {
       },
     });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       result: false,
@@ -202,7 +203,7 @@ router.get("/get/:id", verifyTokenWithoutErr, async (req, res, next) => {
     }
     res.status(200).json({ result: true, error: false, data });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       result: false,
@@ -226,7 +227,7 @@ router.delete("/del/:id", verifyToken, async (req, res, next) => {
     });
     res.status(200).json({ result: true, error: false, data: true });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       result: false,
@@ -260,7 +261,7 @@ router.get("/search", async (req, res, next) => {
     });
     res.status(200).json({ result: true, error: false, data: result });
   } catch (err) {
-    console.error(err);
+    !isActiveInServer && console.error(err);
     res.status(500).json({
       error: true,
       result: false,

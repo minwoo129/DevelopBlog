@@ -3,6 +3,7 @@ import { batch } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { isActiveInServer } from "../../config";
 import invokeAPI, { invokeFileUpload } from "../../lib/restAPI";
 import { clearReviseData, setAppState } from "../../modules/actions/appInfo";
 import { RootState } from "../../modules/reducer";
@@ -146,7 +147,8 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
         nickname: tempNickname,
       });
     } catch (err) {
-      console.log("MyPageTemplate _uploadFile error: ", err);
+      !isActiveInServer &&
+        console.log("MyPageTemplate _uploadFile error: ", err);
     }
   };
 
@@ -165,7 +167,8 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
       });
       _getUserInfo();
     } catch (err) {
-      console.log("MyPageTemplate _updateUserInfo error: ", err);
+      !isActiveInServer &&
+        console.log("MyPageTemplate _updateUserInfo error: ", err);
     }
   };
 
@@ -174,7 +177,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
       const result = await dispatch(getUserInfoThunk({}));
       await dispatch(clearReviseData());
     } catch (err) {
-      console.log("MyPage _getUserInfo error: ", err);
+      !isActiveInServer && console.log("MyPage _getUserInfo error: ", err);
     }
   };
 

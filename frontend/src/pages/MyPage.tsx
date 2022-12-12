@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import MenuTemplate from "../components/menu/MenuTemplate";
 import MyPageTemplate from "../components/myPage/MyPageTemplate";
+import { isActiveInServer } from "../config";
 import { RootState } from "../modules/reducer";
 import {
   getUserInfoThunk,
@@ -26,7 +27,7 @@ const MyPage = ({}) => {
     try {
       const result = await dispatch(getUserInfoThunk({}));
     } catch (err) {
-      console.log("MyPage _getUserInfo error: ", err);
+      !isActiveInServer && console.log("MyPage _getUserInfo error: ", err);
     }
   };
 
@@ -41,7 +42,8 @@ const MyPage = ({}) => {
         })
       );
     } catch (err) {
-      console.log("MyPage _getUserWriteBlogs error: ", err);
+      !isActiveInServer &&
+        console.log("MyPage _getUserWriteBlogs error: ", err);
     }
   };
 
