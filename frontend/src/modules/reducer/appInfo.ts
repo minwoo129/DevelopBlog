@@ -7,6 +7,7 @@ import {
   GET_USER_WRITE_BLOGS,
   GET_USER_WRITE_BLOGS_ERROR,
   GET_USER_WRITE_BLOGS_SUCCESS,
+  SET_APP_STATE,
   SET_SEARCHBAR_VISIBLE,
   SET_SEARCH_TXT,
 } from "../actions/appInfo";
@@ -66,6 +67,16 @@ export default createReducer<initialStateType, appInfoActionType>(
     },
     [GET_USER_WRITE_BLOGS_ERROR]: (state, action) => {
       return state;
+    },
+
+    // SET_APP_STATE ////////////////////////////////////////////////////
+    [SET_APP_STATE]: (state, { payload: result }) => {
+      const { key, value } = result;
+      const newState: initialStateType = {
+        ...state,
+        [key]: value,
+      };
+      return newState;
     },
   }
 );

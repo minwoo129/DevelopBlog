@@ -41,6 +41,7 @@ export type appInfoInitialStateType = {
   searchTxt: string;
   userInfo: userDetailInfoType | null;
   userWriteBlogs: userWriteBlogsType | null;
+  isReviseUserInfo: boolean;
 };
 
 // =============================================================================
@@ -69,7 +70,7 @@ export interface blogDetailType extends blogItemType {
   };
 }
 
-interface userDetailInfoType {
+export interface userDetailInfoType {
   createdAt: string;
   email: string;
   id: number;

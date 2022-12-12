@@ -46,4 +46,5 @@ export const appInfoInitialState: appInfoInitialStateType = {
   searchTxt: "",
   userInfo: null,
   userWriteBlogs: null,
+  isReviseUserInfo: false,
 };

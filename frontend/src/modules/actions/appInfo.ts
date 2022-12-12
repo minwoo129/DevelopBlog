@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { createAsyncAction } from "typesafe-actions";
 import { asyncCommonReturnType } from "./actionType";
+import { setAppStateParams } from "./actionType/appInfo";
 
 export const SET_SEARCHBAR_VISIBLE = "appInfo/SET_SEARCHBAR_VISIBLE";
 
@@ -14,6 +15,8 @@ export const GET_USER_WRITE_BLOGS = "appInfo/GET_USER_WRITE_BLOGS";
 export const GET_USER_WRITE_BLOGS_SUCCESS =
   "appInfo/GET_USER_WRITE_BLOGS_SUCCESS";
 export const GET_USER_WRITE_BLOGS_ERROR = "appInfo/GET_USER_WRITE_BLOGS_ERROR";
+
+export const SET_APP_STATE = "appInfo/SET_APP_STATE";
 // ********************************** Action *******************************************
 export const setSearchbarVisible = (value: boolean) => {
   return { type: SET_SEARCHBAR_VISIBLE, payload: value };
@@ -34,3 +37,7 @@ export const getUserWriteBlogs = createAsyncAction(
   GET_USER_WRITE_BLOGS_SUCCESS,
   GET_USER_WRITE_BLOGS_ERROR
 )<any, asyncCommonReturnType, AxiosError>();
+
+export const setAppState = (value: setAppStateParams) => {
+  return { type: SET_APP_STATE, payload: value };
+};
