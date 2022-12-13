@@ -26,7 +26,6 @@ import { isActiveInServer } from "../../config";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
-  border: 1px solid green;
   background: #e9ecef;
   display: flex;
   justify-content: center;

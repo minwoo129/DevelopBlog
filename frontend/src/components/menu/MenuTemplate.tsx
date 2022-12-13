@@ -50,11 +50,11 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     const resizeEvent = () => {
       if (window.innerWidth >= 906) {
         if (!isMenuVisible) {
-          dispatch(setMenuVisible(true));
+          //dispatch(setMenuVisible(true));
           dispatch(setMenuOpen(false));
         }
       } else {
-        if (isMenuVisible) dispatch(setMenuVisible(false));
+        //if (isMenuVisible) dispatch(setMenuVisible(false));
       }
     };
 
