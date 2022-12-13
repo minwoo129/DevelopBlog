@@ -29,7 +29,7 @@ export const authInitialState: authInitialStateType = {
 };
 // ================================ menu =======================================
 export const menuInitialState: menuInitialStateType = {
-  isMenuVisible: true,
+  isMenuVisible: false,
   isMenuOpen: false,
 };
 // ================================ blog =======================================
