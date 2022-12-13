@@ -15,13 +15,17 @@ const ListItemBlock = styled.div`
   margin-top: 25px;
   margin-bottom: 25px;
   width: 500px;
-  height: 200px;
+  height: 300px;
   display: block;
   box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.7);
   border: 1px solid grey;
   background: #e9ecef;
   &:hover {
     background: #d8d8d8;
+  }
+  @media (min-width: 1400px) {
+    width: 600px;
+    height: 300px;
   }
 `;
 
