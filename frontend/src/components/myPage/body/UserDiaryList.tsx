@@ -7,7 +7,6 @@ const UserDiaryListBlock = styled.div`
   width: 100%;
   min-height: 920px;
   display: flex;
-  background: #fff;
   flex-wrap: wrap;
 `;
 
