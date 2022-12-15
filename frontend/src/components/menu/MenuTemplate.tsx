@@ -47,23 +47,6 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     }
   }, []);
   useEffect(() => {
-    const resizeEvent = () => {
-      if (window.innerWidth >= 906) {
-        if (!isMenuVisible) {
-          //dispatch(setMenuVisible(true));
-          dispatch(setMenuOpen(false));
-        }
-      } else {
-        //if (isMenuVisible) dispatch(setMenuVisible(false));
-      }
-    };
-
-    window.addEventListener("resize", resizeEvent);
-    return () => {
-      window.removeEventListener("resize", resizeEvent);
-    };
-  }, [isMenuVisible]);
-  useEffect(() => {
     if (location.pathname.indexOf("/myPage") != -1) setMyPage(true);
     else setMyPage(false);
   }, [location]);

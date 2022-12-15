@@ -8,6 +8,9 @@ const UserDiaryListBlock = styled.div`
   min-height: 920px;
   display: flex;
   flex-wrap: wrap;
+  @media (max-width: 905px) {
+    background: #fff;
+  }
 `;
 
 const EmptyBlogLayer = styled.div`
