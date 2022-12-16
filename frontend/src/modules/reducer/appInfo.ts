@@ -73,10 +73,30 @@ export default createReducer<initialStateType, appInfoActionType>(
       return state;
     },
     [GET_USER_WRITE_BLOGS_SUCCESS]: (state, { payload: { param, result } }) => {
-      const newState: initialStateType = {
+      let newState: initialStateType = {
         ...state,
-        userWriteBlogs: result.data,
       };
+      if (param?.params?.page == 1) {
+        newState = {
+          ...newState,
+          userWriteBlogs: result.data,
+        };
+      } else {
+        let contents: any[] = [];
+        if (newState.userWriteBlogs) {
+          contents = [
+            ...newState.userWriteBlogs.contents,
+            ...result.data.contents,
+          ];
+          newState = {
+            ...newState,
+            userWriteBlogs: {
+              ...newState.userWriteBlogs,
+              contents,
+            },
+          };
+        }
+      }
       return newState;
     },
     [GET_USER_WRITE_BLOGS_ERROR]: (state, action) => {

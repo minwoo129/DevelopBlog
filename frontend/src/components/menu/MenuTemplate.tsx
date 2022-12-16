@@ -47,23 +47,6 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     }
   }, []);
   useEffect(() => {
-    const resizeEvent = () => {
-      if (window.innerWidth >= 906) {
-        if (!isMenuVisible) {
-          //dispatch(setMenuVisible(true));
-          dispatch(setMenuOpen(false));
-        }
-      } else {
-        //if (isMenuVisible) dispatch(setMenuVisible(false));
-      }
-    };
-
-    window.addEventListener("resize", resizeEvent);
-    return () => {
-      window.removeEventListener("resize", resizeEvent);
-    };
-  }, [isMenuVisible]);
-  useEffect(() => {
     if (location.pathname.indexOf("/myPage") != -1) setMyPage(true);
     else setMyPage(false);
   }, [location]);
@@ -176,97 +159,34 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
 
   return (
     <div className="menuTemplate">
-      {isMenuVisible ? (
-        <div className="menuBar">
-          <div className="menuTitle" onClick={onClickTitle}>
+      <Drawer
+        variant="temporary"
+        open={isMenuOpen}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        onClick={() => {
+          dispatch(setMenuOpen(false));
+        }}
+      >
+        <div className="menu">
+          <div onClick={onClickTitle} className="logo">
             <h3>DEVBLOG</h3>
           </div>
           {login && (
             <div
-              className="loginInfo"
+              className="userInfo"
               onClick={onClickUser}
-            >{`${loginInfo.name}님, 반갑습니다.`}</div>
+            >{`${loginInfo.name}님\n반갑습니다.`}</div>
           )}
-          <div className="menuItem" onClick={onClickLogin}>
+          <div onClick={onClickLogin} className="menuItem">
             <h3>{login ? "로그아웃" : "로그인"}</h3>
           </div>
-          <div className="menuItem" onClick={onClickWrite}>
+          <div onClick={onClickWrite} className="menuItem">
             <h3>글쓰기</h3>
           </div>
         </div>
-      ) : (
-        <Drawer
-          variant="temporary"
-          open={isMenuOpen}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          onClick={() => {
-            dispatch(setMenuOpen(false));
-          }}
-        >
-          <div
-            style={{ background: "#424242", width: "10rem", height: "100%" }}
-          >
-            <div
-              onClick={onClickTitle}
-              style={{
-                width: "100%",
-                height: "10rem",
-                justifyContent: "center",
-                alignItems: "center",
-                borderBottom: "1px solid #fff",
-                display: "flex",
-              }}
-            >
-              <h3 style={{ color: "orange", fontSize: "1.5rem" }}>DEVBLOG</h3>
-            </div>
-            {login && (
-              <div
-                style={{
-                  width: "100%",
-                  height: "5rem",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderBottom: "1px solid #fff",
-                  display: "flex",
-                  color: "orange",
-                  fontWeight: "bold",
-                }}
-                onClick={onClickUser}
-              >{`${loginInfo.name}님\n반갑습니다.`}</div>
-            )}
-            <div
-              onClick={onClickLogin}
-              style={{
-                width: "100%",
-                height: "5rem",
-                justifyContent: "center",
-                alignItems: "center",
-                borderBottom: "1px solid #fff",
-                display: "flex",
-              }}
-            >
-              <h3 style={{ color: "orange", fontSize: "1rem" }}>
-                {login ? "로그아웃" : "로그인"}
-              </h3>
-            </div>
-            <div
-              onClick={onClickWrite}
-              style={{
-                width: "100%",
-                height: "5rem",
-                justifyContent: "center",
-                alignItems: "center",
-                borderBottom: "1px solid #fff",
-                display: "flex",
-              }}
-            >
-              <h3 style={{ color: "orange", fontSize: "1rem" }}>글쓰기</h3>
-            </div>
-          </div>
-        </Drawer>
-      )}
+      </Drawer>
       {props.children}
     </div>
   );

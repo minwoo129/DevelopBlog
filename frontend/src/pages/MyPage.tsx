@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useEffect } from "react";
+import React, { FC, HTMLAttributes, useEffect, useState } from "react";
 import { batch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -14,12 +14,14 @@ import {
 const MyPage = ({}) => {
   const dispatch = useDispatch<any>();
 
+  const [page, setPage] = useState(1);
+
   const loginInfo = useSelector((state: RootState) => state.auth.loginInfo);
 
   useEffect(() => {
     batch(() => {
       _getUserInfo();
-      _getUserWriteBlogs();
+      _getUserWriteBlogs(page);
     });
   }, []);
 
@@ -31,16 +33,17 @@ const MyPage = ({}) => {
     }
   };
 
-  const _getUserWriteBlogs = async () => {
+  const _getUserWriteBlogs = async (page: number) => {
     try {
       const result = await dispatch(
         getUserWriteBlogsThunk({
           params: {
-            page: 1,
+            page,
             size: 20,
           },
         })
       );
+      setPage(page);
     } catch (err) {
       !isActiveInServer &&
         console.log("MyPage _getUserWriteBlogs error: ", err);
@@ -49,7 +52,7 @@ const MyPage = ({}) => {
 
   return (
     <MenuTemplate>
-      <MyPageTemplate />
+      <MyPageTemplate getUserWriteBlogs={_getUserWriteBlogs} page={page} />
     </MenuTemplate>
   );
 };
