@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, RefObject } from "react";
 import styled from "styled-components";
 import {
   userDetailInfoType,
@@ -31,6 +31,7 @@ interface BodyProps extends HTMLAttributes<HTMLDivElement> {
   onClickReviseCancel(): void;
   tempNickname: string;
   setTempNickname(value: string): void;
+  bodyRef: RefObject<HTMLDivElement>;
 }
 
 const Body: FC<BodyProps> = ({
@@ -44,10 +45,11 @@ const Body: FC<BodyProps> = ({
   onClickReviseCancel,
   tempNickname,
   setTempNickname,
+  bodyRef,
   ...props
 }) => {
   return (
-    <BodyBlock {...props}>
+    <BodyBlock {...props} ref={bodyRef}>
       <UserInfo
         isRevise={isRevise}
         userInfo={userInfo}

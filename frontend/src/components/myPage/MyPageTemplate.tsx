@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useEffect, useState } from "react";
+import React, { FC, HTMLAttributes, useEffect, useRef, useState } from "react";
 import { batch } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -18,7 +18,10 @@ const MyPageTemplateBlock = styled.div`
   flex-direction: column;
 `;
 
-interface MyPageTemplateProps extends HTMLAttributes<HTMLDivElement> {}
+interface MyPageTemplateProps extends HTMLAttributes<HTMLDivElement> {
+  getUserWriteBlogs(page: number): void;
+  page: number;
+}
 
 type updateUserInfoParams = {
   profileImgIdx: number | null;
@@ -26,7 +29,11 @@ type updateUserInfoParams = {
   nickname: string;
 };
 
-const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
+const MyPageTemplate: FC<MyPageTemplateProps> = ({
+  getUserWriteBlogs,
+  page,
+  ...props
+}) => {
   const dispatch = useDispatch<any>();
   const userBlogs = useSelector(
     (state: RootState) => state.appInfo.userWriteBlogs
@@ -56,6 +63,8 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
   const isBackgroundImgChanged = useSelector(
     (state: RootState) => state.appInfo.isBackgroundImgChanged
   );
+
+  const bodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (userInfo?.profileImg?.publishedUrl) {
@@ -181,6 +190,18 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
     }
   };
 
+  const onScroll = () => {
+    if (bodyRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = bodyRef.current;
+      if (scrollTop + clientHeight == scrollHeight) {
+        const totalPages = userBlogs?.totalPages ?? 0;
+        if (totalPages > page) {
+          getUserWriteBlogs(page + 1);
+        }
+      }
+    }
+  };
+
   return (
     <MyPageTemplateBlock
       {...props}
@@ -204,6 +225,8 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({ ...props }) => {
         setTempNickname={(value) => {
           dispatch(setAppState({ key: "tempNickname", value }));
         }}
+        bodyRef={bodyRef}
+        onScroll={onScroll}
       />
     </MyPageTemplateBlock>
   );
