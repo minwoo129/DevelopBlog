@@ -10,11 +10,14 @@ const ContentViewBlock = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 5rem;
-  @media (min-width: 906px) {
+  @media (max-width: 700px) {
+    margin: 0;
+  }
+  @media (min-width: 700px) {
     margin: 0 50px;
   }
   @media (min-width: 1000px) {
-    margin: 0 50px;
+    margin: 0 100px;
   }
 `;
 
