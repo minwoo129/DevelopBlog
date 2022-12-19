@@ -7,18 +7,11 @@ import { SecondHeader, StyledTitle } from "./AdditionalComponent";
 
 const ContentViewBlock = styled.div`
   flex: 1;
-  display: flex;
+  display: block;
   flex-direction: column;
   padding: 0 5rem;
-  @media (max-width: 700px) {
-    margin: 0;
-  }
-  @media (min-width: 700px) {
-    margin: 0 50px;
-  }
-  @media (min-width: 1000px) {
-    margin: 0 100px;
-  }
+  border: 1px solid red;
+  min-height: 800px;
 `;
 
 interface ContentViewProps extends HTMLAttributes<HTMLDivElement> {

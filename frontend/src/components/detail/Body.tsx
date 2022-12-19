@@ -1,14 +1,14 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { blogDetailType } from "../../modules/initialStates/initialStateType";
-import CommentView from "./CommentView";
-import ContentView from "./ContentView";
+import BodyGroup from "./BodyGroup";
 
 const BodyBlock = styled.div`
   flex: 1;
   display: flex;
   overflow: scroll;
   flex-direction: column;
+  border: 1px solid blue;
 `;
 
 interface BodyProps extends HTMLAttributes<HTMLDivElement> {
@@ -25,12 +25,11 @@ const Body: FC<BodyProps> = ({
 }) => {
   return (
     <BodyBlock {...props}>
-      <ContentView
+      <BodyGroup
         blog={blog}
         onPressDelete={onPressDelete}
         onPressRevise={onPressRevise}
       />
-      {/* <CommentView /> */}
     </BodyBlock>
   );
 };
