@@ -1,13 +1,14 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { blogDetailType } from "../../modules/initialStates/initialStateType";
+import CommentView from "./CommentView";
 import ContentView from "./ContentView";
 
 const BodyBlock = styled.div`
   flex: 1;
   display: flex;
-  flex-flow: row wrap;
   overflow: scroll;
+  flex-direction: column;
 `;
 
 interface BodyProps extends HTMLAttributes<HTMLDivElement> {
@@ -29,6 +30,7 @@ const Body: FC<BodyProps> = ({
         onPressDelete={onPressDelete}
         onPressRevise={onPressRevise}
       />
+      {/* <CommentView /> */}
     </BodyBlock>
   );
 };
