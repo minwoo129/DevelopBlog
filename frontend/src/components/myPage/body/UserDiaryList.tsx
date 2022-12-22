@@ -37,6 +37,12 @@ const UserDiaryList: FC<UserDiaryListProps> = ({ userBlogs, ...props }) => {
         <EmptyLayerTitle>작성된 글이 없습니다</EmptyLayerTitle>
       </EmptyBlogLayer>
     );
+  } else if (userBlogs.contents.length == 0) {
+    return (
+      <EmptyBlogLayer>
+        <EmptyLayerTitle>작성된 글이 없습니다</EmptyLayerTitle>
+      </EmptyBlogLayer>
+    );
   }
   return (
     <UserDiaryListBlock {...props}>
