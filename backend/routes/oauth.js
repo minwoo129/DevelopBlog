@@ -10,6 +10,8 @@ const router = express.Router();
 
 router.post("/token", async (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
+    console.log("token authError: ", authError);
+    console.log("token user: ", user);
     if (authError) {
       res.status(500).json({
         error: true,
@@ -21,7 +23,7 @@ router.post("/token", async (req, res, next) => {
       return;
     }
     if (!user) {
-      res.status(401).status({
+      res.status(401).json({
         error: true,
         code: 401,
         result: false,
