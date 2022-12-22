@@ -10,8 +10,6 @@ const router = express.Router();
 
 router.post("/token", async (req, res, next) => {
   passport.authenticate("local", (authError, user, info) => {
-    console.log("token authError: ", authError);
-    console.log("token user: ", user);
     if (authError) {
       res.status(500).json({
         error: true,
