@@ -4,6 +4,8 @@ import { authInitialStateType as initialStateType } from "../initialStates/initi
 import { authInitialState as initialState } from "../initialStates/initialState";
 import {
   CHANGE_FIELD,
+  CLEAR_JOIN_FORM,
+  CLEAR_LOGIN_FORM,
   INITIALIZE_BY_TOKEN,
   JOIN,
   JOIN_ERROR,
@@ -123,6 +125,36 @@ export default createReducer<initialStateType, authActionType>(initialState, {
       ...initialState,
     };
     removeCookies("access_token");
+    return newState;
+  },
+
+  // CLEAR_LOGIN_FORM ////////////////////////////////////////////////////
+  [CLEAR_LOGIN_FORM]: (state, action) => {
+    const newState: initialStateType = {
+      ...state,
+      loginForm: {
+        email: "",
+        pwd: "",
+      },
+    };
+    return newState;
+  },
+
+  // CLEAR_JOIN_FORM ////////////////////////////////////////////////////
+  [CLEAR_JOIN_FORM]: (state, action) => {
+    const newState: initialStateType = {
+      ...state,
+      joinForm: {
+        adminPwd: "",
+        email: "",
+        imageFile: null,
+        isAdmin: false,
+        name: "",
+        nickname: "",
+        pwd: "",
+        pwdCheck: "",
+      },
+    };
     return newState;
   },
 });

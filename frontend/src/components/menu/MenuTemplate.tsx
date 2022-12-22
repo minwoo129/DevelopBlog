@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { logout } from "../../modules/actions/auth";
+import { clearLoginForm, logout } from "../../modules/actions/auth";
 import { RootState } from "../../modules/reducer";
 import "./MenuTemplate.scss";
 import { setMenuOpen, setMenuVisible } from "../../modules/actions/menu";
@@ -31,9 +31,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
 
   const loginInfo = useSelector((state: RootState) => state.auth.loginInfo);
   const login = useSelector((state: RootState) => state.auth.login);
-  const isMenuVisible = useSelector(
-    (state: RootState) => state.menu.isMenuVisible
-  );
+  const loginForm = useSelector((state: RootState) => state.auth.loginForm);
   const isMenuOpen = useSelector((state: RootState) => state.menu.isMenuOpen);
   const isReviseUserInfo = useSelector(
     (state: RootState) => state.appInfo.isReviseUserInfo
@@ -49,6 +47,10 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   useEffect(() => {
     if (location.pathname.indexOf("/myPage") != -1) setMyPage(true);
     else setMyPage(false);
+
+    if (loginForm.email != "" || loginForm.pwd != "") {
+      dispatch(clearLoginForm());
+    }
   }, [location]);
 
   const onClickTitle = (e: MouseEvent<HTMLDivElement>) => {

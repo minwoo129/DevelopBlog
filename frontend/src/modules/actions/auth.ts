@@ -21,6 +21,10 @@ export const TOKEN_CHECK_ERROR = "auth/TOKEN_CHECK_ERROR";
 
 export const LOGOUT = "auth/LOGOUT";
 
+export const CLEAR_LOGIN_FORM = "auth/CLEAR_LOGIN_FORM";
+
+export const CLEAR_JOIN_FORM = "auth/CLEAR_JOIN_FORM";
+
 // ********************************** Action *******************************************
 export const changeField = ({ form, key, value }: ChangeFieldParam) => {
   return { type: CHANGE_FIELD, payload: { form, key, value } };
@@ -55,4 +59,12 @@ export const tokenCheck = createAsyncAction(
 
 export const logout = () => {
   return { type: LOGOUT, payload: null };
+};
+
+export const clearLoginForm = () => {
+  return { type: CLEAR_LOGIN_FORM, payload: null };
+};
+
+export const clearJoinForm = () => {
+  return { type: CLEAR_JOIN_FORM, payload: null };
 };
