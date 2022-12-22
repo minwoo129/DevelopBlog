@@ -246,6 +246,9 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     } catch (e: any) {
       !isActiveInServer &&
         console.log("AuthTemplate _login error: ", e.response);
+      if (e.response.data.code == 401) {
+        alert("아이디 또는 비밀번호가 일치하지 않습니다.");
+      }
     }
   };
 
