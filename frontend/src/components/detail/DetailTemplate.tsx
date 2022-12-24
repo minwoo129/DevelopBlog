@@ -9,6 +9,7 @@ const DetailTemplateBlock = styled.div`
   background: #e9ecef;
   display: flex;
   flex-direction: column;
+  width: 600px;
 `;
 
 interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {

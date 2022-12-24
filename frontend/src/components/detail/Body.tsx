@@ -9,6 +9,7 @@ const BodyBlock = styled.div`
   overflow: scroll;
   flex-direction: column;
   border: 1px solid blue;
+  align-items: center;
 `;
 
 interface BodyProps extends HTMLAttributes<HTMLDivElement> {

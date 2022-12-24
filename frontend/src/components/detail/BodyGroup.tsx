@@ -9,14 +9,17 @@ const BodyGroupBlock = styled.div`
   display: block;
   flex-direction: column;
   padding: 0 5rem;
+
   @media (max-width: 700px) {
     padding: 0;
   }
   @media (min-width: 700px) {
     padding: 0 50px;
+    width: 700px;
   }
   @media (min-width: 1000px) {
     padding: 0 100px;
+    width: 700px;
   }
 `;
 
