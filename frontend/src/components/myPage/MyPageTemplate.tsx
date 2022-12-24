@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, useEffect, useRef, useState } from "react";
 import { batch } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { isActiveInServer } from "../../config";
 import invokeAPI, { invokeFileUpload } from "../../lib/restAPI";
@@ -34,6 +35,8 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
   page,
   ...props
 }) => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch<any>();
   const userBlogs = useSelector(
     (state: RootState) => state.blog.userWriteBlogs
@@ -201,6 +204,9 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
       }
     }
   };
+  const onPressItem = (id: number) => {
+    navigate(`/detail?id=${id}`);
+  };
 
   return (
     <MyPageTemplateBlock
@@ -227,6 +233,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
         }}
         bodyRef={bodyRef}
         onScroll={onScroll}
+        onPressItem={onPressItem}
       />
     </MyPageTemplateBlock>
   );

@@ -28,9 +28,14 @@ const EmptyLayerTitle = styled.h1`
 
 interface UserDiaryListProps extends HTMLAttributes<HTMLDivElement> {
   userBlogs: userWriteBlogsType | null;
+  onPress(id: number): void;
 }
 
-const UserDiaryList: FC<UserDiaryListProps> = ({ userBlogs, ...props }) => {
+const UserDiaryList: FC<UserDiaryListProps> = ({
+  userBlogs,
+  onPress,
+  ...props
+}) => {
   if (!userBlogs) {
     return (
       <EmptyBlogLayer>
@@ -47,7 +52,7 @@ const UserDiaryList: FC<UserDiaryListProps> = ({ userBlogs, ...props }) => {
   return (
     <UserDiaryListBlock {...props}>
       {userBlogs.contents.map((item, index) => {
-        return <UserDiaryItem item={item} key={index} />;
+        return <UserDiaryItem item={item} key={index} onPress={onPress} />;
       })}
     </UserDiaryListBlock>
   );

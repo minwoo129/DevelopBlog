@@ -32,6 +32,7 @@ interface BodyProps extends HTMLAttributes<HTMLDivElement> {
   tempNickname: string;
   setTempNickname(value: string): void;
   bodyRef: RefObject<HTMLDivElement>;
+  onPressItem(id: number): void;
 }
 
 const Body: FC<BodyProps> = ({
@@ -46,6 +47,7 @@ const Body: FC<BodyProps> = ({
   tempNickname,
   setTempNickname,
   bodyRef,
+  onPressItem,
   ...props
 }) => {
   return (
@@ -61,7 +63,7 @@ const Body: FC<BodyProps> = ({
         tempNickname={tempNickname}
         setTempNickname={setTempNickname}
       />
-      <UserDiaryList userBlogs={userBlogs} />
+      <UserDiaryList userBlogs={userBlogs} onPress={onPressItem} />
     </BodyBlock>
   );
 };

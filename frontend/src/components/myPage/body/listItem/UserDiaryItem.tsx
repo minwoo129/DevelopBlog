@@ -34,9 +34,10 @@ const UserDiaryItemBlock = styled.div`
 
 interface UserDiaryItemProps extends HTMLAttributes<HTMLDivElement> {
   item: blogItemType;
+  onPress(id: number): void;
 }
 
-const UserDiaryItem: FC<UserDiaryItemProps> = ({ item, ...props }) => {
+const UserDiaryItem: FC<UserDiaryItemProps> = ({ item, onPress, ...props }) => {
   let newContent = item.htmlContent.replace(/(<([^>]+)>)/gi, "");
   const createdAt = useMemo(() => {
     let createdAt = "";
@@ -48,7 +49,7 @@ const UserDiaryItem: FC<UserDiaryItemProps> = ({ item, ...props }) => {
     return createdAt;
   }, [item]);
   return (
-    <UserDiaryItemBlock {...props}>
+    <UserDiaryItemBlock {...props} onClick={() => onPress(item.id)}>
       <StyledImage src={item.thumbnailUrl} />
       <ItemInformationView>
         <StyledTitle>{item.title}</StyledTitle>
