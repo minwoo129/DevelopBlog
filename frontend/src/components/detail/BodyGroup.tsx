@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { blogDetailType } from "../../modules/initialStates/initialStateType";
-import CommentView from "./CommentView";
+import CommentView from "./comment/CommentView";
 import ContentView from "./ContentView";
 
 const BodyGroupBlock = styled.div`
