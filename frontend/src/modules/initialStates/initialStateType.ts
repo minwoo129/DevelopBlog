@@ -34,13 +34,13 @@ export type blogInitialStateType = {
   blog: blogDetailType | null;
   searchBlogs: blogItemType[];
   isExecuteSearch: boolean;
+  userWriteBlogs: userWriteBlogsType | null;
 };
 // ================================ appInfo =======================================
 export type appInfoInitialStateType = {
   searchBarVisible: boolean;
   searchTxt: string;
   userInfo: userDetailInfoType | null;
-  userWriteBlogs: userWriteBlogsType | null;
   isReviseUserInfo: boolean;
   userImgTempData: File | Blob | null;
   backgroundImgTempData: File | Blob | null;

@@ -36,7 +36,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
 }) => {
   const dispatch = useDispatch<any>();
   const userBlogs = useSelector(
-    (state: RootState) => state.appInfo.userWriteBlogs
+    (state: RootState) => state.blog.userWriteBlogs
   );
   const userInfo = useSelector((state: RootState) => state.appInfo.userInfo);
   const isReviseUserInfo = useSelector(

@@ -12,6 +12,9 @@ import {
   GET_SEARCH_BLOGS,
   GET_SEARCH_BLOGS_ERROR,
   GET_SEARCH_BLOGS_SUCCESS,
+  GET_USER_WRITE_BLOGS,
+  GET_USER_WRITE_BLOGS_ERROR,
+  GET_USER_WRITE_BLOGS_SUCCESS,
   SET_ADDED_IMAGE_IDS,
 } from "../actions/blog";
 import { blogInitialState as initialState } from "../initialStates/initialState";
@@ -91,5 +94,40 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
       isExecuteSearch: false,
     };
     return newState;
+  },
+
+  // GET_USER_WRITE_BLOGS ////////////////////////////////////////////////////
+  [GET_USER_WRITE_BLOGS]: (state, action) => {
+    return state;
+  },
+  [GET_USER_WRITE_BLOGS_SUCCESS]: (state, { payload: { param, result } }) => {
+    let newState: initialStateType = {
+      ...state,
+    };
+    if (param?.params?.page == 1) {
+      newState = {
+        ...newState,
+        userWriteBlogs: result.data,
+      };
+    } else {
+      let contents: any[] = [];
+      if (newState.userWriteBlogs) {
+        contents = [
+          ...newState.userWriteBlogs.contents,
+          ...result.data.contents,
+        ];
+        newState = {
+          ...newState,
+          userWriteBlogs: {
+            ...newState.userWriteBlogs,
+            contents,
+          },
+        };
+      }
+    }
+    return newState;
+  },
+  [GET_USER_WRITE_BLOGS_ERROR]: (state, action) => {
+    return state;
   },
 });

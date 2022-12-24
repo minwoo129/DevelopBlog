@@ -1,6 +1,11 @@
 import invokeAPI from "../../lib/restAPI";
 import createAsyncThunk from "../../lib/thunk/createAsyncThunk";
-import { getBlog, getBlogs, getSearchBlogs } from "../actions/blog";
+import {
+  getBlog,
+  getBlogs,
+  getSearchBlogs,
+  getUserWriteBlogs,
+} from "../actions/blog";
 
 export const getBlogsThunk = createAsyncThunk(
   getBlogs,
@@ -15,4 +20,9 @@ export const getBlogThunk = createAsyncThunk(
 export const getSearchBlogsThunk = createAsyncThunk(
   getSearchBlogs,
   invokeAPI({ method: "get", path: "/api/content/search" })
+);
+
+export const getUserWriteBlogsThunk = createAsyncThunk(
+  getUserWriteBlogs,
+  invokeAPI({ method: "get", path: "/api/content/get/list/userWrite" })
 );

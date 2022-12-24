@@ -19,6 +19,10 @@ export const GET_SEARCH_BLOGS_SUCCESS = "blog/GET_SEARCH_BLOGS_SUCCESS";
 export const GET_SEARCH_BLOGS_ERROR = "blog/GET_SEARCH_BLOGS_ERROR";
 
 export const CLEAR_SEARCH_BLOGS = "blog/CLEAR_SEARCH_BLOGS";
+
+export const GET_USER_WRITE_BLOGS = "blog/GET_USER_WRITE_BLOGS";
+export const GET_USER_WRITE_BLOGS_SUCCESS = "blog/GET_USER_WRITE_BLOGS_SUCCESS";
+export const GET_USER_WRITE_BLOGS_ERROR = "blog/GET_USER_WRITE_BLOGS_ERROR";
 // ********************************** Action *******************************************e
 export const setAddedImageIds = (id: number) => {
   return { type: SET_ADDED_IMAGE_IDS, payload: id };
@@ -49,3 +53,9 @@ export const getSearchBlogs = createAsyncAction(
 export const clearSearchBlogs = () => {
   return { type: CLEAR_SEARCH_BLOGS, payload: null };
 };
+
+export const getUserWriteBlogs = createAsyncAction(
+  GET_USER_WRITE_BLOGS,
+  GET_USER_WRITE_BLOGS_SUCCESS,
+  GET_USER_WRITE_BLOGS_ERROR
+)<any, asyncCommonReturnType, AxiosError>();

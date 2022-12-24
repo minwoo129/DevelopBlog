@@ -6,10 +6,8 @@ import MenuTemplate from "../components/menu/MenuTemplate";
 import MyPageTemplate from "../components/myPage/MyPageTemplate";
 import { isActiveInServer } from "../config";
 import { RootState } from "../modules/reducer";
-import {
-  getUserInfoThunk,
-  getUserWriteBlogsThunk,
-} from "../modules/thunk/appInfo";
+import { getUserInfoThunk } from "../modules/thunk/appInfo";
+import { getUserWriteBlogsThunk } from "../modules/thunk/blog";
 
 const MyPage = ({}) => {
   const dispatch = useDispatch<any>();
