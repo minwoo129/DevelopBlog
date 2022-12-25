@@ -3,10 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.addColumn("contents", "public", {
-      type: Sequelize.BOOLEAN,
-      defaultValue: true,
-    });
+    return queryInterface.dropTable("comments");
     /**
      * Add altering commands here.
      *
