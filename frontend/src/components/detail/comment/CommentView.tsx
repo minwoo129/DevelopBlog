@@ -7,7 +7,8 @@ const CommentViewBlock = styled.div`
   min-height: 300px;
   border: 1px solid green;
   height: 500px;
-  padding: 0 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 `;
 
 interface CommentViewProps extends HTMLAttributes<HTMLDivElement> {}

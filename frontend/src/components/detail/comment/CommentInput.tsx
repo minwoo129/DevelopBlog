@@ -6,10 +6,11 @@ const CommentInputBlock = styled.textarea`
   border: 1px solid #a4a4a4;
   border-radius: 6px;
   margin-top: 2rem;
-  display: inline;
-  min-width: 600px;
+  display: block;
+  width: 100%;
   vertical-align: top;
   padding: 10px;
+  box-sizing: border-box;
 `;
 
 interface CommentInputProps extends HTMLAttributes<HTMLTextAreaElement> {}
