@@ -10,6 +10,7 @@ const ButtonViewBlock = styled.div`
   justify-content: flex-end;
   align-items: center;
   margin-top: 1.5rem;
+  border: 1px solid black;
 `;
 
 const AddButton = styled.button`
@@ -19,6 +20,9 @@ const AddButton = styled.button`
   border-radius: 6px;
   border: 1px solid #fff;
   color: #fff;
+  &:hover {
+    background: #01df3a;
+  }
 `;
 
 interface ButtonViewProps extends HTMLAttributes<HTMLDivElement> {}

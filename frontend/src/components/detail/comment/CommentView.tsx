@@ -7,7 +7,6 @@ const CommentViewBlock = styled.div`
   display: block;
   min-height: 300px;
   border: 1px solid green;
-  height: 500px;
   padding-left: 50px;
   padding-right: 50px;
 `;
