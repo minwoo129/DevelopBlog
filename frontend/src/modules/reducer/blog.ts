@@ -16,6 +16,7 @@ import {
   GET_USER_WRITE_BLOGS_ERROR,
   GET_USER_WRITE_BLOGS_SUCCESS,
   SET_ADDED_IMAGE_IDS,
+  SET_COMMENT_INPUT,
 } from "../actions/blog";
 import { blogInitialState as initialState } from "../initialStates/initialState";
 import { blogInitialStateType as initialStateType } from "../initialStates/initialStateType";
@@ -129,5 +130,14 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
   },
   [GET_USER_WRITE_BLOGS_ERROR]: (state, action) => {
     return state;
+  },
+
+  // SET_COMMENT_INPUT ////////////////////////////////////////////////////
+  [SET_COMMENT_INPUT]: (state, { payload: result }) => {
+    const newState: initialStateType = {
+      ...state,
+      commentInput: result,
+    };
+    return newState;
   },
 });

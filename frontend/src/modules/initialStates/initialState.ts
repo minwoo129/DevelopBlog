@@ -40,6 +40,7 @@ export const blogInitialState: blogInitialStateType = {
   searchBlogs: [],
   isExecuteSearch: false,
   userWriteBlogs: null,
+  commentInput: "",
 };
 // ================================ appInfo =======================================
 export const appInfoInitialState: appInfoInitialStateType = {
