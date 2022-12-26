@@ -1,6 +1,7 @@
 import invokeAPI from "../../lib/restAPI";
 import createAsyncThunk from "../../lib/thunk/createAsyncThunk";
 import {
+  addComment,
   getBlog,
   getBlogs,
   getSearchBlogs,
@@ -25,4 +26,9 @@ export const getSearchBlogsThunk = createAsyncThunk(
 export const getUserWriteBlogsThunk = createAsyncThunk(
   getUserWriteBlogs,
   invokeAPI({ method: "get", path: "/api/content/get/list/userWrite" })
+);
+
+export const addCommentThunk = createAsyncThunk(
+  addComment,
+  invokeAPI({ method: "post", path: "/api/comment/save" })
 );

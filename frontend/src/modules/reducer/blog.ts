@@ -1,6 +1,9 @@
 import { createReducer } from "typesafe-actions";
 import { blogActionType } from "../actions";
 import {
+  ADD_COMMENT,
+  ADD_COMMENT_ERROR,
+  ADD_COMMENT_SUCCESS,
   CLEAR_ADDED_IMAGE_IDS,
   CLEAR_SEARCH_BLOGS,
   GET_BLOG,
@@ -139,5 +142,20 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
       commentInput: result,
     };
     return newState;
+  },
+
+  // ADD_COMMENT ////////////////////////////////////////////////////
+  [ADD_COMMENT]: (state, action) => {
+    return state;
+  },
+  [ADD_COMMENT_SUCCESS]: (state, { payload: { param, result } }) => {
+    const newState: initialStateType = {
+      ...state,
+      commentInput: "",
+    };
+    return newState;
+  },
+  [ADD_COMMENT_ERROR]: (state, action) => {
+    return state;
   },
 });
