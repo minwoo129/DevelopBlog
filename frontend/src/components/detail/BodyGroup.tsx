@@ -8,17 +8,15 @@ const BodyGroupBlock = styled.div`
   flex: 1;
   display: block;
   flex-direction: column;
-  padding: 0 5rem;
-
+  border: 1px solid orange;
   @media (max-width: 700px) {
     padding: 0;
+    min-width: 500px;
   }
   @media (min-width: 700px) {
-    padding: 0 50px;
     width: 700px;
   }
   @media (min-width: 1000px) {
-    padding: 0 100px;
     width: 700px;
   }
 `;
