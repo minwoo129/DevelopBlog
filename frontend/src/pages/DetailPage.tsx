@@ -10,7 +10,7 @@ import { RootState } from "../modules/reducer";
 import { setMenuOpen } from "../modules/actions/menu";
 import invokeAPI from "../lib/restAPI";
 import { batch } from "react-redux";
-import { clearSearchBlogs } from "../modules/actions/blog";
+import { clearSearchBlogs, setCommentInput } from "../modules/actions/blog";
 import { setSearchTxt } from "../modules/actions/appInfo";
 import { isActiveInServer } from "../config";
 
@@ -28,11 +28,15 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   const isMenuVisible = useSelector(
     (state: RootState) => state.menu.isMenuVisible
   );
+  const commentInput = useSelector(
+    (state: RootState) => state.blog.commentInput
+  );
 
   useEffect(() => {
     document.title = "DEVELOPBLOG-상세";
     batch(() => {
       _getBlog(Number(query.id));
+      //__getComments(Number(query.id));
     });
   }, []);
 
@@ -45,6 +49,24 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
       );
     } catch (err) {
       !isActiveInServer && console.log("DetailPage _getBlog error: ", err);
+    }
+  };
+
+  const __getComments = async (id: number) => {
+    try {
+      const result = await invokeAPI({
+        method: "get",
+        path: `/api/comment/get/list/${id}`,
+      })({
+        params: {
+          page: 1,
+          size: 10,
+        },
+      });
+      !isActiveInServer &&
+        console.log("DetailPage __getComments result: ", result);
+    } catch (err) {
+      !isActiveInServer && console.log("DetailPage __getComments error: ", err);
     }
   };
 
@@ -79,6 +101,11 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
         setMenuOpen={() => dispatch(setMenuOpen(true))}
         onPressDelete={onPressDelete}
         onPressRevise={onPressRevise}
+        commentInput={commentInput}
+        setCommentInput={(value) => {
+          dispatch(setCommentInput(value));
+        }}
+        onPressAdd={() => {}}
       />
     </MenuTemplate>
   );

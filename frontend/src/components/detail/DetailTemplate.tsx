@@ -18,6 +18,9 @@ interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
   setMenuOpen(): void;
   onPressDelete(): void;
   onPressRevise(): void;
+  commentInput: string;
+  setCommentInput(value: string): void;
+  onPressAdd(): void;
 }
 
 const DetailTemplate: FC<DetailTemplateProps> = ({
@@ -26,6 +29,9 @@ const DetailTemplate: FC<DetailTemplateProps> = ({
   setMenuOpen,
   onPressDelete,
   onPressRevise,
+  commentInput,
+  setCommentInput,
+  onPressAdd,
   ...props
 }) => {
   return (
@@ -35,6 +41,9 @@ const DetailTemplate: FC<DetailTemplateProps> = ({
         blog={blog}
         onPressRevise={onPressRevise}
         onPressDelete={onPressDelete}
+        commentInput={commentInput}
+        setCommentInput={setCommentInput}
+        onPressAdd={onPressAdd}
       />
     </DetailTemplateBlock>
   );

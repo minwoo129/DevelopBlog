@@ -13,14 +13,28 @@ const CommentViewBlock = styled.div`
 
 const StyledTitle = styled.h2``;
 
-interface CommentViewProps extends HTMLAttributes<HTMLDivElement> {}
+interface CommentViewProps extends HTMLAttributes<HTMLDivElement> {
+  commentInput: string;
+  setCommentInput(value: string): void;
+  onPressAdd(): void;
+}
 
-const CommentView: FC<CommentViewProps> = ({ ...props }) => {
+const CommentView: FC<CommentViewProps> = ({
+  commentInput,
+  setCommentInput,
+  onPressAdd,
+  ...props
+}) => {
   return (
     <CommentViewBlock {...props}>
       <StyledTitle>테스트</StyledTitle>
-      <CommentInput />
-      <ButtonView />
+      <CommentInput
+        defaultValue={commentInput}
+        onMouseOut={(e) => {
+          setCommentInput(e.currentTarget.value);
+        }}
+      />
+      <ButtonView onPressAdd={onPressAdd} />
     </CommentViewBlock>
   );
 };

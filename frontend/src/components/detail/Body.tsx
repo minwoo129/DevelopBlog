@@ -16,12 +16,18 @@ interface BodyProps extends HTMLAttributes<HTMLDivElement> {
   blog: blogDetailType | null;
   onPressDelete(): void;
   onPressRevise(): void;
+  commentInput: string;
+  setCommentInput(value: string): void;
+  onPressAdd(): void;
 }
 
 const Body: FC<BodyProps> = ({
   blog,
   onPressDelete,
   onPressRevise,
+  commentInput,
+  setCommentInput,
+  onPressAdd,
   ...props
 }) => {
   return (
@@ -30,6 +36,9 @@ const Body: FC<BodyProps> = ({
         blog={blog}
         onPressDelete={onPressDelete}
         onPressRevise={onPressRevise}
+        commentInput={commentInput}
+        setCommentInput={setCommentInput}
+        onPressAdd={onPressAdd}
       />
     </BodyBlock>
   );

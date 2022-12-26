@@ -25,12 +25,14 @@ const AddButton = styled.button`
   }
 `;
 
-interface ButtonViewProps extends HTMLAttributes<HTMLDivElement> {}
+interface ButtonViewProps extends HTMLAttributes<HTMLDivElement> {
+  onPressAdd(): void;
+}
 
-const ButtonView: FC<ButtonViewProps> = ({ ...props }) => {
+const ButtonView: FC<ButtonViewProps> = ({ onPressAdd, ...props }) => {
   return (
     <ButtonViewBlock {...props}>
-      <AddButton>등록하기</AddButton>
+      <AddButton onClick={onPressAdd}>등록하기</AddButton>
     </ButtonViewBlock>
   );
 };

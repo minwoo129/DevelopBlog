@@ -25,12 +25,18 @@ interface BodyGroupProps extends HTMLAttributes<HTMLDivElement> {
   blog: blogDetailType | null;
   onPressDelete(): void;
   onPressRevise(): void;
+  commentInput: string;
+  setCommentInput(value: string): void;
+  onPressAdd(): void;
 }
 
 const BodyGroup: FC<BodyGroupProps> = ({
   blog,
   onPressDelete,
   onPressRevise,
+  commentInput,
+  setCommentInput,
+  onPressAdd,
   ...props
 }) => {
   return (
@@ -40,7 +46,11 @@ const BodyGroup: FC<BodyGroupProps> = ({
         onPressDelete={onPressDelete}
         onPressRevise={onPressRevise}
       />
-      <CommentView />
+      <CommentView
+        commentInput={commentInput}
+        setCommentInput={setCommentInput}
+        onPressAdd={onPressAdd}
+      />
     </BodyGroupBlock>
   );
 };
