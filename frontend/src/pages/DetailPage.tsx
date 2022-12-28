@@ -4,7 +4,7 @@ import DetailTemplate from "../components/detail/DetailTemplate";
 import MenuTemplate from "../components/menu/MenuTemplate";
 import qs from "qs";
 import { useDispatch } from "react-redux";
-import { getBlogThunk } from "../modules/thunk/blog";
+import { addCommentThunk, getBlogThunk } from "../modules/thunk/blog";
 import { useSelector } from "react-redux";
 import { RootState } from "../modules/reducer";
 import { setMenuOpen } from "../modules/actions/menu";
@@ -31,12 +31,13 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   const commentInput = useSelector(
     (state: RootState) => state.blog.commentInput
   );
+  const login = useSelector((state: RootState) => state.auth.login);
 
   useEffect(() => {
     document.title = "DEVELOPBLOG-상세";
     batch(() => {
       _getBlog(Number(query.id));
-      //__getComments(Number(query.id));
+      __getComments(Number(query.id));
     });
   }, []);
 
@@ -93,6 +94,27 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
     }
   };
 
+  const _addComment = async () => {
+    if (!login) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
+    try {
+      const result = await dispatch(
+        addCommentThunk({
+          data: {
+            comment: commentInput,
+            contentId: blog?.id,
+          },
+        })
+      );
+      if (blog) __getComments(blog.id);
+    } catch (err) {
+      !isActiveInServer && console.log("DetailPage _addComment error: ", err);
+    }
+  };
+
   return (
     <MenuTemplate {...props}>
       <DetailTemplate
@@ -105,7 +127,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
         setCommentInput={(value) => {
           dispatch(setCommentInput(value));
         }}
-        onPressAdd={() => {}}
+        onPressAdd={_addComment}
       />
     </MenuTemplate>
   );
