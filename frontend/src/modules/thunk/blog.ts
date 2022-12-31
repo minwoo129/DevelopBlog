@@ -4,6 +4,7 @@ import {
   addComment,
   getBlog,
   getBlogs,
+  getComments,
   getSearchBlogs,
   getUserWriteBlogs,
 } from "../actions/blog";
@@ -31,4 +32,9 @@ export const getUserWriteBlogsThunk = createAsyncThunk(
 export const addCommentThunk = createAsyncThunk(
   addComment,
   invokeAPI({ method: "post", path: "/api/comment/save" })
+);
+
+export const getCommentsThunk = createAsyncThunk(
+  getComments,
+  invokeAPI({ method: "get", path: "/api/comment/get/list" })
 );

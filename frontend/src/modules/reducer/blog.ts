@@ -12,6 +12,9 @@ import {
   GET_BLOGS_SUCCESS,
   GET_BLOG_ERROR,
   GET_BLOG_SUCCESS,
+  GET_COMMENTS,
+  GET_COMMENTS_ERROR,
+  GET_COMMENTS_SUCCESS,
   GET_SEARCH_BLOGS,
   GET_SEARCH_BLOGS_ERROR,
   GET_SEARCH_BLOGS_SUCCESS,
@@ -156,6 +159,21 @@ export default createReducer<initialStateType, blogActionType>(initialState, {
     return newState;
   },
   [ADD_COMMENT_ERROR]: (state, action) => {
+    return state;
+  },
+
+  // GET_COMMENTS ////////////////////////////////////////////////////
+  [GET_COMMENTS]: (state, action) => {
+    return state;
+  },
+  [GET_COMMENTS_SUCCESS]: (state, { payload: { param, result } }) => {
+    const newState: initialStateType = {
+      ...state,
+      comments: result.data,
+    };
+    return newState;
+  },
+  [GET_COMMENTS_ERROR]: (state, action) => {
     return state;
   },
 });

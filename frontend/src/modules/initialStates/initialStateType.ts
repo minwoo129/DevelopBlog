@@ -36,6 +36,7 @@ export type blogInitialStateType = {
   isExecuteSearch: boolean;
   userWriteBlogs: userWriteBlogsType | null;
   commentInput: string;
+  comments: blogCommentsType | null;
 };
 // ================================ appInfo =======================================
 export type appInfoInitialStateType = {
@@ -101,3 +102,26 @@ export interface userWriteBlogsType {
   totalElements: number;
   totalPages: number;
 }
+
+export interface blogCommentsType {
+  contents: CommentType[];
+  totalElements: number;
+  totalPages: number;
+}
+
+export type CommentType = {
+  id: number;
+  comment: string;
+  enableDelete: boolean;
+  enableEdit: boolean;
+  updatedAt: string;
+  createdAt: string;
+  userId: number;
+  User: {
+    nickname: string;
+    profileImgUrl: string | null;
+    id: number;
+  };
+  contentId: number;
+  deletedAt: null | string;
+};

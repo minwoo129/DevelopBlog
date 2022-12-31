@@ -29,6 +29,10 @@ export const SET_COMMENT_INPUT = "blog/SET_COMMENT_INPUT";
 export const ADD_COMMENT = "blog/ADD_COMMENT";
 export const ADD_COMMENT_SUCCESS = "blog/ADD_COMMENT_SUCCESS";
 export const ADD_COMMENT_ERROR = "blog/ADD_COMMENT_ERROR";
+
+export const GET_COMMENTS = "blog/GET_COMMENTS";
+export const GET_COMMENTS_SUCCESS = "blog/GET_COMMENTS_SUCCESS";
+export const GET_COMMENTS_ERROR = "blog/GET_COMMENTS_ERROR";
 // ********************************** Action *******************************************e
 export const setAddedImageIds = (id: number) => {
   return { type: SET_ADDED_IMAGE_IDS, payload: id };
@@ -74,4 +78,10 @@ export const addComment = createAsyncAction(
   ADD_COMMENT,
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_ERROR
+)<any, asyncCommonReturnType, AxiosError>();
+
+export const getComments = createAsyncAction(
+  GET_COMMENTS,
+  GET_COMMENTS_SUCCESS,
+  GET_COMMENTS_ERROR
 )<any, asyncCommonReturnType, AxiosError>();
