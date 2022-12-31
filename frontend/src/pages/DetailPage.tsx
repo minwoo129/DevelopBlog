@@ -4,7 +4,11 @@ import DetailTemplate from "../components/detail/DetailTemplate";
 import MenuTemplate from "../components/menu/MenuTemplate";
 import qs from "qs";
 import { useDispatch } from "react-redux";
-import { addCommentThunk, getBlogThunk } from "../modules/thunk/blog";
+import {
+  addCommentThunk,
+  getBlogThunk,
+  getCommentsThunk,
+} from "../modules/thunk/blog";
 import { useSelector } from "react-redux";
 import { RootState } from "../modules/reducer";
 import { setMenuOpen } from "../modules/actions/menu";
@@ -37,7 +41,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
     document.title = "DEVELOPBLOG-상세";
     batch(() => {
       _getBlog(Number(query.id));
-      __getComments(Number(query.id));
+      _getComments(Number(query.id));
     });
   }, []);
 
@@ -53,21 +57,21 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
     }
   };
 
-  const __getComments = async (id: number) => {
+  const _getComments = async (id: number) => {
     try {
-      const result = await invokeAPI({
-        method: "get",
-        path: `/api/comment/get/list/${id}`,
-      })({
-        params: {
-          page: 1,
-          size: 10,
-        },
-      });
+      const result = await dispatch(
+        getCommentsThunk({
+          subPath: `/${id}`,
+          params: {
+            page: 1,
+            size: 10,
+          },
+        })
+      );
       !isActiveInServer &&
-        console.log("DetailPage __getComments result: ", result);
+        console.log("DetailPage _getComments result: ", result);
     } catch (err) {
-      !isActiveInServer && console.log("DetailPage __getComments error: ", err);
+      !isActiveInServer && console.log("DetailPage _getComments error: ", err);
     }
   };
 
@@ -109,7 +113,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
           },
         })
       );
-      if (blog) __getComments(blog.id);
+      if (blog) _getComments(blog.id);
     } catch (err) {
       !isActiveInServer && console.log("DetailPage _addComment error: ", err);
     }
