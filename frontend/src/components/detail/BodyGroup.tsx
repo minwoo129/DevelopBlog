@@ -51,6 +51,7 @@ const BodyGroup: FC<BodyGroupProps> = ({
         onPressRevise={onPressRevise}
       />
       <CommentView
+        blog={blog}
         commentInput={commentInput}
         setCommentInput={setCommentInput}
         onPressAdd={onPressAdd}

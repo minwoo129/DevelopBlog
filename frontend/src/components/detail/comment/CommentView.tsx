@@ -1,6 +1,9 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { CommentType } from "../../../modules/initialStates/initialStateType";
+import {
+  blogDetailType,
+  CommentType,
+} from "../../../modules/initialStates/initialStateType";
 import ButtonView from "./ButtonView";
 import CommentInput from "./CommentInput";
 import CommentListView from "./CommentListView";
@@ -15,6 +18,7 @@ const CommentViewBlock = styled.div`
 const StyledTitle = styled.h2``;
 
 interface CommentViewProps extends HTMLAttributes<HTMLDivElement> {
+  blog: blogDetailType | null;
   commentInput: string;
   setCommentInput(value: string): void;
   onPressAdd(): void;
@@ -22,6 +26,7 @@ interface CommentViewProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const CommentView: FC<CommentViewProps> = ({
+  blog,
   commentInput,
   setCommentInput,
   onPressAdd,
@@ -30,7 +35,7 @@ const CommentView: FC<CommentViewProps> = ({
 }) => {
   return (
     <CommentViewBlock {...props}>
-      <StyledTitle>테스트</StyledTitle>
+      <StyledTitle>{`총 ${blog?.commentCount ?? 0}개의 댓글`}</StyledTitle>
       <CommentInput
         defaultValue={commentInput}
         onMouseOut={(e) => {
