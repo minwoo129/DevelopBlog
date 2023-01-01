@@ -5,6 +5,7 @@ import {
   CommentType,
 } from "../../modules/initialStates/initialStateType";
 import BodyGroup from "./BodyGroup";
+import { BodyProps } from "./DetailType";
 
 const BodyBlock = styled.div`
   flex: 1;
@@ -13,16 +14,6 @@ const BodyBlock = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-interface BodyProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogDetailType | null;
-  onPressDelete(): void;
-  onPressRevise(): void;
-  commentInput: string;
-  setCommentInput(value: string): void;
-  onPressAdd(): void;
-  comments?: CommentType[];
-}
 
 const Body: FC<BodyProps> = ({
   blog,

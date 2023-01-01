@@ -4,6 +4,7 @@ import {
   blogDetailType,
   CommentType,
 } from "../../../modules/initialStates/initialStateType";
+import { CommentViewProps } from "../DetailType";
 import ButtonView from "./ButtonView";
 import CommentInput from "./CommentInput";
 import CommentListView from "./CommentListView";
@@ -16,14 +17,6 @@ const CommentViewBlock = styled.div`
 `;
 
 const StyledTitle = styled.h2``;
-
-interface CommentViewProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogDetailType | null;
-  commentInput: string;
-  setCommentInput(value: string): void;
-  onPressAdd(): void;
-  comments?: CommentType[];
-}
 
 const CommentView: FC<CommentViewProps> = ({
   blog,

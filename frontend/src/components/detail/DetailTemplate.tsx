@@ -5,6 +5,7 @@ import {
   CommentType,
 } from "../../modules/initialStates/initialStateType";
 import Body from "./Body";
+import { DetailTemplateProps } from "./DetailType";
 import Header from "./Header";
 
 const DetailTemplateBlock = styled.div`
@@ -14,18 +15,6 @@ const DetailTemplateBlock = styled.div`
   flex-direction: column;
   width: 600px;
 `;
-
-interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogDetailType | null;
-  isMenuVisible: boolean;
-  setMenuOpen(): void;
-  onPressDelete(): void;
-  onPressRevise(): void;
-  commentInput: string;
-  setCommentInput(value: string): void;
-  onPressAdd(): void;
-  comments?: CommentType[];
-}
 
 const DetailTemplate: FC<DetailTemplateProps> = ({
   blog,

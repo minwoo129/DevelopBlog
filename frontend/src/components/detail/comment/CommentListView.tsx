@@ -1,16 +1,13 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { CommentType } from "../../../modules/initialStates/initialStateType";
+import { CommentListViewProps } from "../DetailType";
 import CommentItem from "./CommentItem";
 
 const CommentListViewBlock = styled.div`
   margin-top: 3rem;
   margin-bottom: 3rem;
 `;
-
-interface CommentListViewProps extends HTMLAttributes<HTMLDivElement> {
-  comments?: CommentType[];
-}
 
 const CommentListView: FC<CommentListViewProps> = ({ comments, ...props }) => {
   return (

@@ -6,6 +6,7 @@ import {
 } from "../../modules/initialStates/initialStateType";
 import CommentView from "./comment/CommentView";
 import ContentView from "./ContentView";
+import { BodyGroupProps } from "./DetailType";
 
 const BodyGroupBlock = styled.div`
   flex: 1;
@@ -22,16 +23,6 @@ const BodyGroupBlock = styled.div`
     width: 700px;
   }
 `;
-
-interface BodyGroupProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogDetailType | null;
-  onPressDelete(): void;
-  onPressRevise(): void;
-  commentInput: string;
-  setCommentInput(value: string): void;
-  onPressAdd(): void;
-  comments?: CommentType[];
-}
 
 const BodyGroup: FC<BodyGroupProps> = ({
   blog,

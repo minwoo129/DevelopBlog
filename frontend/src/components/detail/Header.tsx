@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { HeaderProps } from "./DetailType";
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -11,11 +12,6 @@ const HeaderBlock = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
-interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
-  isMenuVisible: boolean;
-  setMenuOpen(): void;
-}
 
 const Header: FC<HeaderProps> = ({ isMenuVisible, setMenuOpen, ...props }) => {
   return (

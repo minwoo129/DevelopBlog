@@ -4,6 +4,7 @@ import { CommentType } from "../../../modules/initialStates/initialStateType";
 import { DefaultUserImage } from "../../../common/UserImage";
 import moment from "moment";
 import "moment/locale/ko";
+import { CommentItemProps } from "../DetailType";
 
 const CommentItemBlock = styled.div`
   width: 100%;
@@ -51,10 +52,6 @@ const CommentTxt = styled.div`
   margin-top: 20px;
   margin-bottom: 20px;
 `;
-
-interface CommentItemProps extends HTMLAttributes<HTMLDivElement> {
-  comment: CommentType;
-}
 
 const MINUTES_OF_A_HOUR = 60;
 const MINUTES_OF_A_DAY = MINUTES_OF_A_HOUR * 24;

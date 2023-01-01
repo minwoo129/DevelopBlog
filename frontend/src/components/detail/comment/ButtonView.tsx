@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import { ButtonViewProps } from "../DetailType";
 
 const ButtonViewBlock = styled.div`
   width: 100%;
@@ -24,10 +25,6 @@ const AddButton = styled.button`
     background: #01df3a;
   }
 `;
-
-interface ButtonViewProps extends HTMLAttributes<HTMLDivElement> {
-  onPressAdd(): void;
-}
 
 const ButtonView: FC<ButtonViewProps> = ({ onPressAdd, ...props }) => {
   return (

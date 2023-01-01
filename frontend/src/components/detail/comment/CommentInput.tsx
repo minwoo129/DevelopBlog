@@ -1,5 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import { CommentInputProps } from "../DetailType";
 
 const CommentInputBlock = styled.textarea`
   height: 4rem;
@@ -12,8 +13,6 @@ const CommentInputBlock = styled.textarea`
   padding: 10px;
   box-sizing: border-box;
 `;
-
-interface CommentInputProps extends HTMLAttributes<HTMLTextAreaElement> {}
 
 const CommentInput: FC<CommentInputProps> = ({ ...props }) => {
   return <CommentInputBlock placeholder="댓글 입력" {...props} />;

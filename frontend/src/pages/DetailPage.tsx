@@ -17,8 +17,7 @@ import { batch } from "react-redux";
 import { clearSearchBlogs, setCommentInput } from "../modules/actions/blog";
 import { setSearchTxt } from "../modules/actions/appInfo";
 import { isActiveInServer } from "../config";
-
-interface DetailPageProps extends HTMLAttributes<HTMLDivElement> {}
+import { DetailPageProps } from "../components/detail/DetailType";
 
 const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   const dispatch = useDispatch<any>();
