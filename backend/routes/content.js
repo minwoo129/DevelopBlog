@@ -3,6 +3,7 @@ const { verifyToken, verifyTokenWithoutErr } = require("./middlewares");
 const Content = require("../models/content");
 const File = require("../models/file");
 const User = require("../models/user");
+const Comment = require("../models/comment");
 const sequelize = require("sequelize");
 const { isActiveInServer } = require("../config");
 const Op = sequelize.Op;
@@ -172,6 +173,11 @@ router.get("/get/:id", verifyTokenWithoutErr, async (req, res, next) => {
         attributes: ["nickname"],
       },
     });
+    const comments = await Comment.findAndCountAll({
+      where: {
+        contentId: id,
+      },
+    });
     let data = {
       ...blog.dataValues,
       authorization: {
@@ -179,6 +185,7 @@ router.get("/get/:id", verifyTokenWithoutErr, async (req, res, next) => {
         reviseContent: false,
         deleteContent: false,
       },
+      commentCount: comments.count,
     };
     if (req.decodeRes) {
       data = {
