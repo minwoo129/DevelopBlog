@@ -1,7 +1,9 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
+import { CommentType } from "../../../modules/initialStates/initialStateType";
 import ButtonView from "./ButtonView";
 import CommentInput from "./CommentInput";
+import CommentListView from "./CommentListView";
 
 const CommentViewBlock = styled.div`
   display: block;
@@ -17,12 +19,14 @@ interface CommentViewProps extends HTMLAttributes<HTMLDivElement> {
   commentInput: string;
   setCommentInput(value: string): void;
   onPressAdd(): void;
+  comments?: CommentType[];
 }
 
 const CommentView: FC<CommentViewProps> = ({
   commentInput,
   setCommentInput,
   onPressAdd,
+  comments,
   ...props
 }) => {
   return (
@@ -35,6 +39,7 @@ const CommentView: FC<CommentViewProps> = ({
         }}
       />
       <ButtonView onPressAdd={onPressAdd} />
+      <CommentListView comments={comments} />
     </CommentViewBlock>
   );
 };

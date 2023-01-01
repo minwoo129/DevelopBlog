@@ -1,6 +1,9 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { blogDetailType } from "../../modules/initialStates/initialStateType";
+import {
+  blogDetailType,
+  CommentType,
+} from "../../modules/initialStates/initialStateType";
 import BodyGroup from "./BodyGroup";
 
 const BodyBlock = styled.div`
@@ -19,6 +22,7 @@ interface BodyProps extends HTMLAttributes<HTMLDivElement> {
   commentInput: string;
   setCommentInput(value: string): void;
   onPressAdd(): void;
+  comments?: CommentType[];
 }
 
 const Body: FC<BodyProps> = ({
@@ -28,6 +32,7 @@ const Body: FC<BodyProps> = ({
   commentInput,
   setCommentInput,
   onPressAdd,
+  comments,
   ...props
 }) => {
   return (
@@ -39,6 +44,7 @@ const Body: FC<BodyProps> = ({
         commentInput={commentInput}
         setCommentInput={setCommentInput}
         onPressAdd={onPressAdd}
+        comments={comments}
       />
     </BodyBlock>
   );

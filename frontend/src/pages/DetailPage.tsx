@@ -36,6 +36,9 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
     (state: RootState) => state.blog.commentInput
   );
   const login = useSelector((state: RootState) => state.auth.login);
+  const comments = useSelector(
+    (state: RootState) => state.blog.comments?.contents
+  );
 
   useEffect(() => {
     document.title = "DEVELOPBLOG-상세";
@@ -132,6 +135,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
           dispatch(setCommentInput(value));
         }}
         onPressAdd={_addComment}
+        comments={comments}
       />
     </MenuTemplate>
   );

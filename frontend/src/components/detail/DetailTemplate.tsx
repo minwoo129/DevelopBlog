@@ -1,6 +1,9 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { blogDetailType } from "../../modules/initialStates/initialStateType";
+import {
+  blogDetailType,
+  CommentType,
+} from "../../modules/initialStates/initialStateType";
 import Body from "./Body";
 import Header from "./Header";
 
@@ -21,6 +24,7 @@ interface DetailTemplateProps extends HTMLAttributes<HTMLDivElement> {
   commentInput: string;
   setCommentInput(value: string): void;
   onPressAdd(): void;
+  comments?: CommentType[];
 }
 
 const DetailTemplate: FC<DetailTemplateProps> = ({
@@ -32,6 +36,7 @@ const DetailTemplate: FC<DetailTemplateProps> = ({
   commentInput,
   setCommentInput,
   onPressAdd,
+  comments,
   ...props
 }) => {
   return (
@@ -44,6 +49,7 @@ const DetailTemplate: FC<DetailTemplateProps> = ({
         commentInput={commentInput}
         setCommentInput={setCommentInput}
         onPressAdd={onPressAdd}
+        comments={comments}
       />
     </DetailTemplateBlock>
   );

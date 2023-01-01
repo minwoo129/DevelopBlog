@@ -1,6 +1,9 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { blogDetailType } from "../../modules/initialStates/initialStateType";
+import {
+  blogDetailType,
+  CommentType,
+} from "../../modules/initialStates/initialStateType";
 import CommentView from "./comment/CommentView";
 import ContentView from "./ContentView";
 
@@ -28,6 +31,7 @@ interface BodyGroupProps extends HTMLAttributes<HTMLDivElement> {
   commentInput: string;
   setCommentInput(value: string): void;
   onPressAdd(): void;
+  comments?: CommentType[];
 }
 
 const BodyGroup: FC<BodyGroupProps> = ({
@@ -37,6 +41,7 @@ const BodyGroup: FC<BodyGroupProps> = ({
   commentInput,
   setCommentInput,
   onPressAdd,
+  comments,
   ...props
 }) => {
   return (
@@ -50,6 +55,7 @@ const BodyGroup: FC<BodyGroupProps> = ({
         commentInput={commentInput}
         setCommentInput={setCommentInput}
         onPressAdd={onPressAdd}
+        comments={comments}
       />
     </BodyGroupBlock>
   );
