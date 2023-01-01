@@ -77,6 +77,7 @@ export interface blogDetailType extends blogItemType {
     reviseContent: boolean;
     deleteContent: boolean;
   };
+  commentCount: number;
 }
 
 export interface userDetailInfoType {
