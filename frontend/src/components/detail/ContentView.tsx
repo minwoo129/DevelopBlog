@@ -10,7 +10,7 @@ const ContentViewBlock = styled.div`
   display: block;
   flex-direction: column;
   padding: 0 3rem;
-  border: 1px solid red;
+  border-bottom: 2px solid #6e6e6e;
   min-height: 800px;
 `;
 

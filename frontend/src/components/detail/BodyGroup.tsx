@@ -11,7 +11,6 @@ const BodyGroupBlock = styled.div`
   flex: 1;
   display: block;
   flex-direction: column;
-  border: 1px solid orange;
   @media (max-width: 700px) {
     padding: 0;
     min-width: 500px;

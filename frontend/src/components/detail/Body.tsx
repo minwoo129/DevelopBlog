@@ -11,7 +11,6 @@ const BodyBlock = styled.div`
   display: flex;
   overflow: scroll;
   flex-direction: column;
-  border: 1px solid blue;
   align-items: center;
 `;
 
