@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes, useMemo } from "react";
 import styled from "styled-components";
 import { blogItemType } from "../../../../modules/initialStates/initialStateType";
+import { UserDiaryItemProps } from "../../myPageTypes";
 import {
   ItemInformationView,
   StyledContent,
@@ -31,11 +32,6 @@ const UserDiaryItemBlock = styled.div`
     padding: 0 25px;
   }
 `;
-
-interface UserDiaryItemProps extends HTMLAttributes<HTMLDivElement> {
-  item: blogItemType;
-  onPress(id: number): void;
-}
 
 const UserDiaryItem: FC<UserDiaryItemProps> = ({ item, onPress, ...props }) => {
   let newContent = item.htmlContent.replace(/(<([^>]+)>)/gi, "");

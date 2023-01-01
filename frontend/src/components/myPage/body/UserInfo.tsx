@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { IoMdAdd } from "react-icons/io";
 import { userDetailInfoType } from "../../../modules/initialStates/initialStateType";
 import { DefaultUserImage, UserImg } from "../../../common/UserImage";
+import { UserInfoProps } from "../myPageTypes";
 
 const UserInfoBlock = styled.div`
   width: 100%;
@@ -114,18 +115,6 @@ const ChangeBackgroundBtn = styled.button`
   top: 200px;
   left: 50%;
 `;
-
-interface UserInfoProps extends HTMLAttributes<HTMLDivElement> {
-  isRevise: boolean;
-  userInfo: userDetailInfoType | null;
-  encodeFileToBase64(fileBlob: Blob, type: "userImg" | "background"): void;
-  onClickRevise(): void;
-  onClickReviseCancel(): void;
-  userImgTempSrc: any;
-  backgroundImgTempSrc: any;
-  tempNickname: string;
-  setTempNickname(value: string): void;
-}
 
 const UserInfo: FC<UserInfoProps> = ({
   isRevise,

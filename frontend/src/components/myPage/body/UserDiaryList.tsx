@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { userWriteBlogsType } from "../../../modules/initialStates/initialStateType";
+import { UserDiaryListProps } from "../myPageTypes";
 import UserDiaryItem from "./listItem/UserDiaryItem";
 
 const UserDiaryListBlock = styled.div`
@@ -25,11 +26,6 @@ const EmptyLayerTitle = styled.h1`
   color: #424242;
   margin-top: 200px;
 `;
-
-interface UserDiaryListProps extends HTMLAttributes<HTMLDivElement> {
-  userBlogs: userWriteBlogsType | null;
-  onPress(id: number): void;
-}
 
 const UserDiaryList: FC<UserDiaryListProps> = ({
   userBlogs,

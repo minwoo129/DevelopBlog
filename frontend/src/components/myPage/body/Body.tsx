@@ -4,6 +4,7 @@ import {
   userDetailInfoType,
   userWriteBlogsType,
 } from "../../../modules/initialStates/initialStateType";
+import { BodyProps } from "../myPageTypes";
 import UserDiaryList from "./UserDiaryList";
 import UserInfo from "./UserInfo";
 
@@ -19,21 +20,6 @@ const BodyBlock = styled.div`
     display: none;
   }
 `;
-
-interface BodyProps extends HTMLAttributes<HTMLDivElement> {
-  userBlogs: userWriteBlogsType | null;
-  isRevise: boolean;
-  userInfo: userDetailInfoType | null;
-  encodeFileToBase64(fileBlob: Blob, type: "userImg" | "background"): void;
-  userImgTempSrc: any;
-  backgroundImgTempSrc: any;
-  onClickRevise(): void;
-  onClickReviseCancel(): void;
-  tempNickname: string;
-  setTempNickname(value: string): void;
-  bodyRef: RefObject<HTMLDivElement>;
-  onPressItem(id: number): void;
-}
 
 const Body: FC<BodyProps> = ({
   userBlogs,
