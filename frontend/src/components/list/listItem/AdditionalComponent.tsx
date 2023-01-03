@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { BiLock } from "react-icons/bi";
+import { LockedIconProps } from "../ListTypes";
 
 export const InsideContentGrid = styled.div`
   width: 100%;
@@ -53,10 +54,6 @@ const LockedIconBlock = styled.div`
   background: #424242;
   border-top-left-radius: 6px;
 `;
-
-interface LockedIconProps extends HTMLAttributes<HTMLDivElement> {
-  isPublic: boolean;
-}
 
 export const LockedIcon: FC<LockedIconProps> = ({ isPublic, ...props }) => {
   if (isPublic) return null;

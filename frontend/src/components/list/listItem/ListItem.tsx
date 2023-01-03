@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { blogItemType } from "../../../modules/initialStates/initialStateType";
+import { ListItemProps } from "../ListTypes";
 import {
   ContentDetailGrid,
   InsideContentGrid,
@@ -28,11 +29,6 @@ const ListItemBlock = styled.div`
     height: 300px;
   }
 `;
-
-interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogItemType;
-  onPress(id: number): void;
-}
 
 const ListItem: FC<ListItemProps> = ({ blog, onPress }) => {
   let newContent = blog.htmlContent.replace(/(<([^>]+)>)/gi, "");

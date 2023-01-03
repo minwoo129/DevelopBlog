@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { getBlogsThunk } from "../../modules/thunk/blog";
 import EmptyLayer from "../../common/EmptyLayer";
 import { isActiveInServer } from "../../config";
+import { BodyProps } from "./ListTypes";
 
 const BodyBlock = styled.div`
   flex: 1;
@@ -31,8 +32,6 @@ const BodyBlock = styled.div`
     padding: 0 100px;
   }
 `;
-
-interface BodyProps extends HTMLAttributes<HTMLDivElement> {}
 
 const Body: FC<BodyProps> = (props) => {
   const blogs = useSelector((state: RootState) => state.blog.blogs);

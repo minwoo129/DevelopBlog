@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../modules/reducer";
 import { setSearchbarVisible } from "../../modules/actions/appInfo";
 import { useNavigate } from "react-router-dom";
+import { HeaderProps } from "./ListTypes";
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -19,8 +20,6 @@ const HeaderBlock = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
-interface HeaderProps extends HTMLAttributes<HTMLDivElement> {}
 
 const Header: FC<HeaderProps> = (props) => {
   const dispatch = useDispatch();
