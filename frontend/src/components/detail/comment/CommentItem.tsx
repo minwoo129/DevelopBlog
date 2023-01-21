@@ -66,7 +66,7 @@ const CommentItem: FC<CommentItemProps> = ({ comment, ...props }) => {
     if (timeDiffByMinute >= MINUTES_OF_A_WEEK) {
       createdAt = createDate.format("LL");
     } else if (timeDiffByMinute >= 1) {
-      createdAt = createDate.startOf("hour").fromNow();
+      createdAt = createDate.startOf("minute").fromNow();
     } else {
       createdAt = "방금 전";
     }
