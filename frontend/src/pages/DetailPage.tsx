@@ -123,10 +123,29 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
 
   const onPressDeleteComment = (id: number) => {
     console.log("onPressDeleteComment");
+    const deleteCheck = window.confirm(
+      "삭제시 내용을 복원할 수 없습니다.\n삭제하시겠습니까?"
+    );
+
+    if (!deleteCheck) return;
+
+    __delComment(id);
   };
 
   const onPressEditComment = (id: number) => {
     console.log("onPressEditComment");
+  };
+
+  const __delComment = async (id: number) => {
+    try {
+      const result = await invokeAPI({
+        method: "delete",
+        path: `/api/comment/del/${id}`,
+      })({});
+      _getComments(Number(query.id));
+    } catch (err) {
+      !isActiveInServer && console.log("DetailPage __delComment error: ", err);
+    }
   };
 
   return (
