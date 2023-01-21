@@ -2,6 +2,7 @@ import { HTMLAttributes, TextareaHTMLAttributes } from "react";
 import {
   blogDetailType,
   CommentType,
+  CommentUserType,
 } from "../../modules/initialStates/initialStateType";
 
 export interface DetailPageProps extends HTMLAttributes<HTMLDivElement> {}
@@ -54,4 +55,13 @@ export interface CommentListViewProps extends HTMLAttributes<HTMLDivElement> {
 
 export interface CommentItemProps extends HTMLAttributes<HTMLDivElement> {
   comment: CommentType;
+}
+
+export interface CommentItemImageViewProps {
+  user: CommentUserType;
+}
+
+export interface CommentInputStyledButtonProps
+  extends HTMLAttributes<HTMLButtonElement> {
+  visible: boolean;
 }
