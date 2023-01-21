@@ -102,27 +102,6 @@ const Body: FC<BodyProps> = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<any>();
 
-  let testBlogs: blogItemType[] = [];
-
-  for (let i = 0; i < 100; i++) {
-    testBlogs.push({
-      id: i,
-      User: {
-        nickname: "test",
-      },
-      content: "당신의 일기를 기록해주세요",
-      htmlContent: "<p>당신의 일기를 기록해주세요.</p>",
-      public: true,
-      thumbnailUrl:
-        "https://developblog.s3.amazonaws.com/image/content/2022/1223/2c644cb1-3dbf-46cb-9301-a055d4fc0ffb",
-      title: `테스트${i}`,
-      updatedAt: "2022-12-23 13:34:21",
-      userId: 1,
-      createdAt: "2022-12-23 13:34:21",
-      deletedAt: null,
-    });
-  }
-
   useEffect(() => {
     _getBlogs();
   }, []);
@@ -151,7 +130,7 @@ const Body: FC<BodyProps> = (props) => {
   }
   return (
     <BodyBlock>
-      <BodyInsideGrid blogs={testBlogs} onPress={onPress} />
+      <BodyInsideGrid blogs={blogs} onPress={onPress} />
     </BodyBlock>
   );
 };
