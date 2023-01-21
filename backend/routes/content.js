@@ -268,7 +268,6 @@ router.get("/search", async (req, res, next) => {
         ],
       },
       order: [["createdAt", "DESC"]],
-      include: { model: User },
     });
     res.status(200).json({ result: true, error: false, data: result });
   } catch (err) {
