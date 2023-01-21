@@ -1,6 +1,7 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
 import { userWriteBlogsType } from "../../../modules/initialStates/initialStateType";
+import { UserDiaryListProps } from "../myPageTypes";
 import UserDiaryItem from "./listItem/UserDiaryItem";
 
 const UserDiaryListBlock = styled.div`
@@ -26,12 +27,18 @@ const EmptyLayerTitle = styled.h1`
   margin-top: 200px;
 `;
 
-interface UserDiaryListProps extends HTMLAttributes<HTMLDivElement> {
-  userBlogs: userWriteBlogsType | null;
-}
-
-const UserDiaryList: FC<UserDiaryListProps> = ({ userBlogs, ...props }) => {
+const UserDiaryList: FC<UserDiaryListProps> = ({
+  userBlogs,
+  onPress,
+  ...props
+}) => {
   if (!userBlogs) {
+    return (
+      <EmptyBlogLayer>
+        <EmptyLayerTitle>작성된 글이 없습니다</EmptyLayerTitle>
+      </EmptyBlogLayer>
+    );
+  } else if (userBlogs.contents.length == 0) {
     return (
       <EmptyBlogLayer>
         <EmptyLayerTitle>작성된 글이 없습니다</EmptyLayerTitle>
@@ -41,7 +48,7 @@ const UserDiaryList: FC<UserDiaryListProps> = ({ userBlogs, ...props }) => {
   return (
     <UserDiaryListBlock {...props}>
       {userBlogs.contents.map((item, index) => {
-        return <UserDiaryItem item={item} key={index} />;
+        return <UserDiaryItem item={item} key={index} onPress={onPress} />;
       })}
     </UserDiaryListBlock>
   );

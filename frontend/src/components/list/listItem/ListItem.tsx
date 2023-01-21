@@ -1,6 +1,7 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, useEffect, useState } from "react";
 import styled from "styled-components";
 import { blogItemType } from "../../../modules/initialStates/initialStateType";
+import { ListItemProps } from "../ListTypes";
 import {
   ContentDetailGrid,
   InsideContentGrid,
@@ -12,9 +13,7 @@ import {
 
 const ListItemBlock = styled.div`
   border-radius: 6px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  width: 500px;
+  width: 300px;
   height: 300px;
   display: block;
   box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.7);
@@ -23,24 +22,39 @@ const ListItemBlock = styled.div`
   &:hover {
     background: #d8d8d8;
   }
-  @media (min-width: 1400px) {
-    width: 600px;
-    height: 300px;
-  }
 `;
 
-interface ListItemProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogItemType;
-  onPress(id: number): void;
-}
-
-const ListItem: FC<ListItemProps> = ({ blog, onPress }) => {
+const ListItem: FC<ListItemProps> = ({ blog, onPress, idx, ...props }) => {
   let newContent = blog.htmlContent.replace(/(<([^>]+)>)/gi, "");
+  const [marginRight, setMarginRight] = useState(0);
+
+  useEffect(() => {
+    resizeEvent();
+    window.addEventListener("resize", resizeEvent);
+    return () => {
+      window.removeEventListener("resize", resizeEvent);
+    };
+  }, []);
+
+  const resizeEvent = () => {
+    if (window.innerWidth >= 1200) {
+      setMarginRight(idx % 3 !== 2 ? 150 : 0);
+    } else if (window.innerWidth >= 700) {
+      setMarginRight(idx % 2 !== 1 ? 100 : 0);
+    } else {
+      setMarginRight(0);
+    }
+  };
+
   return (
     <ListItemBlock
       onClick={(e) => {
         onPress(blog.id);
       }}
+      style={{
+        marginRight,
+      }}
+      {...props}
     >
       <LockedIcon isPublic={blog.public} />
       <InsideContentGrid>

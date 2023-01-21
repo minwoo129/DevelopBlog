@@ -2,6 +2,7 @@ import React, { FC, HTMLAttributes, useEffect, useRef, useState } from "react";
 import { batch } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { isActiveInServer } from "../../config";
 import invokeAPI, { invokeFileUpload } from "../../lib/restAPI";
@@ -10,6 +11,7 @@ import { RootState } from "../../modules/reducer";
 import { getUserInfoThunk } from "../../modules/thunk/appInfo";
 import Body from "./body/Body";
 import Header from "./Header";
+import { MyPageTemplateProps, updateUserInfoArgs } from "./myPageTypes";
 
 const MyPageTemplateBlock = styled.div`
   display: flex;
@@ -18,25 +20,16 @@ const MyPageTemplateBlock = styled.div`
   flex-direction: column;
 `;
 
-interface MyPageTemplateProps extends HTMLAttributes<HTMLDivElement> {
-  getUserWriteBlogs(page: number): void;
-  page: number;
-}
-
-type updateUserInfoParams = {
-  profileImgIdx: number | null;
-  backgroundImgIdx: number | null;
-  nickname: string;
-};
-
 const MyPageTemplate: FC<MyPageTemplateProps> = ({
   getUserWriteBlogs,
   page,
   ...props
 }) => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch<any>();
   const userBlogs = useSelector(
-    (state: RootState) => state.appInfo.userWriteBlogs
+    (state: RootState) => state.blog.userWriteBlogs
   );
   const userInfo = useSelector((state: RootState) => state.appInfo.userInfo);
   const isReviseUserInfo = useSelector(
@@ -161,7 +154,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
     }
   };
 
-  const _updateUserInfo = async (props: updateUserInfoParams) => {
+  const _updateUserInfo = async (props: updateUserInfoArgs) => {
     const { profileImgIdx, backgroundImgIdx, nickname } = props;
     try {
       const result = await invokeAPI({
@@ -201,6 +194,9 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
       }
     }
   };
+  const onPressItem = (id: number) => {
+    navigate(`/detail?id=${id}`);
+  };
 
   return (
     <MyPageTemplateBlock
@@ -227,6 +223,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
         }}
         bodyRef={bodyRef}
         onScroll={onScroll}
+        onPressItem={onPressItem}
       />
     </MyPageTemplateBlock>
   );

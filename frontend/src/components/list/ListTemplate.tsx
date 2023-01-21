@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { RootState } from "../../modules/reducer";
 import Body from "./Body";
 import Header from "./Header";
+import { ListTemplateProps } from "./ListTypes";
 
 const ListTemplateBlock = styled.div`
   flex: 1;
@@ -12,8 +13,6 @@ const ListTemplateBlock = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
-interface ListTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 
 const ListTemplate: FC<ListTemplateProps> = ({ ...props }) => {
   const backgroundImgSrc = useSelector(

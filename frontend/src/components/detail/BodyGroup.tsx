@@ -4,22 +4,28 @@ import {
   blogDetailType,
   CommentType,
 } from "../../modules/initialStates/initialStateType";
-import Body from "./Body";
-import { DetailTemplateProps } from "./DetailType";
-import Header from "./Header";
+import CommentView from "./comment/CommentView";
+import ContentView from "./ContentView";
+import { BodyGroupProps } from "./DetailType";
 
-const DetailTemplateBlock = styled.div`
+const BodyGroupBlock = styled.div`
   flex: 1;
-  background: #e9ecef;
-  display: flex;
+  display: block;
   flex-direction: column;
-  width: 600px;
+  @media (max-width: 700px) {
+    padding: 0;
+    min-width: 500px;
+  }
+  @media (min-width: 700px) {
+    width: 700px;
+  }
+  @media (min-width: 1000px) {
+    width: 700px;
+  }
 `;
 
-const DetailTemplate: FC<DetailTemplateProps> = ({
+const BodyGroup: FC<BodyGroupProps> = ({
   blog,
-  isMenuVisible,
-  setMenuOpen,
   onPressDelete,
   onPressRevise,
   commentInput,
@@ -31,12 +37,14 @@ const DetailTemplate: FC<DetailTemplateProps> = ({
   ...props
 }) => {
   return (
-    <DetailTemplateBlock {...props}>
-      <Header isMenuVisible={isMenuVisible} setMenuOpen={setMenuOpen} />
-      <Body
+    <BodyGroupBlock {...props}>
+      <ContentView
         blog={blog}
-        onPressRevise={onPressRevise}
         onPressDelete={onPressDelete}
+        onPressRevise={onPressRevise}
+      />
+      <CommentView
+        blog={blog}
         commentInput={commentInput}
         setCommentInput={setCommentInput}
         onPressAdd={onPressAdd}
@@ -44,8 +52,8 @@ const DetailTemplate: FC<DetailTemplateProps> = ({
         onPressDeleteComment={onPressDeleteComment}
         onPressEditComment={onPressEditComment}
       />
-    </DetailTemplateBlock>
+    </BodyGroupBlock>
   );
 };
 
-export default DetailTemplate;
+export default BodyGroup;

@@ -3,10 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.changeColumn("contents", "htmlContent", {
-      type: Sequelize.TEXT("long"),
-      allowNull: false,
-    });
+    return queryInterface.dropTable("comments");
     /**
      * Add altering commands here.
      *

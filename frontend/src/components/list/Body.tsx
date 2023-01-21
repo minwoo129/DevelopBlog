@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useEffect, useMemo } from "react";
+import React, { FC, HTMLAttributes, useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import ListItem from "./listItem/ListItem";
 import { useSelector } from "react-redux";
@@ -9,30 +9,92 @@ import { useDispatch } from "react-redux";
 import { getBlogsThunk } from "../../modules/thunk/blog";
 import EmptyLayer from "../../common/EmptyLayer";
 import { isActiveInServer } from "../../config";
+import { BodyInsideGridProps, BodyProps } from "./ListTypes";
+import _ from "lodash";
 
 const BodyBlock = styled.div`
   flex: 1;
   display: flex;
   overflow: scroll;
-  @media (max-width: 768px) {
-    padding: 0 50px;
-    flex-direction: column;
-    align-items: center;
-  }
-  @media (min-width: 768px) {
-    padding: 0 120px;
-    flex-direction: column;
-    align-items: center;
-  }
-  @media (min-width: 1400px) {
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 0 100px;
-  }
+  justify-content: center;
+  padding-top: 50px;
 `;
 
-interface BodyProps extends HTMLAttributes<HTMLDivElement> {}
+const BodyInsideGridBlock = styled.div`
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+  @media (min-width: 700px) {
+    width: 700px;
+  }
+  @media (min-width: 1200px) {
+    width: 1200px;
+  }
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+const BodyRowBlock = styled.div`
+  @media (max-width: 700px) {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  @media (min-width: 700px) {
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+  }
+  @media (min-width: 1200px) {
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+  }
+  margin-bottom: 50px;
+`;
+
+const BodyInsideGrid: FC<BodyInsideGridProps> = ({ blogs, onPress }) => {
+  const [rowList, setRowList] = useState<blogItemType[][]>([]);
+  useEffect(() => {
+    resizeEvent();
+    window.addEventListener("resize", resizeEvent);
+    return () => {
+      window.removeEventListener("resize", resizeEvent);
+    };
+  }, []);
+  const resizeEvent = () => {
+    if (window.innerWidth >= 1200) {
+      setRowList(_.chunk(blogs, 3));
+    } else if (window.innerWidth >= 700) {
+      setRowList(_.chunk(blogs, 2));
+    } else {
+      setRowList(_.chunk(blogs, 1));
+    }
+  };
+  return (
+    <BodyInsideGridBlock>
+      {rowList.map((item, idx) => {
+        return (
+          <BodyRowBlock key={idx}>
+            {item.map((blog, idx1) => {
+              return (
+                <ListItem
+                  blog={blog}
+                  onPress={onPress}
+                  key={blog.id}
+                  idx={idx1}
+                />
+              );
+            })}
+          </BodyRowBlock>
+        );
+      })}
+    </BodyInsideGridBlock>
+  );
+};
 
 const Body: FC<BodyProps> = (props) => {
   const blogs = useSelector((state: RootState) => state.blog.blogs);
@@ -67,9 +129,7 @@ const Body: FC<BodyProps> = (props) => {
   }
   return (
     <BodyBlock>
-      {blogs.map((item: blogItemType, index: number) => {
-        return <ListItem blog={item} onPress={onPress} key={index} />;
-      })}
+      <BodyInsideGrid blogs={blogs} onPress={onPress} />
     </BodyBlock>
   );
 };

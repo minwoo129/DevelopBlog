@@ -6,9 +6,6 @@ import {
   GET_USER_INFO,
   GET_USER_INFO_ERROR,
   GET_USER_INFO_SUCCESS,
-  GET_USER_WRITE_BLOGS,
-  GET_USER_WRITE_BLOGS_ERROR,
-  GET_USER_WRITE_BLOGS_SUCCESS,
   SET_APP_STATE,
   SET_SEARCHBAR_VISIBLE,
   SET_SEARCH_TXT,
@@ -65,41 +62,6 @@ export default createReducer<initialStateType, appInfoActionType>(
       return newState;
     },
     [GET_USER_INFO_ERROR]: (state, action) => {
-      return state;
-    },
-
-    // GET_USER_WRITE_BLOGS ////////////////////////////////////////////////////
-    [GET_USER_WRITE_BLOGS]: (state, action) => {
-      return state;
-    },
-    [GET_USER_WRITE_BLOGS_SUCCESS]: (state, { payload: { param, result } }) => {
-      let newState: initialStateType = {
-        ...state,
-      };
-      if (param?.params?.page == 1) {
-        newState = {
-          ...newState,
-          userWriteBlogs: result.data,
-        };
-      } else {
-        let contents: any[] = [];
-        if (newState.userWriteBlogs) {
-          contents = [
-            ...newState.userWriteBlogs.contents,
-            ...result.data.contents,
-          ];
-          newState = {
-            ...newState,
-            userWriteBlogs: {
-              ...newState.userWriteBlogs,
-              contents,
-            },
-          };
-        }
-      }
-      return newState;
-    },
-    [GET_USER_WRITE_BLOGS_ERROR]: (state, action) => {
       return state;
     },
 

@@ -3,10 +3,6 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.addColumn("contents", "public", {
-      type: Sequelize.BOOLEAN,
-      defaultValue: true,
-    });
     /**
      * Add altering commands here.
      *
@@ -16,6 +12,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
+    return queryInterface.removeColumn("comments", "commentId");
     /**
      * Add reverting commands here.
      *

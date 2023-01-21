@@ -4,28 +4,16 @@ import { blogDetailType } from "../../modules/initialStates/initialStateType";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
 import { SecondHeader, StyledTitle } from "./AdditionalComponent";
+import { ContentViewProps } from "./DetailType";
 
 const ContentViewBlock = styled.div`
   flex: 1;
-  display: flex;
+  display: block;
   flex-direction: column;
-  padding: 0 5rem;
-  @media (max-width: 700px) {
-    margin: 0;
-  }
-  @media (min-width: 700px) {
-    margin: 0 50px;
-  }
-  @media (min-width: 1000px) {
-    margin: 0 100px;
-  }
+  padding: 0 3rem;
+  border-bottom: 2px solid #6e6e6e;
+  min-height: 800px;
 `;
-
-interface ContentViewProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogDetailType | null;
-  onPressDelete(): void;
-  onPressRevise(): void;
-}
 
 const ContentView: FC<ContentViewProps> = ({
   blog,

@@ -2,13 +2,14 @@ import { apiType1, apiType2, fileUpload } from "./type";
 import axios, { AxiosRequestConfig } from "axios";
 import { Cookies } from "react-cookie";
 import { isActiveInServer } from "../../config";
+import moment from "moment";
 
 const cookies = new Cookies();
 
 export const setCookies = (key: string, data: any) => {
   cookies.remove(key);
   const date = new Date();
-  date.setDate(date.getDate() + 1);
+  date.setHours(date.getHours() + 6);
   return cookies.set(key, data, {
     expires: date,
   });

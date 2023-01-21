@@ -3,8 +3,8 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    return queryInterface.addColumn("users", "profileImgIdx", {
-      type: Sequelize.INTEGER,
+    return queryInterface.addColumn("users", "profileImgUrl", {
+      type: Sequelize.STRING,
       allowNull: true,
     });
     /**

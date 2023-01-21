@@ -21,7 +21,7 @@ router.post("/token", async (req, res, next) => {
       return;
     }
     if (!user) {
-      res.status(401).status({
+      res.status(401).json({
         error: true,
         code: 401,
         result: false,

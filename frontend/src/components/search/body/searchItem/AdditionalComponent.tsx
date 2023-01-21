@@ -4,46 +4,14 @@ import { blogItemType } from "../../../../modules/initialStates/initialStateType
 
 export const StyledImgGrid = styled.div`
   border-radius: 6px;
-  @media (max-width: 768px) {
-    width: 500px;
-    height: 300px;
-  }
-  @media (min-width: 768px) {
-    width: 300px;
-    height: 200px;
-  }
-  @media (min-width: 906px) {
-    width: 300px;
-    height: 200px;
-  }
-  @media (min-width: 1400px) {
-    width: 400px;
-    height: 200px;
-  }
+  width: 300px;
+  height: 200px;
 `;
 
 export const StyledImg = styled.img`
   border-radius: 6px;
-  object-fit: cover;
-  @media (max-width: 768px) {
-    width: 500px;
-    height: 300px;
-  }
-  @media (min-width: 768px) {
-    width: 280px;
-    height: 180px;
-    margin: 10px;
-  }
-  @media (min-width: 906px) {
-    width: 280px;
-    height: 180px;
-    margin: 10px;
-  }
-  @media (min-width: 1400px) {
-    width: 380px;
-    height: 180px;
-    margin: 10px;
-  }
+  width: 300px;
+  height: 200px;
 `;
 
 const InformationGridBlock = styled.div`
@@ -51,19 +19,6 @@ const InformationGridBlock = styled.div`
   flex: 1;
   border-radius: 6px;
   flex-direction: column;
-  padding: 10px;
-  @media (max-width: 768px) {
-    width: 480px;
-  }
-  @media (min-width: 768px) {
-    width: 370px;
-  }
-  @media (min-width: 906px) {
-    width: 370px;
-  }
-  @media (min-width: 1400px) {
-    width: 470px;
-  }
 `;
 
 interface InformationGridProps extends HTMLAttributes<HTMLDivElement> {
@@ -84,12 +39,12 @@ export const InformationGrid: FC<InformationGridProps> = ({
   );
 };
 
-const StyledTitle = styled.h1`
+const StyledTitle = styled.h2`
   display: inline-block;
+  width: 218px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidded;
-  color: #1c1c1c;
 `;
 const StyledContent = styled.p`
   overflow: hidden;

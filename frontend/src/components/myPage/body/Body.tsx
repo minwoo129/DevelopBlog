@@ -4,6 +4,7 @@ import {
   userDetailInfoType,
   userWriteBlogsType,
 } from "../../../modules/initialStates/initialStateType";
+import { BodyProps } from "../myPageTypes";
 import UserDiaryList from "./UserDiaryList";
 import UserInfo from "./UserInfo";
 
@@ -20,20 +21,6 @@ const BodyBlock = styled.div`
   }
 `;
 
-interface BodyProps extends HTMLAttributes<HTMLDivElement> {
-  userBlogs: userWriteBlogsType | null;
-  isRevise: boolean;
-  userInfo: userDetailInfoType | null;
-  encodeFileToBase64(fileBlob: Blob, type: "userImg" | "background"): void;
-  userImgTempSrc: any;
-  backgroundImgTempSrc: any;
-  onClickRevise(): void;
-  onClickReviseCancel(): void;
-  tempNickname: string;
-  setTempNickname(value: string): void;
-  bodyRef: RefObject<HTMLDivElement>;
-}
-
 const Body: FC<BodyProps> = ({
   userBlogs,
   isRevise,
@@ -46,6 +33,7 @@ const Body: FC<BodyProps> = ({
   tempNickname,
   setTempNickname,
   bodyRef,
+  onPressItem,
   ...props
 }) => {
   return (
@@ -61,7 +49,7 @@ const Body: FC<BodyProps> = ({
         tempNickname={tempNickname}
         setTempNickname={setTempNickname}
       />
-      <UserDiaryList userBlogs={userBlogs} />
+      <UserDiaryList userBlogs={userBlogs} onPress={onPressItem} />
     </BodyBlock>
   );
 };

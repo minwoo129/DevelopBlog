@@ -98,6 +98,17 @@ router.post("/join", isNotLoggedIn, async (req, res, next) => {
         nickname: defaultNickname,
       };
     }
+    if (profileImgIdx) {
+      const profileImg = await File.findOne({
+        where: {
+          id: profileImgIdx,
+        },
+      });
+      query = {
+        ...query,
+        profileImgUrl: profileImg.dataValues.publishedUrl,
+      };
+    }
 
     if (isAdmin && adminPwd == process.env.ADMIN_CONFIRM_KEY) {
       query = {

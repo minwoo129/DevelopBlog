@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../modules/reducer";
 import { setSearchbarVisible } from "../../modules/actions/appInfo";
 import { useNavigate } from "react-router-dom";
+import { HeaderProps } from "./ListTypes";
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -17,10 +18,24 @@ const HeaderBlock = styled.div`
   background-color: #fff;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 `;
 
-interface HeaderProps extends HTMLAttributes<HTMLDivElement> {}
+const HeaderInsideGrid = styled.div`
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+  @media (min-width: 700px) {
+    width: 700px;
+  }
+  @media (min-width: 1200px) {
+    width: 1200px;
+  }
+`;
 
 const Header: FC<HeaderProps> = (props) => {
   const dispatch = useDispatch();
@@ -38,21 +53,23 @@ const Header: FC<HeaderProps> = (props) => {
 
   return (
     <HeaderBlock>
-      <div style={{ marginLeft: "2rem" }}>
-        {!isMenuVisible && (
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge={false}
-            onClick={() => dispatch(setMenuOpen(true))}
-          >
-            <MenuIcon />
-          </IconButton>
-        )}
-      </div>
-      <div style={{ marginRight: "2rem" }} onClick={onClickSearch}>
-        <HiOutlineSearch style={{ width: "1.5rem", height: "1.5rem" }} />
-      </div>
+      <HeaderInsideGrid>
+        <div style={{ marginLeft: "2rem" }}>
+          {!isMenuVisible && (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge={false}
+              onClick={() => dispatch(setMenuOpen(true))}
+            >
+              <MenuIcon />
+            </IconButton>
+          )}
+        </div>
+        <div style={{ marginRight: "2rem" }} onClick={onClickSearch}>
+          <HiOutlineSearch style={{ width: "1.5rem", height: "1.5rem" }} />
+        </div>
+      </HeaderInsideGrid>
     </HeaderBlock>
   );
 };

@@ -39,13 +39,15 @@ export const blogInitialState: blogInitialStateType = {
   blog: null,
   searchBlogs: [],
   isExecuteSearch: false,
+  userWriteBlogs: null,
+  commentInput: "",
+  comments: null,
 };
 // ================================ appInfo =======================================
 export const appInfoInitialState: appInfoInitialStateType = {
   searchBarVisible: false,
   searchTxt: "",
   userInfo: null,
-  userWriteBlogs: null,
   isReviseUserInfo: false,
   userImgTempData: null,
   backgroundImgTempData: null,
