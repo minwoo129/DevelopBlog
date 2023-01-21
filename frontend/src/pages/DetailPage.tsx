@@ -121,6 +121,14 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
     }
   };
 
+  const onPressDeleteComment = (id: number) => {
+    console.log("onPressDeleteComment");
+  };
+
+  const onPressEditComment = (id: number) => {
+    console.log("onPressEditComment");
+  };
+
   return (
     <MenuTemplate {...props}>
       <DetailTemplate
@@ -135,6 +143,8 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
         }}
         onPressAdd={_addComment}
         comments={comments}
+        onPressDeleteComment={onPressDeleteComment}
+        onPressEditComment={onPressEditComment}
       />
     </MenuTemplate>
   );

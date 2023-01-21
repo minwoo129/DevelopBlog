@@ -23,6 +23,8 @@ const Body: FC<BodyProps> = ({
   setCommentInput,
   onPressAdd,
   comments,
+  onPressDeleteComment,
+  onPressEditComment,
   ...props
 }) => {
   return (
@@ -35,6 +37,8 @@ const Body: FC<BodyProps> = ({
         setCommentInput={setCommentInput}
         onPressAdd={onPressAdd}
         comments={comments}
+        onPressDeleteComment={onPressDeleteComment}
+        onPressEditComment={onPressEditComment}
       />
     </BodyBlock>
   );

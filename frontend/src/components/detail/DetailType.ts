@@ -49,12 +49,21 @@ export interface ButtonViewProps extends HTMLAttributes<HTMLDivElement> {
   onPressAdd(): void;
 }
 
-export interface CommentListViewProps extends HTMLAttributes<HTMLDivElement> {
+export interface CommentListViewProps
+  extends HTMLAttributes<HTMLDivElement>,
+    CommentItemExtendProps {
   comments?: CommentType[];
 }
 
-export interface CommentItemProps extends HTMLAttributes<HTMLDivElement> {
+export interface CommentItemProps
+  extends HTMLAttributes<HTMLDivElement>,
+    CommentItemExtendProps {
   comment: CommentType;
+}
+
+interface CommentItemExtendProps {
+  onPressEditComment(id: number): void;
+  onPressDeleteComment(id: number): void;
 }
 
 export interface CommentItemImageViewProps {

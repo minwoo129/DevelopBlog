@@ -32,6 +32,8 @@ const BodyGroup: FC<BodyGroupProps> = ({
   setCommentInput,
   onPressAdd,
   comments,
+  onPressDeleteComment,
+  onPressEditComment,
   ...props
 }) => {
   return (
@@ -47,6 +49,8 @@ const BodyGroup: FC<BodyGroupProps> = ({
         setCommentInput={setCommentInput}
         onPressAdd={onPressAdd}
         comments={comments}
+        onPressDeleteComment={onPressDeleteComment}
+        onPressEditComment={onPressEditComment}
       />
     </BodyGroupBlock>
   );

@@ -26,6 +26,8 @@ const DetailTemplate: FC<DetailTemplateProps> = ({
   setCommentInput,
   onPressAdd,
   comments,
+  onPressDeleteComment,
+  onPressEditComment,
   ...props
 }) => {
   return (
@@ -39,6 +41,8 @@ const DetailTemplate: FC<DetailTemplateProps> = ({
         setCommentInput={setCommentInput}
         onPressAdd={onPressAdd}
         comments={comments}
+        onPressDeleteComment={onPressDeleteComment}
+        onPressEditComment={onPressEditComment}
       />
     </DetailTemplateBlock>
   );

@@ -109,7 +109,12 @@ const MINUTES_OF_A_HOUR = 60;
 const MINUTES_OF_A_DAY = MINUTES_OF_A_HOUR * 24;
 const MINUTES_OF_A_WEEK = MINUTES_OF_A_DAY * 7;
 
-const CommentItem: FC<CommentItemProps> = ({ comment, ...props }) => {
+const CommentItem: FC<CommentItemProps> = ({
+  comment,
+  onPressEditComment,
+  onPressDeleteComment,
+  ...props
+}) => {
   const createdAt = useMemo(() => {
     let createdAt = "";
     const createDate = moment(comment.createdAt);
@@ -129,6 +134,13 @@ const CommentItem: FC<CommentItemProps> = ({ comment, ...props }) => {
 
     return createdAt;
   }, []);
+
+  const onPressDelete = () => {
+    onPressDeleteComment(comment.id);
+  };
+  const onPressEdit = () => {
+    onPressEditComment(comment.id);
+  };
   return (
     <CommentItemBlock {...props}>
       <UserInfoGrid>
@@ -142,8 +154,12 @@ const CommentItem: FC<CommentItemProps> = ({ comment, ...props }) => {
         </InformationGrid>
 
         <FunctionBtnGridBlock>
-          <StyledButton visible={comment.enableEdit}>수정</StyledButton>
-          <StyledButton visible={comment.enableDelete}>삭제</StyledButton>
+          <StyledButton visible={comment.enableEdit} onClick={onPressEdit}>
+            수정
+          </StyledButton>
+          <StyledButton visible={comment.enableDelete} onClick={onPressDelete}>
+            삭제
+          </StyledButton>
         </FunctionBtnGridBlock>
       </UserInfoGrid>
       <CommentTxt>{comment.comment}</CommentTxt>

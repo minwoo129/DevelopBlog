@@ -24,6 +24,8 @@ const CommentView: FC<CommentViewProps> = ({
   setCommentInput,
   onPressAdd,
   comments,
+  onPressEditComment,
+  onPressDeleteComment,
   ...props
 }) => {
   return (
@@ -36,7 +38,11 @@ const CommentView: FC<CommentViewProps> = ({
         }}
       />
       <ButtonView onPressAdd={onPressAdd} />
-      <CommentListView comments={comments} />
+      <CommentListView
+        comments={comments}
+        onPressEditComment={onPressEditComment}
+        onPressDeleteComment={onPressDeleteComment}
+      />
     </CommentViewBlock>
   );
 };

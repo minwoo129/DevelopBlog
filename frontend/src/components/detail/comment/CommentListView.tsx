@@ -9,11 +9,23 @@ const CommentListViewBlock = styled.div`
   margin-bottom: 3rem;
 `;
 
-const CommentListView: FC<CommentListViewProps> = ({ comments, ...props }) => {
+const CommentListView: FC<CommentListViewProps> = ({
+  comments,
+  onPressDeleteComment,
+  onPressEditComment,
+  ...props
+}) => {
   return (
     <CommentListViewBlock {...props}>
       {comments?.map((item, index) => {
-        return <CommentItem comment={item} key={index} />;
+        return (
+          <CommentItem
+            comment={item}
+            onPressDeleteComment={onPressDeleteComment}
+            onPressEditComment={onPressEditComment}
+            key={index}
+          />
+        );
       })}
     </CommentListViewBlock>
   );
