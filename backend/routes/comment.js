@@ -47,7 +47,9 @@ router.post("/save", verifyToken, async (req, res, next) => {
 router.delete("/del/:commentId", verifyToken, async (req, res, next) => {
   try {
     const result = await Comment.destroy({
-      where: req.params.commentId,
+      where: {
+        id: req.params.commentId,
+      },
     });
     res.status(200).json({ result: true, error: false, data: true });
   } catch (err) {
