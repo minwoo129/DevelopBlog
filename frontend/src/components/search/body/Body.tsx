@@ -65,14 +65,13 @@ interface BodyInsideGridProps extends HTMLAttributes<HTMLDivElement> {
 
 const BodyInsideGrid: FC<BodyInsideGridProps> = ({ blogs, onPress }) => {
   const [rowList, setRowList] = useState<blogItemType[][]>([]);
-  console.log("rowList: ", rowList);
   useEffect(() => {
     resizeEvent();
     window.addEventListener("resize", resizeEvent);
     return () => {
       window.removeEventListener("resize", resizeEvent);
     };
-  }, []);
+  }, [blogs]);
   const resizeEvent = () => {
     if (window.innerWidth >= 1200) {
       setRowList(_.chunk(blogs, 3));
@@ -86,7 +85,6 @@ const BodyInsideGrid: FC<BodyInsideGridProps> = ({ blogs, onPress }) => {
   return (
     <BodyInsideGridBlock>
       {rowList.map((item, idx) => {
-        console.log(item);
         return (
           <BodyRowBlock key={idx}>
             {item.map((blog, idx1) => {
