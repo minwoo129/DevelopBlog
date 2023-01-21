@@ -122,7 +122,6 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   };
 
   const onPressDeleteComment = (id: number) => {
-    console.log("onPressDeleteComment");
     const deleteCheck = window.confirm(
       "삭제시 내용을 복원할 수 없습니다.\n삭제하시겠습니까?"
     );
