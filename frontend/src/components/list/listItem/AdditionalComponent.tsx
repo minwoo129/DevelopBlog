@@ -7,7 +7,7 @@ export const InsideContentGrid = styled.div`
   width: 100%;
   height: 150px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 export const ContentDetailGrid = styled.div`
@@ -19,7 +19,7 @@ export const ContentDetailGrid = styled.div`
 `;
 
 export const StyledImg = styled.img`
-  width: 250px;
+  width: 300px;
   height: 150px;
   border-radius: 6px;
   object-fit: cover;

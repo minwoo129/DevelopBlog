@@ -13,9 +13,7 @@ import {
 
 const ListItemBlock = styled.div`
   border-radius: 6px;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  width: 500px;
+  width: 300px;
   height: 300px;
   display: block;
   box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.7);
@@ -24,18 +22,20 @@ const ListItemBlock = styled.div`
   &:hover {
     background: #d8d8d8;
   }
-  @media (min-width: 1400px) {
-    width: 600px;
-    height: 300px;
+  @media (min-width: 1200px) {
+    width: 300px;
   }
 `;
 
-const ListItem: FC<ListItemProps> = ({ blog, onPress }) => {
+const ListItem: FC<ListItemProps> = ({ blog, onPress, idx }) => {
   let newContent = blog.htmlContent.replace(/(<([^>]+)>)/gi, "");
   return (
     <ListItemBlock
       onClick={(e) => {
         onPress(blog.id);
+      }}
+      style={{
+        marginRight: idx % 3 !== 2 ? 150 : 0,
       }}
     >
       <LockedIcon isPublic={blog.public} />

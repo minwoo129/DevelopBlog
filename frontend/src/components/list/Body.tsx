@@ -9,34 +9,90 @@ import { useDispatch } from "react-redux";
 import { getBlogsThunk } from "../../modules/thunk/blog";
 import EmptyLayer from "../../common/EmptyLayer";
 import { isActiveInServer } from "../../config";
-import { BodyProps } from "./ListTypes";
+import { BodyInsideGridProps, BodyProps } from "./ListTypes";
+import _ from "lodash";
 
 const BodyBlock = styled.div`
   flex: 1;
   display: flex;
   overflow: scroll;
-  @media (max-width: 768px) {
-    padding: 0 50px;
-    flex-direction: column;
-    align-items: center;
+  justify-content: center;
+`;
+
+const BodyInsideGridBlock = styled.div`
+  @media (min-width: 1200px) {
+    width: 1200px;
   }
-  @media (min-width: 768px) {
-    padding: 0 120px;
-    flex-direction: column;
-    align-items: center;
+  @media (max-width: 1200px) {
+    width: 100%;
   }
-  @media (min-width: 1400px) {
-    flex-flow: row wrap;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 0 100px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+const BodyRowBlock = styled.div`
+  @media (max-width: 1200px) {
+    width: 100%;
+  }
+  @media (min-width: 1200px) {
+    width: 1200px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid red;
   }
 `;
+
+const BodyInsideGrid: FC<BodyInsideGridProps> = ({ blogs, onPress }) => {
+  return (
+    <BodyInsideGridBlock>
+      {_.chunk(blogs, 3).map((item, idx) => {
+        console.log(item);
+        return (
+          <BodyRowBlock key={idx}>
+            {item.map((blog, idx1) => {
+              return (
+                <ListItem
+                  blog={blog}
+                  onPress={onPress}
+                  key={blog.id}
+                  idx={idx1}
+                />
+              );
+            })}
+          </BodyRowBlock>
+        );
+      })}
+    </BodyInsideGridBlock>
+  );
+};
 
 const Body: FC<BodyProps> = (props) => {
   const blogs = useSelector((state: RootState) => state.blog.blogs);
   const navigate = useNavigate();
   const dispatch = useDispatch<any>();
+
+  let testBlogs: blogItemType[] = [];
+
+  for (let i = 0; i < 100; i++) {
+    testBlogs.push({
+      id: i,
+      User: {
+        nickname: "test",
+      },
+      content: "당신의 일기를 기록해주세요",
+      htmlContent: "<p>당신의 일기를 기록해주세요.</p>",
+      public: true,
+      thumbnailUrl:
+        "https://developblog.s3.amazonaws.com/image/content/2022/1223/2c644cb1-3dbf-46cb-9301-a055d4fc0ffb",
+      title: `테스트${i}`,
+      updatedAt: "2022-12-23 13:34:21",
+      userId: 1,
+      createdAt: "2022-12-23 13:34:21",
+      deletedAt: null,
+    });
+  }
 
   useEffect(() => {
     _getBlogs();
@@ -66,9 +122,7 @@ const Body: FC<BodyProps> = (props) => {
   }
   return (
     <BodyBlock>
-      {blogs.map((item: blogItemType, index: number) => {
-        return <ListItem blog={item} onPress={onPress} key={index} />;
-      })}
+      <BodyInsideGrid blogs={testBlogs} onPress={onPress} />
     </BodyBlock>
   );
 };
