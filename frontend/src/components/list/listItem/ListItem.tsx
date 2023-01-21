@@ -24,7 +24,7 @@ const ListItemBlock = styled.div`
   }
 `;
 
-const ListItem: FC<ListItemProps> = ({ blog, onPress, idx }) => {
+const ListItem: FC<ListItemProps> = ({ blog, onPress, idx, ...props }) => {
   let newContent = blog.htmlContent.replace(/(<([^>]+)>)/gi, "");
   const [marginRight, setMarginRight] = useState(0);
 
@@ -54,6 +54,7 @@ const ListItem: FC<ListItemProps> = ({ blog, onPress, idx }) => {
       style={{
         marginRight,
       }}
+      {...props}
     >
       <LockedIcon isPublic={blog.public} />
       <InsideContentGrid>

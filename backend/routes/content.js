@@ -249,6 +249,10 @@ router.get("/search", async (req, res, next) => {
   const { searchTxt } = req.query;
   try {
     const result = await Content.findAll({
+      include: {
+        model: User,
+        attributes: ["nickname"],
+      },
       where: {
         [Op.or]: [
           {

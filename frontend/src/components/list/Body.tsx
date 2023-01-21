@@ -77,7 +77,6 @@ const BodyInsideGrid: FC<BodyInsideGridProps> = ({ blogs, onPress }) => {
   return (
     <BodyInsideGridBlock>
       {rowList.map((item, idx) => {
-        console.log(item);
         return (
           <BodyRowBlock key={idx}>
             {item.map((blog, idx1) => {

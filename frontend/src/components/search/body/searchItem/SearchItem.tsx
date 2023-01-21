@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, useEffect, useState } from "react";
 import styled from "styled-components";
 import { blogItemType } from "../../../../modules/initialStates/initialStateType";
 import {
@@ -9,36 +9,13 @@ import {
 
 const SearchItemBlock = styled.div`
   border-radius: 6px;
-  margin-top: 20px;
-  border: 1px solid #848484;
+  width: 300px;
+  height: 350px;
+  display: block;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.7);
+  border: 1px solid grey;
   background: #e9ecef;
-  @media (max-width: 768px) {
-    width: 500px;
-    height: 700px;
-    display: flex;
-    flex-direction: column;
-  }
-  @media (min-width: 768px) {
-    width: 700px;
-    height: 200px;
-    display: flex;
-    flex-direction: row;
-  }
-  @media (min-width: 906px) {
-    width: 700px;
-    height: 200px;
-    display: flex;
-    flex-direction: row;
-  }
-  @media (min-width: 1400px) {
-    width: 900px;
-    height: 200px;
-    display: flex;
-    flex-direction: row;
-  }
-  & + & {
-    margin-bottom: 30px;
-  }
+  padding: 10px;
   &:hover {
     background: #d8d8d8;
   }
@@ -47,11 +24,37 @@ const SearchItemBlock = styled.div`
 interface SearchItemProps extends HTMLAttributes<HTMLDivElement> {
   blog: blogItemType;
   onPress(id: number): void;
+  idx: number;
 }
 
-const SearchItem: FC<SearchItemProps> = ({ blog, onPress, ...props }) => {
+const SearchItem: FC<SearchItemProps> = ({ blog, onPress, idx, ...props }) => {
+  const [marginRight, setMarginRight] = useState(0);
+
+  useEffect(() => {
+    resizeEvent();
+    window.addEventListener("resize", resizeEvent);
+    return () => {
+      window.removeEventListener("resize", resizeEvent);
+    };
+  }, []);
+
+  const resizeEvent = () => {
+    if (window.innerWidth >= 1200) {
+      setMarginRight(idx % 3 !== 2 ? 150 : 0);
+    } else if (window.innerWidth >= 700) {
+      setMarginRight(idx % 2 !== 1 ? 100 : 0);
+    } else {
+      setMarginRight(0);
+    }
+  };
   return (
-    <SearchItemBlock {...props} onClick={() => onPress(blog.id)}>
+    <SearchItemBlock
+      onClick={() => onPress(blog.id)}
+      style={{
+        marginRight,
+      }}
+      {...props}
+    >
       <StyledImgGrid>
         <StyledImg src={blog.thumbnailUrl} />
       </StyledImgGrid>
