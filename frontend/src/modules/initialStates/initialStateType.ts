@@ -118,11 +118,13 @@ export type CommentType = {
   updatedAt: string;
   createdAt: string;
   userId: number;
-  User: {
-    nickname: string;
-    profileImgUrl: string | null;
-    id: number;
-  };
+  User: CommentUserType;
   contentId: number;
   deletedAt: null | string;
+};
+
+export type CommentUserType = {
+  nickname: string;
+  profileImgUrl: string | null;
+  id: number;
 };
