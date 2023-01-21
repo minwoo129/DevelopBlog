@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from "react";
+import React, { FC, HTMLAttributes, useEffect, useState } from "react";
 import styled from "styled-components";
 import { blogItemType } from "../../../modules/initialStates/initialStateType";
 import { ListItemProps } from "../ListTypes";
@@ -22,20 +22,37 @@ const ListItemBlock = styled.div`
   &:hover {
     background: #d8d8d8;
   }
-  @media (min-width: 1200px) {
-    width: 300px;
-  }
 `;
 
 const ListItem: FC<ListItemProps> = ({ blog, onPress, idx }) => {
   let newContent = blog.htmlContent.replace(/(<([^>]+)>)/gi, "");
+  const [marginRight, setMarginRight] = useState(0);
+
+  useEffect(() => {
+    resizeEvent();
+    window.addEventListener("resize", resizeEvent);
+    return () => {
+      window.removeEventListener("resize", resizeEvent);
+    };
+  }, []);
+
+  const resizeEvent = () => {
+    if (window.innerWidth >= 1200) {
+      setMarginRight(idx % 3 !== 2 ? 150 : 0);
+    } else if (window.innerWidth >= 700) {
+      setMarginRight(idx % 2 !== 1 ? 100 : 0);
+    } else {
+      setMarginRight(0);
+    }
+  };
+
   return (
     <ListItemBlock
       onClick={(e) => {
         onPress(blog.id);
       }}
       style={{
-        marginRight: idx % 3 !== 2 ? 150 : 0,
+        marginRight,
       }}
     >
       <LockedIcon isPublic={blog.public} />

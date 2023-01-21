@@ -26,8 +26,11 @@ const HeaderInsideGrid = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  @media (max-width: 1200px) {
+  @media (max-width: 700px) {
     width: 100%;
+  }
+  @media (min-width: 700px) {
+    width: 700px;
   }
   @media (min-width: 1200px) {
     width: 1200px;

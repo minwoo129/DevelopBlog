@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useEffect, useMemo } from "react";
+import React, { FC, HTMLAttributes, useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import ListItem from "./listItem/ListItem";
 import { useSelector } from "react-redux";
@@ -17,14 +17,18 @@ const BodyBlock = styled.div`
   display: flex;
   overflow: scroll;
   justify-content: center;
+  padding-top: 50px;
 `;
 
 const BodyInsideGridBlock = styled.div`
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+  @media (min-width: 700px) {
+    width: 700px;
+  }
   @media (min-width: 1200px) {
     width: 1200px;
-  }
-  @media (max-width: 1200px) {
-    width: 100%;
   }
   display: flex;
   flex-flow: row wrap;
@@ -33,21 +37,46 @@ const BodyInsideGridBlock = styled.div`
 `;
 
 const BodyRowBlock = styled.div`
-  @media (max-width: 1200px) {
+  @media (max-width: 700px) {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+  @media (min-width: 700px) {
+    width: 700px;
+    display: flex;
+    flex-direction: row;
   }
   @media (min-width: 1200px) {
     width: 1200px;
     display: flex;
     flex-direction: row;
-    border: 1px solid red;
   }
+  margin-bottom: 50px;
 `;
 
 const BodyInsideGrid: FC<BodyInsideGridProps> = ({ blogs, onPress }) => {
+  const [rowList, setRowList] = useState<blogItemType[][]>([]);
+  useEffect(() => {
+    resizeEvent();
+    window.addEventListener("resize", resizeEvent);
+    return () => {
+      window.removeEventListener("resize", resizeEvent);
+    };
+  }, []);
+  const resizeEvent = () => {
+    if (window.innerWidth >= 1200) {
+      setRowList(_.chunk(blogs, 3));
+    } else if (window.innerWidth >= 700) {
+      setRowList(_.chunk(blogs, 2));
+    } else {
+      setRowList(_.chunk(blogs, 1));
+    }
+  };
   return (
     <BodyInsideGridBlock>
-      {_.chunk(blogs, 3).map((item, idx) => {
+      {rowList.map((item, idx) => {
         console.log(item);
         return (
           <BodyRowBlock key={idx}>
