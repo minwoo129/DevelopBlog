@@ -30,9 +30,9 @@ const CommentView: FC<CommentViewProps> = ({
     <CommentViewBlock {...props}>
       <StyledTitle>{`총 ${blog?.commentCount ?? 0}개의 댓글`}</StyledTitle>
       <CommentInput
-        defaultValue={commentInput}
-        onMouseOut={(e) => {
-          setCommentInput(e.currentTarget.value);
+        value={commentInput}
+        onChange={(e) => {
+          setCommentInput(e.target.value);
         }}
       />
       <ButtonView onPressAdd={onPressAdd} />

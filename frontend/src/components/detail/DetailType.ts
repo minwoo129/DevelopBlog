@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, TextareaHTMLAttributes } from "react";
 import {
   blogDetailType,
   CommentType,
@@ -42,7 +42,7 @@ export interface CommentViewProps
 }
 
 export interface CommentInputProps
-  extends HTMLAttributes<HTMLTextAreaElement> {}
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 export interface ButtonViewProps extends HTMLAttributes<HTMLDivElement> {
   onPressAdd(): void;
