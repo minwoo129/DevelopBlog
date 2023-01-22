@@ -81,9 +81,9 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
 
   useEffect(() => {
     if (type == "joinForm") {
-      document.title = "DEVELOPBLOG-로그인";
+      document.title = "DEVLOG-로그인";
     } else {
-      document.title = "DEVELOPBLOG-회원가입";
+      document.title = "DEVLOG-회원가입";
     }
   }, [type]);
 

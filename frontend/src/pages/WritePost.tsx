@@ -51,7 +51,7 @@ const WritePost: FC<WritePostProps> = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = "DEVELOPBLOG-작성하기";
+    document.title = "DEVLOG-작성하기";
     batch(() => {
       dispatch(clearSearchBlogs());
       dispatch(setSearchTxt(""));

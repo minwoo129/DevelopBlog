@@ -16,7 +16,7 @@ const MainPage = ({}) => {
   const dispatch = useDispatch<any>();
 
   useEffect(() => {
-    document.title = "DEVELOPBLOG";
+    document.title = "DEVLOG";
     batch(() => {
       dispatch(clearSearchBlogs());
       dispatch(setSearchTxt(""));
