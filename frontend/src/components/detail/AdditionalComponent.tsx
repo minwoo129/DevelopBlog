@@ -1,3 +1,4 @@
+import moment from "moment";
 import React, { FC, HTMLAttributes, useMemo } from "react";
 import styled from "styled-components";
 import { blogDetailType } from "../../modules/initialStates/initialStateType";
@@ -85,7 +86,9 @@ const InformationView: FC<InformationViewProps> = ({ blog, ...props }) => {
       createdAt = "";
     name = blog?.User?.nickname ?? "";
     if (blog?.createdAt) {
-      const [year, month, day] = blog.createdAt.split("T")[0].split("-");
+      const [year, month, day] = moment(blog.createdAt)
+        .format("YYYY-MM-DD")
+        .split("-");
       createdAt = `${year}년 ${month}월 ${day}일`;
     }
     return { name, createdAt };
