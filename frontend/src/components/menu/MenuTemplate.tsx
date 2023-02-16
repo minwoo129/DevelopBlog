@@ -173,7 +173,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
       >
         <div className="menu">
           <div onClick={onClickTitle} className="logo">
-            <h3>DEVBLOG</h3>
+            <h3>DEVLOG</h3>
           </div>
           {login && (
             <div
