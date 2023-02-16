@@ -23,6 +23,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { setMenuOpen } from "../../modules/actions/menu";
 import { setAppState } from "../../modules/actions/appInfo";
 import { isActiveInServer } from "../../config";
+import { getBlogsThunk } from "../../modules/thunk/blog";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -242,6 +243,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
           })
         );
       }
+      await _getBlogs();
       navigate("/");
     } catch (e: any) {
       !isActiveInServer &&
@@ -249,6 +251,21 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       if (e.response.data.code == 401) {
         alert("아이디 또는 비밀번호가 일치하지 않습니다.");
       }
+    }
+  };
+
+  const _getBlogs = async () => {
+    try {
+      const result = await dispatch(
+        getBlogsThunk({
+          params: {
+            page: 1,
+            size: 20,
+          },
+        })
+      );
+    } catch (err) {
+      !isActiveInServer && console.log("MainPage _getBlogs error: ", err);
     }
   };
 

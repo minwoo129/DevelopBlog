@@ -77,7 +77,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     dispatch(setMenuOpen(false));
     navigate("/myPage");
   };
-  const onClickLogin = (e: MouseEvent<HTMLDivElement>) => {
+  const onClickLogin = async (e: MouseEvent<HTMLDivElement>) => {
     if (isMyPage && isReviseUserInfo) {
       const confirmMove = window.confirm(
         "페이지를 이동하시겠습니까?\n현재까지 수정한 데이터가 삭제됩니다."
@@ -88,10 +88,9 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
     }
     dispatch(setMenuOpen(false));
     if (login) {
-      dispatch(logout());
-      dispatch(clearDataWhenLogout());
-      _getBlogs();
-      navigate("/");
+      await dispatch(logout());
+      await dispatch(clearDataWhenLogout());
+      await _getBlogs();
     } else navigate("/auth/login");
   };
   const onClickWrite = (e: MouseEvent<HTMLDivElement>) => {
@@ -154,6 +153,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
           },
         })
       );
+      await navigate("/");
     } catch (err) {
       !isActiveInServer && console.log("MainPage _getBlogs error: ", err);
     }
