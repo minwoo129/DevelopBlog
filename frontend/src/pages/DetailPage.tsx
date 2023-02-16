@@ -6,6 +6,7 @@ import qs from "qs";
 import { useDispatch } from "react-redux";
 import {
   addCommentThunk,
+  getBlogsThunk,
   getBlogThunk,
   getCommentsThunk,
 } from "../modules/thunk/blog";
@@ -94,9 +95,25 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
       })({
         subPath: `/${id}`,
       });
+      await _getBlogs();
       navigate("/");
     } catch (err) {
       !isActiveInServer && console.log("DetailPage __delContent error: ", err);
+    }
+  };
+
+  const _getBlogs = async () => {
+    try {
+      const result = await dispatch(
+        getBlogsThunk({
+          params: {
+            page: 1,
+            size: 20,
+          },
+        })
+      );
+    } catch (err) {
+      !isActiveInServer && console.log("MainPage _getBlogs error: ", err);
     }
   };
 

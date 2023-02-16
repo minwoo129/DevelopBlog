@@ -25,11 +25,12 @@ import { setSearchTxt } from "../modules/actions/appInfo";
 import { clearAddedImageIds } from "../modules/actions/blog";
 import Modal from "../components/write/modal/Modal";
 import { isActiveInServer } from "../config";
+import { getBlogsThunk } from "../modules/thunk/blog";
 
 interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
 
 const WritePost: FC<WritePostProps> = (props) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const location = useLocation();
 
   const addedImageIds = useSelector(
@@ -96,10 +97,26 @@ const WritePost: FC<WritePostProps> = (props) => {
       })({
         data,
       });
+      await _getBlogs();
       dispatch(clearAddedImageIds());
       navigate("/");
     } catch (e) {
       !isActiveInServer && console.log("WritePost onClick error: ", e);
+    }
+  };
+
+  const _getBlogs = async () => {
+    try {
+      const result = await dispatch(
+        getBlogsThunk({
+          params: {
+            page: 1,
+            size: 20,
+          },
+        })
+      );
+    } catch (err) {
+      !isActiveInServer && console.log("MainPage _getBlogs error: ", err);
     }
   };
   return (
