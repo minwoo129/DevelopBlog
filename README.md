@@ -18,10 +18,14 @@
 
 - Frontend
   - React, TypeScript
+  - React-Router-Dom(SPA)
+  - 에디터: [ToastUI](https://ui.toast.com/tui-editor)
+  - 기타 사용 UI 도구: [mui](https://mui.com/)
   - 배포: NGINX
 - Backend
   - Nodejs
     - Express
+    - 로그인 기능 구현: [passport](https://www.passportjs.org/)
   - DB: MySQL
   - 파일 업로드: AWS S3
   - PM2(무중단 실행)
@@ -33,7 +37,7 @@
         ⇒ 현재 해당 인스턴스는 삭제한 상태(비용적인 문제)
       - DB(MySQL): (퍼블릭 IP 비공개)
   - S3
-    - 버킷명: d****\*****
+    - 버킷명: d\***\*\*\*\***
 
 ## 기본 설계 내용 정리
 
@@ -69,8 +73,8 @@
   - 그런만큼 걱정을 많이 했는데 생각만큼 어렵지는 않았었다.
     ⇒ 물론 이 프로젝트가 실제로 릴리즈할 목적으로 만든 것은 아니기 때문에 보안과 관련된 설정이 모두 제거되어서 그런 것 같다.
     ⇒ 만약에 실제 운영에 필요한 정도로 설정을 하려고 하면 어려울 수 있다.
-  DevLog 프로젝트를 위해 설정한 실제 NGINX 설정 내용
-  ![스크린샷 2023-02-16 오후 11.43.54.png](./readmeImages/img1.png)
+    DevLog 프로젝트를 위해 설정한 실제 NGINX 설정 내용
+    ![스크린샷 2023-02-16 오후 11.43.54.png](./readmeImages/img1.png)
 - React-Native와 React간의 사용가능한 기능의 혼동
 
   - 개발시 메인 페이지에 접근할 때마다 게시글 목록을 업데이트 해줘야 하는 부분이 있었는데, React-Native에서는 useFocusEffect를 사용해서 페이지가 열릴 때마다 목록을 갱신하는 API를 호출하면 되지만, React에서는 그게 불가능했다.
