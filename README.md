@@ -24,11 +24,11 @@
   - 배포: NGINX
 - Backend
   - Nodejs
-    - Express
+    - [Express](https://expressjs.com/ko/)
     - 로그인 기능 구현: [passport](https://www.passportjs.org/)
   - DB: MySQL
   - 파일 업로드: AWS S3
-  - PM2(무중단 실행)
+  - 백엔드 실행: [PM2](https://pm2.keymetrics.io/)
 - AWS
   - 주 사용 리전: AP-NORTHEAST-2(서울)
   - EC2
