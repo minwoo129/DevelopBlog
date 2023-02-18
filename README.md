@@ -94,12 +94,12 @@
 
 ---
 
-![스크린샷 2023-02-16 오후 11.04.54.png](./readmeImages/img2.png)
+![스크린샷 2023-02-16 오후 11.04.54.png](https://github.com/minwoo129/readmeImgs/blob/master/developBlog/img2.png)
 
-![스크린샷 2023-02-16 오후 11.30.01.png](./readmeImages/img3.png)
+![스크린샷 2023-02-16 오후 11.30.01.png](https://github.com/minwoo129/readmeImgs/blob/master/developBlog/img3.png)
 
-![스크린샷 2023-02-16 오후 11.30.19.png](./readmeImages/img4.png)
+![스크린샷 2023-02-16 오후 11.30.19.png](https://github.com/minwoo129/readmeImgs/blob/master/developBlog/img4.png)
 
-![스크린샷 2023-02-16 오후 11.05.24.png](./readmeImages/img5.png)
+![스크린샷 2023-02-16 오후 11.05.24.png](https://github.com/minwoo129/readmeImgs/blob/master/developBlog/img5.png)
 
-![스크린샷 2023-01-23 오후 1.08.40.png](./readmeImages/img6.png)
+![스크린샷 2023-01-23 오후 1.08.40.png](https://github.com/minwoo129/readmeImgs/blob/master/developBlog/img6.png)
