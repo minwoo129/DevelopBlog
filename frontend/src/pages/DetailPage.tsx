@@ -15,8 +15,7 @@ import { RootState } from "../modules/reducer";
 import { setMenuOpen } from "../modules/actions/menu";
 import invokeAPI from "../lib/restAPI";
 import { batch } from "react-redux";
-import { clearSearchBlogs, setCommentInput } from "../modules/actions/blog";
-import { setSearchTxt } from "../modules/actions/appInfo";
+import { setCommentInput } from "../modules/actions/blog";
 import { isActiveInServer } from "../config";
 import { DetailPageProps } from "../components/detail/DetailType";
 

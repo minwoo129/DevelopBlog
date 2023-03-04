@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { batch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
