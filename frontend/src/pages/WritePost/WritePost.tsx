@@ -1,11 +1,4 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { Editor } from "@toast-ui/react-editor";
 import "@toast-ui/editor/dist/toastui-editor.css";
 import "prismjs/themes/prism.css";
@@ -26,7 +19,11 @@ import { clearAddedImageIds } from "../../modules/actions/blog";
 import Modal from "../../components/write/modal/Modal";
 import { isActiveInServer } from "../../config";
 import { getBlogsThunk } from "../../modules/thunk/blog";
-import { addImageBlobHook, WritePostProps } from "./PageTypes";
+import {
+  addBlogRequestData,
+  addImageBlobHook,
+  WritePostProps,
+} from "./PageTypes";
 import { DEFAULT_POST_THUMBNAIL_URL } from "./DefaultDatas";
 
 const WritePost: FC<WritePostProps> = (props) => {
@@ -76,20 +73,7 @@ const WritePost: FC<WritePostProps> = (props) => {
   };
 
   const __addBlog = async () => {
-    let data: any = {
-      title,
-      content: ref?.current?.getInstance()?.getMarkdown(),
-      thumbnailUrl,
-      htmlContent: ref.current?.getInstance()?.getHTML(),
-      imageIds: addedImageIds,
-      public: isPublic,
-    };
-    if (location.pathname.indexOf("revise") != -1) {
-      data = {
-        ...data,
-        contentId: blog?.id ?? 0,
-      };
-    }
+    const data = convertAddRequestData();
     try {
       const result = await invokeAPI({
         method: "post",
@@ -103,6 +87,25 @@ const WritePost: FC<WritePostProps> = (props) => {
     } catch (e) {
       !isActiveInServer && console.log("WritePost onClick error: ", e);
     }
+  };
+
+  const convertAddRequestData = () => {
+    let data: addBlogRequestData = {
+      title,
+      content: ref?.current?.getInstance()?.getMarkdown(),
+      thumbnailUrl,
+      htmlContent: ref.current?.getInstance()?.getHTML(),
+      imageIds: addedImageIds,
+      public: isPublic,
+    };
+    if (location.pathname.indexOf("revise") != -1) {
+      data = {
+        ...data,
+        contentId: blog?.id ?? 0,
+      };
+    }
+
+    return data;
   };
 
   const _getBlogs = async () => {

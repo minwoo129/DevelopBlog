@@ -1,54 +1,23 @@
-import React, { FC, HTMLAttributes, MouseEvent } from "react";
-import styled from "styled-components";
+import React, { FC } from "react";
+import { WritePostHeaderProps } from "../../pages/WritePost/PageTypes";
+import {
+  WritePostHeaderBlock,
+  WritePostHeaderInput,
+  WritePostHeaderSubmitBtn,
+} from "./StyledComponents";
 
-const HeaderBlock = styled.div`
-  flex: 1;
-  height: 48px;
-  padding: 4px 20px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const HeaderInput = styled.input`
-  width: 60%;
-  height: 100%;
-  border: 1px solid orange;
-  border-radius: 6px;
-  padding: 0 10px;
-  font-size: 1rem;
-`;
-
-const HeaderSubmitBtn = styled.button`
-  width: 100px;
-  height: 100%;
-  background: #0080ff;
-  border-radius: 6px;
-  border: 1px solid white;
-  color: white;
-  &:hover {
-    background: #084b8a;
-  }
-`;
-
-interface HeaderProps extends HTMLAttributes<HTMLDivElement> {
-  title: string;
-  setTitle(value: string): void;
-  onClick(): void;
-}
-
-const Header: FC<HeaderProps> = ({ title, setTitle, onClick }) => {
-  const pressButton = (e: MouseEvent<HTMLButtonElement>) => {};
+const Header: FC<WritePostHeaderProps> = ({ title, setTitle, onClick }) => {
   return (
-    <HeaderBlock>
-      <HeaderInput
+    <WritePostHeaderBlock>
+      <WritePostHeaderInput
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="제목을 입력하세요."
       />
-      <HeaderSubmitBtn onClick={onClick}>등록하기</HeaderSubmitBtn>
-    </HeaderBlock>
+      <WritePostHeaderSubmitBtn onClick={onClick}>
+        등록하기
+      </WritePostHeaderSubmitBtn>
+    </WritePostHeaderBlock>
   );
 };
 

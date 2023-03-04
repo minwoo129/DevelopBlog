@@ -2,7 +2,6 @@ import React, {
   ChangeEvent,
   CSSProperties,
   FC,
-  HTMLAttributes,
   useMemo,
   useRef,
   useState,
@@ -10,48 +9,27 @@ import React, {
 import { MdPublic } from "react-icons/md";
 import { BiLock } from "react-icons/bi";
 import { ClipLoader } from "react-spinners";
-import styled from "styled-components";
 import { invokeFileUpload } from "../../../lib/restAPI";
 import {
   FooterBtn,
   ImageView,
   PublicAskBtnGrid,
-  PublicAskTitleGrid,
   PublicBtn,
   PublicTitle,
   SaveBtnsGrid,
   StyledFileInput,
   StyledFileUploadBtn,
   StyledImg,
-  StyledTempCloseBtn,
 } from "./AdditionalComponent";
 import { isActiveInServer } from "../../../config";
-
-const InputInfoBlock = styled.div`
-  background: #fff;
-  margin: 0 auto;
-  border-radius: 6px;
-  width: 500px;
-  height: 700px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+import { WritePostModalInputInfoBlock } from "../StyledComponents";
+import { WritePostModalInputInfoProps } from "../../../pages/WritePost/PageTypes";
 
 const override: CSSProperties = {
   position: "absolute",
 };
 
-interface InputInfoProps extends HTMLAttributes<HTMLDivElement> {
-  thumbnailUrl: string;
-  setThumbnailUrl(value: string): void;
-  isPublic: boolean;
-  setPublic(value: boolean): void;
-  close(): void;
-  addBlog(): void;
-}
-
-const InputInfo: FC<InputInfoProps> = ({
+const InputInfo: FC<WritePostModalInputInfoProps> = ({
   thumbnailUrl,
   setThumbnailUrl,
   isPublic,
@@ -108,7 +86,7 @@ const InputInfo: FC<InputInfoProps> = ({
     inputRef.current.click();
   };
   return (
-    <InputInfoBlock {...props}>
+    <WritePostModalInputInfoBlock {...props}>
       <StyledFileInput
         type="file"
         ref={inputRef}
@@ -155,7 +133,7 @@ const InputInfo: FC<InputInfoProps> = ({
           등록하기
         </FooterBtn>
       </SaveBtnsGrid>
-    </InputInfoBlock>
+    </WritePostModalInputInfoBlock>
   );
 };
 
