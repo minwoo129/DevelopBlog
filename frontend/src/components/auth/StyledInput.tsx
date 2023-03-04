@@ -1,5 +1,6 @@
-import React, { FC, HTMLAttributes, InputHTMLAttributes } from "react";
+import React, { FC } from "react";
 import styled from "styled-components";
+import { StyledInputProps } from "../../pages/AuthPage/AuthPageTypes";
 
 const StyledInputBlock = styled.input`
   font-size: 1rem;
@@ -16,8 +17,6 @@ const StyledInputBlock = styled.input`
     margin-top: 1rem;
   }
 `;
-
-interface StyledInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 const StyledInput: FC<StyledInputProps> = (props) => {
   return <StyledInputBlock {...props} />;

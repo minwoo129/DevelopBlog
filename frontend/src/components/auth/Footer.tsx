@@ -1,6 +1,7 @@
-import React, { HTMLAttributes } from "react";
-import styled, { css } from "styled-components";
+import React, { FC } from "react";
+import styled from "styled-components";
 import palette from "../../lib/styles/palette";
+import { AuthFormFooterProps } from "../../pages/AuthPage/AuthPageTypes";
 
 const FooterBlock = styled.div`
   margin-top: 2rem;
@@ -14,11 +15,7 @@ const FooterBlock = styled.div`
   }
 `;
 
-interface FooterProps extends HTMLAttributes<HTMLDivElement> {
-  disabled?: boolean;
-}
-
-const Footer = (props: FooterProps) => {
+const Footer: FC<AuthFormFooterProps> = (props) => {
   return <FooterBlock {...props} />;
 };
 

@@ -1,13 +1,8 @@
-import React, {
-  FC,
-  HTMLAttributes,
-  MouseEvent,
-  MouseEventHandler,
-  useRef,
-} from "react";
+import React, { FC, MouseEvent, useRef } from "react";
 import styled from "styled-components";
 import { IoMdAdd } from "react-icons/io";
 import { DefaultUserImage } from "../../common/UserImage";
+import { StyledImageInputProps } from "../../pages/AuthPage/AuthPageTypes";
 
 const StyledImageInputBlock = styled.div`
   width: 100%;
@@ -43,12 +38,6 @@ const UserImage = styled.img`
   align-items: center;
   color: #fff;
 `;
-
-interface StyledImageInputProps extends HTMLAttributes<HTMLDivElement> {
-  imgSrc: any;
-  setImgSrc(value: any): void;
-  onChangeImg(value: File | Blob): void;
-}
 
 const StyledImageInput: FC<StyledImageInputProps> = ({
   imgSrc,

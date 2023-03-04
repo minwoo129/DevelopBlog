@@ -1,21 +1,11 @@
-import React, {
-  ChangeEvent,
-  FC,
-  FormEvent,
-  HTMLAttributes,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
-import qs from "qs";
 import { useLocation, useNavigate } from "react-router-dom";
 import AuthForm from "./AuthForm";
 import { useSelector } from "react-redux";
-import { AnyAction } from "redux";
 import { useDispatch } from "react-redux";
-import { changeField, login } from "../../modules/actions/auth";
-import invokeAPI, { invokeFileUpload } from "../../lib/restAPI";
+import { changeField } from "../../modules/actions/auth";
+import { invokeFileUpload } from "../../lib/restAPI";
 import { joinThunk, loginThunk } from "../../modules/thunk/auth";
 import { RootState } from "../../modules/reducer";
 import { IconButton } from "@mui/material";
@@ -24,6 +14,16 @@ import { setMenuOpen } from "../../modules/actions/menu";
 import { setAppState } from "../../modules/actions/appInfo";
 import { isActiveInServer } from "../../config";
 import { getBlogsThunk } from "../../modules/thunk/blog";
+import {
+  AuthTemplateProps,
+  onChange,
+  onChangeImg,
+  onCheckAdmin,
+  onSubmit,
+  pageEnableType,
+  _join,
+  __uploadImageFile,
+} from "../../pages/AuthPage/AuthPageTypes";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -39,29 +39,6 @@ const WhiteBox = styled.div`
   background: white;
   border-radius: 2px;
 `;
-
-interface AuthTemplateProps extends HTMLAttributes<HTMLDivElement> {}
-type pageEnableType = "loginForm" | "joinForm";
-
-type joinMethodParams = {
-  email: string;
-  password: string;
-  name: string;
-  isAdmin: boolean;
-  adminPwd: string;
-  nickname: string;
-  profileImgIdx: number | null;
-};
-
-type uploadFileMethodParams = {
-  email: string;
-  password: string;
-  name: string;
-  isAdmin: boolean;
-  adminPwd: string;
-  nickname: string;
-  imageFile: File | Blob | null;
-};
 
 const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
@@ -88,49 +65,22 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     }
   }, [type]);
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onChange: onChange = (e) => {
     const { name, value } = e.target;
     dispatch(changeField({ form: type, key: name, value }));
   };
-  const onChangeImg = (data: File | Blob) => {
+  const onChangeImg: onChangeImg = (data) => {
     dispatch(changeField({ form: type, key: "imageFile", value: data }));
   };
-  const onCheckAdmin = (value: boolean) => {
+  const onCheckAdmin: onCheckAdmin = (value) => {
     dispatch(changeField({ form: "joinForm", key: "isAdmin", value }));
   };
-  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit: onSubmit = async (e) => {
     e.preventDefault();
     if (type == "joinForm") {
-      const {
-        email,
-        pwd,
-        pwdCheck,
-        name,
-        isAdmin,
-        adminPwd,
-        nickname,
-        imageFile,
-      } = joinForm;
-      if (email == "") {
-        alert("이메일을 입력해주세요.");
-        return;
-      }
-      if (pwd == "") {
-        alert("비밀번호를 입력해주세요.");
-        return;
-      }
-      if (pwdCheck == "") {
-        alert("확인용 비밀번호를 입력해주세요.");
-        return;
-      }
-      if (name == "") {
-        alert("이름을 입력해주세요.");
-        return;
-      }
-      if (pwd != pwdCheck) {
-        alert("비밀번호가 일치하지 않습니다.");
-        return;
-      }
+      const { email, pwd, name, isAdmin, adminPwd, nickname, imageFile } =
+        joinForm;
+      if (!joinValidationCheck()) return;
       __uploadImageFile({
         email,
         password: pwd,
@@ -142,19 +92,52 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       });
     } else {
       const { email, pwd } = loginForm;
-      if (email == "") {
-        alert("이메일을 입력해주세요.");
-        return;
-      }
-      if (pwd == "") {
-        alert("비밀번호를 입력해주세요.");
-        return;
-      }
+      if (!loginValidationCheck()) return;
       _login(email, pwd);
     }
   };
 
-  const __uploadImageFile = async (props: uploadFileMethodParams) => {
+  const joinValidationCheck = () => {
+    const { email, pwd, pwdCheck, name } = joinForm;
+    let result = true;
+    if (email == "") {
+      alert("이메일을 입력해주세요.");
+      result = false;
+    }
+    if (pwd == "") {
+      alert("비밀번호를 입력해주세요.");
+      result = false;
+    }
+    if (pwdCheck == "") {
+      alert("확인용 비밀번호를 입력해주세요.");
+      result = false;
+    }
+    if (name == "") {
+      alert("이름을 입력해주세요.");
+      result = false;
+    }
+    if (pwd != pwdCheck) {
+      alert("비밀번호가 일치하지 않습니다.");
+      result = false;
+    }
+    return result;
+  };
+
+  const loginValidationCheck = () => {
+    const { email, pwd } = loginForm;
+    let result = true;
+    if (email == "") {
+      alert("이메일을 입력해주세요.");
+      result = false;
+    }
+    if (pwd == "") {
+      alert("비밀번호를 입력해주세요.");
+      result = false;
+    }
+    return result;
+  };
+
+  const __uploadImageFile: __uploadImageFile = async (props) => {
     const { imageFile, adminPwd, email, isAdmin, name, nickname, password } =
       props;
     if (!imageFile) {
@@ -194,7 +177,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     }
   };
 
-  const _join = async (props: joinMethodParams) => {
+  const _join: _join = async (props) => {
     const {
       adminPwd,
       email,
@@ -205,7 +188,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       password,
     } = props;
     try {
-      const result = await dispatch(
+      await dispatch(
         joinThunk({
           data: {
             email,

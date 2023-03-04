@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import AuthPage from "./pages/AuthPage";
+import AuthPage from "./pages/AuthPage/AuthPage";
 import DetailPage from "./pages/DetailPage";
 import MainPage from "./pages/MainPage";
 import MyPage from "./pages/MyPage";

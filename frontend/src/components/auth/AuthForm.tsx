@@ -1,13 +1,8 @@
-import React, {
-  ChangeEvent,
-  FC,
-  FormEvent,
-  HTMLAttributes,
-  useMemo,
-} from "react";
+import React, { FC, useMemo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../common/Button";
+import { AuthFormProps, textMap } from "../../pages/AuthPage/AuthPageTypes";
 import CheckAdminSection from "./CheckAdminSection";
 import Footer from "./Footer";
 import StyledImageInput from "./StyledImageInput";
@@ -23,31 +18,6 @@ const AuthFormBlock = styled.div`
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
-
-const textMap = {
-  loginForm: "로그인",
-  joinForm: "회원가입",
-};
-
-interface AuthFormProps {
-  formType: "loginForm" | "joinForm";
-  form?: {
-    email: string;
-    pwd: string;
-    pwdCheck?: string;
-    name?: string;
-    isAdmin?: boolean;
-    adminPwd?: string;
-    nickname?: string;
-    imageFile?: File | null;
-  };
-  onChange(e: ChangeEvent<HTMLInputElement>): void;
-  onCheckAdmin?(value: boolean): void;
-  onSubmit(e: FormEvent<HTMLFormElement>): void;
-  imgSrc: any;
-  setImgSrc(value: any): void;
-  onChangeImg(value: File | Blob): void;
-}
 
 const AuthForm: FC<AuthFormProps> = ({
   formType,
