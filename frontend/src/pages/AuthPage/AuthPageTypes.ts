@@ -27,9 +27,8 @@ export type joinMethodParams = {
   profileImgIdx: number | null;
 };
 
-export const textMap = {
-  loginForm: "로그인",
-  joinForm: "회원가입",
+export type pageMapType = {
+  [key in pageEnableType]: string;
 };
 // ================================= Component Prop Types ===============================
 export interface AuthPageProps extends HTMLAttributes<HTMLDivElement> {}
@@ -37,7 +36,7 @@ export interface AuthPageProps extends HTMLAttributes<HTMLDivElement> {}
 export interface AuthTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 
 export interface AuthFormProps extends StyledImageInputCommonProps {
-  formType: "loginForm" | "joinForm";
+  formType: pageEnableType;
   form?: {
     email: string;
     pwd: string;

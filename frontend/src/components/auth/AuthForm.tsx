@@ -2,7 +2,7 @@ import React, { FC, useMemo } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../common/Button";
-import { AuthFormProps, textMap } from "../../pages/AuthPage/AuthPageTypes";
+import { AuthFormProps, pageMapType } from "../../pages/AuthPage/AuthPageTypes";
 import CheckAdminSection from "./CheckAdminSection";
 import Footer from "./Footer";
 import StyledImageInput from "./StyledImageInput";
@@ -18,6 +18,11 @@ const AuthFormBlock = styled.div`
 const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
+
+const textMap: pageMapType = {
+  loginForm: "로그인",
+  joinForm: "회원가입",
+};
 
 const AuthForm: FC<AuthFormProps> = ({
   formType,
