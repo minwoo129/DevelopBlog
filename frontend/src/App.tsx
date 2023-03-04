@@ -6,7 +6,7 @@ import DetailPage from "./pages/DetailPage";
 import MainPage from "./pages/MainPage";
 import MyPage from "./pages/MyPage";
 import SearchPage from "./pages/SearchPage";
-import WritePost from "./pages/WritePost";
+import WritePost from "./pages/WritePost/WritePost";
 
 const App = () => {
   return (

@@ -13,21 +13,21 @@ import "@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import codeSyntaxHighlight from "@toast-ui/editor-plugin-code-syntax-highlight";
 import Prism from "prismjs";
 import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
-import Header from "../components/write/Header";
-import invokeAPI, { invokeFileUpload } from "../lib/restAPI";
+import Header from "../../components/write/Header";
+import invokeAPI, { invokeFileUpload } from "../../lib/restAPI";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { clearSearchBlogs, setAddedImageIds } from "../modules/actions/blog";
+import { clearSearchBlogs, setAddedImageIds } from "../../modules/actions/blog";
 import { useSelector } from "react-redux";
-import { RootState } from "../modules/reducer";
+import { RootState } from "../../modules/reducer";
 import { batch } from "react-redux";
-import { setSearchTxt } from "../modules/actions/appInfo";
-import { clearAddedImageIds } from "../modules/actions/blog";
-import Modal from "../components/write/modal/Modal";
-import { isActiveInServer } from "../config";
-import { getBlogsThunk } from "../modules/thunk/blog";
-
-interface WritePostProps extends HTMLAttributes<HTMLDivElement> {}
+import { setSearchTxt } from "../../modules/actions/appInfo";
+import { clearAddedImageIds } from "../../modules/actions/blog";
+import Modal from "../../components/write/modal/Modal";
+import { isActiveInServer } from "../../config";
+import { getBlogsThunk } from "../../modules/thunk/blog";
+import { addImageBlobHook, WritePostProps } from "./PageTypes";
+import { DEFAULT_POST_THUMBNAIL_URL } from "./DefaultDatas";
 
 const WritePost: FC<WritePostProps> = (props) => {
   const dispatch = useDispatch<any>();
@@ -43,7 +43,7 @@ const WritePost: FC<WritePostProps> = (props) => {
 
   const [title, setTitle] = useState<string>("");
   const [thumbnailUrl, setThumbnailUrl] = useState<string>(
-    "https://developblog.s3.ap-northeast-2.amazonaws.com/image/default/2022/1203/93eb6dd6-8a7a-41ad-93fd-616795fa4bae"
+    DEFAULT_POST_THUMBNAIL_URL
   );
   const [isthumbnailChange, setThumbnailChange] = useState(false);
   const [modal, setModal] = useState<boolean>(false);
@@ -119,6 +119,24 @@ const WritePost: FC<WritePostProps> = (props) => {
       !isActiveInServer && console.log("MainPage _getBlogs error: ", err);
     }
   };
+
+  const addImageBlobHook: addImageBlobHook = async (data, callback) => {
+    try {
+      const result = await invokeFileUpload({
+        data,
+        path: "/api/files/upload",
+        uploadType: "image/content",
+      });
+      if (!isthumbnailChange) {
+        setThumbnailUrl(result.data.data.publishedUrl);
+        setThumbnailChange(true);
+      }
+      dispatch(setAddedImageIds(result.data.data.id));
+      callback(result.data.data.publishedUrl);
+    } catch (err) {
+      !isActiveInServer && console.log("upload error: ", err);
+    }
+  };
   return (
     <div>
       <Header title={title} setTitle={setTitle} onClick={onClick} />
@@ -135,23 +153,7 @@ const WritePost: FC<WritePostProps> = (props) => {
         useCommandShortcut={true}
         plugins={[[codeSyntaxHighlight, { highlighter: Prism }], colorSyntax]}
         hooks={{
-          addImageBlobHook: async (blob, callback) => {
-            try {
-              const result = await invokeFileUpload({
-                data: blob,
-                path: "/api/files/upload",
-                uploadType: "image/content",
-              });
-              if (!isthumbnailChange) {
-                setThumbnailUrl(result.data.data.publishedUrl);
-                setThumbnailChange(true);
-              }
-              dispatch(setAddedImageIds(result.data.data.id));
-              callback(result.data.data.publishedUrl);
-            } catch (err) {
-              !isActiveInServer && console.log("upload error: ", err);
-            }
-          },
+          addImageBlobHook,
         }}
       />
       <Modal
