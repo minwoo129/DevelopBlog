@@ -1,11 +1,17 @@
-import { apiType1, apiType2, fileUpload } from "./type";
+import {
+  getCookiesMethType,
+  invokeAPIMethType,
+  invokeFileUploadMethType,
+  removeCookiesMethType,
+  setCookiesMethType,
+} from "./type";
 import axios, { AxiosRequestConfig } from "axios";
 import { Cookies } from "react-cookie";
 import { isActiveInServer } from "../../config";
 
 const cookies = new Cookies();
 
-export const setCookies = (key: string, data: any) => {
+export const setCookies: setCookiesMethType = (key, data) => {
   cookies.remove(key);
   const date = new Date();
   date.setHours(date.getHours() + 6);
@@ -14,15 +20,16 @@ export const setCookies = (key: string, data: any) => {
   });
 };
 
-export const getCookies = (key: string) => {
+export const getCookies: getCookiesMethType = (key) => {
   return cookies.get(key);
 };
 
-export const removeCookies = (key: string) => {
+export const removeCookies: removeCookiesMethType = (key) => {
   return cookies.remove(key);
 };
 
-export const invokeFileUpload = ({ path, data, uploadType }: fileUpload) => {
+export const invokeFileUpload: invokeFileUploadMethType = (args) => {
+  const { path, data, uploadType } = args;
   const form = new FormData();
   form.append("file", data);
   return axios.post(path, form, {
@@ -36,9 +43,9 @@ export const invokeFileUpload = ({ path, data, uploadType }: fileUpload) => {
   });
 };
 
-const invokeAPI =
-  ({ method, path }: apiType1) =>
-  ({ subPath = null, params = null, data = null }: apiType2) => {
+const invokeAPI: invokeAPIMethType =
+  ({ method, path }) =>
+  ({ subPath = null, params = null, data = null }) => {
     let axiosReq: AxiosRequestConfig = {
       method,
       url: subPath ? `${path}${subPath}` : path,
