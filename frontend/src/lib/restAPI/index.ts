@@ -2,7 +2,6 @@ import { apiType1, apiType2, fileUpload } from "./type";
 import axios, { AxiosRequestConfig } from "axios";
 import { Cookies } from "react-cookie";
 import { isActiveInServer } from "../../config";
-import moment from "moment";
 
 const cookies = new Cookies();
 
