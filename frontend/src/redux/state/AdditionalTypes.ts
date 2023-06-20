@@ -16,4 +16,8 @@ export type {
 } from "./Blog/types";
 
 // ================================ AppInfo =======================================
-export type { userDetailInfoType, userProfileImgType } from "./AppInfo/types";
+export type {
+  userDetailInfoType,
+  userProfileImgType,
+  AppInfoInitialStateSelectableType,
+} from "./AppInfo/types";

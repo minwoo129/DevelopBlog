@@ -12,6 +12,20 @@ export type initialStateType = {
   tempNickname: string;
 };
 
+export type AppInfoInitialStateSelectableType = {
+  searchBarVisible?: boolean;
+  searchTxt?: string;
+  userInfo?: userDetailInfoType | null;
+  isReviseUserInfo?: boolean;
+  userImgTempData?: File | Blob | null;
+  backgroundImgTempData?: File | Blob | null;
+  userImgSrc?: any;
+  backgroundImgSrc?: any;
+  isUserImgChanged?: boolean;
+  isBackgroundImgChanged?: boolean;
+  tempNickname?: string;
+};
+
 export interface userDetailInfoType {
   createdAt: string;
   email: string;
