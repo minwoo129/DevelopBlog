@@ -20,7 +20,7 @@ export const createPromiseThunk = <T>(args: promiseThunkArgs) => {
         return result.data;
       } catch (e: any) {
         if (!e.response) throw e;
-        return rejectWithValue(e.response);
+        return rejectWithValue(e);
       }
     }
   );
