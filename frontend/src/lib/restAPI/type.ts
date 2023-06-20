@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosPromise, AxiosResponse } from "axios";
 
 export type invokeFileUploadArgs = {
   path: string;
@@ -28,9 +28,9 @@ export type invokeAPIRequestArgs2 = {
 export type setCookiesMethType = (key: string, data: any) => void;
 export type getCookiesMethType = (key: string) => any;
 export type removeCookiesMethType = (key: string) => void;
-export type invokeFileUploadMethType = (
+export type invokeFileUploadMethType = <T = any>(
   args: invokeFileUploadArgs
-) => Promise<AxiosResponse<any, any>>;
-export type invokeAPIMethType = (
+) => AxiosPromise<T>;
+export type invokeAPIMethType = <T = any>(
   args1: invokeAPIRequestArgs1
-) => (args2: invokeAPIRequestArgs2) => Promise<AxiosResponse<any, any>>;
+) => (args2: invokeAPIRequestArgs2) => AxiosPromise<T>;
