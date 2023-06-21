@@ -5,44 +5,21 @@ import {
   blogItemType,
   userWriteBlogsType,
 } from "../../state/AdditionalTypes";
+import { commonResultType } from "../commonTypes";
 
 // ===========================================================
 export type setAddedImageIdsAction = PayloadAction<number>;
 // ===========================================================
-export type getBlogsResult = {
-  data: blogItemType[];
-  error: boolean;
-  result: boolean;
-};
+export type getBlogsResult = commonResultType<blogItemType[]>;
 // ===========================================================
-export type getBlogResult = {
-  data: blogDetailType;
-  error: boolean;
-  result: boolean;
-};
+export type getBlogResult = commonResultType<blogDetailType>;
 // ===========================================================
-export type getSearchBlogsResult = {
-  data: blogItemType[];
-  error: boolean;
-  result: boolean;
-};
+export type getSearchBlogsResult = commonResultType<blogItemType[]>;
 // ===========================================================
-export type getUserWriteBlogsResult = {
-  data: userWriteBlogsType;
-  error: boolean;
-  result: boolean;
-};
+export type getUserWriteBlogsResult = commonResultType<userWriteBlogsType>;
 // ===========================================================
 export type setCommentInputAction = PayloadAction<string>;
 // ===========================================================
-export type addCommentResult = {
-  data: boolean;
-  error: boolean;
-  result: boolean;
-};
+export type addCommentResult = commonResultType<boolean>;
 // ===========================================================
-export type getCommentsResult = {
-  data: blogCommentsType;
-  error: boolean;
-  result: boolean;
-};
+export type getCommentsResult = commonResultType<blogCommentsType>;

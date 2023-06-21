@@ -4,17 +4,14 @@ import {
   loginSelectableForm,
   userProfileImgType,
 } from "../../state/AdditionalTypes";
+import { commonResultType } from "../commonTypes";
 
 // ===========================================================
 export type changeLoginFieldAction = PayloadAction<loginSelectableForm>;
 // ===========================================================
 export type changeJoinFieldAction = PayloadAction<joinSelectableForm>;
 // ===========================================================
-export type loginRetType = {
-  data: loginResult;
-  error: boolean;
-  result: boolean;
-};
+export type loginRetType = commonResultType<loginResult>;
 
 type loginResult = {
   backgroundImg: userProfileImgType | null;
@@ -28,11 +25,7 @@ type loginResult = {
   token: string;
 };
 // ===========================================================
-export type joinRetType = {
-  data: null;
-  error: boolean;
-  result: boolean;
-};
+export type joinRetType = commonResultType<null>;
 // ===========================================================
 export type initializeByTokenAction = PayloadAction<InitializeByTokenParam>;
 type InitializeByTokenParam = {
