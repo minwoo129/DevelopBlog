@@ -1,9 +1,9 @@
 import { HTMLAttributes, TextareaHTMLAttributes } from "react";
 import {
-  blogDetailType,
   CommentType,
   CommentUserType,
-} from "../../modules/initialStates/initialStateType";
+  blogDetailType,
+} from "../../redux/state/AdditionalTypes";
 
 export interface DetailPageProps extends HTMLAttributes<HTMLDivElement> {}
 

@@ -1,6 +1,5 @@
 import React, { FC, HTMLAttributes, useMemo } from "react";
 import styled from "styled-components";
-import { CommentType } from "../../../modules/initialStates/initialStateType";
 import { DefaultUserImage } from "../../../common/UserImage";
 import moment from "moment";
 import "moment/locale/ko";

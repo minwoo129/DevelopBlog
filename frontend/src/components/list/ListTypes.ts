@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { blogItemType } from "../../modules/initialStates/initialStateType";
+import { blogItemType } from "../../redux/state/AdditionalTypes";
 
 export interface ListTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 

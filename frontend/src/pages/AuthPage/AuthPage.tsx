@@ -3,9 +3,9 @@ import { batch } from "react-redux";
 import { useDispatch } from "react-redux";
 import AuthTemplate from "../../components/auth/AuthTemplate";
 import MenuTemplate from "../../components/menu/MenuTemplate";
-import { setSearchTxt } from "../../modules/actions/appInfo";
-import { clearSearchBlogs } from "../../modules/actions/blog";
 import { AuthPageProps } from "./AuthPageTypes";
+import { clearSearchBlogs } from "../../redux/slice/Blog";
+import { setSearchTxt } from "../../redux/slice/AppInfo";
 
 const AuthPage: FC<AuthPageProps> = ({ ...props }) => {
   const dispatch = useDispatch<any>();

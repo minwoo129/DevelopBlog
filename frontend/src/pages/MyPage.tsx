@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import MenuTemplate from "../components/menu/MenuTemplate";
 import MyPageTemplate from "../components/myPage/MyPageTemplate";
 import { isActiveInServer } from "../config";
-import { getUserInfoThunk } from "../modules/thunk/appInfo";
-import { getUserWriteBlogsThunk } from "../modules/thunk/blog";
 import { RootState } from "../redux/slice";
+import { getUserInfo } from "../redux/slice/AppInfo";
+import { getUserWriteBlogs } from "../redux/slice/Blog";
 
 const MyPage = ({}) => {
   const dispatch = useDispatch<any>();
@@ -25,7 +25,7 @@ const MyPage = ({}) => {
 
   const _getUserInfo = async () => {
     try {
-      const result = await dispatch(getUserInfoThunk({}));
+      const result = await dispatch(getUserInfo({}));
     } catch (err) {
       !isActiveInServer && console.log("MyPage _getUserInfo error: ", err);
     }
@@ -34,7 +34,7 @@ const MyPage = ({}) => {
   const _getUserWriteBlogs = async (page: number) => {
     try {
       const result = await dispatch(
-        getUserWriteBlogsThunk({
+        getUserWriteBlogs({
           params: {
             page,
             size: 20,

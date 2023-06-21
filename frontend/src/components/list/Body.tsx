@@ -2,15 +2,15 @@ import React, { FC, HTMLAttributes, useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import ListItem from "./listItem/ListItem";
 import { useSelector } from "react-redux";
-import { blogItemType } from "../../modules/initialStates/initialStateType";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getBlogsThunk } from "../../modules/thunk/blog";
 import EmptyLayer from "../../common/EmptyLayer";
 import { isActiveInServer } from "../../config";
 import { BodyInsideGridProps, BodyProps } from "./ListTypes";
 import _ from "lodash";
 import { RootState } from "../../redux/slice";
+import { blogItemType } from "../../redux/state/AdditionalTypes";
+import { getBlogs } from "../../redux/slice/Blog";
 
 const BodyBlock = styled.div`
   flex: 1;
@@ -108,7 +108,7 @@ const Body: FC<BodyProps> = (props) => {
   const _getBlogs = async () => {
     try {
       const result = await dispatch(
-        getBlogsThunk({
+        getBlogs({
           params: {
             page: 1,
             size: 20,

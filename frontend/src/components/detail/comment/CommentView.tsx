@@ -1,9 +1,5 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import {
-  blogDetailType,
-  CommentType,
-} from "../../../modules/initialStates/initialStateType";
 import { CommentViewProps } from "../DetailType";
 import ButtonView from "./ButtonView";
 import CommentInput from "./CommentInput";

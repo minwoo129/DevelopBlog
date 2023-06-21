@@ -7,21 +7,20 @@ import React, {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { clearLoginForm, logout } from "../../modules/actions/auth";
 import "./MenuTemplate.scss";
-import { setMenuOpen, setMenuVisible } from "../../modules/actions/menu";
 import { Drawer } from "@mui/material";
-import { tokenCheckThunk } from "../../modules/thunk/auth";
 import { getCookies } from "../../lib/restAPI";
 import { batch } from "react-redux";
+import { isActiveInServer } from "../../config";
+import { RootState } from "../../redux/slice";
+import { clearLoginForm, logout, tokenCheck } from "../../redux/slice/Auth";
 import {
   clearDataWhenLogout,
   clearReviseData,
   setAppState,
-} from "../../modules/actions/appInfo";
-import { getBlogsThunk } from "../../modules/thunk/blog";
-import { isActiveInServer } from "../../config";
-import { RootState } from "../../redux/slice";
+} from "../../redux/slice/AppInfo";
+import { setMenuOpen } from "../../redux/slice/Menu";
+import { getBlogs } from "../../redux/slice/Blog";
 
 interface MenuTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const MenuTemplate: FC<MenuTemplateProps> = (props) => {
@@ -109,13 +108,12 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
 
   const _updateToken = async () => {
     try {
-      const result = await dispatch(tokenCheckThunk({}));
+      const result = await dispatch(tokenCheck({}));
       navigate("/write");
       if (result.data?.backgroundImg) {
         dispatch(
           setAppState({
-            key: "backgroundImgSrc",
-            value: result.data?.backgroundImg.publishedUrl,
+            backgroundImgSrc: result.data?.backgroundImg.publishedUrl,
           })
         );
       }
@@ -129,12 +127,11 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   };
   const _tokenCheck = async () => {
     try {
-      const result = await dispatch(tokenCheckThunk({}));
+      const result = await dispatch(tokenCheck({}));
       if (result.data?.backgroundImg) {
         dispatch(
           setAppState({
-            key: "backgroundImgSrc",
-            value: result.data?.backgroundImg.publishedUrl,
+            backgroundImgSrc: result.data?.backgroundImg.publishedUrl,
           })
         );
       }
@@ -146,7 +143,7 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   const _getBlogs = async () => {
     try {
       const result = await dispatch(
-        getBlogsThunk({
+        getBlogs({
           params: {
             page: 1,
             size: 20,

@@ -1,9 +1,5 @@
 import React, { FC, HTMLAttributes, RefObject } from "react";
 import styled from "styled-components";
-import {
-  userDetailInfoType,
-  userWriteBlogsType,
-} from "../../../modules/initialStates/initialStateType";
 import { BodyProps } from "../myPageTypes";
 import UserDiaryList from "./UserDiaryList";
 import UserInfo from "./UserInfo";

@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { isActiveInServer } from "../../config";
-import { setSearchTxt } from "../../modules/actions/appInfo";
-import { getSearchBlogsThunk } from "../../modules/thunk/blog";
 import Body from "./body/Body";
 import SearchBar from "./SearchBar";
 import { RootState } from "../../redux/slice";
+import { getSearchBlogs } from "../../redux/slice/Blog";
+import { setSearchTxt } from "../../redux/slice/AppInfo";
 
 const SearchTemplateBlock = styled.div`
   flex: 1;
@@ -37,7 +37,7 @@ const SearchTemplate: FC<SearchTemplateProps> = (props) => {
     }
     try {
       const result = await dispatch(
-        getSearchBlogsThunk({
+        getSearchBlogs({
           params: {
             searchTxt,
           },

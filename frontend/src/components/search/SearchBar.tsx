@@ -4,8 +4,8 @@ import styled from "styled-components";
 import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { setMenuOpen } from "../../modules/actions/menu";
 import { RootState } from "../../redux/slice";
+import { setMenuOpen } from "../../redux/slice/Menu";
 
 const SearchBarBlock = styled.div`
   background-color: #fff;

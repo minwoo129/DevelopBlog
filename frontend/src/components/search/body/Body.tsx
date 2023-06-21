@@ -3,8 +3,8 @@ import React, { FC, HTMLAttributes, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import EmptyLayer from "../../../common/EmptyLayer";
-import { blogItemType } from "../../../modules/initialStates/initialStateType";
 import SearchItem from "./searchItem/SearchItem";
+import { blogItemType } from "../../../redux/state/AdditionalTypes";
 
 const BodyBlock = styled.div`
   flex: 1;

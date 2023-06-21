@@ -4,20 +4,20 @@ import DetailTemplate from "../components/detail/DetailTemplate";
 import MenuTemplate from "../components/menu/MenuTemplate";
 import qs from "qs";
 import { useDispatch } from "react-redux";
-import {
-  addCommentThunk,
-  getBlogsThunk,
-  getBlogThunk,
-  getCommentsThunk,
-} from "../modules/thunk/blog";
 import { useSelector } from "react-redux";
-import { setMenuOpen } from "../modules/actions/menu";
 import invokeAPI from "../lib/restAPI";
 import { batch } from "react-redux";
-import { setCommentInput } from "../modules/actions/blog";
 import { isActiveInServer } from "../config";
 import { DetailPageProps } from "../components/detail/DetailType";
 import { RootState } from "../redux/slice";
+import {
+  addComment,
+  getBlog,
+  getBlogs,
+  getComments,
+  setCommentInput,
+} from "../redux/slice/Blog";
+import { setMenuOpen } from "../redux/slice/Menu";
 
 const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   const dispatch = useDispatch<any>();
@@ -50,7 +50,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   const _getBlog = async (id: number) => {
     try {
       const result = await dispatch(
-        getBlogThunk({
+        getBlog({
           subPath: `/${id}`,
         })
       );
@@ -62,7 +62,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   const _getComments = async (id: number) => {
     try {
       const result = await dispatch(
-        getCommentsThunk({
+        getComments({
           subPath: `/${id}`,
           params: {
             page: 1,
@@ -104,7 +104,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   const _getBlogs = async () => {
     try {
       const result = await dispatch(
-        getBlogsThunk({
+        getBlogs({
           params: {
             page: 1,
             size: 20,
@@ -124,7 +124,7 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
 
     try {
       const result = await dispatch(
-        addCommentThunk({
+        addComment({
           data: {
             comment: commentInput,
             contentId: blog?.id,

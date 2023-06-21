@@ -1,6 +1,5 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { CommentType } from "../../../modules/initialStates/initialStateType";
 import { CommentListViewProps } from "../DetailType";
 import CommentItem from "./CommentItem";
 

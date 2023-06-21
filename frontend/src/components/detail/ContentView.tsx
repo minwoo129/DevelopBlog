@@ -1,6 +1,5 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { blogDetailType } from "../../modules/initialStates/initialStateType";
 import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 import { Viewer } from "@toast-ui/react-editor";
 import { SecondHeader, StyledTitle } from "./AdditionalComponent";

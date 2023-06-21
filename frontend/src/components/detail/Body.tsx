@@ -1,9 +1,5 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import {
-  blogDetailType,
-  CommentType,
-} from "../../modules/initialStates/initialStateType";
 import BodyGroup from "./BodyGroup";
 import { BodyProps } from "./DetailType";
 

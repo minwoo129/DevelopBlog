@@ -6,12 +6,15 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { isActiveInServer } from "../../config";
 import invokeAPI, { invokeFileUpload } from "../../lib/restAPI";
-import { clearReviseData, setAppState } from "../../modules/actions/appInfo";
-import { getUserInfoThunk } from "../../modules/thunk/appInfo";
 import Body from "./body/Body";
 import Header from "./Header";
 import { MyPageTemplateProps, updateUserInfoArgs } from "./myPageTypes";
 import { RootState } from "../../redux/slice";
+import {
+  clearReviseData,
+  getUserInfo,
+  setAppState,
+} from "../../redux/slice/AppInfo";
 
 const MyPageTemplateBlock = styled.div`
   display: flex;
@@ -61,12 +64,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
 
   useEffect(() => {
     if (userInfo?.profileImg?.publishedUrl) {
-      dispatch(
-        setAppState({
-          key: "userImgSrc",
-          value: userInfo.profileImg.publishedUrl,
-        })
-      );
+      dispatch(setAppState({ userImgSrc: userInfo.profileImg.publishedUrl }));
     }
   }, [userInfo]);
 
@@ -80,17 +78,13 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
     return new Promise((resolve) => {
       reader.onload = () => {
         if (type == "userImg") {
-          dispatch(setAppState({ key: "userImgTempData", value: fileBlob }));
-          dispatch(setAppState({ key: "userImgSrc", value: reader.result }));
-          dispatch(setAppState({ key: "isUserImgChanged", value: true }));
+          dispatch(setAppState({ userImgTempData: fileBlob }));
+          dispatch(setAppState({ userImgSrc: reader.result }));
+          dispatch(setAppState({ isUserImgChanged: true }));
         } else {
-          dispatch(
-            setAppState({ key: "backgroundImgTempData", value: fileBlob })
-          );
-          dispatch(
-            setAppState({ key: "backgroundImgSrc", value: reader.result })
-          );
-          dispatch(setAppState({ key: "isBackgroundImgChanged", value: true }));
+          dispatch(setAppState({ backgroundImgTempData: fileBlob }));
+          dispatch(setAppState({ backgroundImgSrc: reader.result }));
+          dispatch(setAppState({ isBackgroundImgChanged: true }));
         }
         resolve(null);
       };
@@ -102,11 +96,10 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
       batch(() => {
         dispatch(
           setAppState({
-            key: "tempNickname",
-            value: userInfo?.nickname ?? "",
+            tempNickname: userInfo?.nickname ?? "",
           })
         );
-        dispatch(setAppState({ key: "isReviseUserInfo", value: true }));
+        dispatch(setAppState({ isReviseUserInfo: true }));
       });
     } else {
       const updateDataExist =
@@ -114,7 +107,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
         isBackgroundImgChanged ||
         tempNickname == userInfo?.nickname;
       if (!updateDataExist) {
-        dispatch(setAppState({ key: "isReviseUserInfo", value: true }));
+        dispatch(setAppState({ isReviseUserInfo: true }));
       }
       _uploadFile(isUserImgChanged, isBackgroundImgChanged);
     }
@@ -176,7 +169,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
 
   const _getUserInfo = async () => {
     try {
-      const result = await dispatch(getUserInfoThunk({}));
+      const result = await dispatch(getUserInfo({}));
       await dispatch(clearReviseData());
     } catch (err) {
       !isActiveInServer && console.log("MyPage _getUserInfo error: ", err);
@@ -219,7 +212,7 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
         }}
         tempNickname={tempNickname}
         setTempNickname={(value) => {
-          dispatch(setAppState({ key: "tempNickname", value }));
+          dispatch(setAppState({ tempNickname: value }));
         }}
         bodyRef={bodyRef}
         onScroll={onScroll}

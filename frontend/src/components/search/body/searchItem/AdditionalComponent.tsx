@@ -1,6 +1,6 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { blogItemType } from "../../../../modules/initialStates/initialStateType";
+import { blogItemType } from "../../../../redux/state/AdditionalTypes";
 
 export const StyledImgGrid = styled.div`
   border-radius: 6px;

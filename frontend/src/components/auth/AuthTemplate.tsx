@@ -4,15 +4,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import AuthForm from "./AuthForm";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { changeField } from "../../modules/actions/auth";
 import { invokeFileUpload } from "../../lib/restAPI";
-import { joinThunk, loginThunk } from "../../modules/thunk/auth";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { setMenuOpen } from "../../modules/actions/menu";
-import { setAppState } from "../../modules/actions/appInfo";
 import { isActiveInServer } from "../../config";
-import { getBlogsThunk } from "../../modules/thunk/blog";
 import {
   AuthTemplateProps,
   onChange,
@@ -24,6 +19,15 @@ import {
   __uploadImageFile,
 } from "../../pages/AuthPage/AuthPageTypes";
 import { RootState } from "../../redux/slice";
+import {
+  changeJoinField,
+  changeLoginField,
+  join,
+  login,
+} from "../../redux/slice/Auth";
+import { getBlogs } from "../../redux/slice/Blog";
+import { setMenuOpen } from "../../redux/slice/Menu";
+import { setAppState } from "../../redux/slice/AppInfo";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -67,13 +71,16 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
 
   const onChange: onChange = (e) => {
     const { name, value } = e.target;
-    dispatch(changeField({ form: type, key: name, value }));
+    //dispatch(changeField({ form: type, key: name, value }));
+    if (type === "loginForm") dispatch(changeLoginField({ [name]: value }));
+    else dispatch(changeJoinField({ [name]: value }));
   };
   const onChangeImg: onChangeImg = (data) => {
-    dispatch(changeField({ form: type, key: "imageFile", value: data }));
+    //dispatch(changeField({ form: type, key: "imageFile", value: data }));
+    if (type === "joinForm") dispatch(changeJoinField({ imageFile: data }));
   };
   const onCheckAdmin: onCheckAdmin = (value) => {
-    dispatch(changeField({ form: "joinForm", key: "isAdmin", value }));
+    dispatch(changeJoinField({ isAdmin: value }));
   };
   const onSubmit: onSubmit = async (e) => {
     e.preventDefault();
@@ -189,7 +196,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
     } = props;
     try {
       await dispatch(
-        joinThunk({
+        join({
           data: {
             email,
             password,
@@ -211,7 +218,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const _login = async (email: string, password: string) => {
     try {
       const result = await dispatch(
-        loginThunk({
+        login({
           data: {
             email,
             password,
@@ -221,8 +228,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
       if (result.data?.backgroundImg) {
         await dispatch(
           setAppState({
-            key: "backgroundImgSrc",
-            value: result.data.backgroundImg.publishedUrl,
+            backgroundImgSrc: result.data.backgroundImg.publishedUrl,
           })
         );
       }
@@ -240,7 +246,7 @@ const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const _getBlogs = async () => {
     try {
       const result = await dispatch(
-        getBlogsThunk({
+        getBlogs({
           params: {
             page: 1,
             size: 20,

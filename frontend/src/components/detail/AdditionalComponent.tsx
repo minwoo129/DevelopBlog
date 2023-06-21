@@ -1,7 +1,7 @@
 import moment from "moment";
 import React, { FC, HTMLAttributes, useMemo } from "react";
 import styled from "styled-components";
-import { blogDetailType } from "../../modules/initialStates/initialStateType";
+import { blogDetailType } from "../../redux/state/AdditionalTypes";
 
 // ================================= StyledTitle ===================================
 const StyledTitleBlock = styled.h1`

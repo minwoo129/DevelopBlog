@@ -10,14 +10,10 @@ import Header from "../../components/write/Header";
 import invokeAPI, { invokeFileUpload } from "../../lib/restAPI";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { clearSearchBlogs, setAddedImageIds } from "../../modules/actions/blog";
 import { useSelector } from "react-redux";
 import { batch } from "react-redux";
-import { setSearchTxt } from "../../modules/actions/appInfo";
-import { clearAddedImageIds } from "../../modules/actions/blog";
 import Modal from "../../components/write/modal/Modal";
 import { isActiveInServer } from "../../config";
-import { getBlogsThunk } from "../../modules/thunk/blog";
 import {
   addBlogRequestData,
   addImageBlobHook,
@@ -25,6 +21,13 @@ import {
 } from "./PageTypes";
 import { DEFAULT_POST_THUMBNAIL_URL } from "./DefaultDatas";
 import { RootState } from "../../redux/slice";
+import {
+  clearAddedImageIds,
+  clearSearchBlogs,
+  getBlogs,
+  setAddedImageIds,
+} from "../../redux/slice/Blog";
+import { setSearchTxt } from "../../redux/slice/AppInfo";
 
 const WritePost: FC<WritePostProps> = (props) => {
   const dispatch = useDispatch<any>();
@@ -111,7 +114,7 @@ const WritePost: FC<WritePostProps> = (props) => {
   const _getBlogs = async () => {
     try {
       const result = await dispatch(
-        getBlogsThunk({
+        getBlogs({
           params: {
             page: 1,
             size: 20,

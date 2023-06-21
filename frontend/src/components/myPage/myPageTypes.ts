@@ -3,7 +3,7 @@ import {
   blogItemType,
   userDetailInfoType,
   userWriteBlogsType,
-} from "../../modules/initialStates/initialStateType";
+} from "../../redux/state/AdditionalTypes";
 // ==================================== MyPageTemplate =====================================
 export interface MyPageTemplateProps extends HTMLAttributes<HTMLDivElement> {
   getUserWriteBlogs(page: number): void;

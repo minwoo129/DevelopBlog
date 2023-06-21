@@ -1,6 +1,5 @@
 import React, { FC, HTMLAttributes, useMemo } from "react";
 import styled from "styled-components";
-import { blogItemType } from "../../../../modules/initialStates/initialStateType";
 import { UserDiaryItemProps } from "../../myPageTypes";
 import {
   ItemInformationView,

@@ -1,11 +1,11 @@
 import React, { FC, HTMLAttributes, useEffect, useState } from "react";
 import styled from "styled-components";
-import { blogItemType } from "../../../../modules/initialStates/initialStateType";
 import {
   InformationGrid,
   StyledImg,
   StyledImgGrid,
 } from "./AdditionalComponent";
+import { blogItemType } from "../../../../redux/state/AdditionalTypes";
 
 const SearchItemBlock = styled.div`
   border-radius: 6px;

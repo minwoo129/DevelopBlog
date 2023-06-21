@@ -3,13 +3,12 @@ import styled from "styled-components";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { HiOutlineSearch } from "react-icons/hi";
 import { useDispatch } from "react-redux";
-import { setMenuOpen } from "../../modules/actions/menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 import { useSelector } from "react-redux";
-import { setSearchbarVisible } from "../../modules/actions/appInfo";
 import { useNavigate } from "react-router-dom";
 import { RootState } from "../../redux/slice";
+import { setMenuOpen } from "../../redux/slice/Menu";
 
 const HeaderBlock = styled.div`
   width: 100%;

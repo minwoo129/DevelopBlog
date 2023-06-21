@@ -1,7 +1,6 @@
 import React, { FC, HTMLAttributes, MouseEvent, useRef } from "react";
 import styled from "styled-components";
 import { IoMdAdd } from "react-icons/io";
-import { userDetailInfoType } from "../../../modules/initialStates/initialStateType";
 import { DefaultUserImage, UserImg } from "../../../common/UserImage";
 import { UserInfoProps } from "../myPageTypes";
 

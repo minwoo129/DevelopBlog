@@ -1,6 +1,5 @@
 import React, { FC, HTMLAttributes } from "react";
 import styled from "styled-components";
-import { userWriteBlogsType } from "../../../modules/initialStates/initialStateType";
 import { UserDiaryListProps } from "../myPageTypes";
 import UserDiaryItem from "./listItem/UserDiaryItem";
 
