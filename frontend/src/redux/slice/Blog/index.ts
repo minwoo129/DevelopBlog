@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import { BlogInitialState as initialState } from "../../state";
 import {
   addCommentResult,
+  clearAddedImageIdsAction,
+  clearSearchBlogsAction,
   getBlogResult,
   getBlogsResult,
   getCommentsResult,
@@ -57,10 +59,10 @@ const blogSlice = createSlice({
       const newIds = [...state.addedImageIds, action.payload];
       state.addedImageIds = newIds;
     },
-    clearAddedImageIds: (state, action) => {
+    clearAddedImageIds: (state, action: clearAddedImageIdsAction) => {
       state.addedImageIds = [];
     },
-    clearSearchBlogs: (state, action) => {
+    clearSearchBlogs: (state, action: clearSearchBlogsAction) => {
       state.searchBlogs = [];
       state.isExecuteSearch = false;
     },

@@ -10,6 +10,10 @@ import { commonResultType } from "../commonTypes";
 // ===========================================================
 export type setAddedImageIdsAction = PayloadAction<number>;
 // ===========================================================
+export type clearAddedImageIdsAction = PayloadAction<undefined>;
+// ===========================================================
+export type clearSearchBlogsAction = PayloadAction<undefined>;
+// ===========================================================
 export type getBlogsResult = commonResultType<blogItemType[]>;
 // ===========================================================
 export type getBlogResult = commonResultType<blogDetailType>;
