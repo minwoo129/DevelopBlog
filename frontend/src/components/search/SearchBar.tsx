@@ -1,11 +1,11 @@
 import React, { ChangeEvent, FC, HTMLAttributes } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { RootState } from "../../modules/reducer";
 import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setMenuOpen } from "../../modules/actions/menu";
+import { RootState } from "../../redux/slice";
 
 const SearchBarBlock = styled.div`
   background-color: #fff;
@@ -72,7 +72,7 @@ const SearchBar: FC<SearchBarProps> = ({
 }) => {
   const dispatch = useDispatch<any>();
   const isMenuVisible = useSelector(
-    (state: RootState) => state.menu.isMenuVisible
+    (state: RootState) => state.Menu.isMenuVisible
   );
   return (
     <SearchBarBlock {...props}>

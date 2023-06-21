@@ -11,13 +11,13 @@ import {
   getCommentsThunk,
 } from "../modules/thunk/blog";
 import { useSelector } from "react-redux";
-import { RootState } from "../modules/reducer";
 import { setMenuOpen } from "../modules/actions/menu";
 import invokeAPI from "../lib/restAPI";
 import { batch } from "react-redux";
 import { setCommentInput } from "../modules/actions/blog";
 import { isActiveInServer } from "../config";
 import { DetailPageProps } from "../components/detail/DetailType";
+import { RootState } from "../redux/slice";
 
 const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
   const dispatch = useDispatch<any>();
@@ -27,16 +27,16 @@ const DetailPage: FC<DetailPageProps> = ({ ...props }) => {
     ignoreQueryPrefix: true,
   });
 
-  const blog = useSelector((state: RootState) => state.blog.blog);
+  const blog = useSelector((state: RootState) => state.Blog.blog);
   const isMenuVisible = useSelector(
-    (state: RootState) => state.menu.isMenuVisible
+    (state: RootState) => state.Menu.isMenuVisible
   );
   const commentInput = useSelector(
-    (state: RootState) => state.blog.commentInput
+    (state: RootState) => state.Blog.commentInput
   );
-  const login = useSelector((state: RootState) => state.auth.login);
+  const login = useSelector((state: RootState) => state.Auth.login);
   const comments = useSelector(
-    (state: RootState) => state.blog.comments?.contents
+    (state: RootState) => state.Blog.comments?.contents
   );
 
   useEffect(() => {

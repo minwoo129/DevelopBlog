@@ -12,7 +12,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { clearSearchBlogs, setAddedImageIds } from "../../modules/actions/blog";
 import { useSelector } from "react-redux";
-import { RootState } from "../../modules/reducer";
 import { batch } from "react-redux";
 import { setSearchTxt } from "../../modules/actions/appInfo";
 import { clearAddedImageIds } from "../../modules/actions/blog";
@@ -25,15 +24,16 @@ import {
   WritePostProps,
 } from "./PageTypes";
 import { DEFAULT_POST_THUMBNAIL_URL } from "./DefaultDatas";
+import { RootState } from "../../redux/slice";
 
 const WritePost: FC<WritePostProps> = (props) => {
   const dispatch = useDispatch<any>();
   const location = useLocation();
 
   const addedImageIds = useSelector(
-    (state: RootState) => state.blog.addedImageIds
+    (state: RootState) => state.Blog.addedImageIds
   );
-  const blog = useSelector((state: RootState) => state.blog.blog);
+  const blog = useSelector((state: RootState) => state.Blog.blog);
   const isReviseMode = useMemo(() => {
     return location.pathname.indexOf("revise") != -1;
   }, []);

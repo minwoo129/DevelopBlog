@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { isActiveInServer } from "../../config";
 import { setSearchTxt } from "../../modules/actions/appInfo";
-import { RootState } from "../../modules/reducer";
 import { getSearchBlogsThunk } from "../../modules/thunk/blog";
 import Body from "./body/Body";
 import SearchBar from "./SearchBar";
+import { RootState } from "../../redux/slice";
 
 const SearchTemplateBlock = styled.div`
   flex: 1;
@@ -21,13 +21,13 @@ interface SearchTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 
 const SearchTemplate: FC<SearchTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
-  const searchTxt = useSelector((state: RootState) => state.appInfo.searchTxt);
-  const searchBlogs = useSelector((state: RootState) => state.blog.searchBlogs);
+  const searchTxt = useSelector((state: RootState) => state.AppInfo.searchTxt);
+  const searchBlogs = useSelector((state: RootState) => state.Blog.searchBlogs);
   const isExecuteSearch = useSelector(
-    (state: RootState) => state.blog.isExecuteSearch
+    (state: RootState) => state.Blog.isExecuteSearch
   );
   const backgroundImgSrc = useSelector(
-    (state: RootState) => state.appInfo.backgroundImgSrc
+    (state: RootState) => state.AppInfo.backgroundImgSrc
   );
 
   const onPressSearch = async () => {

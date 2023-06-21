@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { changeField } from "../../modules/actions/auth";
 import { invokeFileUpload } from "../../lib/restAPI";
 import { joinThunk, loginThunk } from "../../modules/thunk/auth";
-import { RootState } from "../../modules/reducer";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { setMenuOpen } from "../../modules/actions/menu";
@@ -24,6 +23,7 @@ import {
   _join,
   __uploadImageFile,
 } from "../../pages/AuthPage/AuthPageTypes";
+import { RootState } from "../../redux/slice";
 
 const AuthTemplateBlock = styled.div`
   flex: 1;
@@ -42,10 +42,10 @@ const WhiteBox = styled.div`
 
 const AuthTemplate: FC<AuthTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
-  const joinForm = useSelector((state: RootState) => state.auth.joinForm);
-  const loginForm = useSelector((state: RootState) => state.auth.loginForm);
+  const joinForm = useSelector((state: RootState) => state.Auth.joinForm);
+  const loginForm = useSelector((state: RootState) => state.Auth.loginForm);
   const isMenuVisible = useSelector(
-    (state: RootState) => state.menu.isMenuVisible
+    (state: RootState) => state.Menu.isMenuVisible
   );
   const location = useLocation();
   const type = useMemo((): pageEnableType => {

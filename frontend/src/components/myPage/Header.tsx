@@ -7,9 +7,9 @@ import { setMenuOpen } from "../../modules/actions/menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import { IconButton } from "@mui/material";
 import { useSelector } from "react-redux";
-import { RootState } from "../../modules/reducer";
 import { setSearchbarVisible } from "../../modules/actions/appInfo";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../../redux/slice";
 
 const HeaderBlock = styled.div`
   width: 100%;
@@ -26,10 +26,10 @@ const Header: FC<HeaderProps> = ({ ...props }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isMenuVisible = useSelector(
-    (state: RootState) => state.menu.isMenuVisible
+    (state: RootState) => state.Menu.isMenuVisible
   );
   const searchBarVisible = useSelector(
-    (state: RootState) => state.appInfo.searchBarVisible
+    (state: RootState) => state.AppInfo.searchBarVisible
   );
 
   const onClickSearch = () => {

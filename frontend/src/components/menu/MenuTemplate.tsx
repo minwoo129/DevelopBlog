@@ -8,7 +8,6 @@ import React, {
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { clearLoginForm, logout } from "../../modules/actions/auth";
-import { RootState } from "../../modules/reducer";
 import "./MenuTemplate.scss";
 import { setMenuOpen, setMenuVisible } from "../../modules/actions/menu";
 import { Drawer } from "@mui/material";
@@ -22,6 +21,7 @@ import {
 } from "../../modules/actions/appInfo";
 import { getBlogsThunk } from "../../modules/thunk/blog";
 import { isActiveInServer } from "../../config";
+import { RootState } from "../../redux/slice";
 
 interface MenuTemplateProps extends HTMLAttributes<HTMLDivElement> {}
 const MenuTemplate: FC<MenuTemplateProps> = (props) => {
@@ -29,12 +29,12 @@ const MenuTemplate: FC<MenuTemplateProps> = (props) => {
   const dispatch = useDispatch<any>();
   const location = useLocation();
 
-  const loginInfo = useSelector((state: RootState) => state.auth.loginInfo);
-  const login = useSelector((state: RootState) => state.auth.login);
-  const loginForm = useSelector((state: RootState) => state.auth.loginForm);
-  const isMenuOpen = useSelector((state: RootState) => state.menu.isMenuOpen);
+  const loginInfo = useSelector((state: RootState) => state.Auth.loginInfo);
+  const login = useSelector((state: RootState) => state.Auth.login);
+  const loginForm = useSelector((state: RootState) => state.Auth.loginForm);
+  const isMenuOpen = useSelector((state: RootState) => state.Menu.isMenuOpen);
   const isReviseUserInfo = useSelector(
-    (state: RootState) => state.appInfo.isReviseUserInfo
+    (state: RootState) => state.AppInfo.isReviseUserInfo
   );
   const [isMyPage, setMyPage] = useState<boolean>(false);
 

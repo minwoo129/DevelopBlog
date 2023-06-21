@@ -2,7 +2,6 @@ import React, { FC, HTMLAttributes, useEffect, useMemo, useState } from "react";
 import styled, { css } from "styled-components";
 import ListItem from "./listItem/ListItem";
 import { useSelector } from "react-redux";
-import { RootState } from "../../modules/reducer";
 import { blogItemType } from "../../modules/initialStates/initialStateType";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -11,6 +10,7 @@ import EmptyLayer from "../../common/EmptyLayer";
 import { isActiveInServer } from "../../config";
 import { BodyInsideGridProps, BodyProps } from "./ListTypes";
 import _ from "lodash";
+import { RootState } from "../../redux/slice";
 
 const BodyBlock = styled.div`
   flex: 1;
@@ -97,7 +97,7 @@ const BodyInsideGrid: FC<BodyInsideGridProps> = ({ blogs, onPress }) => {
 };
 
 const Body: FC<BodyProps> = (props) => {
-  const blogs = useSelector((state: RootState) => state.blog.blogs);
+  const blogs = useSelector((state: RootState) => state.Blog.blogs);
   const navigate = useNavigate();
   const dispatch = useDispatch<any>();
 

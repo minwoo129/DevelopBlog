@@ -7,11 +7,11 @@ import styled from "styled-components";
 import { isActiveInServer } from "../../config";
 import invokeAPI, { invokeFileUpload } from "../../lib/restAPI";
 import { clearReviseData, setAppState } from "../../modules/actions/appInfo";
-import { RootState } from "../../modules/reducer";
 import { getUserInfoThunk } from "../../modules/thunk/appInfo";
 import Body from "./body/Body";
 import Header from "./Header";
 import { MyPageTemplateProps, updateUserInfoArgs } from "./myPageTypes";
+import { RootState } from "../../redux/slice";
 
 const MyPageTemplateBlock = styled.div`
   display: flex;
@@ -29,32 +29,32 @@ const MyPageTemplate: FC<MyPageTemplateProps> = ({
 
   const dispatch = useDispatch<any>();
   const userBlogs = useSelector(
-    (state: RootState) => state.blog.userWriteBlogs
+    (state: RootState) => state.Blog.userWriteBlogs
   );
-  const userInfo = useSelector((state: RootState) => state.appInfo.userInfo);
+  const userInfo = useSelector((state: RootState) => state.AppInfo.userInfo);
   const isReviseUserInfo = useSelector(
-    (state: RootState) => state.appInfo.isReviseUserInfo
+    (state: RootState) => state.AppInfo.isReviseUserInfo
   );
   const userImgSrc = useSelector(
-    (state: RootState) => state.appInfo.userImgSrc
+    (state: RootState) => state.AppInfo.userImgSrc
   );
   const backgroundImgSrc = useSelector(
-    (state: RootState) => state.appInfo.backgroundImgSrc
+    (state: RootState) => state.AppInfo.backgroundImgSrc
   );
   const tempNickname = useSelector(
-    (state: RootState) => state.appInfo.tempNickname
+    (state: RootState) => state.AppInfo.tempNickname
   );
   const userImgTempData = useSelector(
-    (state: RootState) => state.appInfo.userImgTempData
+    (state: RootState) => state.AppInfo.userImgTempData
   );
   const backgroundImgTempData = useSelector(
-    (state: RootState) => state.appInfo.backgroundImgTempData
+    (state: RootState) => state.AppInfo.backgroundImgTempData
   );
   const isUserImgChanged = useSelector(
-    (state: RootState) => state.appInfo.isUserImgChanged
+    (state: RootState) => state.AppInfo.isUserImgChanged
   );
   const isBackgroundImgChanged = useSelector(
-    (state: RootState) => state.appInfo.isBackgroundImgChanged
+    (state: RootState) => state.AppInfo.isBackgroundImgChanged
   );
 
   const bodyRef = useRef<HTMLDivElement>(null);

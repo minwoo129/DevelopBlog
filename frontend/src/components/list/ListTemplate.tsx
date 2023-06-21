@@ -2,10 +2,10 @@ import React, { FC, HTMLAttributes, MouseEvent } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { RootState } from "../../modules/reducer";
 import Body from "./Body";
 import Header from "./Header";
 import { ListTemplateProps } from "./ListTypes";
+import { RootState } from "../../redux/slice";
 
 const ListTemplateBlock = styled.div`
   flex: 1;
@@ -16,7 +16,7 @@ const ListTemplateBlock = styled.div`
 
 const ListTemplate: FC<ListTemplateProps> = ({ ...props }) => {
   const backgroundImgSrc = useSelector(
-    (state: RootState) => state.appInfo.backgroundImgSrc
+    (state: RootState) => state.AppInfo.backgroundImgSrc
   );
   return (
     <ListTemplateBlock

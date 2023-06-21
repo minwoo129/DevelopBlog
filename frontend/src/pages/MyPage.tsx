@@ -5,16 +5,16 @@ import { useDispatch } from "react-redux";
 import MenuTemplate from "../components/menu/MenuTemplate";
 import MyPageTemplate from "../components/myPage/MyPageTemplate";
 import { isActiveInServer } from "../config";
-import { RootState } from "../modules/reducer";
 import { getUserInfoThunk } from "../modules/thunk/appInfo";
 import { getUserWriteBlogsThunk } from "../modules/thunk/blog";
+import { RootState } from "../redux/slice";
 
 const MyPage = ({}) => {
   const dispatch = useDispatch<any>();
 
   const [page, setPage] = useState(1);
 
-  const loginInfo = useSelector((state: RootState) => state.auth.loginInfo);
+  const loginInfo = useSelector((state: RootState) => state.Auth.loginInfo);
 
   useEffect(() => {
     batch(() => {
