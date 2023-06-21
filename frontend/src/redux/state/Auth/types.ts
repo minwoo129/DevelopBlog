@@ -10,6 +10,11 @@ export type loginForm = {
   pwd: string;
 };
 
+export type loginSelectableForm = {
+  email?: string;
+  pwd?: string;
+};
+
 export type joinForm = {
   email: string;
   pwd: string;
@@ -19,6 +24,17 @@ export type joinForm = {
   adminPwd: string;
   nickname: string;
   imageFile: File | Blob | null;
+};
+
+export type joinSelectableForm = {
+  email?: string;
+  pwd?: string;
+  pwdCheck?: string;
+  name?: string;
+  isAdmin?: boolean;
+  adminPwd?: string;
+  nickname?: string;
+  imageFile?: File | Blob | null;
 };
 
 export type loginInfo = {

@@ -1,5 +1,11 @@
 // ================================ Auth =======================================
-export type { joinForm, loginForm, loginInfo } from "./Auth/types";
+export type {
+  joinForm,
+  loginForm,
+  loginInfo,
+  loginSelectableForm,
+  joinSelectableForm,
+} from "./Auth/types";
 
 // ================================ Menu =======================================
 //export type {  } from "./Menu/types";
