@@ -11,6 +11,10 @@ import { isActiveInServer } from "../../config";
 
 const cookies = new Cookies();
 
+export const setToken = (token: string) => {
+  axios.defaults.headers.common["Authorization"] = token;
+};
+
 export const setCookies: setCookiesMethType = (key, data) => {
   cookies.remove(key);
   const date = new Date();
@@ -33,10 +37,6 @@ export const invokeFileUpload: invokeFileUploadMethType = (args) => {
   const form = new FormData();
   form.append("file", data);
   return axios.post(path, form, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: getCookies("access_token"),
-    },
     params: {
       uploadType,
     },
@@ -52,15 +52,6 @@ const invokeAPI: invokeAPIMethType =
       params,
       data,
     };
-    const token = getCookies("access_token");
-    if (token) {
-      axiosReq = {
-        ...axiosReq,
-        headers: {
-          Authorization: token,
-        },
-      };
-    }
 
     !isActiveInServer && console.log("request req: ", axiosReq);
     return axios(axiosReq);
