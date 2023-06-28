@@ -11,7 +11,7 @@ import {
   logoutAction,
 } from "./types";
 import { createPromiseThunk } from "../../lib/AsyncUtils";
-import { removeCookies } from "../../../lib/restAPI";
+import { removeCookies, setToken } from "../../../lib/restAPI";
 
 export const login = createPromiseThunk<loginRetType>({
   type: "auth/LOGIN",
@@ -82,6 +82,7 @@ const authSlice = createSlice({
       state.loginInfo.email = data.email;
       state.loginForm.email = "";
       state.loginForm.pwd = "";
+      setToken(data.token);
     });
     builder.addCase(login.rejected, (state, action) => {
       throw action.payload;

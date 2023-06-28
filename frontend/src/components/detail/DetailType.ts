@@ -28,7 +28,7 @@ export interface BodyGroupProps
     ContentViewProps {}
 // ======================================== ContentView ====================================
 export interface ContentViewProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogDetailType | null;
+  blog: blogDetailType | undefined;
   onPressDelete(): void;
   onPressRevise(): void;
 }
@@ -37,7 +37,7 @@ export interface CommentViewProps
   extends HTMLAttributes<HTMLDivElement>,
     ButtonViewProps,
     CommentListViewProps {
-  blog: blogDetailType | null;
+  blog: blogDetailType | undefined;
   commentInput: string;
   setCommentInput(value: string): void;
 }
