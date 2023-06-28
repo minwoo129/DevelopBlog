@@ -19,6 +19,7 @@
   - 기타 사용 UI 도구: [mui](https://mui.com/)
   - 배포: NGINX
   - Redux, Redux-toolkit
+  - React-Query
 - Backend
   - Nodejs
     - [Express](https://expressjs.com/ko/)
