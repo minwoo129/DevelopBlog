@@ -7,17 +7,21 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { CookiesProvider } from "react-cookie";
 import store from "./redux/store";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+const queryClient = new QueryClient();
 root.render(
   <CookiesProvider>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </QueryClientProvider>
   </CookiesProvider>
 );
 
