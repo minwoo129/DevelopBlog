@@ -32,7 +32,7 @@ const SecondHeaderBlock = styled.div`
 `;
 
 interface SecondHeaderProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogDetailType | null;
+  blog: blogDetailType | undefined;
   onPressRevise(): void;
   onPressDelete(): void;
 }
@@ -77,7 +77,7 @@ const InformationViewBlock = styled.div`
 `;
 
 interface InformationViewProps extends HTMLAttributes<HTMLDivElement> {
-  blog: blogDetailType | null;
+  blog: blogDetailType | undefined;
 }
 
 const InformationView: FC<InformationViewProps> = ({ blog, ...props }) => {
