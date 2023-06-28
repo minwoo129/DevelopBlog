@@ -18,6 +18,7 @@
   - 에디터: [ToastUI](https://ui.toast.com/tui-editor)
   - 기타 사용 UI 도구: [mui](https://mui.com/)
   - 배포: NGINX
+  - Redux, Redux-toolkit
 - Backend
   - Nodejs
     - [Express](https://expressjs.com/ko/)
