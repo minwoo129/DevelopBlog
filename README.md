@@ -83,6 +83,7 @@
 - Redux 구조 TypeScript로 설계
   - 회사 프로젝트에서 Redux를 JavaScript로 설계한 것과 달리, 이번 프로젝트에서는 프론트 부분은 전부 TypeScript로 설계하면서, Redux 설계에 어려움이 있었다.
   - Velopert의 Redux 설계 관련 블로그를 참고하면서 설계하였다.
+  - Redux-Toolkit을 사용하는 방식으로 수정하였더니, Redux 영역 코드가 절반 이상으로 줄어들었다.
 
 - 웹에서의 상태관리에서는 Redux가 그렇게 적절하지는 않은 것 같다.
   - 모바일(React Native)에서는 Redux를 사용해도 redux-logger의 로그 내용이 노출되지 않는다.
