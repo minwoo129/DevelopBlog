@@ -84,6 +84,12 @@
   - 회사 프로젝트에서 Redux를 JavaScript로 설계한 것과 달리, 이번 프로젝트에서는 프론트 부분은 전부 TypeScript로 설계하면서, Redux 설계에 어려움이 있었다.
   - Velopert의 Redux 설계 관련 블로그를 참고하면서 설계하였다.
 
+- 웹에서의 상태관리에서는 Redux가 그렇게 적절하지는 않은 것 같다.
+  - 모바일(React Native)에서는 Redux를 사용해도 redux-logger의 로그 내용이 노출되지 않는다.
+  - 하지만 웹의 경우에는 로그 내용이 노출되기 때문에 실제 release를 할 때는 로그 내용이 노출되지 않도록 별도의 처리를 해줘야 한다.
+  - 무엇보다도 웹에서는 React-Query의 강점이 강하게 두드러지는 것 같다.
+      -> 로그를 통해 정보가 노출될 우려도 없고, 캐싱이 가능하기 때문!!!!
+
 ## 사이트 이미지
 
 ![스크린샷 2023-02-16 오후 11.04.54.png](https://github.com/minwoo129/readmeImgs/blob/master/developBlog/img2.png)
